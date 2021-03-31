@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="vm"
+            type="cz.pecawolf.charactersheet.presentation.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_75"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <TextView
+            android:id="@+id/name_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_name"
+            app:layout_constraintBaseline_toBaselineOf="@id/name_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/name_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ahsoka Tano" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/species_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_species"
+            app:layout_constraintBaseline_toBaselineOf="@id/species_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/species_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.species.standardName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/name_value"
+            tools:text="Togruta" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/str_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_str"
+            app:layout_constraintBaseline_toBaselineOf="@id/str_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/str_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.strength}"
+            app:layout_constraintEnd_toStartOf="@id/str_trap"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/species_value"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/str_trap"
+            style="@style/Text.Value.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.strengthTrap}"
+            app:layout_constraintBaseline_toBaselineOf="@id/str_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_50"
+            app:layout_constraintStart_toEndOf="@id/str_value"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/str_roll"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/roll"
+            app:layout_constraintBaseline_toBaselineOf="@id/str_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintStart_toStartOf="@id/guide_50" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/dex_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_dex"
+            app:layout_constraintBaseline_toBaselineOf="@id/dex_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/dex_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.dexterity}"
+            app:layout_constraintEnd_toStartOf="@id/dex_trap"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/str_value"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/dex_trap"
+            style="@style/Text.Value.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.dexterityTrap}"
+            app:layout_constraintBaseline_toBaselineOf="@id/dex_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_50"
+            app:layout_constraintStart_toEndOf="@id/dex_value"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/dex_roll"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/roll"
+            app:layout_constraintBaseline_toBaselineOf="@id/dex_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintStart_toStartOf="@id/guide_50" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/end_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_end"
+            app:layout_constraintBaseline_toBaselineOf="@id/end_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/end_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.endurance}"
+            app:layout_constraintEnd_toStartOf="@id/end_trap"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/dex_value"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/end_trap"
+            style="@style/Text.Value.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.enduranceTrap}"
+            app:layout_constraintBaseline_toBaselineOf="@id/end_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_50"
+            app:layout_constraintStart_toEndOf="@id/end_value"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/end_roll"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/roll"
+            app:layout_constraintBaseline_toBaselineOf="@id/end_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintStart_toStartOf="@id/guide_50" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/int_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_int"
+            app:layout_constraintBaseline_toBaselineOf="@id/int_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/int_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.inteligence}"
+            app:layout_constraintEnd_toStartOf="@id/int_trap"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/end_value"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/int_trap"
+            style="@style/Text.Value.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.inteligenceTrap}"
+            app:layout_constraintBaseline_toBaselineOf="@id/int_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_50"
+            app:layout_constraintStart_toEndOf="@id/int_value"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/int_roll"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/roll"
+            app:layout_constraintBaseline_toBaselineOf="@id/int_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintStart_toStartOf="@id/guide_50" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/wis_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_wis"
+            app:layout_constraintBaseline_toBaselineOf="@id/wis_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/wis_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.wisdom}"
+            app:layout_constraintEnd_toStartOf="@id/wis_trap"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/int_value"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/wis_trap"
+            style="@style/Text.Value.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.wisdomTrap}"
+            app:layout_constraintBaseline_toBaselineOf="@id/wis_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_50"
+            app:layout_constraintStart_toEndOf="@id/wis_value"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/wis_roll"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/roll"
+            app:layout_constraintBaseline_toBaselineOf="@id/wis_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintStart_toStartOf="@id/guide_50" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/cha_label"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/character_cha"
+            app:layout_constraintBaseline_toBaselineOf="@id/cha_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_25"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/cha_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.charisma}"
+            app:layout_constraintEnd_toStartOf="@id/cha_trap"
+            app:layout_constraintStart_toStartOf="@id/guide_25"
+            app:layout_constraintTop_toBottomOf="@id/wis_value"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/cha_trap"
+            style="@style/Text.Value.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{vm.baseStats.charismaTrap}"
+            app:layout_constraintBaseline_toBaselineOf="@id/cha_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_50"
+            app:layout_constraintStart_toEndOf="@id/cha_value"
+            tools:text="20" />
+
+        <TextView
+            android:id="@+id/cha_roll"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/roll"
+            app:layout_constraintBaseline_toBaselineOf="@id/cha_value"
+            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintStart_toStartOf="@id/guide_50" />
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <TextView
+            android:id="@+id/luck_and_hp_value"
+            style="@style/Text.Value.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{vm.baseStats.luckAndHp}"
+            app:layout_constraintBottom_toTopOf="@id/heal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_75"
+            app:layout_constraintTop_toBottomOf="@id/species_value"
+            tools:text="10+3" />
+
+        <TextView
+            android:id="@+id/heal"
+            style="@style/Button.Positive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/heal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_75"
+            app:layout_constraintTop_toBottomOf="@id/luck_and_hp_value" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/luck_and_hp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/damage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_75"
+            app:layout_constraintTop_toBottomOf="@id/heal"
+            app:layout_constraintVertical_bias="1"
+            tools:itemCount="13"
+            tools:listitem="@layout/item_luck_hp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/damage"
+            style="@style/Button.Negative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/damage"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guide_75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
