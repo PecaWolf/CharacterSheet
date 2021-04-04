@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#FFF</color>
+    <color name="backgroundCard">#DDD</color>
     <color name="textPrimary">#000</color>
-    <color name="textSecondary">#666</color>
+    <color name="textInverse">#FFF</color>
+    <color name="textSecondary">#555</color>
     <color name="activePrimary">@color/purple_500</color>
     <color name="activeSecondary">@color/purple_700</color>
     <color name="buttonBackgroundEnabled">@color/purple_200</color>
@@ -11,6 +13,9 @@
     <color name="buttonBackgroundPositiveDisabled">@color/green_light</color>
     <color name="buttonBackgroundNegativeEnabled">@color/red_medium</color>
     <color name="buttonBackgroundNegativeDisabled">@color/red_light</color>
+
+    <color name="wound">@color/red_dark</color>
+    <color name="luck">@color/green_dark</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

@@ -7,12 +7,12 @@
 
     <string name="character_name">Name:</string>
     <string name="character_species">Species:</string>
-    <string name="character_str">Str</string>
-    <string name="character_dex">Dex</string>
-    <string name="character_end">End</string>
-    <string name="character_int">Int</string>
-    <string name="character_wis">Wis</string>
-    <string name="character_cha">Cha</string>
+    <string name="character_str">Str:</string>
+    <string name="character_dex">Dex:</string>
+    <string name="character_vit">Vit:</string>
+    <string name="character_int">Int:</string>
+    <string name="character_wis">Wis:</string>
+    <string name="character_cha">Cha:</string>
     <string name="roll">Roll</string>
     <string name="damage">-</string>
     <string name="heal">+</string>

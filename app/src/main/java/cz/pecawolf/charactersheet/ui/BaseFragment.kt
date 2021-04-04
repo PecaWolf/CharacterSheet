@@ -10,9 +10,11 @@ abstract class BaseFragment<BINDING: ViewDataBinding>: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.lifecycleOwner = this
         bindView(binding)
+        observeViewModel()
     }
 
     protected abstract fun bindView(binding: BINDING)
+    abstract fun observeViewModel()
 }

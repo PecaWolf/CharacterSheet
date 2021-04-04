@@ -9,14 +9,14 @@ data class BaseStats(
     var wounds: Int,
     val str: Int,
     val dex: Int,
-    val end: Int,
+    val vit: Int,
     val inl: Int,
     val wis: Int,
     val cha: Int,
     val money: Int
 ) {
 
-    val luckAndHp: String
+    val luckAndWounds: String
         get() = "$luck + $wounds"
 
     val strength: String
@@ -27,10 +27,10 @@ data class BaseStats(
         get() = "${dex}"
     val dexterityTrap: String
         get() = "${dex * 2}"
-    val endurance: String
-        get() = "${end}"
-    val enduranceTrap: String
-        get() = "${end * 2}"
+    val vitality: String
+        get() = "${vit}"
+    val vitalityTrap: String
+        get() = "${vit * 2}"
     val inteligence: String
         get() = "${inl}"
     val inteligenceTrap: String

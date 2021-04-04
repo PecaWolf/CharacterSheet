@@ -3,8 +3,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="spacing_1">8dp</dimen>
+    <dimen name="spacing_1">4dp</dimen>
+    <dimen name="spacing_2">8dp</dimen>
+    <dimen name="spacing_3">12dp</dimen>
+    <dimen name="spacing_4">16dp</dimen>
 
     <dimen name="text_size_primary">18sp</dimen>
     <dimen name="text_size_secondary">16sp</dimen>
+
 </resources>
