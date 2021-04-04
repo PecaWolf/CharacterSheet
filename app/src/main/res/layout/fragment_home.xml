@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,9 +11,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
@@ -43,11 +43,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_name"
-            app:layout_constraintBaseline_toBaselineOf="@id/name_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/name_value"
@@ -55,12 +54,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:text="@{vm.baseStats.name}"
+            app:layout_constraintBaseline_toBaselineOf="@id/name_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Ahsoka Tano" />
 
         <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -71,11 +68,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_species"
-            app:layout_constraintBaseline_toBaselineOf="@id/species_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_label" />
 
         <TextView
             android:id="@+id/species_value"
@@ -83,12 +79,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:text="@{vm.baseStats.species.standardName}"
+            app:layout_constraintBaseline_toBaselineOf="@id/species_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/name_value"
             tools:text="Togruta" />
 
         <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -99,11 +93,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
+            android:layout_marginTop="@dimen/spacing_4"
             android:text="@string/character_str"
-            app:layout_constraintBaseline_toBaselineOf="@id/str_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/species_label" />
 
         <TextView
             android:id="@+id/str_value"
@@ -111,13 +105,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_4"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.strength}"
+            app:layout_constraintBaseline_toBaselineOf="@id/str_label"
             app:layout_constraintEnd_toStartOf="@id/str_trap"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/species_value"
             tools:text="10" />
 
         <TextView
@@ -126,11 +118,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.strengthTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/str_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/str_label"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toEndOf="@id/str_value"
             tools:text="20" />
@@ -141,9 +131,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
             android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/str_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/str_label"
             app:layout_constraintEnd_toEndOf="@id/guide_75"
             app:layout_constraintStart_toStartOf="@id/guide_50" />
 
@@ -155,11 +144,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_dex"
-            app:layout_constraintBaseline_toBaselineOf="@id/dex_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/str_label" />
 
         <TextView
             android:id="@+id/dex_value"
@@ -167,13 +155,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.dexterity}"
+            app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
             app:layout_constraintEnd_toStartOf="@id/dex_trap"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/str_value"
             tools:text="10" />
 
         <TextView
@@ -182,11 +168,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.dexterityTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/dex_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toEndOf="@id/dex_value"
             tools:text="20" />
@@ -197,9 +181,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
             android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/dex_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
             app:layout_constraintEnd_toEndOf="@id/guide_75"
             app:layout_constraintStart_toStartOf="@id/guide_50" />
 
@@ -211,11 +194,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_vit"
-            app:layout_constraintBaseline_toBaselineOf="@id/vit_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dex_label" />
 
         <TextView
             android:id="@+id/vit_value"
@@ -223,13 +205,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.vitality}"
+            app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
             app:layout_constraintEnd_toStartOf="@id/vit_trap"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/dex_value"
             tools:text="10" />
 
         <TextView
@@ -238,11 +218,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.vitalityTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/vit_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toEndOf="@id/vit_value"
             tools:text="20" />
@@ -253,9 +231,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
             android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/vit_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
             app:layout_constraintEnd_toEndOf="@id/guide_75"
             app:layout_constraintStart_toStartOf="@id/guide_50" />
 
@@ -267,11 +244,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_int"
-            app:layout_constraintBaseline_toBaselineOf="@id/int_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vit_label" />
 
         <TextView
             android:id="@+id/int_value"
@@ -279,13 +255,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.inteligence}"
+            app:layout_constraintBaseline_toBaselineOf="@id/int_label"
             app:layout_constraintEnd_toStartOf="@id/int_trap"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/vit_value"
             tools:text="10" />
 
         <TextView
@@ -294,11 +268,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.inteligenceTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/int_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/int_label"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toEndOf="@id/int_value"
             tools:text="20" />
@@ -309,9 +281,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
             android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/int_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/int_label"
             app:layout_constraintEnd_toEndOf="@id/guide_75"
             app:layout_constraintStart_toStartOf="@id/guide_50" />
 
@@ -323,11 +294,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_wis"
-            app:layout_constraintBaseline_toBaselineOf="@id/wis_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/int_label" />
 
         <TextView
             android:id="@+id/wis_value"
@@ -335,13 +305,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.wisdom}"
+            app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
             app:layout_constraintEnd_toStartOf="@id/wis_trap"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/int_value"
             tools:text="10" />
 
         <TextView
@@ -350,11 +318,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.wisdomTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/wis_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toEndOf="@id/wis_value"
             tools:text="20" />
@@ -365,9 +331,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
             android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/wis_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
             app:layout_constraintEnd_toEndOf="@id/guide_75"
             app:layout_constraintStart_toStartOf="@id/guide_50" />
 
@@ -379,11 +344,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:background="@drawable/bg_text"
             android:text="@string/character_cha"
-            app:layout_constraintBaseline_toBaselineOf="@id/cha_value"
             app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wis_label" />
 
         <TextView
             android:id="@+id/cha_value"
@@ -391,13 +355,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.charisma}"
+            app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
             app:layout_constraintEnd_toStartOf="@id/cha_trap"
             app:layout_constraintStart_toStartOf="@id/guide_25"
-            app:layout_constraintTop_toBottomOf="@id/wis_value"
             tools:text="10" />
 
         <TextView
@@ -406,11 +368,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:background="@drawable/bg_text"
             android:gravity="end"
             android:text="@{vm.baseStats.charismaTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/cha_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toEndOf="@id/cha_value"
             tools:text="20" />
@@ -421,9 +381,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
             android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/cha_value"
+            app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
             app:layout_constraintEnd_toEndOf="@id/guide_75"
             app:layout_constraintStart_toStartOf="@id/guide_50" />
 
@@ -434,10 +393,9 @@
             style="@style/Text.Value.Primary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_2"
             android:layout_marginStart="@dimen/spacing_4"
             android:layout_marginTop="@dimen/spacing_4"
-            android:background="@drawable/bg_text"
+            android:layout_marginEnd="@dimen/spacing_2"
             android:gravity="center"
             android:text="@{vm.luckAndHp}"
             app:layout_constraintBottom_toTopOf="@id/heal"
@@ -452,8 +410,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_2"
-            android:layout_marginEnd="@dimen/spacing_2"
             android:layout_marginStart="@dimen/spacing_4"
+            android:layout_marginEnd="@dimen/spacing_2"
             android:text="@string/heal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide_75"
@@ -464,8 +422,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/spacing_1"
-            android:layout_marginEnd="@dimen/spacing_2"
             android:layout_marginStart="@dimen/spacing_4"
+            android:layout_marginEnd="@dimen/spacing_2"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/damage"
             app:layout_constraintEnd_toEndOf="parent"
@@ -481,8 +439,8 @@
             style="@style/Button.Negative"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_2"
             android:layout_marginStart="@dimen/spacing_4"
+            android:layout_marginEnd="@dimen/spacing_2"
             android:layout_marginBottom="@dimen/spacing_2"
             android:text="@string/damage"
             app:layout_constraintBottom_toBottomOf="parent"
