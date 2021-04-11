@@ -1,6 +1,6 @@
 package cz.pecawolf.charactersheet.common.model
 
-import kotlin.experimental.and
+import  cz.pecawolf.charactersheet.common.model.Character.WorldMask as World
 
 data class BaseStats(
     val name: String,
@@ -20,88 +20,48 @@ data class BaseStats(
         get() = "$luck + $wounds"
 
     val strength: String
-        get() = "${str}"
+        get() = "$str"
     val strengthTrap: String
         get() = "${str * 2}"
     val dexterity: String
-        get() = "${dex}"
+        get() = "$dex"
     val dexterityTrap: String
         get() = "${dex * 2}"
     val vitality: String
-        get() = "${vit}"
+        get() = "$vit"
     val vitalityTrap: String
         get() = "${vit * 2}"
     val inteligence: String
-        get() = "${inl}"
+        get() = "$inl"
     val inteligenceTrap: String
         get() = "${inl * 2}"
     val wisdom: String
-        get() = "${wis}"
+        get() = "$wis"
     val wisdomTrap: String
         get() = "${wis * 2}"
     val charisma: String
-        get() = "${cha}"
+        get() = "$cha"
     val charismaTrap: String
         get() = "${cha * 2}"
 
     enum class Species(
         val standardName: String,
-        val mask: Byte
+        val worldMask: Byte
     ) {
-        HUMAN("Human", ALL),
+        HUMAN("Human", World.ALL),
 
         // last realm
-        DWARF(
-            "Dwarf",
-            LAST_REALM
-        ),
-        ELF(
-            "Elf",
-            LAST_REALM
-        ),
-        HAVLIN(
-            "Havlin",
-            LAST_REALM
-        ),
+        DWARF("Dwarf", World.LAST_REALM),
+        ELF("Elf", World.LAST_REALM),
+        HAVLIN("Havlin", World.LAST_REALM),
 
         // dark way
-        KARANTI(
-            "Karanti",
-            DARK_WAY
-        ),
-        NATHOREAN(
-            "Nathorean",
-            DARK_WAY
-        ),
-        SEARIAN(
-            "Searian",
-            DARK_WAY
-        ),
-        GUSMERIAN(
-            "Gusmerian",
-            DARK_WAY
-        ),
+        KARANTI("Karanti", World.DARK_WAY),
+        NATHOREAN("Nathorean", World.DARK_WAY),
+        SEARIAN("Searian", World.DARK_WAY),
+        GUSMERIAN("Gusmerian", World.DARK_WAY),
 
         // cold frontier
-        KRUNG(
-            "Krung",
-            COLD_FRONTIER
-        );
-
-        val isLastRealm: Boolean
-            get() = mask.and(LAST_REALM) == LAST_REALM
-
-        val isDarkWay: Boolean
-            get() = mask.and(DARK_WAY) == DARK_WAY
-
-        val isColdFrontier: Boolean
-            get() = mask.and(COLD_FRONTIER) == COLD_FRONTIER
-    }
-
-    companion object {
-        private const val LAST_REALM: Byte = 1
-        private const val DARK_WAY: Byte = 2
-        private const val COLD_FRONTIER: Byte = 4
-        private const val ALL: Byte = 7
+        KRUNG("Krung", World.COLD_FRONTIER);
     }
 }

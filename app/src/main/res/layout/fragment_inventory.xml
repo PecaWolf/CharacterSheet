@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="cz.pecawolf.charactersheet.presentation.InventoryViewModel" />
@@ -36,6 +38,41 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/primary_weapon_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.isPrimaryAllowed ? View.VISIBLE : View.GONE}"
+            app:constraint_referenced_ids="primary_weapon_label, primary_weapon_value" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/secondary_weapon_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.isSecondaryAllowed ? View.VISIBLE : View.GONE}"
+            app:constraint_referenced_ids="secondary_weapon_label, secondary_weapon_value" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/tertiary_weapon_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.isTertiaryAllowed ? View.VISIBLE : View.GONE}"
+            app:constraint_referenced_ids="tertiary_weapon_label, tertiary_weapon_value" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/civilian_clothes_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.isLoadoutCombat ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="civilian_clothes_label, civilian_clothes_value" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/combat_gear_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.isLoadoutCombat ? View.VISIBLE : View.GONE}"
+            app:constraint_referenced_ids="combat_gear_label, combat_gear_value" />
 
         <TextView
             android:id="@+id/loadout_header"
@@ -70,27 +107,21 @@
             android:layout_marginHorizontal="@dimen/spacing_1"
             android:text="@{vm.isLoadoutCombat ? @string/combat : @string/civilian }"
             app:layout_constraintBaseline_toBaselineOf="@+id/current_loadout_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
+            app:layout_constraintEnd_toStartOf="@id/switch_loadout"
             app:layout_constraintStart_toStartOf="@id/guide_50"
             tools:text="Combat" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_loadout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/spacing_1"
             android:checked="@{vm.isLoadoutCombat}"
             android:onClick="@{() -> vm.onSwitchLoadoutClicked()}"
             app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_75"
+            app:layout_constraintStart_toEndOf="@id/current_loadout_value"
             app:layout_constraintTop_toTopOf="@+id/current_loadout_label" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/primary_weapon_group"
-            android:layout_width="wrap_content"
-            app:constraint_referenced_ids="primary_weapon_label, primary_weapon_value"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/primary_weapon_label"
@@ -165,25 +196,25 @@
             tools:text="Falcata" />
 
         <TextView
-            android:id="@+id/civlian_clothes_label"
+            android:id="@+id/civilian_clothes_label"
             style="@style/Text.Label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
             android:layout_marginTop="@dimen/spacing_4"
-            android:text="@string/civlian_clothes"
+            android:text="@string/civilian_clothes"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tertiary_weapon_label" />
 
         <TextView
-            android:id="@+id/civlian_clothes_value"
+            android:id="@+id/civilian_clothes_value"
             style="@style/Text.Value.Primary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
             android:text="@{vm.equipment.clothes.name}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/civlian_clothes_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/civilian_clothes_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide_50"
             tools:text="Kevlar-reinforced suit" />
@@ -194,11 +225,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
+            android:layout_marginTop="@dimen/spacing_4"
             android:text="@string/combat_gear"
             app:layout_constraintEnd_toEndOf="@id/guide_50"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/civlian_clothes_label" />
+            app:layout_constraintTop_toBottomOf="@id/civilian_clothes_label" />
 
         <TextView
             android:id="@+id/combat_gear_value"
@@ -248,7 +279,7 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/money_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guide_50"
-            tools:text="50.000" />
+            tools:text="50 000" />
 
         <TextView
             android:id="@+id/backpack_header"

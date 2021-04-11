@@ -22,7 +22,6 @@
     <style name="Text.Label">
         <item name="android:textSize">@dimen/text_size_secondary</item>
         <item name="android:textColor">@color/textSecondary</item>
-        <item name="android:layout_marginTop">@dimen/spacing_2</item>
     </style>
     <style name="Text.Value">
         <item name="android:textSize">@dimen/text_size_primary</item>

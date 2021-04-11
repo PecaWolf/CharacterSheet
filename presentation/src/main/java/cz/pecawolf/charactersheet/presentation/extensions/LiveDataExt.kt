@@ -13,3 +13,7 @@ fun <T> LiveData<T>.reObserve(owner: LifecycleOwner, observer: Observer<T>) {
 fun <T> MutableLiveData<T>.notifyChanged() {
     postValue(value)
 }
+
+fun MutableLiveData<Boolean>.toggle() {
+    postValue(value?.not() ?: false)
+}
