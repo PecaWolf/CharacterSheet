@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import cz.pecawolf.charactersheet.R
 import cz.pecawolf.charactersheet.common.let2
 import cz.pecawolf.charactersheet.databinding.FragmentHomeBinding
 import cz.pecawolf.charactersheet.presentation.HomeViewModel
@@ -50,19 +51,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.baseStats.reObserve(this, { stats ->
+        viewModel.baseStats.reObserve(this) { stats ->
             Log.d("HECK", "baseStats.reObserve(): ${stats.luck} + ${stats.wounds}")
             hpAdapter.items = stats.run { luck to wounds }
-        })
+        }
 
         viewModel.rollResult.reObserve(this) { result ->
             result.let2 { roll, success ->
                 Snackbar.make(
                     binding.root,
-                    if (success) "$roll = Success!" else "$roll = Failure!",
+                    getSuccessString(roll, success),
                     Snackbar.LENGTH_LONG
                 ).show()
             }
         }
     }
+
+    private fun getSuccessString(roll: Int, success: Boolean): String = resources.getString(
+        when {
+            roll == 1 -> R.string.roll_success_critical
+            roll == 20 -> R.string.roll_failure_critical
+            success -> R.string.roll_success
+            else -> R.string.roll_failure
+        },
+        roll
+    )
 }

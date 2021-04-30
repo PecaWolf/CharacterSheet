@@ -62,36 +62,41 @@ class HomeViewModel(
 
     fun onStrRollClicked() {
         _baseStats.value?.str?.trap?.let { trap ->
-            val roll = roll()
-            _rollResult.postValue(roll to (roll <= trap))
+            roll().let { roll ->
+                _rollResult.postValue(roll to (roll <= trap))
+            }
         }
     }
 
     fun onDexRollClicked() {
         _baseStats.value?.dex?.trap?.let { trap ->
-            val roll = roll()
-            _rollResult.postValue(roll to (roll <= trap))
+            roll().let { roll ->
+                _rollResult.postValue(roll to (roll <= trap))
+            }
         }
     }
 
     fun onVitRollClicked() {
         _baseStats.value?.vit?.trap?.let { trap ->
-            val roll = roll()
-            _rollResult.postValue(roll to (roll <= trap))
+            roll().let { roll ->
+                _rollResult.postValue(roll to (roll <= trap))
+            }
         }
     }
 
     fun onInlRollClicked() {
         _baseStats.value?.inl?.trap?.let { trap ->
-            val roll = roll()
-            _rollResult.postValue(roll to (roll <= trap))
+            roll().let { roll ->
+                _rollResult.postValue(roll to (roll <= trap))
+            }
         }
     }
 
     fun onWisRollClicked() {
         _baseStats.value?.wis?.trap?.let { trap ->
-            val roll = roll()
-            _rollResult.postValue(roll to (roll <= trap))
+            roll().let { roll ->
+                _rollResult.postValue(roll to (roll <= trap))
+            }
         }
     }
 

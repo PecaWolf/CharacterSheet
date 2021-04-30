@@ -16,4 +16,9 @@
     <string name="roll">Roll</string>
     <string name="damage">-</string>
     <string name="heal">+</string>
+
+    <string name="roll_success">%d = Success!</string>
+    <string name="roll_failure">%d = Failure!</string>
+    <string name="roll_success_critical">%d = CRITICAL SUCCESS!</string>
+    <string name="roll_failure_critical">%d = CRITICAL FAILURE!</string>
 </resources>

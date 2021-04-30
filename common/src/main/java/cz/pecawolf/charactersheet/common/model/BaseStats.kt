@@ -1,5 +1,6 @@
 package cz.pecawolf.charactersheet.common.model
 
+import cz.pecawolf.charactersheet.common.Rules
 import kotlin.experimental.and
 
 class BaseStats(
@@ -46,7 +47,7 @@ class BaseStats(
 
     data class CharacterStat(val value: Int) {
         val trap: Int
-            get() = value * 2
+            get() = Rules.getCharacterStatTrap(value)
     }
 
     enum class Species(
