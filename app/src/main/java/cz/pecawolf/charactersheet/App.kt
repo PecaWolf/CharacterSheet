@@ -4,6 +4,7 @@ import android.app.Application
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
+import cz.pecawolf.charactersheet.presentation.RxKoinModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -25,7 +26,7 @@ class App : Application() {
         }
 
         UiModule.start()
-//        RxKoinModule.start()
+        RxKoinModule.start()
     }
 
     private fun initializeFirebase() {

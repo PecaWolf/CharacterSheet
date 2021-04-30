@@ -1,20 +1,62 @@
 package cz.pecawolf.charactersheet
 
+import android.content.res.Resources
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import cz.pecawolf.charactersheet.common.IRemote
-import cz.pecawolf.charactersheet.common.model.BaseStatsEntity
+import cz.pecawolf.charactersheet.common.model.BaseStats
+import io.reactivex.rxjava3.core.Single
 
 class RemoteImpl(val firestore: FirebaseFirestore) : IRemote {
-    override fun foo(): String {
-        return firestore.app.name
+    override fun getCharacter(id: String): Single<BaseStats> {
+        return Single.create { emitter ->
+            firestore.collection("characters")
+                .addSnapshotListener { snapshot, error ->
+                    snapshot
+                        ?.documents
+                        ?.firstOrNull { it.id == id }
+                        ?.let { doc ->
+                            BaseStats(
+                                doc.getString("name")
+                                    ?: throw Resources.NotFoundException("name not found"),
+                                doc.getString("species")
+                                    ?.let { BaseStats.Species.fromName(it) }
+                                    ?: throw Resources.NotFoundException("species not found"),
+                                doc.getLong("luck")?.toInt()
+                                    ?: throw Resources.NotFoundException("luck not found"),
+                                doc.getLong("wounds")?.toInt()
+                                    ?: throw Resources.NotFoundException("wounds not found"),
+                                doc.getLong("str")?.toInt()
+                                    ?: throw Resources.NotFoundException("str not found"),
+                                doc.getLong("dex")?.toInt()
+                                    ?: throw Resources.NotFoundException("dex not found"),
+                                doc.getLong("vit")?.toInt()
+                                    ?: throw Resources.NotFoundException("vit not found"),
+                                doc.getLong("inl")?.toInt()
+                                    ?: throw Resources.NotFoundException("inl not found"),
+                                doc.getLong("wis")?.toInt()
+                                    ?: throw Resources.NotFoundException("wis not found"),
+                                doc.getLong("cha")?.toInt()
+                                    ?: throw Resources.NotFoundException("cha not found"),
+                                doc.getLong("money")?.toInt()
+                                    ?: throw Resources.NotFoundException("money not found")
+                            )
+                        }
+                        ?.let {
+                            emitter.onSuccess(it)
+                        } ?: emitter.onError(error)
+                }
+        }
     }
 
-    override fun setCharacter(baseStats: BaseStatsEntity) {
+    override fun setCharacter(
+        id: String?,
+        baseStats: BaseStats
+    ) {
         val stats = baseStats.run {
             hashMapOf(
                 "name" to name,
-                "species" to species,
+                "species" to species.standardName,
                 "luck" to luck,
                 "wounds" to wounds,
                 "str" to str,
@@ -27,12 +69,15 @@ class RemoteImpl(val firestore: FirebaseFirestore) : IRemote {
             )
         }
 
-        firestore.collection("characters")
-            .add(stats)
-            .addOnCompleteListener { Log.d("HECKERY", "onComplete()") }
-            .addOnCanceledListener { Log.w("HECKERY", "onCanceled()") }
+        if (id != null) {
+            firestore.collection("characters")
+                .document(id)
+                .set(stats)
+        } else {
+            firestore.collection("characters").add(stats)
+        }
             .addOnSuccessListener {
-                Log.d("HECKERY", "onSuccess(): ${it.id}")
+                Log.d("HECKERY", "onSuccess()")
             }
             .addOnFailureListener {
                 Log.w("HECKERY", "onFailure()", it)

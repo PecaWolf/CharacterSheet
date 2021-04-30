@@ -1,8 +1,8 @@
-package cz.pecawolf.charactersheet.domain.model
+package cz.pecawolf.charactersheet.common.model
 
 import kotlin.experimental.and
 
-data class BaseStats(
+class BaseStats(
     val name: String,
     val species: Species,
     var luck: Int,
@@ -99,6 +99,13 @@ data class BaseStats(
 
         val isColdFrontier: Boolean
             get() = mask.and(COLD_FRONTIER) == COLD_FRONTIER
+
+        companion object {
+            fun fromName(name: String): Species {
+                return values().firstOrNull { it.standardName == name }
+                    ?: throw IllegalArgumentException("Species name \'$name\' not found")
+            }
+        }
     }
 
     companion object {

@@ -4,33 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import cz.pecawolf.charactersheet.common.model.BaseStats
 import cz.pecawolf.charactersheet.domain.GetBaseStatsInteractor
 import cz.pecawolf.charactersheet.domain.SetBaseStatsInteractor
-import cz.pecawolf.charactersheet.domain.model.BaseStats
 import cz.pecawolf.charactersheet.presentation.extensions.notifyChanged
 
 class HomeViewModel(
     private val mainViewModel: MainViewModel,
     val getBaseStats: GetBaseStatsInteractor,
     val setBaseStats: SetBaseStatsInteractor
-) : ViewModel() {
+) : BaseViewModel() {
 
-    private val _baseStats = MutableLiveData(
-        BaseStats(
-            "Mathias Caldera",
-            BaseStats.Species.HUMAN,
-            10,
-            4,
-            5,
-            6,
-            4,
-            7,
-            6,
-            8,
-            1000
-        )
-    )
+    private val _baseStats = MutableLiveData<BaseStats>()
     val baseStats: LiveData<BaseStats> = _baseStats
     val luckAndHp: LiveData<String> = Transformations.map(_baseStats) { it.luckAndWounds }
 
@@ -45,6 +30,8 @@ class HomeViewModel(
             Log.d("HECK", "onHealClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
+
+        saveChanges()
     }
 
     fun onDamageClicked() {
@@ -54,6 +41,8 @@ class HomeViewModel(
             Log.d("HECK", "onDamageClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
+
+        saveChanges()
     }
 
     fun onDamageLongClicked() {
@@ -62,12 +51,22 @@ class HomeViewModel(
             Log.d("HECK", "onDamageLongClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
+
+        saveChanges()
+    }
+
+    private fun saveChanges() {
+        setBaseStats.setStats(_baseStats.value!!)
     }
 
     private fun loadData() {
-        setBaseStats.setStats(baseStats.value!!)
-        getBaseStats.getStats().let {
-
-        }
+        getBaseStats.getStats("VPTNEoSmGeDCBXNhlCNW")
+            .observe(
+                {
+                    Log.d("HECKERY", "onLoadData(): ${it.name}")
+                    _baseStats.value = it
+                },
+                { Log.e("HECKERY", "onLoadDataError(): ", it) }
+            )
     }
 }
