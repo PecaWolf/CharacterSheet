@@ -1,4 +1,4 @@
-package cz.pecawolf.charactersheet.common.model
+package cz.pecawolf.charactersheet.domain.model
 
 import kotlin.experimental.and
 
@@ -48,7 +48,10 @@ data class BaseStats(
         val standardName: String,
         val mask: Byte
     ) {
-        HUMAN("Human", ALL),
+        HUMAN(
+            "Human",
+            ALL
+        ),
 
         // last realm
         DWARF(

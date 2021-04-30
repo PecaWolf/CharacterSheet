@@ -5,10 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import cz.pecawolf.charactersheet.common.model.BaseStats
+import cz.pecawolf.charactersheet.domain.GetBaseStatsInteractor
+import cz.pecawolf.charactersheet.domain.SetBaseStatsInteractor
+import cz.pecawolf.charactersheet.domain.model.BaseStats
 import cz.pecawolf.charactersheet.presentation.extensions.notifyChanged
 
-class HomeViewModel(private val mainViewModel: MainViewModel) : ViewModel() {
+class HomeViewModel(
+    private val mainViewModel: MainViewModel,
+    val getBaseStats: GetBaseStatsInteractor,
+    val setBaseStats: SetBaseStatsInteractor
+) : ViewModel() {
 
     private val _baseStats = MutableLiveData(
         BaseStats(
@@ -27,6 +33,10 @@ class HomeViewModel(private val mainViewModel: MainViewModel) : ViewModel() {
     )
     val baseStats: LiveData<BaseStats> = _baseStats
     val luckAndHp: LiveData<String> = Transformations.map(_baseStats) { it.luckAndWounds }
+
+    init {
+        loadData()
+    }
 
     fun onHealClicked() {
         _baseStats.value?.apply {
@@ -52,5 +62,12 @@ class HomeViewModel(private val mainViewModel: MainViewModel) : ViewModel() {
             Log.d("HECK", "onDamageLongClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
+    }
+
+    private fun loadData() {
+        setBaseStats.setStats(baseStats.value!!)
+        getBaseStats.getStats().let {
+
+        }
     }
 }
