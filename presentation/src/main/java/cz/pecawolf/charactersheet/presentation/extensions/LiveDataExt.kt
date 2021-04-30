@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
-fun <T> LiveData<T>.reObserve(owner: LifecycleOwner, observer: Observer<T>) {
+fun <T> LiveData<T>.reObserve(owner: LifecycleOwner, observer: (T) -> Unit) {
     removeObservers(owner)
-    observe(owner, observer)
+    observe(owner, Observer { observer.invoke(it) })
 }
 
 fun <T> MutableLiveData<T>.notifyChanged() {

@@ -7,12 +7,12 @@ class BaseStats(
     val species: Species,
     var luck: Int,
     var wounds: Int,
-    val str: Int,
-    val dex: Int,
-    val vit: Int,
-    val inl: Int,
-    val wis: Int,
-    val cha: Int,
+    val str: CharacterStat,
+    val dex: CharacterStat,
+    val vit: CharacterStat,
+    val inl: CharacterStat,
+    val wis: CharacterStat,
+    val cha: CharacterStat,
     val money: Int
 ) {
 
@@ -20,29 +20,34 @@ class BaseStats(
         get() = "$luck + $wounds"
 
     val strength: String
-        get() = "${str}"
+        get() = "${str.value}"
     val strengthTrap: String
-        get() = "${str * 2}"
+        get() = "${str.trap}"
     val dexterity: String
-        get() = "${dex}"
+        get() = "${dex.value}"
     val dexterityTrap: String
-        get() = "${dex * 2}"
+        get() = "${dex.trap}"
     val vitality: String
-        get() = "${vit}"
+        get() = "${vit.value}"
     val vitalityTrap: String
-        get() = "${vit * 2}"
+        get() = "${vit.trap}"
     val inteligence: String
-        get() = "${inl}"
+        get() = "${inl.value}"
     val inteligenceTrap: String
-        get() = "${inl * 2}"
+        get() = "${inl.trap}"
     val wisdom: String
-        get() = "${wis}"
+        get() = "${wis.value}"
     val wisdomTrap: String
-        get() = "${wis * 2}"
+        get() = "${wis.trap}"
     val charisma: String
-        get() = "${cha}"
+        get() = "${cha.value}"
     val charismaTrap: String
-        get() = "${cha * 2}"
+        get() = "${cha.trap}"
+
+    data class CharacterStat(val value: Int) {
+        val trap: Int
+            get() = value * 2
+    }
 
     enum class Species(
         val standardName: String,

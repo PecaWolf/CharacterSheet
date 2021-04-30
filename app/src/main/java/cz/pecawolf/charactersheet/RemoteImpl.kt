@@ -27,16 +27,22 @@ class RemoteImpl(val firestore: FirebaseFirestore) : IRemote {
                                 doc.getLong("wounds")?.toInt()
                                     ?: throw Resources.NotFoundException("wounds not found"),
                                 doc.getLong("str")?.toInt()
+                                    ?.let { BaseStats.CharacterStat(it) }
                                     ?: throw Resources.NotFoundException("str not found"),
                                 doc.getLong("dex")?.toInt()
+                                    ?.let { BaseStats.CharacterStat(it) }
                                     ?: throw Resources.NotFoundException("dex not found"),
                                 doc.getLong("vit")?.toInt()
+                                    ?.let { BaseStats.CharacterStat(it) }
                                     ?: throw Resources.NotFoundException("vit not found"),
                                 doc.getLong("inl")?.toInt()
+                                    ?.let { BaseStats.CharacterStat(it) }
                                     ?: throw Resources.NotFoundException("inl not found"),
                                 doc.getLong("wis")?.toInt()
+                                    ?.let { BaseStats.CharacterStat(it) }
                                     ?: throw Resources.NotFoundException("wis not found"),
                                 doc.getLong("cha")?.toInt()
+                                    ?.let { BaseStats.CharacterStat(it) }
                                     ?: throw Resources.NotFoundException("cha not found"),
                                 doc.getLong("money")?.toInt()
                                     ?: throw Resources.NotFoundException("money not found")

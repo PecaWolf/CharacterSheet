@@ -7,7 +7,9 @@ import androidx.lifecycle.Transformations
 import cz.pecawolf.charactersheet.common.model.BaseStats
 import cz.pecawolf.charactersheet.domain.GetBaseStatsInteractor
 import cz.pecawolf.charactersheet.domain.SetBaseStatsInteractor
+import cz.pecawolf.charactersheet.presentation.extensions.SingleLiveEvent
 import cz.pecawolf.charactersheet.presentation.extensions.notifyChanged
+import kotlin.random.Random
 
 class HomeViewModel(
     private val mainViewModel: MainViewModel,
@@ -16,8 +18,11 @@ class HomeViewModel(
 ) : BaseViewModel() {
 
     private val _baseStats = MutableLiveData<BaseStats>()
+    private val _rollResult = SingleLiveEvent<Pair<Int, Boolean>>()
+
     val baseStats: LiveData<BaseStats> = _baseStats
     val luckAndHp: LiveData<String> = Transformations.map(_baseStats) { it.luckAndWounds }
+    val rollResult: LiveData<Pair<Int, Boolean>> = _rollResult
 
     init {
         loadData()
@@ -25,7 +30,7 @@ class HomeViewModel(
 
     fun onHealClicked() {
         _baseStats.value?.apply {
-            if (wounds < vit) wounds++
+            if (wounds < vit.value) wounds++
             else luck++
             Log.d("HECK", "onHealClicked(): $luck + $wounds")
         }
@@ -54,6 +59,50 @@ class HomeViewModel(
 
         saveChanges()
     }
+
+    fun onStrRollClicked() {
+        _baseStats.value?.str?.trap?.let { trap ->
+            val roll = roll()
+            _rollResult.postValue(roll to (roll <= trap))
+        }
+    }
+
+    fun onDexRollClicked() {
+        _baseStats.value?.dex?.trap?.let { trap ->
+            val roll = roll()
+            _rollResult.postValue(roll to (roll <= trap))
+        }
+    }
+
+    fun onVitRollClicked() {
+        _baseStats.value?.vit?.trap?.let { trap ->
+            val roll = roll()
+            _rollResult.postValue(roll to (roll <= trap))
+        }
+    }
+
+    fun onInlRollClicked() {
+        _baseStats.value?.inl?.trap?.let { trap ->
+            val roll = roll()
+            _rollResult.postValue(roll to (roll <= trap))
+        }
+    }
+
+    fun onWisRollClicked() {
+        _baseStats.value?.wis?.trap?.let { trap ->
+            val roll = roll()
+            _rollResult.postValue(roll to (roll <= trap))
+        }
+    }
+
+    fun onChaRollClicked() {
+        _baseStats.value?.cha?.trap?.let { trap ->
+            val roll = roll()
+            _rollResult.postValue(roll to (roll <= trap))
+        }
+    }
+
+    private fun roll() = Random(System.currentTimeMillis()).nextInt(20) + 1
 
     private fun saveChanges() {
         setBaseStats.setStats(_baseStats.value!!)

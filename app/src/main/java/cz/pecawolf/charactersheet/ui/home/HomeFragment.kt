@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import cz.pecawolf.charactersheet.common.let2
 import cz.pecawolf.charactersheet.databinding.FragmentHomeBinding
 import cz.pecawolf.charactersheet.presentation.HomeViewModel
 import cz.pecawolf.charactersheet.presentation.extensions.reObserve
@@ -38,6 +40,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.heal.setOnClickListener { viewModel.onHealClicked() }
         binding.damage.setOnClickListener { viewModel.onDamageClicked() }
         binding.damage.setOnLongClickListener { true.also { viewModel.onDamageLongClicked() } }
+
+        binding.strRoll.setOnClickListener { viewModel.onStrRollClicked() }
+        binding.dexRoll.setOnClickListener { viewModel.onDexRollClicked() }
+        binding.vitRoll.setOnClickListener { viewModel.onVitRollClicked() }
+        binding.inlRoll.setOnClickListener { viewModel.onInlRollClicked() }
+        binding.wisRoll.setOnClickListener { viewModel.onWisRollClicked() }
+        binding.chaRoll.setOnClickListener { viewModel.onChaRollClicked() }
     }
 
     override fun observeViewModel() {
@@ -45,5 +54,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             Log.d("HECK", "baseStats.reObserve(): ${stats.luck} + ${stats.wounds}")
             hpAdapter.items = stats.run { luck to wounds }
         })
+
+        viewModel.rollResult.reObserve(this) { result ->
+            result.let2 { roll, success ->
+                Snackbar.make(
+                    binding.root,
+                    if (success) "$roll = Success!" else "$roll = Failure!",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 }
