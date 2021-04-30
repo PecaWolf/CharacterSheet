@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "25949367782",
+    "firebase_url": "https://staqquest.firebaseio.com",
+    "project_id": "staqquest",
+    "storage_bucket": "staqquest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25949367782:android:4127252ce2c5401ff67a27",
+        "android_client_info": {
+          "package_name": "cz.pecawolf.charactersheet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25949367782-h1au1nh49r253hhpmpj66lmkbiidbl1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cz.pecawolf.charactersheet",
+            "certificate_hash": "55efa56d48c479b36bf8d81e205bd1b345d13aeb"
+          }
+        },
+        {
+          "client_id": "25949367782-kpjhd4g792ett3fd8vb9kju3sqkdllsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACUrTZS7LiaVE0dm5j-zkyN0vpklUUGws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25949367782-kpjhd4g792ett3fd8vb9kju3sqkdllsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
