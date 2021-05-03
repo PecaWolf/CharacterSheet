@@ -8,6 +8,7 @@ import cz.pecawolf.charactersheet.presentation.RxKoinModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import timber.log.Timber
 
 class App : Application() {
 
@@ -16,6 +17,11 @@ class App : Application() {
 
         initializeKoin()
         initializeFirebase()
+        plantTimber()
+    }
+
+    private fun plantTimber() {
+        Timber.plant(Timber.DebugTree())
     }
 
 

@@ -1,6 +1,5 @@
 package cz.pecawolf.charactersheet.presentation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -9,6 +8,7 @@ import cz.pecawolf.charactersheet.domain.GetBaseStatsInteractor
 import cz.pecawolf.charactersheet.domain.SetBaseStatsInteractor
 import cz.pecawolf.charactersheet.presentation.extensions.SingleLiveEvent
 import cz.pecawolf.charactersheet.presentation.extensions.notifyChanged
+import timber.log.Timber
 import kotlin.random.Random
 
 class HomeViewModel(
@@ -32,7 +32,7 @@ class HomeViewModel(
         _baseStats.value?.apply {
             if (wounds < vit.value) wounds++
             else luck++
-            Log.d("HECK", "onHealClicked(): $luck + $wounds")
+            Timber.d("onHealClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
 
@@ -43,7 +43,7 @@ class HomeViewModel(
         _baseStats.value?.apply {
             if (luck > 0) luck--
             else wounds = maxOf(wounds - 1, 0)
-            Log.d("HECK", "onDamageClicked(): $luck + $wounds")
+            Timber.d("onDamageClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
 
@@ -53,7 +53,7 @@ class HomeViewModel(
     fun onDamageLongClicked() {
         _baseStats.value?.apply {
             wounds = maxOf(wounds - 1, 0)
-            Log.d("HECK", "onDamageLongClicked(): $luck + $wounds")
+            Timber.d("onDamageLongClicked(): $luck + $wounds")
         }
         _baseStats.notifyChanged()
 
@@ -117,10 +117,10 @@ class HomeViewModel(
         getBaseStats.getStats("VPTNEoSmGeDCBXNhlCNW")
             .observe(
                 {
-                    Log.d("HECKERY", "onLoadData(): ${it.name}")
+                    Timber.d("onLoadData(): ${it.name}")
                     _baseStats.value = it
                 },
-                { Log.e("HECKERY", "onLoadDataError(): ", it) }
+                { Timber.e(it, "onLoadDataError(): ") }
             )
     }
 }

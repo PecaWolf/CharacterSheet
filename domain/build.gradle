@@ -9,12 +9,15 @@ java {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
-    implementation project(path: ':data')
     implementation project(path: ':common')
+    implementation project(path: ':data')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
 
     implementation "org.koin:koin-core:2.2.2"
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

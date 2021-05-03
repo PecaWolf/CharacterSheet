@@ -1,10 +1,10 @@
 package cz.pecawolf.charactersheet.presentation.extensions
 
-import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
 class SingleLiveEvent<T> : MutableLiveData<T>() {
@@ -13,10 +13,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
         if (hasActiveObservers()) {
-            Log.w(
-                this::class.java.name,
-                "Multiple observers registered but only one will be notified of changes."
-            )
+            Timber.w("Multiple observers registered but only one will be notified of changes.")
         }
 
         super.observe(owner, Observer {

@@ -1,7 +1,6 @@
 package cz.pecawolf.charactersheet.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +11,7 @@ import cz.pecawolf.charactersheet.databinding.FragmentHomeBinding
 import cz.pecawolf.charactersheet.presentation.HomeViewModel
 import cz.pecawolf.charactersheet.presentation.extensions.reObserve
 import cz.pecawolf.charactersheet.ui.BaseFragment
+import timber.log.Timber
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun observeViewModel() {
         viewModel.baseStats.reObserve(this) { stats ->
-            Log.d("HECK", "baseStats.reObserve(): ${stats.luck} + ${stats.wounds}")
+            Timber.d("baseStats.reObserve(): ${stats.luck} + ${stats.wounds}")
             hpAdapter.items = stats.run { luck to wounds }
         }
 

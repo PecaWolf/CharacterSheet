@@ -1,11 +1,11 @@
 package cz.pecawolf.charactersheet
 
 import android.content.res.Resources
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import cz.pecawolf.charactersheet.common.IRemote
 import cz.pecawolf.charactersheet.common.model.BaseStats
 import io.reactivex.rxjava3.core.Single
+import timber.log.Timber
 
 class RemoteImpl(val firestore: FirebaseFirestore) : IRemote {
     override fun getCharacter(id: String): Single<BaseStats> {
@@ -83,10 +83,10 @@ class RemoteImpl(val firestore: FirebaseFirestore) : IRemote {
             firestore.collection("characters").add(stats)
         }
             .addOnSuccessListener {
-                Log.d("HECKERY", "onSuccess()")
+                Timber.d("onSuccess()")
             }
             .addOnFailureListener {
-                Log.w("HECKERY", "onFailure()", it)
+                Timber.w(it, "onFailure()")
             }
     }
 }
