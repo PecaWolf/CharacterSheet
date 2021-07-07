@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VIEWMODEL: ViewModel, BINDING: ViewDataBinding> : Fragment() {
+abstract class BaseFragment<VIEWMODEL : ViewModel, BINDING : ViewBinding> : Fragment() {
 
     protected val viewModel: VIEWMODEL by lazy { createViewModel() }
+
     protected lateinit var binding: BINDING
 
     override fun onCreateView(
@@ -19,19 +19,18 @@ abstract class BaseFragment<VIEWMODEL: ViewModel, BINDING: ViewDataBinding> : Fr
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutResource(), container, false)
+        binding = getBinding(inflater, container)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
-        bindView(binding)
-        observeViewModel()
+        bindView(binding, viewModel)
+        observeViewModel(binding, viewModel)
     }
 
-    protected abstract fun getLayoutResource(): Int
+    protected abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): BINDING
     protected abstract fun createViewModel(): VIEWMODEL
-    protected abstract fun bindView(binding: BINDING)
-    protected abstract fun observeViewModel()
+    protected abstract fun bindView(binding: BINDING, viewModel: VIEWMODEL)
+    protected abstract fun observeViewModel(binding: BINDING, viewModel: VIEWMODEL)
 }

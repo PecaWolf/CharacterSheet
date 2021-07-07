@@ -8,11 +8,10 @@ import androidx.lifecycle.ViewModel
 import cz.pecawolf.charactersheet.common.model.Equipment
 import cz.pecawolf.charactersheet.common.model.Equipment.Item
 import cz.pecawolf.charactersheet.presentation.extensions.MergedLiveData2
-import cz.pecawolf.charactersheet.presentation.extensions.toggle
 
 class InventoryViewModel(val mainViewModel: MainViewModel) : ViewModel() {
 
-    private val _isLoadoutCombat = MutableLiveData<Boolean>().apply {
+    private val _loadoutType = MutableLiveData<Boolean>().apply {
         value = false
     }
     private val _equipment = MutableLiveData<Equipment>().apply {
@@ -46,16 +45,25 @@ class InventoryViewModel(val mainViewModel: MainViewModel) : ViewModel() {
         value = 50000
     }
 
-    val isLoadoutCombat: LiveData<Boolean> = _isLoadoutCombat
-    val isPrimaryAllowed = MergedLiveData2<Equipment, Boolean, Boolean>(_equipment, _isLoadoutCombat){ equipment, isCombat ->
+    val loadoutType: LiveData<Boolean> = _loadoutType
+    val isPrimaryAllowed = MergedLiveData2<Equipment, Boolean, Boolean>(
+        _equipment,
+        _loadoutType
+    ) { equipment, isCombat ->
         Log.d("HECK", "primary: $isCombat, ${equipment.primary.isCivilian}")
         isCombat || equipment.primary.isCivilian
     }
-    val isSecondaryAllowed = MergedLiveData2<Equipment, Boolean, Boolean>(_equipment, _isLoadoutCombat){ equipment, isCombat ->
+    val isSecondaryAllowed = MergedLiveData2<Equipment, Boolean, Boolean>(
+        _equipment,
+        _loadoutType
+    ) { equipment, isCombat ->
         Log.d("HECK", "secondary: $isCombat, ${equipment.secondary.isCivilian}")
         isCombat || equipment.secondary.isCivilian
     }
-    val isTertiaryAllowed = MergedLiveData2<Equipment, Boolean, Boolean>(_equipment, _isLoadoutCombat){ equipment, isCombat ->
+    val isTertiaryAllowed = MergedLiveData2<Equipment, Boolean, Boolean>(
+        _equipment,
+        _loadoutType
+    ) { equipment, isCombat ->
         Log.d("HECK", "tertiary: $isCombat, ${equipment.tertiary.isCivilian}")
         isCombat || equipment.tertiary.isCivilian
     }
@@ -63,6 +71,6 @@ class InventoryViewModel(val mainViewModel: MainViewModel) : ViewModel() {
     val money: LiveData<String> = Transformations.map(_money) { "$it" }
 
     fun onSwitchLoadoutClicked() {
-        _isLoadoutCombat.toggle()
+        _loadoutType
     }
 }

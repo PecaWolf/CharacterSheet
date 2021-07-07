@@ -1,6 +1,8 @@
-include ':presentation'
-include ':data'
-include ':domain'
-include ':common'
 include ':app'
+include ':common'
+include ':presentation'
+include ':domain'
+include ':data'
+include ':cache'
+include ':remote'
 rootProject.name = "CharacterSheet"

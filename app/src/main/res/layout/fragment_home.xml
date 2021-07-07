@@ -1,458 +1,454 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_1"
+    tools:context=".ui.home.HomeFragment">
 
-    <data>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
 
-        <variable
-            name="vm"
-            type="cz.pecawolf.charactersheet.presentation.HomeViewModel" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
 
-    </data>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header_card"
+        style="@style/Card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide_25"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_header_25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <TextView
+                android:id="@+id/name_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_name"
+                app:layout_constraintEnd_toEndOf="@id/guide_header_25"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                app:layout_constraintBaseline_toBaselineOf="@id/name_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toStartOf="@id/guide_header_25"
+                tools:text="Ahsoka Tano" />
+
+            <TextView
+                android:id="@+id/species_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_species"
+                app:layout_constraintEnd_toEndOf="@id/guide_header_25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name_label" />
+
+            <TextView
+                android:id="@+id/species_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                app:layout_constraintBaseline_toBaselineOf="@id/species_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_header_25"
+                tools:text="Togruta" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stats_card"
+        style="@style/Card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guide_75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
+            android:padding="@dimen/spacing_1">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide_50"
-            android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_stats_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.333" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_stats_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.666" />
+
+            <TextView
+                android:id="@+id/str_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_str"
+                app:layout_constraintBaseline_toBaselineOf="@id/str_roll"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/str_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/str_label"
+                app:layout_constraintEnd_toStartOf="@id/str_trap"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/str_trap"
+                style="@style/Text.Value.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/str_label"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
+                app:layout_constraintStart_toEndOf="@id/str_value"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/str_roll"
+                style="@style/Button.Roll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/roll"
+                app:layout_constraintBottom_toTopOf="@id/dex_roll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <TextView
+                android:id="@+id/dex_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_dex"
+                app:layout_constraintBaseline_toBaselineOf="@id/dex_roll"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/dex_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
+                app:layout_constraintEnd_toStartOf="@id/dex_trap"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/dex_trap"
+                style="@style/Text.Value.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
+                app:layout_constraintStart_toEndOf="@id/dex_value"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/dex_roll"
+                style="@style/Button.Roll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/roll"
+                app:layout_constraintBottom_toTopOf="@id/vit_roll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
+                app:layout_constraintTop_toBottomOf="@id/str_roll" />
+
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <TextView
+                android:id="@+id/vit_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_vit"
+                app:layout_constraintBaseline_toBaselineOf="@id/vit_roll"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/vit_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
+                app:layout_constraintEnd_toStartOf="@id/vit_trap"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/vit_trap"
+                style="@style/Text.Value.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
+                app:layout_constraintStart_toEndOf="@id/vit_value"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/vit_roll"
+                style="@style/Button.Roll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/roll"
+                app:layout_constraintBottom_toTopOf="@id/int_roll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
+                app:layout_constraintTop_toBottomOf="@id/dex_roll" />
+
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <TextView
+                android:id="@+id/int_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_int"
+                app:layout_constraintBaseline_toBaselineOf="@id/int_roll"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/int_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/int_label"
+                app:layout_constraintEnd_toStartOf="@id/int_trap"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/int_trap"
+                style="@style/Text.Value.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/int_label"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
+                app:layout_constraintStart_toEndOf="@id/int_value"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/int_roll"
+                style="@style/Button.Roll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/roll"
+                app:layout_constraintBottom_toTopOf="@id/wis_roll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
+                app:layout_constraintTop_toBottomOf="@id/vit_roll" />
+
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <TextView
+                android:id="@+id/wis_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_wis"
+                app:layout_constraintBaseline_toBaselineOf="@id/wis_roll"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/wis_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
+                app:layout_constraintEnd_toStartOf="@id/wis_trap"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/wis_trap"
+                style="@style/Text.Value.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
+                app:layout_constraintStart_toEndOf="@id/wis_value"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/wis_roll"
+                style="@style/Button.Roll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/roll"
+                app:layout_constraintBottom_toTopOf="@id/cha_roll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
+                app:layout_constraintTop_toBottomOf="@id/int_roll" />
+
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <TextView
+                android:id="@+id/cha_label"
+                style="@style/Text.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/character_cha"
+                app:layout_constraintBaseline_toBaselineOf="@id/cha_roll"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/cha_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
+                app:layout_constraintEnd_toStartOf="@id/cha_trap"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/cha_trap"
+                style="@style/Text.Value.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
+                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
+                app:layout_constraintStart_toEndOf="@id/cha_value"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/cha_roll"
+                style="@style/Button.Roll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/roll"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
+                app:layout_constraintTop_toBottomOf="@id/wis_roll" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/hit_point_card"
+        style="@style/Card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@id/luck_and_hp_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guide_75"
+        app:layout_constraintTop_toBottomOf="@id/header_card">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.50" />
+            android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide_75"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
+            <TextView
+                android:id="@+id/luck_and_hp_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/heal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10+4" />
 
-        <TextView
-            android:id="@+id/name_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_name"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/heal"
+                style="@style/Button.Positive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/heal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/luck_and_hp_value" />
 
-        <TextView
-            android:id="@+id/name_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@{vm.baseStats.name}"
-            app:layout_constraintBaseline_toBaselineOf="@id/name_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="Ahsoka Tano" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/species_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_species"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_label" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/luck_and_hp_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/spacing_1"
+        android:layout_marginHorizontal="@dimen/spacing_1"
+        app:layout_constraintBottom_toTopOf="@id/damage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guide_75"
+        app:layout_constraintTop_toBottomOf="@id/hit_point_card"
+        tools:itemCount="14"
+        tools:listitem="@layout/item_hit_point">
 
-        <TextView
-            android:id="@+id/species_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@{vm.baseStats.species.standardName}"
-            app:layout_constraintBaseline_toBaselineOf="@id/species_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="Togruta" />
+    </androidx.recyclerview.widget.RecyclerView>
 
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+    <TextView
+        android:id="@+id/damage"
+        style="@style/Button.Negative"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="@string/damage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guide_75" />
 
-        <TextView
-            android:id="@+id/str_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_4"
-            android:text="@string/character_str"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/species_label" />
-
-        <TextView
-            android:id="@+id/str_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.strength}"
-            app:layout_constraintBaseline_toBaselineOf="@id/str_label"
-            app:layout_constraintEnd_toStartOf="@id/str_trap"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/str_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.strengthTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/str_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_50"
-            app:layout_constraintStart_toEndOf="@id/str_value"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/str_roll"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/str_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
-            app:layout_constraintStart_toStartOf="@id/guide_50" />
-
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-        <TextView
-            android:id="@+id/dex_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_dex"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/str_label" />
-
-        <TextView
-            android:id="@+id/dex_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.dexterity}"
-            app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
-            app:layout_constraintEnd_toStartOf="@id/dex_trap"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/dex_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.dexterityTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_50"
-            app:layout_constraintStart_toEndOf="@id/dex_value"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/dex_roll"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
-            app:layout_constraintStart_toStartOf="@id/guide_50" />
-
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-        <TextView
-            android:id="@+id/vit_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_vit"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dex_label" />
-
-        <TextView
-            android:id="@+id/vit_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.vitality}"
-            app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
-            app:layout_constraintEnd_toStartOf="@id/vit_trap"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/vit_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.vitalityTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_50"
-            app:layout_constraintStart_toEndOf="@id/vit_value"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/vit_roll"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
-            app:layout_constraintStart_toStartOf="@id/guide_50" />
-
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-        <TextView
-            android:id="@+id/int_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_int"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vit_label" />
-
-        <TextView
-            android:id="@+id/int_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.inteligence}"
-            app:layout_constraintBaseline_toBaselineOf="@id/int_label"
-            app:layout_constraintEnd_toStartOf="@id/int_trap"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/int_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.inteligenceTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/int_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_50"
-            app:layout_constraintStart_toEndOf="@id/int_value"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/int_roll"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/int_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
-            app:layout_constraintStart_toStartOf="@id/guide_50" />
-
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-        <TextView
-            android:id="@+id/wis_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_wis"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/int_label" />
-
-        <TextView
-            android:id="@+id/wis_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.wisdom}"
-            app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
-            app:layout_constraintEnd_toStartOf="@id/wis_trap"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/wis_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.wisdomTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_50"
-            app:layout_constraintStart_toEndOf="@id/wis_value"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/wis_roll"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
-            app:layout_constraintStart_toStartOf="@id/guide_50" />
-
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-        <TextView
-            android:id="@+id/cha_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:layout_marginTop="@dimen/spacing_2"
-            android:text="@string/character_cha"
-            app:layout_constraintEnd_toEndOf="@id/guide_25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wis_label" />
-
-        <TextView
-            android:id="@+id/cha_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.charisma}"
-            app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
-            app:layout_constraintEnd_toStartOf="@id/cha_trap"
-            app:layout_constraintStart_toStartOf="@id/guide_25"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/cha_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:gravity="end"
-            android:text="@{vm.baseStats.charismaTrap}"
-            app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_50"
-            app:layout_constraintStart_toEndOf="@id/cha_value"
-            tools:text="20" />
-
-        <TextView
-            android:id="@+id/cha_roll"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_1"
-            android:text="@string/roll"
-            app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
-            app:layout_constraintEnd_toEndOf="@id/guide_75"
-            app:layout_constraintStart_toStartOf="@id/guide_50" />
-
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-        <TextView
-            android:id="@+id/luck_and_hp_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_4"
-            android:layout_marginTop="@dimen/spacing_4"
-            android:layout_marginEnd="@dimen/spacing_2"
-            android:gravity="center"
-            android:text="@{vm.luckAndHp}"
-            app:layout_constraintBottom_toTopOf="@id/heal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_75"
-            app:layout_constraintTop_toBottomOf="@id/species_value"
-            tools:text="10+3" />
-
-        <TextView
-            android:id="@+id/heal"
-            style="@style/Button.Positive"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_2"
-            android:layout_marginStart="@dimen/spacing_4"
-            android:layout_marginEnd="@dimen/spacing_2"
-            android:text="@string/heal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_75"
-            app:layout_constraintTop_toBottomOf="@id/luck_and_hp_value" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/luck_and_hp"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/spacing_1"
-            android:layout_marginStart="@dimen/spacing_4"
-            android:layout_marginEnd="@dimen/spacing_2"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@id/damage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_75"
-            app:layout_constraintTop_toBottomOf="@id/heal"
-            tools:itemCount="13"
-            tools:listitem="@layout/item_hit_point">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/damage"
-            style="@style/Button.Negative"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_4"
-            android:layout_marginEnd="@dimen/spacing_2"
-            android:layout_marginBottom="@dimen/spacing_2"
-            android:text="@string/damage"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guide_75" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

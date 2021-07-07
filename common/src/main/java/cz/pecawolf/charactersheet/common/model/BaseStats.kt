@@ -16,8 +16,8 @@ data class BaseStats(
     val money: Int
 ) {
 
-    val luckAndWounds: String
-        get() = "$luck + $wounds"
+    val luckAndWounds: Pair<Int, Int>
+        get() = luck to wounds
 
     val strength: String
         get() = "$str"

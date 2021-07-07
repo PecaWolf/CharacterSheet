@@ -315,4 +315,8 @@ data class Equipment(
         BREATH(512),          // suffocation
         KINETIC(1024)         // explosions
     }
+
+    enum class LoadoutType {
+        COMBAT, SOCIAL, TRAVEL
+    }
 }

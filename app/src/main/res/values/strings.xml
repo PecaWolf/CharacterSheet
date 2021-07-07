@@ -20,13 +20,14 @@
     <string name="secondary_weapon">Side weapon:</string>
     <string name="tertiary_weapon">Tertiary weapon:</string>
     <string name="civilian_clothes">Civilian clothes:</string>
-    <string name="combat_gear">Combat gear:</string>
+    <string name="combat_gear">Combat gear / armor:</string>
     <string name="current_loadout">Current loadout:</string>
     <string name="combat">Combat</string>
     <string name="civilian">Civilian</string>
     <string name="switch_loadout">Switch</string>
-    <string name="money">Money</string>
+    <string name="money">Money:</string>
     <string name="backpack">Backpack</string>
-    <string name="credits">Credits:</string>
+    <string name="storage">Storage</string>
     <string name="loadout">Loadout</string>
+    <string name="home_luck_and_hp">"%1$d + %2$d "</string>
 </resources>

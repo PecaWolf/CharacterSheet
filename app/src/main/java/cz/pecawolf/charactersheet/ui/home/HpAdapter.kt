@@ -22,18 +22,22 @@ class HpAdapter : RecyclerView.Adapter<HpAdapter.ViewHolder>() {
         get() = items.second
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ItemHitPointBinding.inflate(LayoutInflater.from(parent.context)).let {
-            it.root.layoutParams =
-                ViewGroup.LayoutParams(parent.width, ViewGroup.LayoutParams.WRAP_CONTENT)
-            it.background = ResourcesCompat.getDrawable(parent.context.resources, viewType, null)
-            ViewHolder(it)
+        ItemHitPointBinding.inflate(LayoutInflater.from(parent.context), parent, false).run {
+            item.setCardBackgroundColor(
+                ResourcesCompat.getColor(
+                    parent.context.resources,
+                    viewType,
+                    null
+                )
+            )
+            ViewHolder(this)
         }
 
     override fun getItemCount(): Int = luck + wounds
 
     override fun getItemViewType(position: Int) = when {
-        position < luck -> R.drawable.bg_luck
-        position < luck + wounds -> R.drawable.bg_wound
+        position < luck -> R.color.luck
+        position < luck + wounds -> R.color.wound
         else -> throw IndexOutOfBoundsException()
     }
 
