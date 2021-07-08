@@ -40,7 +40,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <cz.pecawolf.charactersheet.ui.view.TwoStateImageView
+            <com.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_combat"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -55,7 +55,7 @@
                 app:uncheckedSrc="@drawable/ic_loadout_combat_inactive"
                 tools:text="combat" />
 
-            <cz.pecawolf.charactersheet.ui.view.TwoStateImageView
+            <com.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_social"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -70,7 +70,7 @@
                 app:uncheckedSrc="@drawable/ic_loadout_social_inactive"
                 tools:text="social" />
 
-            <cz.pecawolf.charactersheet.ui.view.TwoStateImageView
+            <com.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_travel"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

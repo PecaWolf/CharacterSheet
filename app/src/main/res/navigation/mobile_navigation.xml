@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="cz.pecawolf.charactersheet.ui.home.HomeFragment"
+        android:name="com.pecawolf.charactersheet.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_inventory"
-        android:name="cz.pecawolf.charactersheet.ui.inventory.InventoryFragment"
+        android:name="com.pecawolf.charactersheet.ui.inventory.InventoryFragment"
         android:label="@string/title_inventory"
         tools:layout="@layout/fragment_inventory" />
 
     <fragment
         android:id="@+id/navigation_skills"
-        android:name="cz.pecawolf.charactersheet.ui.skills.SkillsFragment"
+        android:name="com.pecawolf.charactersheet.ui.skills.SkillsFragment"
         android:label="@string/title_skills"
         tools:layout="@layout/fragment_skills" />
 
     <fragment
         android:id="@+id/navigation_other"
-        android:name="cz.pecawolf.charactersheet.ui.other.OtherFragment"
+        android:name="com.pecawolf.charactersheet.ui.other.OtherFragment"
         android:label="@string/title_other"
         tools:layout="@layout/fragment_other" />
 </navigation>
