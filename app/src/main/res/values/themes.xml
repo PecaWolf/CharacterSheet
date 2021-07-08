@@ -57,11 +57,13 @@
         <item name="android:textSize">@dimen/text_size_primary</item>
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:background">@drawable/btn_primary</item>
-        <item name="android:padding">@dimen/spacing_0_5</item>
+        <item name="android:padding">@dimen/spacing_1</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="Button.Roll"></style>
+    <style name="Button.Roll">
+        <item name="android:padding">@dimen/spacing_1</item>
+    </style>
 
     <style name="Button.Positive">
         <item name="android:background">@drawable/btn_positive</item>

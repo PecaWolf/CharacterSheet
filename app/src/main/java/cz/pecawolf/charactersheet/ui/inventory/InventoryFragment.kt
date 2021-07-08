@@ -2,8 +2,12 @@ package cz.pecawolf.charactersheet.ui.inventory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
+import cz.pecawolf.charactersheet.R
+import cz.pecawolf.charactersheet.common.model.Equipment
 import cz.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import cz.pecawolf.charactersheet.presentation.InventoryViewModel
+import cz.pecawolf.charactersheet.presentation.extensions.reObserve
 import cz.pecawolf.charactersheet.ui.BaseFragment
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
@@ -21,12 +25,71 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
 //        viewModel.equipment.clothes.name
 //        viewModel.equipment.armor.name
 //        viewModel.money
+
+        binding.loadoutCombat.setOnClickListener { viewModel.onLoadoutCombatClicked() }
+        binding.loadoutSocial.setOnClickListener { viewModel.onLoadoutSocialClicked() }
+        binding.loadoutTravel.setOnClickListener { viewModel.onLoadoutTravelClicked() }
     }
 
     override fun observeViewModel(
         binding: FragmentInventoryBinding,
         viewModel: InventoryViewModel
     ) {
+        viewModel.loadoutType.reObserve(this) { type ->
+            binding.loadoutCombat.isActive = type == Equipment.Item.LoadoutType.COMBAT
+            binding.loadoutSocial.isActive = type == Equipment.Item.LoadoutType.SOCIAL
+            binding.loadoutTravel.isActive = type == Equipment.Item.LoadoutType.TRAVEL
+        }
 
+        viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->
+            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
+                resources,
+                R.dimen.inactive_item_alpha
+            )
+            binding.primaryWeaponLabel.alpha = alpha
+            binding.primaryWeaponValue.alpha = alpha
+        }
+        viewModel.isSecondaryAllowed.reObserve(this) { isAllowed ->
+            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
+                resources,
+                R.dimen.inactive_item_alpha
+            )
+            binding.secondaryWeaponLabel.alpha = alpha
+            binding.secondaryWeaponValue.alpha = alpha
+        }
+        viewModel.isTertiaryAllowed.reObserve(this) { isAllowed ->
+            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
+                resources,
+                R.dimen.inactive_item_alpha
+            )
+            binding.tertiaryWeaponLabel.alpha = alpha
+            binding.tertiaryWeaponValue.alpha = alpha
+        }
+        viewModel.isClothingAllowed.reObserve(this) { isAllowed ->
+            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
+                resources,
+                R.dimen.inactive_item_alpha
+            )
+            binding.civilianClothesLabel.alpha = alpha
+            binding.civilianClothesValue.alpha = alpha
+        }
+        viewModel.isArmorAllowed.reObserve(this) { isAllowed ->
+            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
+                resources,
+                R.dimen.inactive_item_alpha
+            )
+            binding.combatGearLabel.alpha = alpha
+            binding.combatGearValue.alpha = alpha
+        }
+        viewModel.equipment.reObserve(this) { equipment ->
+            binding.primaryWeaponValue.text = equipment.primary.name
+            binding.secondaryWeaponValue.text = equipment.secondary.name
+            binding.tertiaryWeaponValue.text = equipment.tertiary.name
+            binding.civilianClothesValue.text = equipment.clothes.name
+            binding.combatGearValue.text = equipment.armor.name
+        }
+        viewModel.money.reObserve(this) {
+            binding.moneyValue.text = it
+        }
     }
 }

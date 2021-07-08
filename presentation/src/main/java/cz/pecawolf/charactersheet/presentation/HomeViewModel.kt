@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
 import cz.pecawolf.charactersheet.common.model.BaseStats
 import cz.pecawolf.charactersheet.presentation.extensions.notifyChanged
 
@@ -24,7 +25,7 @@ class HomeViewModel(private val mainViewModel: MainViewModel) : ViewModel() {
             1000
         )
     )
-    val baseStats: LiveData<BaseStats> = _baseStats
+    val baseStats: LiveData<BaseStats> = _baseStats.distinctUntilChanged()
     val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(_baseStats) { it.luckAndWounds }
 
     fun onHealClicked() {

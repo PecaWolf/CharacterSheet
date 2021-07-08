@@ -28,36 +28,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.50" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/primary_weapon_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="primary_weapon_label, primary_weapon_value" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/secondary_weapon_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="secondary_weapon_label, secondary_weapon_value" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/tertiary_weapon_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tertiary_weapon_label, tertiary_weapon_value" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/civilian_clothes_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="civilian_clothes_label, civilian_clothes_value" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/combat_gear_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="combat_gear_label, combat_gear_value" />
-
             <TextView
                 android:id="@+id/current_loadout_label"
                 style="@style/Text.Label"
@@ -70,40 +40,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <cz.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_combat"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="@dimen/spacing_1"
-                android:src="@drawable/ic_combat"
+                android:src="@drawable/ic_loadout_combat_inactive"
+                app:checkedSrc="@drawable/ic_loadout_combat_active"
+                app:isActive="false"
                 app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
                 app:layout_constraintEnd_toStartOf="@id/loadout_social"
                 app:layout_constraintStart_toStartOf="@id/guide_50"
                 app:layout_constraintTop_toTopOf="@+id/current_loadout_label"
+                app:uncheckedSrc="@drawable/ic_loadout_combat_inactive"
                 tools:text="combat" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <cz.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_social"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="@dimen/spacing_1"
-                android:src="@drawable/ic_social"
+                android:src="@drawable/ic_loadout_social_inactive"
+                app:checkedSrc="@drawable/ic_loadout_social_active"
+                app:isActive="false"
                 app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
                 app:layout_constraintEnd_toStartOf="@id/loadout_travel"
                 app:layout_constraintStart_toEndOf="@id/loadout_combat"
                 app:layout_constraintTop_toTopOf="@+id/current_loadout_label"
+                app:uncheckedSrc="@drawable/ic_loadout_social_inactive"
                 tools:text="social" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <cz.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_travel"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="@dimen/spacing_1"
-                android:src="@drawable/ic_travel"
+                android:src="@drawable/ic_loadout_travel_inactive"
+                app:checkedSrc="@drawable/ic_loadout_travel_active"
+                app:isActive="false"
                 app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/loadout_social"
                 app:layout_constraintTop_toTopOf="@+id/current_loadout_label"
+                app:uncheckedSrc="@drawable/ic_loadout_travel_inactive"
                 tools:text="travel" />
 
             <TextView

@@ -12,4 +12,5 @@
     <dimen name="text_size_primary">18sp</dimen>
     <dimen name="text_size_secondary">16sp</dimen>
 
+    <item name="inactive_item_alpha" type="dimen" format="float">0.2</item>
 </resources>

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "cz.pecawolf.charactersheet"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "0.1"
@@ -39,8 +39,6 @@ android {
 dependencies {
     implementation project(path: ':common')
     implementation project(path: ':presentation')
-    implementation project(path: ':domain')
-    implementation project(path: ':data')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
