@@ -1,4 +1,4 @@
-package com.pecawolf.charactersheet.common.model
+package com.pecawolf.model
 
 import kotlin.experimental.and
 import kotlin.experimental.or

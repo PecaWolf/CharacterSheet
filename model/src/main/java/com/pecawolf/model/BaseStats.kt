@@ -1,6 +1,6 @@
-package com.pecawolf.charactersheet.common.model
+package com.pecawolf.model
 
-import  com.pecawolf.charactersheet.common.model.Character.WorldMask as World
+import  com.pecawolf.model.Character.WorldMask as World
 
 data class BaseStats(
     val name: String,

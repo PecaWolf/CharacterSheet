@@ -1,6 +1,6 @@
-package com.pecawolf.cache.model
+package com.pecawolf.remote.model
 
-data class BaseStatsEntity(
+data class BaseStatsResponse(
     val name: String,
     val species: String,
     var luck: Int,

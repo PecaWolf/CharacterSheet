@@ -36,6 +36,7 @@ dependencies {
     api project(path: ':common')
     implementation project(path: ':cache')
     implementation project(path: ':remote')
+    implementation project(path: ':model')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'

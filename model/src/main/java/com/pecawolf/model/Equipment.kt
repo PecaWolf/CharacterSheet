@@ -1,6 +1,4 @@
-package com.pecawolf.charactersheet.common.model
-
-import com.pecawolf.charactersheet.common.isOneOf
+package com.pecawolf.model
 
 data class Equipment(
     val primary: Item.Weapon,
@@ -487,17 +485,6 @@ data class Equipment(
 
         enum class LoadoutType {
             COMBAT, SOCIAL, TRAVEL;
-
-            val isPrimaryAllowed: Boolean
-                get() = this.isOneOf(COMBAT)
-            val isSecondaryAllowed: Boolean
-                get() = this.isOneOf(COMBAT, SOCIAL, TRAVEL)
-            val isTertiaryAllowed: Boolean
-                get() = this.isOneOf(COMBAT, SOCIAL, TRAVEL)
-            val isClothingAllowed: Boolean
-                get() = this.isOneOf(SOCIAL, TRAVEL)
-            val isArmorAllowed: Boolean
-                get() = this.isOneOf(COMBAT)
         }
     }
 }

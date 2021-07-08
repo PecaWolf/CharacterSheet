@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.pecawolf.charactersheet.common.formatAmount
-import com.pecawolf.charactersheet.common.model.Equipment
-import com.pecawolf.charactersheet.common.model.Equipment.Item
+import com.pecawolf.model.Equipment
+import com.pecawolf.model.Equipment.Item
 import com.pecawolf.presentation.extensions.MergedLiveData2
 
 class InventoryViewModel(val mainViewModel: MainViewModel) : ViewModel() {
@@ -14,31 +14,7 @@ class InventoryViewModel(val mainViewModel: MainViewModel) : ViewModel() {
     private val _loadoutType = MutableLiveData<Item.LoadoutType>().apply {
         value = Item.LoadoutType.COMBAT
     }
-    private val _equipment = MutableLiveData<Equipment>().apply {
-        value = Equipment(
-            Item.Weapon.Ranged.Rifle(
-                "AR-15",
-                "Awesome assault rifle"
-            ),
-            Item.Weapon.Ranged.Pistol(
-                "Glock",
-                "Awesome pistol"
-            ),
-            Item.Weapon.Melee.Sword(
-                "Falcata",
-                "Awesome tactical sword",
-                allowedLoadouts = listOf(Item.LoadoutType.COMBAT, Item.LoadoutType.TRAVEL)
-            ),
-            Item.Armor.Clothing(
-                "Kevlar-reinforced suit",
-                "Style AND protection",
-            ),
-            Item.Armor.VacArmor(
-                "Light vac-armor",
-                "Kick ass anywhere"
-            )
-        )
-    }
+    private val _equipment = MutableLiveData<Equipment>()
 
     private val _money = MutableLiveData<Int>().apply {
         value = 50000

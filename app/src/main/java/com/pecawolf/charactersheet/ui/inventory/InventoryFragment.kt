@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import com.pecawolf.charactersheet.R
-import com.pecawolf.charactersheet.common.model.Equipment
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.presentation.InventoryViewModel
@@ -36,9 +35,12 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
         viewModel: InventoryViewModel
     ) {
         viewModel.loadoutType.reObserve(this) { type ->
-            binding.loadoutCombat.isActive = type == Equipment.Item.LoadoutType.COMBAT
-            binding.loadoutSocial.isActive = type == Equipment.Item.LoadoutType.SOCIAL
-            binding.loadoutTravel.isActive = type == Equipment.Item.LoadoutType.TRAVEL
+            binding.loadoutCombat.isActive =
+                type == com.pecawolf.model.Equipment.Item.LoadoutType.COMBAT
+            binding.loadoutSocial.isActive =
+                type == com.pecawolf.model.Equipment.Item.LoadoutType.SOCIAL
+            binding.loadoutTravel.isActive =
+                type == com.pecawolf.model.Equipment.Item.LoadoutType.TRAVEL
         }
 
         viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->
