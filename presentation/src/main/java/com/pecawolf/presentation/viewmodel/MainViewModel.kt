@@ -1,4 +1,4 @@
-package com.pecawolf.presentation
+package com.pecawolf.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 

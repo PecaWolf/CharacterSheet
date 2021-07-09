@@ -1,14 +1,13 @@
-package com.pecawolf.presentation
+package com.pecawolf.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import com.pecawolf.model.BaseStats
 import com.pecawolf.presentation.extensions.notifyChanged
 
-class HomeViewModel(private val mainViewModel: MainViewModel) : ViewModel() {
+class HomeViewModel(private val mainViewModel: MainViewModel) : BaseViewModel() {
 
     private val _baseStats = MutableLiveData<BaseStats>()
     val baseStats: LiveData<BaseStats> = _baseStats.distinctUntilChanged()

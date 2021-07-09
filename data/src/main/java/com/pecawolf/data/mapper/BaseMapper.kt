@@ -1,10 +1,8 @@
 package com.pecawolf.data.mapper
 
-interface BaseMapper<MODEL, RESPONSE, ENTITY> {
+interface BaseMapper<MODEL, ENTITY, AD_MODEL, AD_ENTITY> {
 
-    fun fromResponse(response: RESPONSE): MODEL
+    fun fromEntity(entity: ENTITY, additional: List<AD_ENTITY> = listOf()): MODEL
 
-    fun fromEntity(entity: ENTITY): MODEL
-
-    fun toEntity(model: MODEL): ENTITY
+    fun toEntity(model: MODEL, additional: List<AD_MODEL> = listOf()): ENTITY
 }

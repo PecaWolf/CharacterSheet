@@ -10,6 +10,18 @@ fun <T> LiveData<T>.reObserve(owner: LifecycleOwner, observer: Observer<T>) {
     observe(owner, observer)
 }
 
+fun <T> MutableLiveData<MutableSet<T>>.add(item: T) {
+    value = value?.apply {
+        add(item)
+    } ?: mutableSetOf()
+}
+
+fun <T> MutableLiveData<MutableSet<T>>.remove(item: T) {
+    value = value?.apply {
+        remove(item)
+    } ?: mutableSetOf()
+}
+
 fun <T> MutableLiveData<T>.notifyChanged() {
     postValue(value)
 }

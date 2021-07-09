@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentHomeBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
-import com.pecawolf.presentation.HomeViewModel
+import com.pecawolf.model.BaseStats
 import com.pecawolf.presentation.extensions.reObserve
+import com.pecawolf.presentation.viewmodel.HomeViewModel
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -22,9 +23,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 ).apply {
                     stackFromEnd = true
                 }
-//                addItemDecoration(
-//                    SpacingDecoration(resources.getDimension(R.dimen.spacing_1).toInt())
-//                )
             }
         }
     }
@@ -43,7 +41,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun observeViewModel(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         viewModel.baseStats.reObserve(this, { stats ->
             binding.nameValue.text = stats.name
-            binding.speciesValue.text = stats.species.standardName
+            binding.speciesValue.text = getSpeciesName(stats.species)
             binding.strValue.text = stats.strength
             binding.strTrap.text = stats.strengthTrap
             binding.dexValue.text = stats.dexterity
@@ -64,4 +62,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             hpAdapter.items = luckAndHp
         }
     }
+
+    private fun getSpeciesName(species: BaseStats.Species) = getString(
+        when (species) {
+            BaseStats.Species.HUMAN -> R.string.species_human
+            BaseStats.Species.DWARF -> R.string.species_dwarf
+            BaseStats.Species.ELF -> R.string.species_elf
+            BaseStats.Species.HAVLIN -> R.string.species_havlin
+            BaseStats.Species.KARANTI -> R.string.species_karanti
+            BaseStats.Species.NATHOREAN -> R.string.species_nathorean
+            BaseStats.Species.SEARIAN -> R.string.species_searian
+            BaseStats.Species.GUSMERIAN -> R.string.species_gusmerian
+            BaseStats.Species.KRUNG -> R.string.species_krung
+        }
+    )
 }

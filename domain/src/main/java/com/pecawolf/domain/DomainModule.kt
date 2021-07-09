@@ -1,12 +1,15 @@
 package com.pecawolf.domain
 
 import com.pecawolf.data.DataModule
+import com.pecawolf.domain.interactor.GetCharactersInteractor
+import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
 object DomainModule {
     val instance = module {
-
+        factory { GetCharactersInteractor(get()) }
+        factory { SetActiveCharacterIdInteractor(get()) }
     }
 
     fun start() {

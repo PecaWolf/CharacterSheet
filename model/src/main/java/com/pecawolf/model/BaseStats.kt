@@ -1,8 +1,6 @@
 package com.pecawolf.model
 
-import  com.pecawolf.model.Character.WorldMask as World
-
-data class BaseStats(
+class BaseStats(
     val name: String,
     val species: Species,
     var luck: Int,
@@ -12,10 +10,8 @@ data class BaseStats(
     val vit: Int,
     val inl: Int,
     val wis: Int,
-    val cha: Int,
-    val money: Int
+    val cha: Int
 ) {
-
     val luckAndWounds: Pair<Int, Int>
         get() = luck to wounds
 
@@ -45,23 +41,22 @@ data class BaseStats(
         get() = "${cha * 2}"
 
     enum class Species(
-        val standardName: String,
         val worldMask: Byte
     ) {
-        HUMAN("Human", World.ALL),
+        HUMAN(Character.WorldMask.ALL),
 
         // last realm
-        DWARF("Dwarf", World.LAST_REALM),
-        ELF("Elf", World.LAST_REALM),
-        HAVLIN("Havlin", World.LAST_REALM),
+        DWARF(Character.WorldMask.LAST_REALM),
+        ELF(Character.WorldMask.LAST_REALM),
+        HAVLIN(Character.WorldMask.LAST_REALM),
 
         // dark way
-        KARANTI("Karanti", World.DARK_WAY),
-        NATHOREAN("Nathorean", World.DARK_WAY),
-        SEARIAN("Searian", World.DARK_WAY),
-        GUSMERIAN("Gusmerian", World.DARK_WAY),
+        KARANTI(Character.WorldMask.DARK_WAY),
+        NATHOREAN(Character.WorldMask.DARK_WAY),
+        SEARIAN(Character.WorldMask.DARK_WAY),
+        GUSMERIAN(Character.WorldMask.DARK_WAY),
 
         // cold frontier
-        KRUNG("Krung", World.COLD_FRONTIER);
+        KRUNG(Character.WorldMask.COLD_FRONTIER);
     }
 }

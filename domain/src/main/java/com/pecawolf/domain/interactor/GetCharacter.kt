@@ -1,12 +1,12 @@
 package com.pecawolf.domain.interactor
 
 import com.pecawolf.data.CharacterRepository
-import com.pecawolf.domain.BaseInteractor
-import io.reactivex.rxjava3.core.Single
+import com.pecawolf.domain.MaybeInteractor
+import com.pecawolf.model.Character
 
-class GetCharacter(private val repository: CharacterRepository) :
-    BaseInteractor<Nothing, com.pecawolf.model.Character>() {
-    override fun execute(params: Nothing): Single<com.pecawolf.model.Character> {
-        return repository.getActiveCharacter()
-    }
+class GetCharacter(
+    private val repository: CharacterRepository
+) : MaybeInteractor<Nothing, Character>() {
+
+    override fun execute(params: Nothing) = repository.getActiveCharacter()
 }

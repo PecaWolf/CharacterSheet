@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import com.pecawolf.charactersheet.R
+import com.pecawolf.charactersheet.common.formatAmount
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
-import com.pecawolf.presentation.InventoryViewModel
+import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.reObserve
+import com.pecawolf.presentation.viewmodel.InventoryViewModel
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {
@@ -35,12 +37,9 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
         viewModel: InventoryViewModel
     ) {
         viewModel.loadoutType.reObserve(this) { type ->
-            binding.loadoutCombat.isActive =
-                type == com.pecawolf.model.Equipment.Item.LoadoutType.COMBAT
-            binding.loadoutSocial.isActive =
-                type == com.pecawolf.model.Equipment.Item.LoadoutType.SOCIAL
-            binding.loadoutTravel.isActive =
-                type == com.pecawolf.model.Equipment.Item.LoadoutType.TRAVEL
+            binding.loadoutCombat.isActive = type == Item.LoadoutType.COMBAT
+            binding.loadoutSocial.isActive = type == Item.LoadoutType.SOCIAL
+            binding.loadoutTravel.isActive = type == Item.LoadoutType.TRAVEL
         }
 
         viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->
@@ -83,15 +82,13 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             binding.combatGearLabel.alpha = alpha
             binding.combatGearValue.alpha = alpha
         }
-        viewModel.equipment.reObserve(this) { equipment ->
-            binding.primaryWeaponValue.text = equipment.primary.name
-            binding.secondaryWeaponValue.text = equipment.secondary.name
-            binding.tertiaryWeaponValue.text = equipment.tertiary.name
-            binding.civilianClothesValue.text = equipment.clothes.name
-            binding.combatGearValue.text = equipment.armor.name
-        }
-        viewModel.money.reObserve(this) {
-            binding.moneyValue.text = it
+        viewModel.inventory.reObserve(this) { inventory ->
+            binding.moneyValue.text = inventory.money.formatAmount()
+            binding.primaryWeaponValue.text = inventory.primary.name
+            binding.secondaryWeaponValue.text = inventory.secondary.name
+            binding.tertiaryWeaponValue.text = inventory.tertiary.name
+            binding.civilianClothesValue.text = inventory.clothes.name
+            binding.combatGearValue.text = inventory.armor.name
         }
     }
 }

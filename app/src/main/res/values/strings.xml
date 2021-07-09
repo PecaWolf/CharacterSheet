@@ -5,6 +5,16 @@
     <string name="title_skills">Skills</string>
     <string name="title_other">Other</string>
 
+    <string name="species_human">Human</string>
+    <string name="species_dwarf">Dwarf</string>
+    <string name="species_elf">Elf</string>
+    <string name="species_havlin">Havlin</string>
+    <string name="species_karanti">Karanti</string>
+    <string name="species_nathorean">Nathorean</string>
+    <string name="species_searian">Searian</string>
+    <string name="species_gusmerian">Gusmerian</string>
+    <string name="species_krung">Krung</string>
+
     <string name="character_name">Name:</string>
     <string name="character_species">Species:</string>
     <string name="character_str">Str:</string>

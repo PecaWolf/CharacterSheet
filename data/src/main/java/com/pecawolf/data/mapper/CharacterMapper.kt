@@ -1,30 +1,74 @@
 package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.CharacterEntity
-import com.pecawolf.remote.model.CharacterResponse
+import com.pecawolf.charactersheet.common.extensions.isNotOneOf
+import com.pecawolf.model.BaseStats
+import com.pecawolf.model.Character
+import com.pecawolf.model.Inventory
+import com.pecawolf.model.Item
 
-class CharacterMapper(
-    private val baseStatsMapper: BaseStatsMapper,
-    private val equipmentMapper: EquipmentMapper
-) : BaseMapper<com.pecawolf.model.Character, CharacterResponse, CharacterEntity> {
-    override fun fromResponse(response: CharacterResponse) = response.run {
-        com.pecawolf.model.Character(
-            baseStatsMapper.fromResponse(base),
-            equipmentMapper.fromResponse(equipment)
+class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
+
+    override fun fromEntity(entity: CharacterEntity, items: List<Item>) = entity.run {
+        Character(
+            characterId,
+            BaseStats(
+                name,
+                BaseStats.Species.valueOf(species),
+                luck,
+                wounds,
+                str,
+                dex,
+                vit,
+                inl,
+                wis,
+                cha
+            ),
+            Inventory(
+                money,
+                lookUpWeapon(items, primary),
+                lookUpWeapon(items, secondary),
+                lookUpWeapon(items, tertiary),
+                lookUpArmor(items, clothes),
+                lookUpArmor(items, armor),
+                filterContainers(items, backpack),
+                filterContainers(items, storage),
+            )
         )
     }
 
-    override fun fromEntity(entity: CharacterEntity) = entity.run {
-        com.pecawolf.model.Character(
-            baseStatsMapper.fromEntity(base),
-            equipmentMapper.fromEntity(equipment)
-        )
-    }
+    private fun lookUpWeapon(items: List<Item>, weaponId: Long) =
+        (items.find { it.itemId == weaponId } as? Item.Weapon) ?: Item.Weapon.Melee.BareHands
 
-    override fun toEntity(model: com.pecawolf.model.Character) = model.run {
+    private fun lookUpArmor(items: List<Item>, armorId: Long) =
+        (items.find { it.itemId == armorId } as? Item.Armor) ?: Item.Armor.None
+
+    private fun CharacterEntity.filterContainers(items: List<Item>, container: List<Long>) =
+        items
+            .filter { it.isNotOneOf(primary, secondary, tertiary, armor, clothes) }
+            .filter { container.contains(it.itemId) }
+
+    override fun toEntity(model: Character, additional: List<Nothing>) = model.run {
         CharacterEntity(
-            baseStatsMapper.toEntity(base),
-            equipmentMapper.toEntity(equipment)
+            characterId,
+            baseStats.name,
+            baseStats.species.name,
+            baseStats.luck,
+            baseStats.wounds,
+            baseStats.str,
+            baseStats.dex,
+            baseStats.vit,
+            baseStats.inl,
+            baseStats.wis,
+            baseStats.cha,
+            inventory.money,
+            inventory.primary.itemId,
+            inventory.secondary.itemId,
+            inventory.tertiary.itemId,
+            inventory.clothes.itemId,
+            inventory.armor.itemId,
+            inventory.backpack.map { it.itemId },
+            inventory.storage.map { it.itemId }
         )
     }
 }

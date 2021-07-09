@@ -1,10 +1,9 @@
-package com.pecawolf.presentation
+package com.pecawolf.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
-class SkillsViewModel(val mainViewModel: MainViewModel) : ViewModel() {
+class SkillsViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

@@ -4,12 +4,13 @@ import kotlin.experimental.and
 import kotlin.experimental.or
 
 data class Character(
-    val base: BaseStats,
-    val equipment: Equipment
+    val characterId: Long,
+    val baseStats: BaseStats,
+    val inventory: Inventory
 ) {
 
     interface WorldMask {
-        abstract val worldMask: Byte
+        val worldMask: Byte
 
         val isLastRealm: Boolean
             get() = worldMask.and(LAST_REALM) == LAST_REALM
