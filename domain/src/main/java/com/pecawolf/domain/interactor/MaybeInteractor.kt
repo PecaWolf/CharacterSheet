@@ -1,4 +1,4 @@
-package com.pecawolf.domain
+package com.pecawolf.domain.interactor
 
 import io.reactivex.rxjava3.core.Maybe
 

@@ -8,17 +8,27 @@ import com.pecawolf.model.BaseStats
 import com.pecawolf.presentation.extensions.notifyChanged
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 
-class HomeViewModel(private val mainViewModel: MainViewModel) : BaseViewModel() {
+class HomeViewModel(
+    private val mainViewModel: MainViewModel
+) : BaseViewModel() {
 
     private val _baseStats = MutableLiveData<BaseStats>()
     val baseStats: LiveData<BaseStats> = _baseStats.distinctUntilChanged()
     val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(_baseStats) { it.luckAndWounds }
 
+    init {
+        mainViewModel.character.observeForever {
+            _baseStats.value = it.baseStats
+        }
+    }
+
+    override fun onRefresh() {
+    }
+
     fun onHealClicked() {
         _baseStats.value?.apply {
             if (wounds < vit) wounds++
             else luck++
-
         }
         _baseStats.notifyChanged()
     }

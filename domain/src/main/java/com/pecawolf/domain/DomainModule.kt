@@ -5,6 +5,7 @@ import com.pecawolf.domain.interactor.CreateChracterInteractor
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
+import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -14,6 +15,7 @@ object DomainModule {
         factory { GetCharacterInteractor(get()) }
         factory { GetCharactersInteractor(get()) }
         factory { SetActiveCharacterIdInteractor(get()) }
+        factory { SubscribeToActiveCharacter(get()) }
     }
 
     fun start() {

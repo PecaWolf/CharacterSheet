@@ -16,12 +16,12 @@ import org.koin.dsl.module
 object PresentationModule {
 
     val instance = module {
-        viewModel { MainViewModel() }
+        viewModel { MainViewModel(get()) }
         viewModel { HomeViewModel(get()) }
         viewModel { InventoryViewModel(get()) }
         viewModel { OtherViewModel(get()) }
 
-        viewModel { CharacterSelectionViewModel(get(), get()) }
+        viewModel { CharacterSelectionViewModel(get(), get(), get()) }
         viewModel { SpeciesSelectionViewModel() }
         viewModel { (world: BaseStats.World, species: BaseStats.Species) ->
             BaseStatsViewModel(

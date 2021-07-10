@@ -2,7 +2,7 @@ package com.pecawolf.cache
 
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.CharacterSnippetEntity
-import io.reactivex.rxjava3.core.Maybe
+import com.pecawolf.charactersheet.common.exception.CharacterNotFoundException
 import io.reactivex.rxjava3.core.Single
 
 class Cache(
@@ -29,11 +29,15 @@ class Cache(
             }
     }
 
-    fun getCharacter(characterId: Long? = applicationPreferences.activeCharacterId): Maybe<CharacterEntity> {
-        return if (characterId == null) Maybe.empty<CharacterEntity>()
-        else database.characterDao().loadAllByIds(arrayOf(characterId))
-            .flatMapMaybe {
-                it.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty()
-            }
+    fun setActiveCharacterId(characterId: Long) {
+        applicationPreferences.activeCharacterId = characterId
     }
+
+    fun getCharacter(characterId: Long? = applicationPreferences.activeCharacterId) =
+        if (characterId == null) Single.error(CharacterNotFoundException(-1))
+        else database.characterDao().loadAllByIds(arrayOf(characterId))
+            .flatMap {
+                it.firstOrNull()?.let { Single.just(it) }
+                    ?: Single.error(CharacterNotFoundException(characterId))
+            }
 }

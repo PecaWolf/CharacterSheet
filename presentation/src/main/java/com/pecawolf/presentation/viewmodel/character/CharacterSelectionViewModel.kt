@@ -2,6 +2,7 @@ package com.pecawolf.presentation.viewmodel.character
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.model.CharacterSnippet
@@ -11,6 +12,7 @@ import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
 class CharacterSelectionViewModel(
+    private val getActiveCharacter: GetCharacterInteractor,
     private val getCharacters: GetCharactersInteractor,
     private val setActiveCharacterId: SetActiveCharacterIdInteractor
 ) : BaseViewModel() {
@@ -23,8 +25,8 @@ class CharacterSelectionViewModel(
 
     override fun onRefresh() {
         Timber.v("onRefresh()")
-        getCharacters.execute(null)
-            .observe(LOADING_GET_CHARACTERS, ::onGetCharactersError, ::onGetCharactersSuccess)
+        getActiveCharacter.execute(null)
+            .observe(LOADING_GET_ACTIVE, ::onGetActiveCharacterError, ::onGetActiveCharacterSuccess)
     }
 
     fun onExistingCharacterClicked(characterId: Long) {
@@ -34,6 +36,17 @@ class CharacterSelectionViewModel(
 
     fun onNewCharacterClicked() {
         _navigateTo.postValue(Destination.Create)
+    }
+
+    private fun onGetActiveCharacterSuccess() {
+        Timber.v("onGetActiveCharacterSuccess()")
+        _navigateTo.postValue(Destination.Home)
+    }
+
+    private fun onGetActiveCharacterError(error: Throwable) {
+        Timber.e(error, "onGetActiveCharacterError(): ")
+        getCharacters.execute(null)
+            .observe(LOADING_GET_CHARACTERS, ::onGetCharactersError, ::onGetCharactersSuccess)
     }
 
     private fun onGetCharactersSuccess(list: List<CharacterSnippet>) {
@@ -63,6 +76,7 @@ class CharacterSelectionViewModel(
     }
 
     companion object {
+        const val LOADING_GET_ACTIVE = "LOADING_GET_ACTIVE"
         const val LOADING_GET_CHARACTERS = "LOADING_GET_CHARACTERS"
         const val LOADING_SET_ID = "LOADING_SET_ID"
     }

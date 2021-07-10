@@ -8,6 +8,7 @@ import com.pecawolf.presentation.extensions.remove
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -28,9 +29,20 @@ open class BaseViewModel : ViewModel() {
         if (!disposable.isDisposed) disposable.dispose()
     }
 
-    open fun onRefresh() {
+    open fun onRefresh() {}
 
-    }
+    fun <T> Observable<T>.observe(
+        loading: String,
+        onError: (Throwable) -> Unit = {},
+        onNext: (T) -> Unit = {},
+        onComplete: () -> Unit = {}
+    ) = subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnSubscribe { _loading.add(loading) }
+        .doOnSubscribe { disposable.add(it) }
+        .doOnNext { _loading.remove(loading) }
+        .doOnError { _loading.remove(loading) }
+        .subscribe(onNext, onError, onComplete)
 
     fun <T> Single<T>.observe(
         loading: String,
@@ -48,7 +60,7 @@ open class BaseViewModel : ViewModel() {
         loading: String,
         onError: (Throwable) -> Unit = {},
         onSuccess: (T) -> Unit = {},
-        onComplete: () -> Unit
+        onComplete: () -> Unit = {}
     ) = subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { _loading.add(loading) }

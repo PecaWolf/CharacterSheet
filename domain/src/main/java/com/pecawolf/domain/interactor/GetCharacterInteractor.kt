@@ -1,12 +1,10 @@
 package com.pecawolf.domain.interactor
 
 import com.pecawolf.data.CharacterRepository
-import com.pecawolf.domain.MaybeInteractor
-import com.pecawolf.model.Character
 
 class GetCharacterInteractor(
     private val repository: CharacterRepository
-) : MaybeInteractor<Nothing, Character>() {
+) : CompletableInteractor<Nothing?>() {
 
-    override fun execute(params: Nothing) = repository.getActiveCharacter()
+    override fun execute(params: Nothing?) = repository.getActiveCharacter().ignoreElement()
 }
