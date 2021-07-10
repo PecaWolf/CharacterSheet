@@ -1,4 +1,4 @@
-package com.pecawolf.presentation.viewmodel
+package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.distinctUntilChanged
 import com.pecawolf.model.BaseStats
 import com.pecawolf.presentation.extensions.notifyChanged
+import com.pecawolf.presentation.viewmodel.BaseViewModel
 
 class HomeViewModel(private val mainViewModel: MainViewModel) : BaseViewModel() {
 

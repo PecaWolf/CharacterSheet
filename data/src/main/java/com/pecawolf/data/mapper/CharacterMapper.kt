@@ -15,6 +15,7 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
             BaseStats(
                 name,
                 BaseStats.Species.valueOf(species),
+                BaseStats.World.valueOf(world),
                 luck,
                 wounds,
                 str,
@@ -53,6 +54,7 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
             characterId,
             baseStats.name,
             baseStats.species.name,
+            baseStats.world.name,
             baseStats.luck,
             baseStats.wounds,
             baseStats.str,

@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import com.pecawolf.presentation.viewmodel.BaseViewModel
 
-abstract class BaseFragment<VIEWMODEL : ViewModel, BINDING : ViewBinding> : Fragment() {
+abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : Fragment() {
 
     protected val viewModel: VIEWMODEL by lazy { createViewModel() }
 
@@ -27,6 +27,11 @@ abstract class BaseFragment<VIEWMODEL : ViewModel, BINDING : ViewBinding> : Frag
         super.onViewCreated(view, savedInstanceState)
         bindView(binding, viewModel)
         observeViewModel(binding, viewModel)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onRefresh()
     }
 
     protected abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): BINDING

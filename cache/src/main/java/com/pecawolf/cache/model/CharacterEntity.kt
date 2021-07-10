@@ -11,6 +11,7 @@ data class CharacterEntity(
     val characterId: Long,
     val name: String,
     val species: String,
+    val world: String,
     var luck: Int,
     var wounds: Int,
     val str: Int,

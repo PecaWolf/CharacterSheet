@@ -5,7 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:itemCount="1"
-    tools:listitem="@layout/item_existing_character">
-
-</androidx.recyclerview.widget.RecyclerView>
+    tools:itemCount="3"
+    tools:listitem="@layout/item_existing_character" />

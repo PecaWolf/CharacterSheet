@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_choose_character">
+
+    <fragment
+        android:id="@+id/navigation_choose_character"
+        android:name="com.pecawolf.charactersheet.ui.character.CharacterSelectionFragment"
+        android:label="Character selection">
+
+        <action
+            android:id="@+id/action_chooseCharacter_to_createCharacter"
+            app:destination="@id/navigation_species_selection" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_species_selection"
+        android:name="com.pecawolf.charactersheet.ui.character.SpeciesSelectionFragment"
+        android:label="Species selection">
+
+        <action
+            android:id="@+id/action_createCharacter_to_baseStats"
+            app:destination="@id/navigation_base_stats" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_base_stats"
+        android:name="com.pecawolf.charactersheet.ui.character.BaseStatsFragment"
+        android:label="Base stats">
+
+        <argument
+            android:name="world"
+            app:argType="string" />
+
+        <argument
+            android:name="species"
+            app:argType="string" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_createCharacter_to_home"-->
+        <!--            app:destination="@id/navigation_base_stats" />-->
+
+    </fragment>
+
+</navigation>

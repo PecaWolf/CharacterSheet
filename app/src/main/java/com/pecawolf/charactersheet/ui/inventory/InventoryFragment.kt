@@ -9,7 +9,7 @@ import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.reObserve
-import com.pecawolf.presentation.viewmodel.InventoryViewModel
+import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {

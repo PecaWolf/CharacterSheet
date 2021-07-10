@@ -1,10 +1,11 @@
-package com.pecawolf.presentation.viewmodel
+package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.MergedLiveData2
+import com.pecawolf.presentation.viewmodel.BaseViewModel
 
 class InventoryViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
 

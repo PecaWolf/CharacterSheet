@@ -3,6 +3,7 @@ package com.pecawolf.model
 class BaseStats(
     val name: String,
     val species: Species,
+    val world: World,
     var luck: Int,
     var wounds: Int,
     val str: Int,
@@ -40,23 +41,60 @@ class BaseStats(
     val charismaTrap: String
         get() = "${cha * 2}"
 
-    enum class Species(
-        val worldMask: Byte
-    ) {
-        HUMAN(Character.WorldMask.ALL),
+    enum class Species {
+        HUMAN,
 
         // last realm
-        DWARF(Character.WorldMask.LAST_REALM),
-        ELF(Character.WorldMask.LAST_REALM),
-        HAVLIN(Character.WorldMask.LAST_REALM),
+        DWARF,
+        ELF,
+        HAVLIN,
 
         // dark way
-        KARANTI(Character.WorldMask.DARK_WAY),
-        NATHOREAN(Character.WorldMask.DARK_WAY),
-        SEARIAN(Character.WorldMask.DARK_WAY),
-        GUSMERIAN(Character.WorldMask.DARK_WAY),
+        KARANTI,
+        NATHOREAN,
+        SEARIAN,
+        GUSMERIAN,
 
         // cold frontier
-        KRUNG(Character.WorldMask.COLD_FRONTIER);
+        KRUNG;
+    }
+
+    enum class World(val fullName: String, val species: List<Species>) {
+        LAST_REALM(
+            "Last Realm",
+            listOf(
+                Species.HUMAN,
+                Species.DWARF,
+                Species.ELF,
+                Species.HAVLIN,
+            )
+        ),
+        BLUE_WAY(
+            "Blue Way",
+            listOf(
+                Species.HUMAN,
+                Species.KARANTI,
+                Species.NATHOREAN,
+                Species.SEARIAN,
+                Species.GUSMERIAN,
+            )
+        ),
+        DARK_WAY(
+            "Dark Way",
+            listOf(
+                Species.HUMAN,
+                Species.KARANTI,
+                Species.NATHOREAN,
+                Species.SEARIAN,
+                Species.GUSMERIAN,
+            )
+        ),
+        COLD_FRONTIER(
+            "Cold Frontier",
+            listOf(
+                Species.HUMAN,
+                Species.KRUNG
+            )
+        )
     }
 }

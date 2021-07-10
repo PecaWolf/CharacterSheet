@@ -1,11 +1,14 @@
 package com.pecawolf.presentation
 
 import com.pecawolf.domain.DomainModule
-import com.pecawolf.presentation.viewmodel.ChooseCharacterViewModel
-import com.pecawolf.presentation.viewmodel.HomeViewModel
-import com.pecawolf.presentation.viewmodel.InventoryViewModel
-import com.pecawolf.presentation.viewmodel.MainViewModel
-import com.pecawolf.presentation.viewmodel.OtherViewModel
+import com.pecawolf.model.BaseStats
+import com.pecawolf.presentation.viewmodel.character.BaseStatsViewModel
+import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel
+import com.pecawolf.presentation.viewmodel.character.SpeciesSelectionViewModel
+import com.pecawolf.presentation.viewmodel.main.HomeViewModel
+import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
+import com.pecawolf.presentation.viewmodel.main.MainViewModel
+import com.pecawolf.presentation.viewmodel.main.OtherViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -17,7 +20,15 @@ object PresentationModule {
         viewModel { HomeViewModel(get()) }
         viewModel { InventoryViewModel(get()) }
         viewModel { OtherViewModel(get()) }
-        viewModel { ChooseCharacterViewModel(get(), get()) }
+
+        viewModel { CharacterSelectionViewModel(get(), get()) }
+        viewModel { SpeciesSelectionViewModel() }
+        viewModel { (world: BaseStats.World, species: BaseStats.Species) ->
+            BaseStatsViewModel(
+                world,
+                species
+            )
+        }
     }
 
     fun start() {

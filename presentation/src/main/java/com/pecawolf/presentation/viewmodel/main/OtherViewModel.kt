@@ -1,7 +1,8 @@
-package com.pecawolf.presentation.viewmodel
+package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import com.pecawolf.presentation.extensions.SingleLiveEvent
+import com.pecawolf.presentation.viewmodel.BaseViewModel
 
 class OtherViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
 

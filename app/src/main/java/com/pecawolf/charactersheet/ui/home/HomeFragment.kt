@@ -8,24 +8,12 @@ import com.pecawolf.charactersheet.databinding.FragmentHomeBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.model.BaseStats
 import com.pecawolf.presentation.extensions.reObserve
-import com.pecawolf.presentation.viewmodel.HomeViewModel
+import com.pecawolf.presentation.viewmodel.main.HomeViewModel
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
-    private val hpAdapter: HpAdapter by lazy {
-        HpAdapter().also {
-            binding.luckAndHpRecycler.apply {
-                adapter = it
-                layoutManager = LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.VERTICAL, false
-                ).apply {
-                    stackFromEnd = true
-                }
-            }
-        }
-    }
+    private val hpAdapter: HpAdapter by lazy { HpAdapter() }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentHomeBinding.inflate(inflater, container, false)
@@ -33,6 +21,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun createViewModel() = injectVM<HomeViewModel>().value
 
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
+        binding.luckAndHpRecycler.apply {
+            adapter = hpAdapter
+            layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            ).apply {
+                stackFromEnd = true
+            }
+        }
         binding.heal.setOnClickListener { viewModel.onHealClicked() }
         binding.damage.setOnClickListener { viewModel.onDamageClicked() }
         binding.damage.setOnLongClickListener { true.also { viewModel.onDamageLongClicked() } }

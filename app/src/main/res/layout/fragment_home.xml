@@ -436,9 +436,7 @@
         app:layout_constraintStart_toStartOf="@id/guide_75"
         app:layout_constraintTop_toBottomOf="@id/hit_point_card"
         tools:itemCount="14"
-        tools:listitem="@layout/item_hit_point">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item_hit_point" />
 
     <TextView
         android:id="@+id/damage"

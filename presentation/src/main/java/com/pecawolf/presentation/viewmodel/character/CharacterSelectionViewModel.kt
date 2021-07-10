@@ -1,26 +1,28 @@
-package com.pecawolf.presentation.viewmodel
+package com.pecawolf.presentation.viewmodel.character
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.model.CharacterSnippet
 import com.pecawolf.presentation.extensions.SingleLiveEvent
+import com.pecawolf.presentation.extensions.notifyChanged
+import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
-class ChooseCharacterViewModel(
+class CharacterSelectionViewModel(
     private val getCharacters: GetCharactersInteractor,
     private val setActiveCharacterId: SetActiveCharacterIdInteractor
 ) : BaseViewModel() {
 
+    private val _characters = MutableLiveData<List<CharacterSnippet>>()
     private val _navigateTo = SingleLiveEvent<Destination>()
 
+    val characters: LiveData<List<CharacterSnippet>> = _characters
     val navigateTo: LiveData<Destination> = _navigateTo
 
-    init {
-        onRefresh()
-    }
-
-    private fun onRefresh() {
+    override fun onRefresh() {
+        Timber.v("onRefresh()")
         getCharacters.execute(null)
             .observe(LOADING_GET_CHARACTERS, ::onGetCharactersError, ::onGetCharactersSuccess)
     }
@@ -34,8 +36,11 @@ class ChooseCharacterViewModel(
         _navigateTo.postValue(Destination.Create)
     }
 
-    private fun onGetCharactersSuccess(list: List<CharacterSnippet>?) {
-        Timber.v("onGetCharactersSuccess(): ${list?.size}")
+    private fun onGetCharactersSuccess(list: List<CharacterSnippet>) {
+        Timber.v("onGetCharactersSuccess(): ${list.size}")
+
+        _characters.value = list
+        _characters.notifyChanged()
     }
 
     private fun onGetCharactersError(throwable: Throwable) {

@@ -28,6 +28,10 @@ open class BaseViewModel : ViewModel() {
         if (!disposable.isDisposed) disposable.dispose()
     }
 
+    open fun onRefresh() {
+
+    }
+
     fun <T> Single<T>.observe(
         loading: String,
         onError: (Throwable) -> Unit = {},

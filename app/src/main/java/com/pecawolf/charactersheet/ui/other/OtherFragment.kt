@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.pecawolf.charactersheet.databinding.FragmentOtherBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.presentation.extensions.reObserve
-import com.pecawolf.presentation.viewmodel.OtherViewModel
+import com.pecawolf.presentation.viewmodel.main.OtherViewModel
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class OtherFragment : BaseFragment<OtherViewModel, FragmentOtherBinding>() {

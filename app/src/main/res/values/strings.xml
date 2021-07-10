@@ -5,6 +5,11 @@
     <string name="title_skills">Skills</string>
     <string name="title_other">Other</string>
 
+    <string name="world_last_realm">Last Realm</string>
+    <string name="world_blue_way">Blue Way</string>
+    <string name="world_dark_way">Dark Way</string>
+    <string name="world_cold_frontier">Cold Frontier</string>
+
     <string name="species_human">Human</string>
     <string name="species_dwarf">Dwarf</string>
     <string name="species_elf">Elf</string>
@@ -41,4 +46,9 @@
     <string name="loadout">Loadout</string>
     <string name="home_luck_and_hp">"%1$d + %2$d "</string>
     <string name="other_create_character">Create new character</string>
+    <string name="create_character_name_hint">Character name</string>
+    <string name="create_character_species_hint">Species</string>
+    <string name="create_character_header_label">Basic info</string>
+    <string name="create_character_world_hint">World</string>
+    <string name="generic_continue">Continue</string>
 </resources>

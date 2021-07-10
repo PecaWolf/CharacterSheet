@@ -9,13 +9,18 @@ import androidx.viewbinding.ViewBinding
 import com.pecawolf.charactersheet.databinding.ItemCreateCharacterBinding
 import com.pecawolf.charactersheet.databinding.ItemExistingCharacterBinding
 import com.pecawolf.model.CharacterSnippet
+import timber.log.Timber
 
 class ChooseCharacterAdapter(
     private val existingCharacterClickListener: (Long) -> Unit,
     private val newCharacterClickListener: () -> Unit
 ) : RecyclerView.Adapter<ViewHolder>() {
 
-    private val items: List<CharacterSnippet> = listOf()
+    var items: List<CharacterSnippet> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun getItemViewType(position: Int) =
         if (position < items.size) ITEM_EXISTING else ITEM_NEW
@@ -23,6 +28,7 @@ class ChooseCharacterAdapter(
     override fun getItemCount() = items.size + 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        Timber.v("onCreateViewHolder()")
         return when (viewType) {
             ITEM_EXISTING -> ExistingCharacterViewHolder(
                 ItemExistingCharacterBinding.inflate(
@@ -43,6 +49,7 @@ class ChooseCharacterAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Timber.v("onBindViewHolder()")
         when (getItemViewType(position)) {
             ITEM_EXISTING -> (holder as ExistingCharacterViewHolder).bind(items[position]) {
                 existingCharacterClickListener.invoke(items[position].characterId)
@@ -59,6 +66,7 @@ class ChooseCharacterAdapter(
 
     class ExistingCharacterViewHolder(override val binding: ItemExistingCharacterBinding) :
         ChooseCharacterViewHolder<ItemExistingCharacterBinding, CharacterSnippet>(binding) {
+
         override fun bind(item: CharacterSnippet, listener: View.OnClickListener) {
             binding.characterName.text = item.name
             binding.characterSpecies.text = item.species
@@ -68,6 +76,7 @@ class ChooseCharacterAdapter(
 
     class CreateCharacterViewHolder(override val binding: ItemCreateCharacterBinding) :
         ChooseCharacterViewHolder<ItemCreateCharacterBinding, Unit>(binding) {
+
         override fun bind(item: Unit, listener: View.OnClickListener) {
             binding.root.setOnClickListener(listener)
         }
