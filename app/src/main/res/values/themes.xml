@@ -31,7 +31,7 @@
         <item name="android:textSize">@dimen/text_size_primary</item>
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <style name="Text">
@@ -44,7 +44,7 @@
     </style>
 
     <style name="Text.Header">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">@dimen/text_size_primary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
@@ -52,7 +52,7 @@
 
     <style name="Text.Label">
         <item name="android:textSize">@dimen/text_size_secondary</item>
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <style name="Text.Value">
@@ -61,11 +61,11 @@
     </style>
 
     <style name="Text.Value.Primary">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <style name="Text.Value.Secondary">
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <style name="Button" parent="Text">

@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
+import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.ItemCreateCharacterBinding
 import com.pecawolf.charactersheet.databinding.ItemExistingCharacterBinding
+import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.model.CharacterSnippet
 import timber.log.Timber
 
@@ -69,7 +71,16 @@ class ChooseCharacterAdapter(
 
         override fun bind(item: CharacterSnippet, listener: View.OnClickListener) {
             binding.characterName.text = item.name
-            binding.characterSpecies.text = item.species
+            binding.characterSpecies.apply {
+                val localizedSpecies = resources.getString(item.species.getLocalizedName())
+                val localizedWorld = resources.getString(item.world.getLocalizedName())
+                Timber.v("bind(): ${item.name}: $localizedSpecies in $localizedWorld")
+                text = resources.getString(
+                    R.string.character_selection_species_world,
+                    localizedSpecies,
+                    localizedWorld
+                )
+            }
             binding.root.setOnClickListener(listener)
         }
     }

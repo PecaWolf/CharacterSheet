@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 object CacheModule {
     val instance = module {
-        single { Cache(get()) }
+        single { Cache(get(), get()) }
         single { ApplicationPreferences(get()) }
         single {
             Room.databaseBuilder(

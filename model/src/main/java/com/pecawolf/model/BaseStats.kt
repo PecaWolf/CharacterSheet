@@ -1,5 +1,10 @@
 package com.pecawolf.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
+
+@Parcelize
 class BaseStats(
     val name: String,
     val species: Species,
@@ -12,7 +17,7 @@ class BaseStats(
     val inl: Int,
     val wis: Int,
     val cha: Int
-) {
+) : Parcelable, Serializable {
     val luckAndWounds: Pair<Int, Int>
         get() = luck to wounds
 
@@ -59,9 +64,8 @@ class BaseStats(
         KRUNG;
     }
 
-    enum class World(val fullName: String, val species: List<Species>) {
+    enum class World(val species: List<Species>) {
         LAST_REALM(
-            "Last Realm",
             listOf(
                 Species.HUMAN,
                 Species.DWARF,
@@ -70,7 +74,6 @@ class BaseStats(
             )
         ),
         BLUE_WAY(
-            "Blue Way",
             listOf(
                 Species.HUMAN,
                 Species.KARANTI,
@@ -80,7 +83,6 @@ class BaseStats(
             )
         ),
         DARK_WAY(
-            "Dark Way",
             listOf(
                 Species.HUMAN,
                 Species.KARANTI,
@@ -90,7 +92,6 @@ class BaseStats(
             )
         ),
         COLD_FRONTIER(
-            "Cold Frontier",
             listOf(
                 Species.HUMAN,
                 Species.KRUNG

@@ -9,15 +9,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/spacing_4">
+        android:padding="@dimen/spacing_4">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_name"
             style="@style/Text.Value.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginBottom="0dp"
             app:layout_constraintBottom_toTopOf="@id/character_species"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,17 +27,15 @@
             style="@style/Text.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_name"
-            tools:text="Togruta" />
+            tools:text="Togruta in the world of Star wars" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/character_arrow"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -26,7 +26,8 @@ object PresentationModule {
         viewModel { (world: BaseStats.World, species: BaseStats.Species) ->
             BaseStatsViewModel(
                 world,
-                species
+                species,
+                get()
             )
         }
     }

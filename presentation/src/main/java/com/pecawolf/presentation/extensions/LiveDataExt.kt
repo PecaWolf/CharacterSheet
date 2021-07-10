@@ -29,3 +29,11 @@ fun <T> MutableLiveData<T>.notifyChanged() {
 fun MutableLiveData<Boolean>.toggle() {
     postValue(value?.not() ?: false)
 }
+
+fun MutableLiveData<Int>.inc() {
+    postValue(value?.inc() ?: 0)
+}
+
+fun MutableLiveData<Int>.dec() {
+    postValue(value?.dec() ?: 0)
+}

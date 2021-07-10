@@ -4,7 +4,7 @@ import com.pecawolf.data.CharacterRepository
 import com.pecawolf.domain.MaybeInteractor
 import com.pecawolf.model.Character
 
-class GetCharacter(
+class GetCharacterInteractor(
     private val repository: CharacterRepository
 ) : MaybeInteractor<Nothing, Character>() {
 

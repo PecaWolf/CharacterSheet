@@ -5,5 +5,7 @@ data class Character(
     val baseStats: BaseStats,
     val inventory: Inventory
 ) {
-
+    companion object {
+        fun new(baseStats: BaseStats) = Character(0, baseStats, Inventory())
+    }
 }

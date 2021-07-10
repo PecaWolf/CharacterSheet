@@ -11,13 +11,13 @@ import io.reactivex.rxjava3.core.Single
 interface CharacterDao {
 
     @Query("SELECT * FROM CharacterEntity")
-    fun getAll(): List<CharacterEntity>
+    fun getAll(): Single<List<CharacterEntity>>
 
     @Query("SELECT * FROM CharacterEntity WHERE characterId IN (:characterIds)")
-    fun loadAllByIds(characterIds: Array<String>): Single<List<CharacterEntity>>
+    fun loadAllByIds(characterIds: Array<Long>): Single<List<CharacterEntity>>
 
     @Insert
-    fun insertAll(vararg CharacterEntitys: CharacterEntity): Completable
+    fun insert(characterEntity: CharacterEntity): Single<Long>
 
     @Delete
     fun delete(character: CharacterEntity): Completable
