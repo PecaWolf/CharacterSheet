@@ -6,14 +6,14 @@ import com.pecawolf.data.mapper.CharacterMapper
 import com.pecawolf.data.mapper.CharacterSnippetMapper
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
-import io.reactivex.rxjava3.subjects.PublishSubject
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class CharacterRepository(
     private val characterCache: Cache,
     private val characterMapper: CharacterMapper,
     private val chracterSnippetMapper: CharacterSnippetMapper
 ) {
-    private val activeCharacter: PublishSubject<CharacterEntity> = PublishSubject.create()
+    private val activeCharacter: BehaviorSubject<CharacterEntity> = BehaviorSubject.create()
 
     fun createCharacter(baseStats: BaseStats) =
         characterCache.createCharacter(characterMapper.toEntity(Character.new(baseStats)))
