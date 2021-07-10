@@ -19,7 +19,13 @@ class MainViewModel(private val subscribeToActiveCharacter: SubscribeToActiveCha
 
     override fun onRefresh() {
         subscribeToActiveCharacter.execute(null)
-            .observe(LOADING_CHARACTER, ::onGetCharacterError, _character::setValue)
+            .observe(LOADING_CHARACTER, ::onGetCharacterError, ::onGetCharacterSuccess)
+    }
+
+    private fun onGetCharacterSuccess(wrapper: List<Character>) {
+        wrapper.firstOrNull()?.let {
+            _character.value = it
+        }
     }
 
     private fun onGetCharacterError(error: Throwable) {

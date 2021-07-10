@@ -5,7 +5,7 @@ import com.pecawolf.model.Character
 
 class SubscribeToActiveCharacter(
     private val repository: CharacterRepository
-) : ObservableInteractor<Nothing?, Character>() {
+) : ObservableInteractor<Nothing?, List<Character>>() {
 
     override fun execute(params: Nothing?) = repository.observeActiveCharacter()
 }

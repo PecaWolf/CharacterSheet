@@ -1,6 +1,7 @@
 package com.pecawolf.domain
 
 import com.pecawolf.data.DataModule
+import com.pecawolf.domain.interactor.ClearActiveCharacterInteractor
 import com.pecawolf.domain.interactor.CreateChracterInteractor
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
@@ -15,6 +16,7 @@ object DomainModule {
         factory { GetCharacterInteractor(get()) }
         factory { GetCharactersInteractor(get()) }
         factory { SetActiveCharacterIdInteractor(get()) }
+        factory { ClearActiveCharacterInteractor(get()) }
         factory { SubscribeToActiveCharacter(get()) }
     }
 

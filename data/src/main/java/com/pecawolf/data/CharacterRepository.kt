@@ -6,30 +6,37 @@ import com.pecawolf.data.mapper.CharacterMapper
 import com.pecawolf.data.mapper.CharacterSnippetMapper
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class CharacterRepository(
-    private val characterCache: Cache,
+    private val cache: Cache,
     private val characterMapper: CharacterMapper,
     private val chracterSnippetMapper: CharacterSnippetMapper
 ) {
-    private val activeCharacter: BehaviorSubject<CharacterEntity> = BehaviorSubject.create()
+    private val activeCharacter: BehaviorSubject<List<CharacterEntity>> = BehaviorSubject.create()
 
     fun createCharacter(baseStats: BaseStats) =
-        characterCache.createCharacter(characterMapper.toEntity(Character.new(baseStats)))
+        cache.createCharacter(characterMapper.toEntity(Character.new(baseStats)))
 
-    fun getActiveCharacter() = characterCache.getCharacter()
-        .doOnSuccess { activeCharacter.onNext(it) }
+    fun getActiveCharacter() = cache.getCharacter()
+        .doOnSuccess { activeCharacter.onNext(listOf(it)) }
         .map { characterMapper.fromEntity(it) }
 
     fun observeActiveCharacter() = activeCharacter
-        .map { characterMapper.fromEntity(it) }
+        .map { list -> list.map { characterMapper.fromEntity(it) } }
 
-    fun getCharacterSnippets() = characterCache.getCharacters()
+    fun getCharacterSnippets() = cache.getCharacters()
         .map { characters -> characters.map { chracterSnippetMapper.fromEntity(it) } }
 
-    fun setActiveCharacterId(characterId: Long) = characterCache.getCharacter(characterId)
-        .doOnSuccess { characterCache.setActiveCharacterId(characterId) }
-        .doOnSuccess { activeCharacter.onNext(it) }
+    fun setActiveCharacterId(characterId: Long) = cache.getCharacter(characterId)
+        .doOnSuccess { cache.setActiveCharacterId(characterId) }
+        .doOnSuccess { activeCharacter.onNext(listOf(it)) }
         .ignoreElement()
+
+    fun clearActiveCharacter(): Completable {
+        return Completable.complete()
+            .doOnComplete { activeCharacter.onNext(listOf()) }
+            .doOnComplete { cache.setActiveCharacterId(null) }
+    }
 }

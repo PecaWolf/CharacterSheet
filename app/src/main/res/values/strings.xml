@@ -64,4 +64,5 @@
     <string name="basic_info_remaining">Remaning points</string>
 
     <string name="character_selection_species_world">"%1$s in the world of %2$s"</string>
+    <string name="other_select_character">Select different character</string>
 </resources>

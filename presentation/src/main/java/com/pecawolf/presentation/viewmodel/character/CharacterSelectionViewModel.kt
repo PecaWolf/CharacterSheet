@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
+import com.pecawolf.model.Character
 import com.pecawolf.model.CharacterSnippet
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.extensions.notifyChanged
@@ -26,7 +27,12 @@ class CharacterSelectionViewModel(
     override fun onRefresh() {
         Timber.v("onRefresh()")
         getActiveCharacter.execute(null)
-            .observe(LOADING_GET_ACTIVE, ::onGetActiveCharacterError, ::onGetActiveCharacterSuccess)
+            .observe(
+                LOADING_GET_ACTIVE,
+                ::onGetActiveCharacterError,
+                ::onGetActiveCharacterSuccess,
+                ::onGetActiveCharacterComplete
+            )
     }
 
     fun onExistingCharacterClicked(characterId: Long) {
@@ -38,15 +44,19 @@ class CharacterSelectionViewModel(
         _navigateTo.postValue(Destination.Create)
     }
 
-    private fun onGetActiveCharacterSuccess() {
+    private fun onGetActiveCharacterSuccess(character: Character) {
         Timber.v("onGetActiveCharacterSuccess()")
         _navigateTo.postValue(Destination.Home)
     }
 
-    private fun onGetActiveCharacterError(error: Throwable) {
-        Timber.e(error, "onGetActiveCharacterError(): ")
+    private fun onGetActiveCharacterComplete() {
+        Timber.v("onGetActiveCharacterSuccess()")
         getCharacters.execute(null)
             .observe(LOADING_GET_CHARACTERS, ::onGetCharactersError, ::onGetCharactersSuccess)
+    }
+
+    private fun onGetActiveCharacterError(error: Throwable) {
+        Timber.e(error, "onGetActiveCharacterError(): ")
     }
 
     private fun onGetCharactersSuccess(list: List<CharacterSnippet>) {
