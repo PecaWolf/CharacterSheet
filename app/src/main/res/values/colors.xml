@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#E8E8E8</color>
+    <color name="background">#DDD</color>
     <color name="backgroundCard">#FFF</color>
-    <color name="textPrimary">#000</color>
-    <color name="textInverse">#FFF</color>
-    <color name="textSecondary">#555</color>
+    <color name="backgroundInput">#EBEBEB</color>
+    <color name="primary">#000</color>
+    <color name="secondary">#444</color>
+    <color name="disabled">@color/greyish</color>
+    <color name="inverse">#FFF</color>
     <color name="activePrimary">@color/purple_500</color>
     <color name="activeSecondary">@color/purple_700</color>
     <color name="buttonBackgroundEnabled">@color/purple_200</color>
-    <color name="buttonBackgroundDisabled">@color/greyish</color>
+    <color name="buttonBackgroundDisabled">@color/background</color>
     <color name="buttonBackgroundPositiveEnabled">@color/green_medium</color>
     <color name="buttonBackgroundPositiveDisabled">@color/green_light</color>
     <color name="buttonBackgroundNegativeEnabled">@color/red_medium</color>

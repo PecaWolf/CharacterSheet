@@ -1,9 +1,26 @@
 <resources>
+    <string name="generic_continue">Continue</string>
+
     <string name="app_name">Character Sheet</string>
     <string name="title_home">Home</string>
     <string name="title_inventory">Inventory</string>
     <string name="title_skills">Skills</string>
     <string name="title_other">Other</string>
+
+    <string name="world_last_realm">Last Realm</string>
+    <string name="world_blue_way">Blue Way</string>
+    <string name="world_dark_way">Dark Way</string>
+    <string name="world_cold_frontier">Cold Frontier</string>
+
+    <string name="species_human">Human</string>
+    <string name="species_dwarf">Dwarf</string>
+    <string name="species_elf">Elf</string>
+    <string name="species_havlin">Havlin</string>
+    <string name="species_karanti">Karanti</string>
+    <string name="species_nathorean">Nathorean</string>
+    <string name="species_searian">Searian</string>
+    <string name="species_gusmerian">Gusmerian</string>
+    <string name="species_krung">Krung</string>
 
     <string name="character_name">Name:</string>
     <string name="character_species">Species:</string>
@@ -30,4 +47,22 @@
     <string name="storage">Storage</string>
     <string name="loadout">Loadout</string>
     <string name="home_luck_and_hp">"%1$d + %2$d "</string>
+    <string name="other_create_character">Create a new character</string>
+    <string name="create_character_name_hint">Character name</string>
+    <string name="create_character_species_hint">Species</string>
+    <string name="create_character_world_hint">World</string>
+
+
+    <string name="basic_info_name_header">Basic info</string>
+    <string name="basic_info_stats_header">Stats</string>
+    <string name="basic_info_str">Strength</string>
+    <string name="basic_info_dex">Dexterity</string>
+    <string name="basic_info_vit">Vitality</string>
+    <string name="basic_info_int">Intelligence</string>
+    <string name="basic_info_wis">Wisdom</string>
+    <string name="basic_info_cha">Charisma</string>
+    <string name="basic_info_remaining">Remaning points</string>
+
+    <string name="character_selection_species_world">"%1$s in the world of %2$s"</string>
+    <string name="other_select_character">Select different character</string>
 </resources>

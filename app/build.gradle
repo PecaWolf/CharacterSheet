@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -8,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "cz.pecawolf.charactersheet"
+        applicationId "com.pecawolf.charactersheet"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -39,6 +40,7 @@ android {
 dependencies {
     implementation project(path: ':common')
     implementation project(path: ':presentation')
+    implementation project(path: ':model')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 

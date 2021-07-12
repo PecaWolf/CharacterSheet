@@ -26,36 +26,51 @@
         <item name="cardBackgroundColor">@color/backgroundCard</item>
     </style>
 
+    <style name="Input">
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:textSize">@dimen/text_size_primary</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
     <style name="Text">
-        <item name="android:gravity">start</item>
-        <item name="android:padding">@dimen/spacing_1</item>
+        <item name="android:gravity">center_vertical|start</item>
         <item name="android:layout_margin">@dimen/spacing_1</item>
+        <item name="android:paddingTop">@dimen/spacing_1</item>
+        <item name="android:paddingBottom">@dimen/spacing_1</item>
         <item name="android:paddingStart">@dimen/spacing_2</item>
         <item name="android:paddingEnd">@dimen/spacing_2</item>
-        <item name="android:background">@drawable/bg_text</item>
+    </style>
+
+    <style name="Text.Header">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">@dimen/text_size_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="Text.Label">
         <item name="android:textSize">@dimen/text_size_secondary</item>
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <style name="Text.Value">
         <item name="android:textSize">@dimen/text_size_primary</item>
-        <item name="android:gravity">end</item>
+        <item name="android:gravity">center_vertical|end</item>
     </style>
 
     <style name="Text.Value.Primary">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <style name="Text.Value.Secondary">
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <style name="Button" parent="Text">
         <item name="android:textSize">@dimen/text_size_primary</item>
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/text_color_button</item>
         <item name="android:background">@drawable/btn_primary</item>
         <item name="android:padding">@dimen/spacing_1</item>
         <item name="android:gravity">center</item>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/buttonBackgroundNegativeDisabled" />
+    <stroke
+        android:width="@dimen/spacing_0_5"
+        android:color="@color/buttonBackgroundNegativeDisabled" />
+    <solid android:color="@color/buttonBackgroundDisabled" />
     <corners android:radius="8dp" />
 </shape>
