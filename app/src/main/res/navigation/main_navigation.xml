@@ -18,10 +18,16 @@
         tools:layout="@layout/fragment_inventory" />
 
     <fragment
-        android:id="@+id/navigation_skills"
-        android:name="com.pecawolf.charactersheet.ui.skills.SkillsFragment"
-        android:label="@string/title_skills"
-        tools:layout="@layout/fragment_skills" />
+        android:id="@+id/navigation_loadout"
+        android:name="com.pecawolf.charactersheet.ui.loadout.LoadoutFragment"
+        android:label="@string/title_loadout"
+        tools:layout="@layout/fragment_loadout" />
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/navigation_skills"-->
+    <!--        android:name="com.pecawolf.charactersheet.ui.skills.SkillsFragment"-->
+    <!--        android:label="@string/title_skills"-->
+    <!--        tools:layout="@layout/fragment_skills" />-->
 
     <fragment
         android:id="@+id/navigation_other"

@@ -7,6 +7,7 @@ import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel
 import com.pecawolf.presentation.viewmodel.character.SpeciesSelectionViewModel
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
+import com.pecawolf.presentation.viewmodel.main.LoadoutViewModel
 import com.pecawolf.presentation.viewmodel.main.MainViewModel
 import com.pecawolf.presentation.viewmodel.main.OtherViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -18,6 +19,7 @@ object PresentationModule {
     val instance = module {
         viewModel { MainViewModel(get()) }
         viewModel { HomeViewModel(get()) }
+        viewModel { LoadoutViewModel(get()) }
         viewModel { InventoryViewModel(get()) }
         viewModel { OtherViewModel(get()) }
 

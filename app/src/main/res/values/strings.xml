@@ -3,6 +3,7 @@
 
     <string name="app_name">Character Sheet</string>
     <string name="title_home">Home</string>
+    <string name="title_loadout">Loadout</string>
     <string name="title_inventory">Inventory</string>
     <string name="title_skills">Skills</string>
     <string name="title_other">Other</string>
