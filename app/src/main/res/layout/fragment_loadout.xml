@@ -22,11 +22,11 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide_50"
+                android:id="@+id/guide_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.50" />
+                app:layout_constraintGuide_percent="0.40" />
 
             <TextView
                 android:id="@+id/current_loadout_label"
@@ -36,52 +36,67 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginTop="@dimen/spacing_2"
                 android:text="@string/current_loadout"
-                app:layout_constraintEnd_toEndOf="@id/guide_50"
+                app:layout_constraintEnd_toEndOf="@id/guide_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/current_loadout_value"
+                style="@style/Text.Value.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginTop="@dimen/spacing_2"
+                app:layout_constraintBaseline_toBaselineOf="@id/current_loadout_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guide_vertical"
+                tools:text="Combat" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_combat"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_2"
                 android:src="@drawable/ic_loadout_combat_inactive"
                 app:checkedSrc="@drawable/ic_loadout_combat_active"
                 app:isActive="false"
-                app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
+                app:layout_constraintBottom_toTopOf="@id/primary_weapon_label"
                 app:layout_constraintEnd_toStartOf="@id/loadout_social"
-                app:layout_constraintStart_toStartOf="@id/guide_50"
-                app:layout_constraintTop_toTopOf="@+id/current_loadout_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/current_loadout_value"
                 app:uncheckedSrc="@drawable/ic_loadout_combat_inactive"
                 tools:text="combat" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_social"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_2"
                 android:src="@drawable/ic_loadout_social_inactive"
                 app:checkedSrc="@drawable/ic_loadout_social_active"
                 app:isActive="false"
-                app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
+                app:layout_constraintBottom_toBottomOf="@id/loadout_combat"
                 app:layout_constraintEnd_toStartOf="@id/loadout_travel"
                 app:layout_constraintStart_toEndOf="@id/loadout_combat"
-                app:layout_constraintTop_toTopOf="@+id/current_loadout_label"
+                app:layout_constraintTop_toTopOf="@id/loadout_combat"
                 app:uncheckedSrc="@drawable/ic_loadout_social_inactive"
                 tools:text="social" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageView
                 android:id="@+id/loadout_travel"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_2"
                 android:src="@drawable/ic_loadout_travel_inactive"
                 app:checkedSrc="@drawable/ic_loadout_travel_active"
                 app:isActive="false"
-                app:layout_constraintBottom_toBottomOf="@+id/current_loadout_label"
+                app:layout_constraintBottom_toBottomOf="@id/loadout_combat"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/loadout_social"
-                app:layout_constraintTop_toTopOf="@+id/current_loadout_label"
+                app:layout_constraintTop_toTopOf="@id/loadout_combat"
                 app:uncheckedSrc="@drawable/ic_loadout_travel_inactive"
                 tools:text="travel" />
 
@@ -93,9 +108,10 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginTop="@dimen/spacing_2"
                 android:text="@string/primary_weapon"
-                app:layout_constraintEnd_toEndOf="@id/guide_50"
+                app:layout_constraintEnd_toEndOf="@id/guide_vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/current_loadout_label" />
+                app:layout_constraintBottom_toTopOf="@id/secondary_weapon_label"
+                app:layout_constraintTop_toBottomOf="@id/loadout_combat" />
 
             <TextView
                 android:id="@+id/primary_weapon_value"
@@ -105,7 +121,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/primary_weapon_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="AR-15" />
 
             <TextView
@@ -116,8 +132,9 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginTop="@dimen/spacing_2"
                 android:text="@string/secondary_weapon"
-                app:layout_constraintEnd_toEndOf="@id/guide_50"
+                app:layout_constraintEnd_toEndOf="@id/guide_vertical"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tertiary_weapon_label"
                 app:layout_constraintTop_toBottomOf="@id/primary_weapon_label" />
 
             <TextView
@@ -128,18 +145,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/secondary_weapon_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Glock" />
 
             <TextView
                 android:id="@+id/tertiary_weapon_label"
                 style="@style/Text.Label"
                 android:layout_width="0dp"
+                app:layout_constraintBottom_toTopOf="@id/civilian_clothes_label"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginTop="@dimen/spacing_2"
                 android:text="@string/tertiary_weapon"
-                app:layout_constraintEnd_toEndOf="@id/guide_50"
+                app:layout_constraintEnd_toEndOf="@id/guide_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/secondary_weapon_label" />
 
@@ -151,18 +169,19 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tertiary_weapon_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Falcata" />
 
             <TextView
                 android:id="@+id/civilian_clothes_label"
                 style="@style/Text.Label"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginTop="@dimen/spacing_4"
                 android:text="@string/civilian_clothes"
-                app:layout_constraintEnd_toEndOf="@id/guide_50"
+                app:layout_constraintEnd_toEndOf="@id/guide_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tertiary_weapon_label" />
 
@@ -174,7 +193,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/civilian_clothes_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Kevlar-reinforced suit" />
 
             <TextView
@@ -185,7 +204,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginTop="@dimen/spacing_4"
                 android:text="@string/combat_gear"
-                app:layout_constraintEnd_toEndOf="@id/guide_50"
+                app:layout_constraintEnd_toEndOf="@id/guide_vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/civilian_clothes_label" />
 
@@ -197,46 +216,9 @@
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/combat_gear_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Goliath exo-skeleton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/money_card"
-        style="@style/Card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loadout_card">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/money_label"
-                style="@style/Text.Label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_2"
-                android:text="@string/money" />
-
-            <TextView
-                android:id="@+id/money_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_weight="1"
-                android:gravity="end"
-                tools:text="50 000" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
 

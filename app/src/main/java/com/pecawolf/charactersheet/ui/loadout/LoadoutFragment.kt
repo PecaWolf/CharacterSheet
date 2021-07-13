@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import com.pecawolf.charactersheet.R
-import com.pecawolf.charactersheet.common.formatAmount
 import com.pecawolf.charactersheet.databinding.FragmentLoadoutBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.model.Item
@@ -83,7 +82,6 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
             binding.combatGearValue.alpha = alpha
         }
         viewModel.inventory.reObserve(this) { inventory ->
-            binding.moneyValue.text = inventory.money.formatAmount()
             binding.primaryWeaponValue.text = inventory.primary.name
             binding.secondaryWeaponValue.text = inventory.secondary.name
             binding.tertiaryWeaponValue.text = inventory.tertiary.name
