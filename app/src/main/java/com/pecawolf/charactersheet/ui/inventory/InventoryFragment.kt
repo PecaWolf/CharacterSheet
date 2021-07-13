@@ -17,13 +17,6 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
     override fun createViewModel() = injectVM<InventoryViewModel>().value
 
     override fun bindView(binding: FragmentInventoryBinding, viewModel: InventoryViewModel) {
-//        viewModel.isLoadoutCombat
-//        viewModel.equipment.primary.name
-//        viewModel.equipment.secondary.name
-//        viewModel.equipment.tertiary.name
-//        viewModel.equipment.clothes.name
-//        viewModel.equipment.armor.name
-//        viewModel.money
 
     }
 
@@ -31,8 +24,15 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
         binding: FragmentInventoryBinding,
         viewModel: InventoryViewModel
     ) {
-        viewModel.inventory.reObserve(this) { inventory ->
-            binding.moneyValue.text = inventory.money.formatAmount()
+        viewModel.money.reObserve(this) { money ->
+            binding.moneyValue.text = money.formatAmount()
+        }
+
+        viewModel.backpack.reObserve(this) { inventory ->
+
+        }
+
+        viewModel.storage.reObserve(this) { inventory ->
 
         }
     }
