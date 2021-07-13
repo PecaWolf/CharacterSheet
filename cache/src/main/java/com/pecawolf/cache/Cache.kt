@@ -37,4 +37,7 @@ class Cache(
         if (characterId == null) Maybe.empty()
         else database.characterDao().loadAllByIds(arrayOf(characterId))
             .flatMapMaybe { it.firstOrNull()?.let { Maybe.just(it) } }
+
+    fun getItemsForOwner(ownerId: Long) = database.itemDao()
+        .loadAllByOwnerId(ownerId)
 }

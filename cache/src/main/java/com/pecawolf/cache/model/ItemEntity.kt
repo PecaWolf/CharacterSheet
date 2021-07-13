@@ -13,12 +13,12 @@ data class ItemEntity(
     val description: String,
     val allowedLoadouts: List<String>,
     val enhancements: List<String>,
-    val damage: String?,
-    val wield: String?,
-    val damageTypes: List<String>?,
-    val magazine: Int?,
-    val rateOfFire: Int?,
-    val protections: List<String>?,
+    val damage: String,
+    val wield: String,
+    val damageTypes: List<String>,
+    val magazine: Int,
+    val rateOfFire: Int,
+    val protections: List<String>,
 ) {
     enum class ItemType {
         BARE_HANDS,

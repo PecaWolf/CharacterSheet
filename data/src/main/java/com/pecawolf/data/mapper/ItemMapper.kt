@@ -212,9 +212,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
+                listOf()
             )
             is Item.Weapon.Melee.Knife -> ItemEntity(
                 itemId,
@@ -227,9 +227,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
+                listOf()
             )
             is Item.Weapon.Melee.Sword -> ItemEntity(
                 itemId,
@@ -242,9 +242,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
+                listOf()
             )
             is Item.Weapon.Melee.Axe -> ItemEntity(
                 itemId,
@@ -257,9 +257,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
+                listOf()
             )
             is Item.Weapon.Ranged.Bow -> ItemEntity(
                 itemId,
@@ -274,7 +274,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.Crossbow -> ItemEntity(
                 itemId,
@@ -289,7 +289,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.Pistol -> ItemEntity(
                 itemId,
@@ -304,7 +304,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.Revolver -> ItemEntity(
                 itemId,
@@ -319,7 +319,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.Rifle -> ItemEntity(
                 itemId,
@@ -334,7 +334,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.SubmachineGun -> ItemEntity(
                 itemId,
@@ -349,7 +349,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.Shotgun -> ItemEntity(
                 itemId,
@@ -364,7 +364,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.MachineGun -> ItemEntity(
                 itemId,
@@ -379,7 +379,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Weapon.Ranged.AntimaterialGun -> ItemEntity(
                 itemId,
@@ -394,7 +394,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+                listOf()
             )
             is Item.Armor.None -> ItemEntity(
                 itemId,
@@ -404,11 +404,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 listOf(),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Armor.Clothing -> ItemEntity(
@@ -419,11 +419,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Armor.Kevlar -> ItemEntity(
@@ -434,11 +434,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Armor.ExoSkeleton -> ItemEntity(
@@ -449,11 +449,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Armor.VacSuit -> ItemEntity(
@@ -464,11 +464,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Armor.VacArmor -> ItemEntity(
@@ -479,11 +479,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Armor.PoweredArmor -> ItemEntity(
@@ -494,11 +494,11 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
                 protections.map { it.name }
             )
             is Item.Other -> ItemEntity(
@@ -509,12 +509,12 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 description,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
+                listOf()
             )
         }
     }

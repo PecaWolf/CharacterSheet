@@ -17,7 +17,7 @@ interface CharacterDao {
     fun loadAllByIds(characterIds: Array<Long>): Single<List<CharacterEntity>>
 
     @Insert
-    fun insert(characterEntity: CharacterEntity): Single<Long>
+    fun insert(character: CharacterEntity): Single<Long>
 
     @Delete
     fun delete(character: CharacterEntity): Completable

@@ -28,5 +28,4 @@ data class CharacterEntity(
     val armor: Long,
     val backpack: List<Long> = listOf(),
     val storage: List<Long> = listOf(),
-) {
-}
+)

@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/current_loadout_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
@@ -102,7 +102,7 @@
 
             <TextView
                 android:id="@+id/primary_weapon_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
@@ -126,7 +126,7 @@
 
             <TextView
                 android:id="@+id/secondary_weapon_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
@@ -150,7 +150,7 @@
 
             <TextView
                 android:id="@+id/tertiary_weapon_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 app:layout_constraintBottom_toTopOf="@id/civilian_clothes_label"
                 android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
 
             <TextView
                 android:id="@+id/civilian_clothes_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
 
             <TextView
                 android:id="@+id/combat_gear_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"

@@ -55,6 +55,19 @@
         <item name="android:textColor">@color/secondary</item>
     </style>
 
+    <style name="Text.Label.Primary">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="Text.Label.Secondary">
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
+    <style name="Text.Description">
+        <item name="android:textSize">@dimen/text_size_description</item>
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
     <style name="Text.Value">
         <item name="android:textSize">@dimen/text_size_primary</item>
         <item name="android:gravity">center_vertical|end</item>

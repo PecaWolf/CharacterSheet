@@ -18,4 +18,12 @@ class InventoryViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
     val money: LiveData<Int> = Transformations.map(mainViewModel.character) {
         it.inventory.money
     }
+
+    fun onItemEdit(itemId: Long) {
+
+    }
+
+    fun onItemSwitch(itemId: Long, fromBackpack: Boolean) {
+
+    }
 }
