@@ -3,6 +3,7 @@ package com.pecawolf.charactersheet.ui.character
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.MainActivity
@@ -42,6 +43,9 @@ class CharacterSelectionFragment :
         binding: FragmentCharacterSelectionBinding,
         viewModel: CharacterSelectionViewModel
     ) {
+        viewModel.isLoading.reObserve(this) { isLoading ->
+            binding.selectionProgress.isVisible = isLoading
+        }
         viewModel.characters.reObserve(this) {
             Timber.v("onCharacters(): $it")
             characterAdapter.items = it

@@ -67,6 +67,7 @@ open class BaseViewModel : ViewModel() {
         .doOnSubscribe { disposable.add(it) }
         .doOnSuccess { _loading.remove(loading) }
         .doOnError { _loading.remove(loading) }
+        .doOnComplete { _loading.remove(loading) }
         .subscribe(onSuccess, onError, onComplete)
 
     fun Completable.observe(
