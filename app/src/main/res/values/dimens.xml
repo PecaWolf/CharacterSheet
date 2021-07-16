@@ -16,5 +16,8 @@
     <dimen name="icon_size">48dp</dimen>
     <dimen name="menu_item_height">96dp</dimen>
 
-    <item name="inactive_item_alpha" type="dimen" format="float">0.2</item>
+    <item name="inactive_item_alpha" format="float" type="dimen">0.2</item>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="icon_large">64dp</dimen>
+    <dimen name="icon_small">32dp</dimen>
 </resources>

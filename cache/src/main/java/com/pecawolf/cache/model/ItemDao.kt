@@ -14,10 +14,10 @@ interface ItemDao {
     fun getAll(): Single<List<ItemEntity>>
 
     @Query("SELECT * FROM ItemEntity WHERE itemId IN (:itemIds)")
-    fun loadAllByIds(itemIds: Array<Long>): Single<List<ItemEntity>>
+    fun getAllByIds(itemIds: Array<Long>): Single<List<ItemEntity>>
 
     @Query("SELECT * FROM ItemEntity WHERE ownerId IS (:ownerId)")
-    fun loadAllByOwnerId(ownerId: Long): Single<List<ItemEntity>>
+    fun getAllByOwnerId(ownerId: Long): Single<List<ItemEntity>>
 
     @Insert
     fun insert(item: ItemEntity): Single<Long>

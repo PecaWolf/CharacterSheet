@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="TwoStateImageView">
-        <attr name="isActive" format="boolean" />
+    <declare-styleable name="TwoStateImageCheckView">
+        <attr name="isChecked" format="boolean" />
         <attr name="checkedSrc" format="integer" />
         <attr name="uncheckedSrc" format="integer" />
+        <attr name="text" format="string" />
     </declare-styleable>
 </resources>

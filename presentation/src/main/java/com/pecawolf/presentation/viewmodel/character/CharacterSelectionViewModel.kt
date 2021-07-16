@@ -50,7 +50,7 @@ class CharacterSelectionViewModel(
     }
 
     private fun onGetActiveCharacterComplete() {
-        Timber.v("onGetActiveCharacterSuccess()")
+        Timber.v("onGetActiveCharacterComplete()")
         getCharacters.execute(null)
             .observe(LOADING_GET_CHARACTERS, ::onGetCharactersError, ::onGetCharactersSuccess)
     }

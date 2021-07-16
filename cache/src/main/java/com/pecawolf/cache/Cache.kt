@@ -2,6 +2,7 @@ package com.pecawolf.cache
 
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.CharacterSnippetEntity
+import com.pecawolf.cache.model.ItemEntity
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
@@ -35,9 +36,42 @@ class Cache(
 
     fun getCharacter(characterId: Long? = applicationPreferences.activeCharacterId) =
         if (characterId == null) Maybe.empty()
-        else database.characterDao().loadAllByIds(arrayOf(characterId))
-            .flatMapMaybe { it.firstOrNull()?.let { Maybe.just(it) } }
+        else database.characterDao().getAllByIds(arrayOf(characterId))
+            .flatMapMaybe { chars -> chars.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty() }
 
     fun getItemsForOwner(ownerId: Long) = database.itemDao()
-        .loadAllByOwnerId(ownerId)
+        .getAllByOwnerId(ownerId)
+
+    fun createItemForCharacter(
+        name: String,
+        description: String,
+        type: String,
+        loadouts: List<String>,
+        damage: String,
+        wield: String,
+        magazineSize: Int,
+        rateOfFire: Int,
+        damageTypes: List<String>,
+        ownerId: Long? = applicationPreferences.activeCharacterId,
+    ): Single<Long> = database.itemDao().insert(
+        ItemEntity(
+            0,
+            ownerId ?: throw IllegalArgumentException("User id $ownerId not found!"),
+            type,
+            name,
+            description,
+            1,
+            loadouts,
+            listOf(),
+            damage,
+            wield,
+            damageTypes,
+            magazineSize,
+            rateOfFire
+        )
+    )
+
+    fun getItemById(itemId: Long): Maybe<ItemEntity> = database.itemDao()
+        .getAllByIds(arrayOf(itemId))
+        .flatMapMaybe { items -> items.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty() }
 }

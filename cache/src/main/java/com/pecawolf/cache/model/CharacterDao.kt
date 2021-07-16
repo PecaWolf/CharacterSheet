@@ -14,7 +14,7 @@ interface CharacterDao {
     fun getAll(): Single<List<CharacterEntity>>
 
     @Query("SELECT * FROM CharacterEntity WHERE characterId IN (:characterIds)")
-    fun loadAllByIds(characterIds: Array<Long>): Single<List<CharacterEntity>>
+    fun getAllByIds(characterIds: Array<Long>): Single<List<CharacterEntity>>
 
     @Insert
     fun insert(character: CharacterEntity): Single<Long>

@@ -2,6 +2,7 @@ package com.pecawolf.charactersheet.ui.inventory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.common.formatAmount
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
@@ -13,11 +14,7 @@ import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {
 
     private val backpackAdapter: InventoryAdapter by lazy {
-        InventoryAdapter(true, viewModel::onItemEdit, viewModel::onItemSwitch)
-    }
-
-    private val storageAdapter: InventoryAdapter by lazy {
-        InventoryAdapter(false, viewModel::onItemEdit, viewModel::onItemSwitch)
+        InventoryAdapter(viewModel::onItemEdit)
     }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -30,10 +27,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             adapter = backpackAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        binding.storageRecycler.apply {
-            adapter = storageAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+        binding.addItemButton.setOnClickListener { viewModel.onAddItem() }
     }
 
     override fun observeViewModel(
@@ -48,8 +42,15 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             backpackAdapter.items = items
         }
 
-        viewModel.storage.reObserve(this) { items ->
-            storageAdapter.items = items
+        viewModel.navigateTo.reObserve(this) { destination ->
+            when (destination) {
+                is InventoryViewModel.Destination.ItemDetail -> findNavController().navigate(
+                    InventoryFragmentDirections.actionInventoryToItemDetail(destination.itemId)
+                )
+                is InventoryViewModel.Destination.NewItem -> findNavController().navigate(
+                    InventoryFragmentDirections.actionInventoryToNewItemStep1()
+                )
+            }
         }
     }
 }

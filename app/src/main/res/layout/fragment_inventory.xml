@@ -8,70 +8,17 @@
     android:padding="@dimen/spacing_1"
     tools:context=".ui.inventory.InventoryFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/backpack_header"
-        style="@style/Card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_1"
-        android:layout_marginTop="@dimen/spacing_4"
-        app:layout_constraintEnd_toStartOf="@id/storage_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            style="@style/Text.Header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_backpack"
-            android:gravity="center"
-            android:text="@string/backpack" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/storage_header"
-        style="@style/Card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_1"
-        android:layout_marginTop="@dimen/spacing_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/backpack_header"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            style="@style/Text.Header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_treasure"
-            android:gravity="center"
-            android:text="@string/storage" />
-
-    </androidx.cardview.widget.CardView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/backpack_recycler"
+        style="@style/Box"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/money_card"
-        app:layout_constraintEnd_toStartOf="@id/storage_recycler"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backpack_header"
-        tools:itemCount="15"
-        tools:listitem="@layout/item_inventory" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/storage_recycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/spacing_1"
         app:layout_constraintBottom_toTopOf="@id/money_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/backpack_recycler"
-        app:layout_constraintTop_toBottomOf="@id/backpack_header"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="15"
         tools:listitem="@layout/item_inventory" />
 

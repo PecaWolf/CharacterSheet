@@ -9,10 +9,11 @@ import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.charactersheet.databinding.ItemSimpleSelectionBinding as Binding
 
 class SimpleSelectionAdapter(
+    initialItems: List<SimpleSelectionItem> = listOf(),
     private val onClick: (Any?) -> Unit
 ) : RecyclerView.Adapter<SimpleSelectionViewHolder>() {
 
-    var items: List<SimpleSelectionItem> = listOf()
+    var items: List<SimpleSelectionItem> = initialItems
         set(value) {
             field = value
             notifyDataSetChanged()

@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/header_card"
+        android:id="@+id/base_data_card"
         style="@style/Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

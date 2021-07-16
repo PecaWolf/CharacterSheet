@@ -19,11 +19,11 @@ class SpeciesSelectionFragment :
     BaseFragment<SpeciesSelectionViewModel, FragmentSpeciesSelectionBinding>() {
 
     private val worldsAdapter: SimpleSelectionAdapter by lazy {
-        SimpleSelectionAdapter(::onWorldSelected)
+        SimpleSelectionAdapter { viewModel.onWorldSelected(it as BaseStats.World) }
     }
 
     private val speciesAdapter: SimpleSelectionAdapter by lazy {
-        SimpleSelectionAdapter(::onSpeciesSelected)
+        SimpleSelectionAdapter { viewModel.onSpeciesSelected(it as BaseStats.Species) }
     }
 
     override fun getBinding(
@@ -82,13 +82,5 @@ class SpeciesSelectionFragment :
                 )
             )
         }
-    }
-
-    private fun onWorldSelected(data: Any?) {
-        viewModel.onWorldSelected(data as BaseStats.World)
-    }
-
-    private fun onSpeciesSelected(data: Any?) {
-        viewModel.onSpeciesSelected(data as BaseStats.Species)
     }
 }

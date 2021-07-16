@@ -26,6 +26,5 @@ data class CharacterEntity(
     val tertiary: Long,
     val clothes: Long,
     val armor: Long,
-    val backpack: List<Long> = listOf(),
-    val storage: List<Long> = listOf(),
+    val backpack: MutableList<Long> = mutableListOf(),
 )

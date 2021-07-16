@@ -12,16 +12,113 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_inventory"
-        android:name="com.pecawolf.charactersheet.ui.inventory.InventoryFragment"
-        android:label="@string/title_inventory"
-        tools:layout="@layout/fragment_inventory" />
-
-    <fragment
         android:id="@+id/navigation_loadout"
         android:name="com.pecawolf.charactersheet.ui.loadout.LoadoutFragment"
         android:label="@string/title_loadout"
         tools:layout="@layout/fragment_loadout" />
+
+    <fragment
+        android:id="@+id/navigation_inventory"
+        android:name="com.pecawolf.charactersheet.ui.inventory.InventoryFragment"
+        android:label="@string/title_inventory"
+        tools:layout="@layout/fragment_inventory">
+
+        <action
+            android:id="@+id/action_inventory_to_new_item_step_1"
+            app:destination="@id/navigation_new_item_step_1" />
+
+        <action
+            android:id="@+id/action_inventory_to_item_detail"
+            app:destination="@id/navigation_item_detail" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_item_detail"
+        android:name="com.pecawolf.charactersheet.ui.inventory.ItemDetailFragment"
+        android:label="@string/title_item_detail"
+        tools:layout="@layout/fragment_item_detail">
+
+        <argument
+            android:name="itemId"
+            app:argType="long"
+            app:nullable="false" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_new_item_step_1"
+        android:name="com.pecawolf.charactersheet.ui.inventory.NewItemStep1Fragment"
+        android:label="@string/title_new_item"
+        tools:layout="@layout/fragment_new_item_step_1">
+
+        <action
+            android:id="@+id/action_new_item_step_1_to_new_item_step_2"
+            app:destination="@id/navigation_new_item_step_2" />
+
+        <action
+            android:id="@+id/action_new_item_step_1_to_new_item_step_3"
+            app:destination="@id/navigation_new_item_step_3" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_new_item_step_2"
+        android:name="com.pecawolf.charactersheet.ui.inventory.NewItemStep2Fragment"
+        android:label="@string/title_new_item"
+        tools:layout="@layout/fragment_new_item_step_2">
+
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="type"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_new_item_step_2_to_item_detail"
+            app:destination="@id/navigation_item_detail" />
+
+        <!--                <action-->
+        <!--                    android:id="@+id/action_new_item_step_2_to_new_item_step_3"-->
+        <!--                    app:destination="@id/navigation_new_item_step_3" />-->
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_new_item_step_3"
+        android:name="com.pecawolf.charactersheet.ui.inventory.NewItemStep3Fragment"
+        android:label="@string/title_new_item"
+        tools:layout="@layout/fragment_new_item_step_3">
+
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="type"
+            app:argType="string"
+            app:nullable="false" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_new_item_step_1_to_new_item_step_2"-->
+        <!--            app:destination="@id/navigation_new_item_step_2" />-->
+
+    </fragment>
 
     <!--    <fragment-->
     <!--        android:id="@+id/navigation_skills"-->

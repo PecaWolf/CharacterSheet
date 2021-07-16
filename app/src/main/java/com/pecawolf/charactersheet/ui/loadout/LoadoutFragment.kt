@@ -36,9 +36,9 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         viewModel: LoadoutViewModel
     ) {
         viewModel.loadoutType.reObserve(this) { type ->
-            binding.loadoutCombat.isActive = type == Item.LoadoutType.COMBAT
-            binding.loadoutSocial.isActive = type == Item.LoadoutType.SOCIAL
-            binding.loadoutTravel.isActive = type == Item.LoadoutType.TRAVEL
+            binding.loadoutCombat.isChecked = type == Item.LoadoutType.COMBAT
+            binding.loadoutSocial.isChecked = type == Item.LoadoutType.SOCIAL
+            binding.loadoutTravel.isChecked = type == Item.LoadoutType.TRAVEL
         }
 
         viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->

@@ -3,8 +3,10 @@ package com.pecawolf.domain
 import com.pecawolf.data.DataModule
 import com.pecawolf.domain.interactor.ClearActiveCharacterInteractor
 import com.pecawolf.domain.interactor.CreateChracterInteractor
+import com.pecawolf.domain.interactor.CreateNewItemInteractor
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
+import com.pecawolf.domain.interactor.GetItemDetailInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import org.koin.core.context.loadKoinModules
@@ -18,6 +20,8 @@ object DomainModule {
         factory { SetActiveCharacterIdInteractor(get()) }
         factory { ClearActiveCharacterInteractor(get()) }
         factory { SubscribeToActiveCharacter(get()) }
+        factory { CreateNewItemInteractor(get()) }
+        factory { GetItemDetailInteractor(get()) }
     }
 
     fun start() {
