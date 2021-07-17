@@ -40,6 +40,7 @@ class CharacterRepository(
 
     fun setActiveCharacterId(characterId: Long) = cache.getCharacter(characterId)
         .firstOrError()
+        .doOnSuccess { cache.setActiveCharacterId(characterId) }
         .ignoreElement()
 
     fun clearActiveCharacter(): Completable {

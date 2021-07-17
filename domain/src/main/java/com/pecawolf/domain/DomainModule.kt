@@ -8,6 +8,7 @@ import com.pecawolf.domain.interactor.EquipItemInteractor
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.GetItemDetailInteractor
+import com.pecawolf.domain.interactor.ObserveCharacterInteractor
 import com.pecawolf.domain.interactor.SaveItemChanges
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
@@ -19,6 +20,7 @@ object DomainModule {
     val instance = module {
         factory { CreateChracterInteractor(get()) }
         factory { GetCharacterInteractor(get()) }
+        factory { ObserveCharacterInteractor(get()) }
         factory { GetCharactersInteractor(get()) }
         factory { SetActiveCharacterIdInteractor(get()) }
         factory { ClearActiveCharacterInteractor(get()) }

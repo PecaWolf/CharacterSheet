@@ -2,7 +2,7 @@ package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.pecawolf.domain.interactor.GetCharacterInteractor
+import com.pecawolf.domain.interactor.ObserveCharacterInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import com.pecawolf.model.Character
 import com.pecawolf.presentation.viewmodel.BaseViewModel
@@ -10,7 +10,7 @@ import timber.log.Timber
 
 class MainViewModel(
     private val subscribeToActiveCharacter: SubscribeToActiveCharacter,
-    private val getActiveCharacter: GetCharacterInteractor
+    private val getActiveCharacter: ObserveCharacterInteractor
 ) :
     BaseViewModel() {
 
@@ -36,7 +36,6 @@ class MainViewModel(
 
     private fun onGetCharacterComplete() {
         Timber.v("onGetCharacterComplete():")
-
     }
 
     private fun onGetCharacterSuccess(character: Character) {
