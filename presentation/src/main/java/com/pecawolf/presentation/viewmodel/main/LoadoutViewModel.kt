@@ -2,6 +2,7 @@ package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.MergedLiveData2
@@ -12,7 +13,7 @@ class LoadoutViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
     private val _loadoutType = MutableLiveData<Item.LoadoutType>().apply {
         value = Item.LoadoutType.COMBAT
     }
-    private val _inventory = MutableLiveData<Inventory>()
+    private val _inventory = mainViewModel.character.map { it.inventory }
 
     val loadoutType: LiveData<Item.LoadoutType> = _loadoutType
     val isPrimaryAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(

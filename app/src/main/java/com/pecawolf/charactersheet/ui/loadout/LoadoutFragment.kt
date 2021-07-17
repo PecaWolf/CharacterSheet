@@ -3,6 +3,8 @@ package com.pecawolf.charactersheet.ui.loadout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
+import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentLoadoutBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
@@ -83,10 +85,30 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         }
         viewModel.inventory.reObserve(this) { inventory ->
             binding.primaryWeaponValue.text = inventory.primary.name
+            binding.primaryWeaponId.apply {
+                text = String.format("#%06d", inventory.primary.itemId)
+                isVisible = BuildConfig.DEBUG && inventory.primary.itemId > 0
+            }
             binding.secondaryWeaponValue.text = inventory.secondary.name
+            binding.secondaryWeaponId.apply {
+                text = String.format("#%06d", inventory.secondary.itemId)
+                isVisible = BuildConfig.DEBUG && inventory.secondary.itemId > 0
+            }
             binding.tertiaryWeaponValue.text = inventory.tertiary.name
+            binding.tertiaryWeaponId.apply {
+                text = String.format("#%06d", inventory.tertiary.itemId)
+                isVisible = BuildConfig.DEBUG && inventory.tertiary.itemId > 0
+            }
             binding.civilianClothesValue.text = inventory.clothes.name
+            binding.civilianClothesId.apply {
+                text = String.format("#%06d", inventory.clothes.itemId)
+                isVisible = BuildConfig.DEBUG && inventory.clothes.itemId > 0
+            }
             binding.combatGearValue.text = inventory.armor.name
+            binding.combatGearId.apply {
+                text = String.format("#%06d", inventory.armor.itemId)
+                isVisible = BuildConfig.DEBUG && inventory.armor.itemId > 0
+            }
         }
     }
 }

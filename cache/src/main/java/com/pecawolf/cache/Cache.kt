@@ -3,6 +3,7 @@ package com.pecawolf.cache
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.CharacterSnippetEntity
 import com.pecawolf.cache.model.ItemEntity
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
@@ -14,6 +15,9 @@ class Cache(
     fun createCharacter(character: CharacterEntity) = database.characterDao().insert(character)
         .doOnSuccess { applicationPreferences.activeCharacterId = it }
         .ignoreElement()
+
+    fun updateCharacter(character: CharacterEntity): Completable =
+        database.characterDao().update(character)
 
     fun getCharacters(): Single<List<CharacterSnippetEntity>> {
         return database.characterDao()
@@ -35,12 +39,11 @@ class Cache(
     }
 
     fun getCharacter(characterId: Long? = applicationPreferences.activeCharacterId) =
-        if (characterId == null) Maybe.empty()
-        else database.characterDao().getAllByIds(arrayOf(characterId))
-            .flatMapMaybe { chars -> chars.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty() }
+        database.characterDao().getAllByIds(listOfNotNull(characterId).toTypedArray())
+            .map { it.first { it.characterId == characterId } }
 
-    fun getItemsForOwner(ownerId: Long) = database.itemDao()
-        .getAllByOwnerId(ownerId)
+    fun getItemsForOwner(ownerId: Long? = applicationPreferences.activeCharacterId) =
+        database.itemDao().getAllByOwnerId(ownerId ?: -1)
 
     fun createItemForCharacter(
         name: String,

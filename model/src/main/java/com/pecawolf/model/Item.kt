@@ -759,4 +759,14 @@ sealed class Item(
             fun items() = values().toList().filter { it.isNotOneOf(NONE, BARE_HANDS) }
         }
     }
+
+    enum class Slot {
+        PRIMARY,
+        SECONDARY,
+        TERTIARY,
+
+        //        GRENADE,
+        ARMOR,
+        CLOTHING;
+    }
 }

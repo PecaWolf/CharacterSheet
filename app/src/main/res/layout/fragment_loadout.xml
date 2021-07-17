@@ -113,10 +113,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/primary_weapon_label"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/primary_weapon_id"
                 app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="AR-15" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/primary_weapon_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/primary_weapon_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/primary_weapon_value"
+                tools:text="#000001" />
 
             <TextView
                 android:id="@+id/secondary_weapon_label"
@@ -137,10 +148,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/secondary_weapon_label"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/secondary_weapon_id"
                 app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Glock" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondary_weapon_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/secondary_weapon_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/secondary_weapon_value"
+                tools:text="#000001" />
 
             <TextView
                 android:id="@+id/tertiary_weapon_label"
@@ -161,15 +183,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tertiary_weapon_label"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tertiary_weapon_id"
                 app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Falcata" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tertiary_weapon_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/tertiary_weapon_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tertiary_weapon_value"
+                tools:text="#000001" />
 
             <TextView
                 android:id="@+id/civilian_clothes_label"
                 style="@style/Text.Label.Secondary"
-
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
@@ -185,10 +217,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/civilian_clothes_label"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/civilian_clothes_id"
                 app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Kevlar-reinforced suit" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/civilian_clothes_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/civilian_clothes_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/civilian_clothes_value"
+                tools:text="#000001" />
 
             <TextView
                 android:id="@+id/combat_gear_label"
@@ -208,10 +251,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintBaseline_toBaselineOf="@+id/combat_gear_label"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/combat_gear_id"
                 app:layout_constraintStart_toStartOf="@id/guide_vertical"
                 tools:text="Goliath exo-skeleton" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/combat_gear_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/combat_gear_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/combat_gear_value"
+                tools:text="#000001" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

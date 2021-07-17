@@ -63,3 +63,12 @@ fun Item.DamageType.getLocalizedName() = when (this) {
     Item.DamageType.BREATH -> R.string.damage_type_breath
     Item.DamageType.KINETIC -> R.string.damage_type_kinetic
 }
+
+fun Item.Slot.getLocalizedName() = when (this) {
+    Item.Slot.PRIMARY -> R.string.equip_slot_primary
+    Item.Slot.SECONDARY -> R.string.equip_slot_secondary
+    Item.Slot.TERTIARY -> R.string.equip_slot_tertiary
+//    Item.Slot.GRENADE -> R.string.equip_slot_grenade
+    Item.Slot.ARMOR -> R.string.equip_slot_armor
+    Item.Slot.CLOTHING -> R.string.equip_slot_clothing
+}

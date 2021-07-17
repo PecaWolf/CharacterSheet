@@ -13,9 +13,9 @@ import com.pecawolf.presentation.viewmodel.BaseViewModel
 class NewItemStep1ViewModel : BaseViewModel() {
 
 
-    private val _nameInput = MutableLiveData("Armor")
-    private val _descriptionInput = MutableLiveData("Omnia vincit armor")
-    private val _selectedItem = MutableLiveData(Item.ItemType.VAC_ARMOR)
+    private val _nameInput = MutableLiveData("")
+    private val _descriptionInput = MutableLiveData("")
+    private val _selectedItem = MutableLiveData(Item.ItemType.NONE)
     private val _itemTypes = MutableLiveData(Item.ItemType.items())
     private val _navigateToNext = SingleLiveEvent<Triple<String, String, Item.ItemType>>()
 

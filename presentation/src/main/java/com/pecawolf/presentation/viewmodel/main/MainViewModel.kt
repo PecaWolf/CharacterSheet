@@ -31,7 +31,6 @@ class MainViewModel(
 
     override fun onRefresh() {
         getActiveCharacter.execute(null)
-            .map { listOf(it) }
             .observe(REFRESH, ::onGetCharacterError, ::onGetCharacterSuccess)
     }
 
@@ -40,11 +39,9 @@ class MainViewModel(
 
     }
 
-    private fun onGetCharacterSuccess(wrapper: List<Character>) {
+    private fun onGetCharacterSuccess(character: Character) {
         Timber.v("onGetCharacterSuccess():")
-        wrapper.firstOrNull()?.let {
-            _character.value = it
-        }
+        _character.value = character
     }
 
     private fun onGetCharacterError(error: Throwable) {

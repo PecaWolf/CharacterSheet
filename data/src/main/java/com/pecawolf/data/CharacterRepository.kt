@@ -26,25 +26,20 @@ class CharacterRepository(
     fun createCharacter(baseStats: BaseStats) =
         cache.createCharacter(characterMapper.toEntity(Character.new(baseStats)))
 
-    fun getActiveCharacter() = cache.getCharacter()
-        .doOnSuccess { activeCharacter.onNext(listOf(it)) }
-        .flatMap { getItemsForCharacter(it).toMaybe() }
-
-    fun observeActiveCharacter(): Observable<List<Character>> = activeCharacter
-        .flatMap { list ->
-            list.firstOrNull()?.let { character ->
-                getItemsForCharacter(character)
-                    .map { listOf(it) }
-                    .toObservable()
-            } ?: Observable.just(listOf())
+    fun observeActiveCharacter(): Observable<Character> = Observable.combineLatest(
+        cache.getCharacter(),
+        cache.getItemsForOwner().map { list -> list.map { itemMapper.fromEntity(it) } },
+        { character: CharacterEntity, items: List<Item> ->
+            characterMapper.fromEntity(character, items)
         }
+    )
+        .doOnNext { Timber.v("activeCharacter(): $it") }
 
     fun getCharacterSnippets() = cache.getCharacters()
         .map { characters -> characters.map { chracterSnippetMapper.fromEntity(it) } }
 
     fun setActiveCharacterId(characterId: Long) = cache.getCharacter(characterId)
-        .doOnSuccess { cache.setActiveCharacterId(characterId) }
-        .doOnSuccess { activeCharacter.onNext(listOf(it)) }
+        .firstOrError()
         .ignoreElement()
 
     fun clearActiveCharacter(): Completable {
@@ -73,14 +68,38 @@ class CharacterRepository(
         magazineSize,
         rateOfFire,
         damageTypes.map { it.name }
-    ).doOnSuccess { activeCharacter.onNext(activeCharacter.value) }
+    )
 
     fun getItem(itemId: Long): Maybe<Item> = cache.getItemById(itemId)
         .map { itemMapper.fromEntity(it) }
 
-    private fun getItemsForCharacter(character: CharacterEntity) =
-        cache.getItemsForOwner(character.characterId)
-            .doOnSuccess { Timber.d("getItemsForCharacter(): ${character.characterId}, ${it}") }
-            .map { list -> list.map { itemMapper.fromEntity(it) } }
-            .map { items -> characterMapper.fromEntity(character, items) }
+    fun equipItem(itemId: Long, slot: Item.Slot): Completable {
+        return cache.getCharacter()
+            .firstOrError()
+            .flatMapCompletable { character ->
+                when (slot) {
+                    Item.Slot.PRIMARY -> character.primary = itemId
+                    Item.Slot.SECONDARY -> character.secondary = itemId
+                    Item.Slot.TERTIARY -> character.tertiary = itemId
+//                Item.Slot.GRENADE -> character.grenade = itemId
+                    Item.Slot.ARMOR -> character.armor = itemId
+                    Item.Slot.CLOTHING -> character.clothes = itemId
+                }
+                cache.updateCharacter(character)
+            }
+    }
+
+    fun unequipItem(slot: Item.Slot) = cache.getCharacter()
+        .firstOrError()
+        .flatMapCompletable { character ->
+            when (slot) {
+                Item.Slot.PRIMARY -> character.primary = -1
+                Item.Slot.SECONDARY -> character.secondary = -1
+                Item.Slot.TERTIARY -> character.tertiary = -1
+                Item.Slot.ARMOR -> character.armor = -1
+                Item.Slot.CLOTHING -> character.clothes = -1
+            }
+            cache.updateCharacter(character)
+        }
+
 }

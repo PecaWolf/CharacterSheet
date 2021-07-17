@@ -4,17 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.common.formatAmount
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
+import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
+import com.pecawolf.presentation.viewmodel.main.InventoryViewModel.Destination
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {
 
     private val backpackAdapter: InventoryAdapter by lazy {
-        InventoryAdapter(viewModel::onItemEdit)
+        InventoryAdapter(viewModel::onItemEdit, viewModel::onItemEquip)
     }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -44,13 +48,43 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
 
         viewModel.navigateTo.reObserve(this) { destination ->
             when (destination) {
-                is InventoryViewModel.Destination.ItemDetail -> findNavController().navigate(
-                    InventoryFragmentDirections.actionInventoryToItemDetail(destination.itemId)
-                )
-                is InventoryViewModel.Destination.NewItem -> findNavController().navigate(
+                is Destination.NewItem -> findNavController().navigate(
                     InventoryFragmentDirections.actionInventoryToNewItemStep1()
                 )
+                is Destination.ItemDetail -> findNavController().navigate(
+                    InventoryFragmentDirections.actionInventoryToItemDetail(destination.itemId)
+                )
+                is Destination.EquipDialog -> showEquipItemDialog(destination.item)
+                is Destination.UnequipDialog -> {
+                    showTwoChoiceDialog(
+                        getString(R.string.item_unequip_slot_title),
+                        getString(
+                            R.string.item_unequip_slot_description,
+                            destination.item.name,
+                            getString(
+                                destination.slot
+                                    .getLocalizedName()
+                            )
+                        ),
+                        getString(R.string.generic_continue),
+                    ) { viewModel.onUnequipItemConfirmed(destination.slot) }
+                }
             }
         }
+    }
+
+    private fun showEquipItemDialog(item: Item) {
+        val items = when (item) {
+            is Item.Armor.Clothing -> listOf(Item.Slot.CLOTHING, Item.Slot.ARMOR)
+            is Item.Armor -> listOf(Item.Slot.ARMOR)
+//            is Item.Weapon.Grenade -> listOf(Item.Slot.GRENADE)
+            is Item.Weapon -> listOf(Item.Slot.PRIMARY, Item.Slot.SECONDARY, Item.Slot.TERTIARY)
+            else -> throw IllegalArgumentException("This should not happen")
+        }
+        showMultiChoiceDialog(
+            getString(R.string.item_equip_slot_selection_description, item.name),
+            items,
+            { getString(it.getLocalizedName()) }
+        ) { slot -> viewModel.onEquipSlotSelected(item.itemId, slot) }
     }
 }

@@ -7,5 +7,6 @@ class GetCharacterInteractor(
     private val repository: CharacterRepository
 ) : MaybeInteractor<Nothing?, Character>() {
 
-    override fun execute(params: Nothing?) = repository.getActiveCharacter()
+    override fun execute(params: Nothing?) = repository.observeActiveCharacter()
+        .firstElement()
 }

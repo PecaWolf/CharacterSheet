@@ -1,7 +1,6 @@
 package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.CharacterEntity
-import com.pecawolf.charactersheet.common.extensions.isNotOneOf
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
 import com.pecawolf.model.Inventory
@@ -45,7 +44,7 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
 
     private fun CharacterEntity.filterContainers(items: List<Item>) =
         items
-            .filter { it.isNotOneOf(primary, secondary, tertiary, armor, clothes) }
+//            .filter { it.itemId.isNotOneOf(primary, secondary, tertiary, armor, clothes) }
 
     override fun toEntity(model: Character, additional: List<Nothing>) = model.run {
         CharacterEntity(

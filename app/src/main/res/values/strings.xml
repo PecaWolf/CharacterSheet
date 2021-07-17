@@ -1,5 +1,6 @@
 <resources>
     <string name="generic_continue">Continue</string>
+    <string name="generic_cancel">Cancel</string>
     <string name="generic_back">Back</string>
 
     <string name="app_name">Character Sheet</string>
@@ -140,4 +141,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="item_count">%1$dx</string>
+    <string name="item_equip_slot_selection_title">Slot selection</string>
+    <string name="item_equip_slot_selection_description">Select a slot to equip %1$s.</string>
+    <string name="item_unequip_slot_title">Unequip item</string>
+    <string name="item_unequip_slot_description">Do you want to unequip %1$s as %2$s slot</string>
+    <string name="equip_slot_armor">Armor</string>
+    <string name="equip_slot_clothing">Clothing</string>
+    <string name="equip_slot_grenade">Grenade</string>
+    <string name="equip_slot_primary">Primary</string>
+    <string name="equip_slot_secondary">Secondary</string>
+    <string name="equip_slot_tertiary">Tertiary</string>
 </resources>
