@@ -77,4 +77,6 @@ class Cache(
     fun getItemById(itemId: Long): Maybe<ItemEntity> = database.itemDao()
         .getAllByIds(arrayOf(itemId))
         .flatMapMaybe { items -> items.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty() }
+
+    fun updateItem(item: ItemEntity) = database.itemDao().update(item)
 }

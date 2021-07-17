@@ -3,12 +3,12 @@ package com.pecawolf.model
 import com.pecawolf.charactersheet.common.extensions.isNotOneOf
 
 sealed class Item(
-    open val itemId: Long,
-    open val name: String,
-    open val description: String,
-    open val count: Int,
-    open val enhancements: List<Enhancement> = listOf(),
-    open val allowedLoadouts: List<LoadoutType>
+    open var itemId: Long,
+    open var name: String,
+    open var description: String,
+    open var count: Int,
+    open var enhancements: List<Enhancement> = listOf(),
+    open var allowedLoadouts: List<LoadoutType>
 ) {
 
     sealed class Weapon(
@@ -18,9 +18,9 @@ sealed class Item(
         count: Int,
         enhancements: List<Enhancement>,
         allowedLoadouts: List<LoadoutType>,
-        open val damage: Damage,
-        open val wield: Wield,
-        open val damageTypes: Set<DamageType>,
+        open var damage: Damage,
+        open var wield: Wield,
+        open var damageTypes: Set<DamageType>,
     ) : Item(itemId, name, description, count, enhancements, allowedLoadouts) {
 
         sealed class Melee(
@@ -58,14 +58,14 @@ sealed class Item(
             )
 
             data class Knife(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-                override val damage: Damage = Damage.LIGHT,
-                override val damageTypes: Set<DamageType> = setOf(
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+                override var damage: Damage = Damage.LIGHT,
+                override var damageTypes: Set<DamageType> = setOf(
                     DamageType.PIERCE,
                     DamageType.SLASH
                 ),
@@ -82,15 +82,15 @@ sealed class Item(
             )
 
             data class Sword(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.MEDIUM,
-                override val wield: Wield = Wield.ONE_HANDED,
-                override val damageTypes: Set<DamageType> = setOf(
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.MEDIUM,
+                override var wield: Wield = Wield.ONE_HANDED,
+                override var damageTypes: Set<DamageType> = setOf(
                     DamageType.PIERCE,
                     DamageType.SLASH
                 ),
@@ -107,15 +107,15 @@ sealed class Item(
             )
 
             data class Axe(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.MEDIUM,
-                override val wield: Wield = Wield.ONE_HANDED,
-                override val damageTypes: Set<DamageType> = setOf(
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.MEDIUM,
+                override var wield: Wield = Wield.ONE_HANDED,
+                override var damageTypes: Set<DamageType> = setOf(
                     DamageType.SLASH,
                     DamageType.BLUNT
                 ),
@@ -142,8 +142,8 @@ sealed class Item(
             damage: Damage,
             wield: Wield,
             damageTypes: Set<DamageType>,
-            open val magazine: Int,
-            open val rateOfFire: Int
+            open var magazine: Int,
+            open var rateOfFire: Int
         ) : Weapon(
             itemId,
             name,
@@ -159,16 +159,16 @@ sealed class Item(
             // region Primitive Weapons
 
             data class Bow(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-                override val damage: Damage = Damage.LIGHT,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.PIERCE),
-                override val magazine: Int = 1,
-                override val rateOfFire: Int = 1
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+                override var damage: Damage = Damage.LIGHT,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.PIERCE),
+                override var magazine: Int = 1,
+                override var rateOfFire: Int = 1
             ) : Ranged(
                 itemId,
                 name,
@@ -184,16 +184,16 @@ sealed class Item(
             )
 
             data class Crossbow(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-                override val damage: Damage = Damage.MEDIUM,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.PIERCE),
-                override val magazine: Int = 1,
-                override val rateOfFire: Int = 1
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+                override var damage: Damage = Damage.MEDIUM,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.PIERCE),
+                override var magazine: Int = 1,
+                override var rateOfFire: Int = 1
             ) : Ranged(
                 itemId,
                 name,
@@ -213,16 +213,16 @@ sealed class Item(
             // region Firearms
 
             data class Pistol(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-                override val damage: Damage = Damage.LIGHT,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 12,
-                override val rateOfFire: Int = 2
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+                override var damage: Damage = Damage.LIGHT,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 12,
+                override var rateOfFire: Int = 2
             ) : Ranged(
                 itemId,
                 name,
@@ -238,16 +238,16 @@ sealed class Item(
             )
 
             data class Revolver(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-                override val damage: Damage = Damage.LIGHT,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 6,
-                override val rateOfFire: Int = 1
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+                override var damage: Damage = Damage.LIGHT,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 6,
+                override var rateOfFire: Int = 1
             ) : Ranged(
                 itemId,
                 name,
@@ -263,16 +263,16 @@ sealed class Item(
             )
 
             data class Rifle(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.MEDIUM,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 20,
-                override val rateOfFire: Int = 5
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.MEDIUM,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 20,
+                override var rateOfFire: Int = 5
             ) : Ranged(
                 itemId,
                 name,
@@ -288,16 +288,16 @@ sealed class Item(
             )
 
             data class SubmachineGun(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.MEDIUM,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 32,
-                override val rateOfFire: Int = 8
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.MEDIUM,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 32,
+                override var rateOfFire: Int = 8
             ) : Ranged(
                 itemId,
                 name,
@@ -313,16 +313,16 @@ sealed class Item(
             )
 
             data class Shotgun(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.MEDIUM,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 8,
-                override val rateOfFire: Int = 1
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.MEDIUM,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 8,
+                override var rateOfFire: Int = 1
             ) : Ranged(
                 itemId,
                 name,
@@ -338,16 +338,16 @@ sealed class Item(
             )
 
             data class MachineGun(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.HEAVY,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 150,
-                override val rateOfFire: Int = 15
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.HEAVY,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 150,
+                override var rateOfFire: Int = 15
             ) : Ranged(
                 itemId,
                 name,
@@ -363,16 +363,16 @@ sealed class Item(
             )
 
             data class AntimaterialGun(
-                override val itemId: Long,
-                override val name: String,
-                override val description: String,
-                override val count: Int,
-                override val enhancements: List<Enhancement> = listOf(),
-                override val allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
-                override val damage: Damage = Damage.HEAVY,
-                override val damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
-                override val magazine: Int = 5,
-                override val rateOfFire: Int = 1
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: List<LoadoutType> = listOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.HEAVY,
+                override var damageTypes: Set<DamageType> = setOf(DamageType.BALLISTIC),
+                override var magazine: Int = 5,
+                override var rateOfFire: Int = 1
             ) : Ranged(
                 itemId,
                 name,
@@ -391,13 +391,13 @@ sealed class Item(
         }
 
         data class Grenade(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement>,
-            override val damage: Damage,
-            override val damageTypes: Set<DamageType>,
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement>,
+            override var damage: Damage,
+            override var damageTypes: Set<DamageType>,
         ) : Weapon(
             itemId,
             name,
@@ -422,19 +422,19 @@ sealed class Item(
         count: Int,
         enhancements: List<Enhancement>,
         allowedLoadouts: List<LoadoutType> = listOf(),
-        open val damageMitigation: Damage,
-        open val protections: Set<DamageType>,
+        open var damageMitigation: Damage,
+        open var protections: Set<DamageType>,
     ) : Item(itemId, name, description, count, enhancements, allowedLoadouts) {
 
         object None : Armor(-1, "", "", 0, listOf(), LoadoutType.ALL, Damage.NONE, setOf())
 
         data class Clothing(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement> = listOf(),
-            override val protections: Set<DamageType> = setOf(),
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement> = listOf(),
+            override var protections: Set<DamageType> = setOf(),
         ) : Armor(
             itemId,
             name,
@@ -447,14 +447,14 @@ sealed class Item(
         )
 
         data class Kevlar(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement> = listOf(),
-            override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-            override val damageMitigation: Damage,
-            override val protections: Set<DamageType> = setOf(DamageType.BALLISTIC),
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement> = listOf(),
+            override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+            override var damageMitigation: Damage,
+            override var protections: Set<DamageType> = setOf(DamageType.BALLISTIC),
         ) : Armor(
             itemId,
             name,
@@ -467,14 +467,14 @@ sealed class Item(
         )
 
         data class ExoSkeleton(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement> = listOf(),
-            override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-            override val damageMitigation: Damage,
-            override val protections: Set<DamageType> = setOf(
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement> = listOf(),
+            override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+            override var damageMitigation: Damage,
+            override var protections: Set<DamageType> = setOf(
                 DamageType.BALLISTIC,
                 DamageType.SLASH,
                 DamageType.PIERCE
@@ -491,14 +491,14 @@ sealed class Item(
         )
 
         data class VacSuit(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement> = listOf(),
-            override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-            override val damageMitigation: Damage,
-            override val protections: Set<DamageType> = setOf(DamageType.BREATH),
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement> = listOf(),
+            override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+            override var damageMitigation: Damage,
+            override var protections: Set<DamageType> = setOf(DamageType.BREATH),
         ) : Armor(
             itemId,
             name,
@@ -511,14 +511,14 @@ sealed class Item(
         )
 
         data class VacArmor(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement> = listOf(),
-            override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-            override val damageMitigation: Damage,
-            override val protections: Set<DamageType> = setOf(
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement> = listOf(),
+            override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+            override var damageMitigation: Damage,
+            override var protections: Set<DamageType> = setOf(
                 DamageType.BREATH,
                 DamageType.BALLISTIC,
                 DamageType.SLASH,
@@ -536,19 +536,19 @@ sealed class Item(
         )
 
         data class PoweredArmor(
-            override val itemId: Long,
-            override val name: String,
-            override val description: String,
-            override val count: Int,
-            override val enhancements: List<Enhancement> = listOf(
+            override var itemId: Long,
+            override var name: String,
+            override var description: String,
+            override var count: Int,
+            override var enhancements: List<Enhancement> = listOf(
                 Enhancement(
                     "Power Assisst",
                     "Added artificial strength"
                 )
             ),
-            override val allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
-            override val damageMitigation: Damage,
-            override val protections: Set<DamageType> = setOf(
+            override var allowedLoadouts: List<LoadoutType> = LoadoutType.ALL,
+            override var damageMitigation: Damage,
+            override var protections: Set<DamageType> = setOf(
                 DamageType.BREATH,
                 DamageType.BALLISTIC,
                 DamageType.BLUNT,
@@ -567,7 +567,7 @@ sealed class Item(
         )
     }
 
-    enum class Damage(val damage: Int) {
+    enum class Damage(var damage: Int) {
         NONE(0),
         LIGHT(1),
         MEDIUM(2),
@@ -575,11 +575,11 @@ sealed class Item(
     }
 
     data class Other(
-        override val itemId: Long,
-        override val name: String,
-        override val description: String,
-        override val count: Int,
-        override val enhancements: List<Enhancement> = listOf()
+        override var itemId: Long,
+        override var name: String,
+        override var description: String,
+        override var count: Int,
+        override var enhancements: List<Enhancement> = listOf()
     ) : Item(itemId, name, description, count, enhancements, LoadoutType.ALL)
 
     data class Enhancement(

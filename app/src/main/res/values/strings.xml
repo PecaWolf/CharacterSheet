@@ -1,4 +1,5 @@
 <resources>
+    <string name="generic_ok">Ok</string>
     <string name="generic_continue">Continue</string>
     <string name="generic_cancel">Cancel</string>
     <string name="generic_back">Back</string>
@@ -152,4 +153,14 @@
     <string name="equip_slot_primary">Primary</string>
     <string name="equip_slot_secondary">Secondary</string>
     <string name="equip_slot_tertiary">Tertiary</string>
+    <string name="item_edit_name_title">Fill in the new item name</string>
+    <string name="item_edit_name_hint">Item Name</string>
+    <string name="item_edit_description_title">Fill in the new item description</string>
+    <string name="item_edit_description_hint">Item Description</string>
+    <string name="item_edit_count_title">Fill in the new item count</string>
+    <string name="item_edit_count_hint">Item Count</string>
+
+    <string name="item_detail_fab_label_edit">Edit item</string>
+    <string name="item_detail_fab_label_equip">Equip item</string>
+    <string name="item_detail_fab_label_unequip">Unequip item</string>
 </resources>

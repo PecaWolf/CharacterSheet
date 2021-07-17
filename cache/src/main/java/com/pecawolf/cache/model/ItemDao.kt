@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -22,6 +23,9 @@ interface ItemDao {
 
     @Insert
     fun insert(item: ItemEntity): Single<Long>
+
+    @Update
+    fun update(item: ItemEntity): Completable
 
     @Delete
     fun delete(item: ItemEntity): Completable

@@ -102,4 +102,6 @@ class CharacterRepository(
             cache.updateCharacter(character)
         }
 
+    fun updateItem(item: Item) = cache.getItemById(item.itemId)
+        .flatMapCompletable { cache.updateItem(itemMapper.toEntity(item, listOf(it.ownerId))) }
 }

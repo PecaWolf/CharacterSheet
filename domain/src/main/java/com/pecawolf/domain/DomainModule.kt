@@ -8,6 +8,7 @@ import com.pecawolf.domain.interactor.EquipItemInteractor
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.GetItemDetailInteractor
+import com.pecawolf.domain.interactor.SaveItemChanges
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import com.pecawolf.domain.interactor.UnequipItemInteractor
@@ -24,6 +25,7 @@ object DomainModule {
         factory { SubscribeToActiveCharacter(get()) }
         factory { CreateNewItemInteractor(get()) }
         factory { GetItemDetailInteractor(get()) }
+        factory { SaveItemChanges(get()) }
         factory { EquipItemInteractor(get()) }
         factory { UnequipItemInteractor(get()) }
     }

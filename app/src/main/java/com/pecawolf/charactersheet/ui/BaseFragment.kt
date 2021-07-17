@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.pecawolf.charactersheet.R
+import com.pecawolf.charactersheet.databinding.WidgetDialogEditTextBinding
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 
 abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : Fragment() {
@@ -41,6 +43,19 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
     protected abstract fun createViewModel(): VIEWMODEL
     protected abstract fun bindView(binding: BINDING, viewModel: VIEWMODEL)
     protected abstract fun observeViewModel(binding: BINDING, viewModel: VIEWMODEL)
+
+    protected fun showSingleChoiceDialog(
+        title: String,
+        message: String,
+        positiveButton: String,
+        positive: () -> Unit
+    ) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveButton) { dialog, _ -> positive.invoke() }
+            .show()
+    }
 
     protected fun showTwoChoiceDialog(
         title: String,
@@ -89,6 +104,37 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
             .setTitle(title)
             .setAdapter(arrayAdapter) { _, which -> onItemSelected.invoke(items[which]) }
             .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
+    protected fun showTextInputDialog(
+        title: String,
+        inputType: Int,
+        lineCount: Int,
+        defaultInput: String,
+        hint: String,
+        positiveButton: String,
+        positive: (String) -> Unit
+    ) {
+
+        val layout = WidgetDialogEditTextBinding.inflate(LayoutInflater.from(requireContext()))
+            .also {
+                it.dialogEditText.inputType = inputType
+                it.dialogEditText.setLines(lineCount)
+                it.dialogEditText.imeOptions = EditorInfo.IME_ACTION_DONE
+
+                it.dialogEditText.setText(defaultInput)
+                it.dialogEditLayout.setHint(hint)
+            }
+        AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setView(layout.root)
+            .setPositiveButton(positiveButton) { dialog, _ ->
+                positive.invoke(
+                    layout.dialogEditText.text?.toString() ?: ""
+                )
+            }
+            .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.cancel() }
             .show()
     }
 }
