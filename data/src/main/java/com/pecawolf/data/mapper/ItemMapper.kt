@@ -577,7 +577,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
 
     private fun parseLoadouts(allowedLoadouts: List<String>) = allowedLoadouts.map {
         Item.LoadoutType.valueOf(it)
-    }
+    }.toMutableList()
 
     private fun parseDamage(damage: String) =
         damage.let { Item.Damage.valueOf(it) }
@@ -587,7 +587,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
 
     private fun parseDamageTypes(damageTypes: List<String>) = damageTypes.map {
         Item.DamageType.valueOf(it)
-    }.toSet()
+    }.toMutableSet()
 
     companion object {
         private const val SEPARATOR_ENHANCEMENT = ":"

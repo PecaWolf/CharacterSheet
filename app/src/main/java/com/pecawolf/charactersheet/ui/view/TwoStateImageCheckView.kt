@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.WidgetTwoStateCheckViewBinding
@@ -18,7 +19,7 @@ class TwoStateImageCheckView : ConstraintLayout {
     var isChecked: Boolean = false
         set(value) {
             field = value
-            setDrawable(value)
+            refresh(value)
         }
 
     var checkedSrc: Drawable? = null
@@ -71,17 +72,23 @@ class TwoStateImageCheckView : ConstraintLayout {
             text = getString(R.styleable.TwoStateImageCheckView_text)
         }
 
-        setDrawable(this.isChecked)
+        refresh(this.isChecked)
 
         setOnClickListener {
             isChecked = !isChecked
             checkedChangedListener?.onCheckedChanged(this, isChecked)
-
         }
     }
 
-    private fun setDrawable(isChecked: Boolean) {
+    private fun refresh(isChecked: Boolean) {
         binding.icon.setImageDrawable(if (isChecked) checkedSrc else uncheckedSrc)
+        binding.label.setTextColor(
+            ResourcesCompat.getColor(
+                resources,
+                if (isChecked) R.color.activePrimary else R.color.secondary,
+                null
+            )
+        )
     }
 
     interface OnCheckedChangeListener {

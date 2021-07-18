@@ -101,7 +101,7 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
         }
         viewModel.isDamageTypesVisible.reObserve(this) { isVisible ->
             binding.damageTypesCard.isVisible = isVisible
-            binding.allowedLoadoutsCard.isVisible = isVisible
+            binding.loadoutsCard.isVisible = isVisible
         }
         viewModel.isAmmoVisible.reObserve(this) { isVisible ->
             binding.ammoCard.isVisible = isVisible

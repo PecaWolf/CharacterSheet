@@ -5,16 +5,29 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
+import com.pecawolf.charactersheet.common.formatAmount
 import com.pecawolf.charactersheet.databinding.FragmentItemDetailBinding
+import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
+import com.pecawolf.model.Item
+import com.pecawolf.model.Item.Damage
+import com.pecawolf.model.Item.LoadoutType
+import com.pecawolf.model.Item.Weapon.Wield
+import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.ItemDetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailBinding>() {
+
+    private val damageTypeAdapter: SimpleSelectionAdapter by lazy {
+        SimpleSelectionAdapter {}
+    }
 
     override fun getBinding(
         inflater: LayoutInflater, container: ViewGroup?
@@ -30,38 +43,70 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding: FragmentItemDetailBinding,
         viewModel: ItemDetailViewModel
     ) {
-        binding.itemEdit.setOnClickListener {
+        binding.itemDetailItemEdit.setOnClickListener {
             viewModel.onItemEditClicked()
         }
-        binding.itemName.setOnClickListener {
+        binding.itemNameEditIcon.setOnClickListener {
             showTextInputDialog(
-                getString(R.string.item_edit_name_title),
-                InputType.TYPE_CLASS_TEXT,
-                1,
-                getString(R.string.item_edit_name_hint),
-                binding.itemName.text.toString(),
-                getString(R.string.generic_ok)
+                title = getString(R.string.item_edit_name_title),
+                inputType = InputType.TYPE_CLASS_TEXT,
+                lineCount = 1,
+                defaultInput = viewModel.item.value?.name,
+                hint = getString(R.string.item_edit_name_hint),
+                positiveButton = getString(R.string.generic_ok)
             ) { viewModel.onNameChanged(it) }
         }
-        binding.itemDescription.setOnClickListener {
+        binding.itemDescriptionEditIcon.setOnClickListener {
             showTextInputDialog(
-                getString(R.string.item_edit_description_title),
-                InputType.TYPE_CLASS_TEXT,
-                5,
-                getString(R.string.item_edit_description_hint),
-                binding.itemName.text.toString(),
-                getString(R.string.generic_ok)
+                title = getString(R.string.item_edit_description_title),
+                inputType = InputType.TYPE_CLASS_TEXT,
+                lineCount = 5,
+                defaultInput = viewModel.item.value?.description,
+                hint = getString(R.string.item_edit_description_hint),
+                positiveButton = getString(R.string.generic_ok)
             ) { viewModel.onDescriptionChanged(it) }
         }
-        binding.itemCount.setOnClickListener {
+        binding.itemCountEditIcon.setOnClickListener {
             showTextInputDialog(
-                getString(R.string.item_edit_count_title),
-                InputType.TYPE_CLASS_NUMBER,
-                1,
-                getString(R.string.item_edit_count_hint),
-                binding.itemName.text.toString(),
-                getString(R.string.generic_ok)
+                title = getString(R.string.item_edit_count_title),
+                inputType = InputType.TYPE_CLASS_NUMBER,
+                lineCount = 1,
+                defaultInput = viewModel.item.value?.count?.toString(),
+                hint = getString(R.string.item_edit_count_hint),
+                positiveButton = getString(R.string.generic_ok)
             ) { viewModel.onCountChanged(it.toInt()) }
+        }
+        binding.itemDetailLoadoutEditIcon.setOnClickListener {
+            viewModel.onLoadoutEditClicked()
+        }
+        binding.itemDetailDamageEditIcon.setOnClickListener {
+            viewModel.onDamageEditClicked()
+        }
+        binding.itemDetailMagazineSizeEditIcon.setOnClickListener {
+            showTextInputDialog(
+                title = getString(R.string.item_edit_magazine_size_title),
+                inputType = InputType.TYPE_CLASS_NUMBER,
+                lineCount = 1,
+                defaultInput = (viewModel.item.value as? Item.Weapon.Ranged)?.magazine?.toString(),
+                hint = getString(R.string.item_edit_magazine_size_hint),
+                positiveButton = getString(R.string.generic_ok)
+            ) { viewModel.onMagazineSizeChanged(it.toInt()) }
+        }
+        binding.itemDetailRateOfFireEditIcon.setOnClickListener {
+            showTextInputDialog(
+                title = getString(R.string.item_edit_rate_of_fire_title),
+                inputType = InputType.TYPE_CLASS_NUMBER,
+                lineCount = 1,
+                defaultInput = (viewModel.item.value as? Item.Weapon.Ranged)?.rateOfFire?.toString(),
+                hint = getString(R.string.item_edit_rate_of_fire_hint),
+                positiveButton = getString(R.string.generic_ok)
+            ) { viewModel.onRateOfFireChanged(it.toInt()) }
+        }
+        binding.itemDetailWieldEditIcon.setOnClickListener {
+            viewModel.onWieldEditClicked()
+        }
+        binding.itemDetailDamageTypesEditIcon.setOnClickListener {
+            viewModel.onDamageTypesEditClicked()
         }
     }
 
@@ -69,51 +114,47 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding: FragmentItemDetailBinding,
         viewModel: ItemDetailViewModel
     ) {
-        viewModel.isEditing.reObserve(this) { isEditing ->
-            binding.itemName.isEnabled = isEditing
+        viewModel.isLoading.reObserve(this) {
+            binding.itemDetailProgressBar.isVisible = it
+            binding.itemDetailContentClicker.apply {
+                isEnabled = it
+                isVisible = it
+            }
+        }
+
+        viewModel.isEditingBaseData.reObserve(this) { isEditing ->
             binding.itemNameEditIcon.isVisible = isEditing
-            binding.itemDescription.isEnabled = isEditing
             binding.itemDescriptionEditIcon.isVisible = isEditing
-            binding.itemCount.isEnabled = isEditing
             binding.itemCountEditIcon.isVisible = isEditing
         }
+
+        viewModel.isEditingLoadoutAndDamage.reObserve(this) { isEditing ->
+            binding.itemDetailLoadoutEditIcon.isVisible = isEditing
+            binding.itemDetailDamageEditIcon.isVisible = isEditing
+            binding.itemDetailDamageTypesEditIcon.isVisible = isEditing
+        }
+
+        viewModel.isEditingAmmunition.reObserve(this) { isEditing ->
+            binding.itemDetailMagazineSizeEditIcon.isVisible = isEditing
+            binding.itemDetailRateOfFireEditIcon.isVisible = isEditing
+        }
+
+        viewModel.isEditingWield.reObserve(this) { isEditing ->
+            binding.itemDetailWieldEditIcon.isVisible = isEditing
+        }
+
+        viewModel.damageTypes.reObserve(this) { items ->
+            damageTypeAdapter.items = items.map {
+                SimpleSelectionItem(
+                    getString(it.first.getLocalizedName()),
+                    it.second,
+                    it.first
+                )
+            }
+        }
+
         viewModel.item.reObserve(this) { item ->
-            binding.itemName.text = item.name
-            binding.itemId.apply {
-                isVisible = BuildConfig.DEBUG
-                text = String.format("#%06d", item.itemId)
-            }
-            binding.itemDescription.text = item.description
-            binding.itemCount.apply {
-                text = resources.getString(R.string.item_count, item.count)
-            }
-
-//            binding.itemEquip.apply {
-//                isVisible = false
-//                val isEquipable =
-//                    item is Item.Weapon || item is Item.Armor || item is Item.Weapon.Grenade
-//                isVisible = isEquipable
-//                isEnabled = isEquipable
-//                isChecked = slot != null
-//                setOnClickListener { viewModel.onItemEquip() }
-//            }
-//            binding.itemSlot.apply {
-//                isVisible = false
-//                text = slot?.getLocalizedName()?.let {
-//                    resources.getString(it)
-//                } ?: ""
-
-//                when (slot) {
-//                    Item.Slot.PRIMARY -> R.color.activePrimary
-//                    Item.Slot.SECONDARY -> R.color.activePrimary
-//                    Item.Slot.TERTIARY -> R.color.activePrimary
-//                    Item.Slot.ARMOR -> R.color.activePrimary
-//                    Item.Slot.CLOTHING -> R.color.activePrimary
-//                    null -> R.color.disabled
-//                }.let {
-//                    setTextColor(ResourcesCompat.getColor(resources, it, null))
-//                }
-//            }
+            setupItemDetails(binding, item)
         }
 
         viewModel.showNotFound.reObserve(this) {
@@ -122,6 +163,86 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                 getString(R.string.item_detail_error_message),
                 getString(R.string.generic_back),
             ) { findNavController().popBackStack() }
+        }
+
+        viewModel.navigateTo.reObserve(this) {
+            when (it) {
+                is ItemDetailViewModel.Destination.MultiChoice -> {
+                    findNavController().navigate(
+                        ItemDetailFragmentDirections.actionItemDetailToMultiChoiceDialog(
+                            itemId = it.itemId,
+                            field = it.field
+                        )
+                    )
+                }
+                is ItemDetailViewModel.Destination.EquipDialog -> {
+                }
+                is ItemDetailViewModel.Destination.UnequipDialog -> {
+                }
+            }
+        }
+    }
+
+    private fun setupItemDetails(
+        binding: FragmentItemDetailBinding,
+        item: Item
+    ) {
+        binding.run {
+            itemName.text = item.name
+            itemId.apply {
+                isVisible = BuildConfig.DEBUG
+                text = String.format("#%06d", item.itemId)
+            }
+            itemDescription.text = item.description
+            itemCount.apply {
+                text = resources.getString(R.string.item_count, item.count)
+            }
+
+            itemDetailDamageCard.isVisible = item is Item.Weapon || item is Item.Armor
+            itemDetailLoadoutsCard.isVisible = item is Item.Weapon || item is Item.Armor
+            itemDetailWieldCard.isVisible = item is Item.Weapon
+            itemDetailDamageTypesCard.isVisible = item is Item.Weapon || item is Item.Armor
+            itemDetailAmmoCard.isVisible = item is Item.Weapon.Ranged
+
+            if (item is Item.Weapon || item is Item.Armor) {
+                loadoutCombat.isChecked = item.allowedLoadouts.contains(LoadoutType.COMBAT)
+                loadoutSocial.isChecked = item.allowedLoadouts.contains(LoadoutType.SOCIAL)
+                loadoutTravel.isChecked = item.allowedLoadouts.contains(LoadoutType.TRAVEL)
+
+                itemDetailDamageTypesRecycler.apply {
+                    adapter = damageTypeAdapter
+                    layoutManager = LinearLayoutManager(requireContext())
+                }
+
+                if (item is Item.Weapon) {
+                    damageHeavy.isChecked = item.damage == Damage.HEAVY
+                    damageMedium.isChecked = item.damage == Damage.MEDIUM
+                    damageLight.isChecked = item.damage == Damage.LIGHT
+
+                    itemDetailDamageHeader.text = getString(R.string.new_item_header_damage)
+                    itemDetailDamageTypesHeader.text =
+                        getString(R.string.new_item_damage_types_header)
+
+                    itemDetailWieldOneHanded.isChecked = item.wield == Wield.ONE_HANDED
+                    itemDetailWieldTwoHanded.isChecked = item.wield == Wield.TWO_HANDED
+                    itemDetailWieldMounted.isChecked = item.wield == Wield.MOUNTED
+                    itemDetailWieldDrone.isChecked = item.wield == Wield.DRONE
+                } else {
+                    item as Item.Armor
+                    damageHeavy.isChecked = item.damageMitigation == Damage.HEAVY
+                    damageMedium.isChecked = item.damageMitigation == Damage.MEDIUM
+                    damageLight.isChecked = item.damageMitigation == Damage.LIGHT
+
+                    itemDetailDamageHeader.text = getString(R.string.new_item_header_protection)
+                    itemDetailDamageTypesHeader.text =
+                        getString(R.string.new_item_protection_types_header)
+                }
+            }
+
+            if (item is Item.Weapon.Ranged) {
+                itemDetailMagazineSizeValue.text = item.magazine.formatAmount()
+                itemDetailRateOfFireValue.text = item.rateOfFire.formatAmount()
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
     tools:background="@color/background">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/base_data_card"
+        android:id="@+id/item_detail_base_data_card"
         style="@style/Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -15,7 +15,6 @@
     <style name="Box">
         <item name="android:layout_margin">@dimen/spacing_1</item>
         <item name="android:padding">@dimen/spacing_1</item>
-        <item name="android:animateLayoutChanges">true</item>
     </style>
 
     <style name="Card">
@@ -104,15 +103,21 @@
         <item name="android:background">@drawable/btn_negative</item>
     </style>
 
-    <style name="Button.Fab"></style>
+    <style name="Button.Fab">
+        <item name="fab_colorNormal">@color/buttonBackgroundPositiveEnabled</item>
+    </style>
 
-    <style name="Button.Fab.Menu"></style>
+    <style name="Button.Fab.Menu">
+        <item name="fab_colorNormal">@color/buttonBackgroundEnabled</item>
+    </style>
 
     <style name="Button.Fab.Item">
         <item name="fab_size">mini</item>
     </style>
 
-    <dimen name="corner_radius">8dp</dimen>
+    <style name="Progress">
+        <item name="background">@drawable/bg_circle_card</item>
+    </style>
 
     <style name="Theme.CharacterSheet.NoActionBar">
         <item name="windowActionBar">false</item>

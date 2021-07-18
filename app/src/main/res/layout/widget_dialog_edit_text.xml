@@ -17,6 +17,7 @@
             android:id="@+id/dialog_edit_text"
             style="@style/Input"
             android:layout_width="match_parent"
+            android:imeOptions="actionDone"
             android:gravity="start|top"
             android:layout_height="wrap_content" />
 

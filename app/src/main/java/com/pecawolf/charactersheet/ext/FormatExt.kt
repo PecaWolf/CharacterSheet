@@ -64,6 +64,26 @@ fun Item.DamageType.getLocalizedName() = when (this) {
     Item.DamageType.KINETIC -> R.string.damage_type_kinetic
 }
 
+fun Item.Damage.getLocalizedName() = when (this) {
+    Item.Damage.NONE -> R.string.damage_none
+    Item.Damage.LIGHT -> R.string.damage_light
+    Item.Damage.MEDIUM -> R.string.damage_medium
+    Item.Damage.HEAVY -> R.string.damage_heavy
+}
+
+fun Item.Weapon.Wield.getLocalizedName() = when (this) {
+    Item.Weapon.Wield.ONE_HANDED -> R.string.wield_one_handed
+    Item.Weapon.Wield.TWO_HANDED -> R.string.wield_two_handed
+    Item.Weapon.Wield.MOUNTED -> R.string.wield_mounted
+    Item.Weapon.Wield.DRONE -> R.string.wield_drone
+}
+
+fun Item.LoadoutType.getLocalizedName() = when (this) {
+    Item.LoadoutType.COMBAT -> R.string.new_item_loadout_combat
+    Item.LoadoutType.SOCIAL -> R.string.new_item_loadout_social
+    Item.LoadoutType.TRAVEL -> R.string.new_item_loadout_travel
+}
+
 fun Item.Slot.getLocalizedName() = when (this) {
     Item.Slot.PRIMARY -> R.string.equip_slot_primary
     Item.Slot.SECONDARY -> R.string.equip_slot_secondary

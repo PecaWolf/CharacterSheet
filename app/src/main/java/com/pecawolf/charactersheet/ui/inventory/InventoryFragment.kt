@@ -81,7 +81,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             is Item.Weapon -> listOf(Item.Slot.PRIMARY, Item.Slot.SECONDARY, Item.Slot.TERTIARY)
             else -> throw IllegalArgumentException("This should not happen")
         }
-        showMultiChoiceDialog(
+        showSingleChoiceListDialog(
             getString(R.string.item_equip_slot_selection_description, item.name),
             items,
             { getString(it.getLocalizedName()) }

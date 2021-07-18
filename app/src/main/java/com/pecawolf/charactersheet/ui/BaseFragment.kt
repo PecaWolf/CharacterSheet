@@ -1,19 +1,26 @@
 package com.pecawolf.charactersheet.ui
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.WidgetDialogEditTextBinding
+import com.pecawolf.charactersheet.databinding.WidgetDialogRecyclerBinding
+import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 
-abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : Fragment() {
+abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : DialogFragment() {
 
     protected val viewModel: VIEWMODEL by lazy { createViewModel() }
 
@@ -36,7 +43,28 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
 
     override fun onResume() {
         super.onResume()
+
+        dialog?.apply {
+            val params: WindowManager.LayoutParams = window!!.attributes
+            params.width = WindowManager.LayoutParams.MATCH_PARENT
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT
+            params.horizontalMargin = resources.getDimension(R.dimen.spacing_2)
+            params.verticalMargin = resources.getDimension(R.dimen.spacing_4)
+            window!!.attributes = params
+        }
+
         viewModel.onRefresh()
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        binding = getBinding(LayoutInflater.from(requireContext()), null)
+        return Dialog(requireContext()).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setStyle(STYLE_NORMAL, android.R.style.Theme)
+
+            setContentView(binding.root)
+        }
     }
 
     protected abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): BINDING
@@ -88,7 +116,7 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
             .show()
     }
 
-    protected fun <T> showMultiChoiceDialog(
+    protected fun <T> showSingleChoiceListDialog(
         title: String,
         items: List<T>,
         itemMapper: (T) -> String,
@@ -107,24 +135,52 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
             .show()
     }
 
+    protected fun <T> showMultiChoiceListDialog(
+        title: String,
+        items: List<T>,
+        itemMapper: (T) -> String,
+        positiveButton: String,
+        positive: (List<T>) -> Unit
+    ) {
+        val initialItems = items.map {
+            SimpleSelectionItem(itemMapper.invoke(it), false, it)
+        }
+        val adapter = SimpleSelectionAdapter(initialItems) {}
+
+        val layout = WidgetDialogRecyclerBinding.inflate(LayoutInflater.from(requireContext()))
+            .also { binding ->
+                binding.dialogRecycler.adapter = adapter
+                binding.dialogRecycler.layoutManager = LinearLayoutManager(requireContext())
+            }
+        AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setView(layout.root)
+            .setPositiveButton(positiveButton) { dialog, _ ->
+                positive.invoke(adapter.items.filter { it.isChecked }.mapNotNull { it.data as T })
+            }
+            .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.cancel() }
+            .show()
+    }
+
     protected fun showTextInputDialog(
         title: String,
         inputType: Int,
         lineCount: Int,
-        defaultInput: String,
+        defaultInput: String?,
         hint: String,
         positiveButton: String,
         positive: (String) -> Unit
     ) {
-
         val layout = WidgetDialogEditTextBinding.inflate(LayoutInflater.from(requireContext()))
-            .also {
-                it.dialogEditText.inputType = inputType
-                it.dialogEditText.setLines(lineCount)
-                it.dialogEditText.imeOptions = EditorInfo.IME_ACTION_DONE
+            .also { binding ->
+                binding.dialogEditText.apply {
+                    this.inputType = inputType
+                    setLines(lineCount)
 
-                it.dialogEditText.setText(defaultInput)
-                it.dialogEditLayout.setHint(hint)
+                    setText(defaultInput)
+                    setSelection(defaultInput?.length ?: 0)
+                }
+                binding.dialogEditLayout.hint = hint
             }
         AlertDialog.Builder(requireContext())
             .setTitle(title)

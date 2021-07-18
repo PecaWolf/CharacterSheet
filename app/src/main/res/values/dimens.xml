@@ -21,4 +21,6 @@
     <dimen name="icon_large">64dp</dimen>
     <dimen name="icon_medium">48dp</dimen>
     <dimen name="icon_small">32dp</dimen>
+
+    <dimen name="corner_radius">8dp</dimen>
 </resources>

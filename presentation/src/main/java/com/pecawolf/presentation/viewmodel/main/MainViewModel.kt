@@ -39,12 +39,12 @@ class MainViewModel(
     }
 
     private fun onGetCharacterSuccess(character: Character) {
-        Timber.v("onGetCharacterSuccess():")
+        Timber.d("onGetCharacterSuccess(): $character")
         _character.value = character
     }
 
     private fun onGetCharacterError(error: Throwable) {
-        Timber.e(error, "onGetCharacterError(): ")
+        Timber.w(error, "onGetCharacterError(): ")
     }
 
     companion object {

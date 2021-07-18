@@ -10,7 +10,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@id/button_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/allowed_loadouts_card"
+                android:id="@+id/loadouts_card"
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -78,7 +77,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/allowed_loadouts_card"
+                app:layout_constraintStart_toEndOf="@id/loadouts_card"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -130,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:constraint_referenced_ids="allowed_loadouts_card,damage_card"
+                app:constraint_referenced_ids="loadouts_card,damage_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -198,7 +197,7 @@
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/damage_types_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ammo_card">
@@ -260,6 +259,8 @@
                         android:id="@+id/wield_drone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:visibility="invisible"
                         app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -278,7 +279,7 @@
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/wield_card"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/wield_card">

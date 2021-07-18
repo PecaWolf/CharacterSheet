@@ -9,6 +9,7 @@
     <string name="title_loadout">Loadout</string>
     <string name="title_inventory">Inventory</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="title_multi_choice">Multi choice</string>
     <string name="title_new_item">New Item</string>
     <string name="title_skills">Skills</string>
     <string name="title_other">Other</string>
@@ -69,8 +70,6 @@
     <string name="civilian_clothes">Civilian clothes:</string>
     <string name="combat_gear">Armor:</string>
     <string name="current_loadout">Current loadout:</string>
-    <string name="combat">Combat</string>
-    <string name="civilian">Civilian</string>
     <string name="switch_loadout">Switch</string>
     <string name="money">Money:</string>
     <string name="backpack">Backpack</string>
@@ -114,6 +113,11 @@
     <string name="wield_two_handed">Two-handed</string>
     <string name="wield_mounted">Mounted</string>
     <string name="wield_drone">Drone</string>
+
+    <string name="damage_none">None</string>
+    <string name="damage_light">Light</string>
+    <string name="damage_medium">Medium</string>
+    <string name="damage_heavy">Heavy</string>
 
     <string name="damage_type_blunt">Blunt</string>
     <string name="damage_type_slash">Slash</string>
@@ -159,8 +163,17 @@
     <string name="item_edit_description_hint">Item Description</string>
     <string name="item_edit_count_title">Fill in the new item count</string>
     <string name="item_edit_count_hint">Item Count</string>
+    <string name="item_edit_magazine_size_title">Fill in the new magazine size</string>
+    <string name="item_edit_magazine_size_hint">Magazine size</string>
+    <string name="item_edit_rate_of_fire_title">Fill in the new rate of fire</string>
+    <string name="item_edit_rate_of_fire_hint">Rate of fire</string>
 
     <string name="item_detail_fab_label_edit">Edit item</string>
     <string name="item_detail_fab_label_equip">Equip item</string>
     <string name="item_detail_fab_label_unequip">Unequip item</string>
+
+    <string name="multi_choice_header_loadout">Select allowed loadouts</string>
+    <string name="multi_choice_header_damage_type">Select damage types</string>
+    <string name="multi_choice_header_damage">Select damage level</string>
+    <string name="multi_choice_header_wield">Select wield option</string>
 </resources>

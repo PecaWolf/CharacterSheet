@@ -3,42 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="68dp"
     android:orientation="horizontal"
     tools:showIn="@layout/fragment_species_selection">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/selection_text"
-        style="@style/Text.Value.Secondary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/selection_checkbox"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Togruta" />
-
     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
         android:id="@+id/selection_checkbox"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:checkedSrc="@drawable/ic_checkmark_active"
         app:isChecked="false"
-        app:uncheckedSrc="@drawable/ic_checkmark_inactive"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/selection_text"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/selection_clicker"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:text="Togruta"
+        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

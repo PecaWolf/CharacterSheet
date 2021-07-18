@@ -29,7 +29,7 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/base_data_card"
+        android:id="@+id/item_detail_base_data_card"
         style="@style/Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guide_75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base_data_card">
+        app:layout_constraintTop_toBottomOf="@id/item_detail_base_data_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -392,7 +392,7 @@
         app:layout_constraintBottom_toTopOf="@id/luck_and_hp_recycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guide_75"
-        app:layout_constraintTop_toBottomOf="@id/base_data_card">
+        app:layout_constraintTop_toBottomOf="@id/item_detail_base_data_card">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

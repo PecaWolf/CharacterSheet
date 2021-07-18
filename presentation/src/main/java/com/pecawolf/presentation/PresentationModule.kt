@@ -4,6 +4,7 @@ import com.pecawolf.domain.DomainModule
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.viewmodel.ItemDetailViewModel
+import com.pecawolf.presentation.viewmodel.MultiChoiceViewModel
 import com.pecawolf.presentation.viewmodel.character.BaseStatsViewModel
 import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel
 import com.pecawolf.presentation.viewmodel.character.SpeciesSelectionViewModel
@@ -47,6 +48,15 @@ object PresentationModule {
             BaseStatsViewModel(
                 world,
                 species,
+                get()
+            )
+        }
+
+        viewModel { (itemId: Long, field: String) ->
+            MultiChoiceViewModel(
+                itemId,
+                field,
+                get(),
                 get()
             )
         }
