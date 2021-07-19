@@ -47,7 +47,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             viewModel.onItemEditClicked()
         }
         binding.itemNameEditIcon.setOnClickListener {
-            showTextInputDialog(
+            dialogHelper.showTextInputDialog(
                 title = getString(R.string.item_edit_name_title),
                 message = getString(R.string.item_edit_name_message),
                 inputType = InputType.TYPE_CLASS_TEXT,
@@ -58,7 +58,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             ) { viewModel.onNameChanged(it) }
         }
         binding.itemDescriptionEditIcon.setOnClickListener {
-            showTextInputDialog(
+            dialogHelper.showTextInputDialog(
                 title = getString(R.string.item_edit_description_title),
                 message = getString(R.string.item_edit_description_message),
                 inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE,
@@ -69,7 +69,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             ) { viewModel.onDescriptionChanged(it) }
         }
         binding.itemCountEditIcon.setOnClickListener {
-            showTextInputDialog(
+            dialogHelper.showTextInputDialog(
                 title = getString(R.string.item_edit_count_title),
                 message = getString(R.string.item_edit_count_message),
                 inputType = InputType.TYPE_CLASS_NUMBER,
@@ -86,7 +86,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             viewModel.onDamageEditClicked()
         }
         binding.itemDetailMagazineSizeEditIcon.setOnClickListener {
-            showTextInputDialog(
+            dialogHelper.showTextInputDialog(
                 title = getString(R.string.item_edit_magazine_size_title),
                 message = getString(R.string.item_edit_magazine_size_message),
                 inputType = InputType.TYPE_CLASS_NUMBER,
@@ -97,7 +97,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             ) { viewModel.onMagazineSizeChanged(it.toInt()) }
         }
         binding.itemDetailRateOfFireEditIcon.setOnClickListener {
-            showTextInputDialog(
+            dialogHelper.showTextInputDialog(
                 title = getString(R.string.item_edit_rate_of_fire_title),
                 message = getString(R.string.item_edit_rate_of_fire_message),
                 inputType = InputType.TYPE_CLASS_NUMBER,
@@ -165,8 +165,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         }
 
         viewModel.showLoadoutDialog.reObserve(this) { items ->
-            showListChoiceDialog<LoadoutType>(
-                getString(R.string.multi_choice_header_loadout),
+            dialogHelper.showListChoiceDialog(getString(R.string.multi_choice_header_loadout),
                 false,
                 items.map {
                     SimpleSelectionItem(
@@ -174,13 +173,11 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                         it.second,
                         it.first
                     )
-                },
-            ) { list -> viewModel.onLoadoutChanged(list) }
+                }) { list: List<LoadoutType> -> viewModel.onLoadoutChanged(list) }
         }
 
         viewModel.showDamageDialog.reObserve(this) { items ->
-            showListChoiceDialog<Damage>(
-                getString(R.string.multi_choice_header_damage),
+            dialogHelper.showListChoiceDialog(getString(R.string.multi_choice_header_damage),
                 false,
                 items.map {
                     SimpleSelectionItem(
@@ -188,13 +185,11 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                         it.second,
                         it.first
                     )
-                },
-            ) { list -> viewModel.onDamageChanged(list.first()) }
+                }) { list: List<Damage> -> viewModel.onDamageChanged(list.first()) }
         }
 
         viewModel.showWieldDialog.reObserve(this) { items ->
-            showListChoiceDialog<Wield>(
-                getString(R.string.multi_choice_header_wield),
+            dialogHelper.showListChoiceDialog(getString(R.string.multi_choice_header_wield),
                 false,
                 items.map {
                     SimpleSelectionItem(
@@ -202,13 +197,11 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                         it.second,
                         it.first
                     )
-                },
-            ) { list -> viewModel.onWieldChanged(list.first()) }
+                }) { list: List<Wield> -> viewModel.onWieldChanged(list.first()) }
         }
 
         viewModel.showDamageTypesDialog.reObserve(this) { items ->
-            showListChoiceDialog<DamageType>(
-                getString(R.string.multi_choice_header_damage_type),
+            dialogHelper.showListChoiceDialog(getString(R.string.multi_choice_header_damage_type),
                 false,
                 items.map {
                     SimpleSelectionItem(
@@ -216,8 +209,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                         it.second,
                         it.first
                     )
-                },
-            ) { list -> viewModel.onDamageTypesChanged(list) }
+                }) { list: List<DamageType> -> viewModel.onDamageTypesChanged(list) }
         }
     }
 

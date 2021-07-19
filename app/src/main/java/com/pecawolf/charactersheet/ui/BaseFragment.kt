@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
-import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -68,71 +67,4 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
     protected abstract fun createViewModel(): VIEWMODEL
     protected abstract fun bindView(binding: BINDING, viewModel: VIEWMODEL)
     protected abstract fun observeViewModel(binding: BINDING, viewModel: VIEWMODEL)
-
-    protected fun showSingleChoiceDialog(
-        title: String,
-        message: String,
-        positiveButton: String,
-        positive: () -> Unit
-    ) {
-        dialogHelper.showSingleChoiceDialog(title, message, positiveButton, positive)
-    }
-
-    protected fun showTwoChoiceDialog(
-        title: String,
-        message: String,
-        positiveButton: String,
-        positive: () -> Unit
-    ) {
-        dialogHelper.showTwoChoiceDialog(title, message, positiveButton, positive)
-    }
-
-    protected fun showThreeChoiceDialog(
-        title: String,
-        message: String,
-        positiveButton: String,
-        positive: () -> Unit,
-        negativeButton: String,
-        negative: () -> Unit
-    ) {
-        dialogHelper.showThreeChoiceDialog(
-            title,
-            message,
-            positiveButton,
-            positive,
-            negativeButton,
-            negative
-        )
-    }
-
-    protected fun <T> showListChoiceDialog(
-        title: String,
-        isSingleChoice: Boolean,
-        items: List<SimpleSelectionItem>,
-        positive: (List<T>) -> Unit,
-    ) {
-        dialogHelper.showListChoiceDialog(title, isSingleChoice, items, positive)
-    }
-
-    protected fun showTextInputDialog(
-        title: String,
-        message: String?,
-        inputType: Int,
-        lineCount: Int,
-        defaultInput: String?,
-        hint: String,
-        positiveButton: String,
-        positive: (String) -> Unit
-    ) {
-        dialogHelper.showTextInputDialog(
-            title,
-            message,
-            inputType,
-            lineCount,
-            defaultInput,
-            hint,
-            positiveButton,
-            positive
-        )
-    }
 }

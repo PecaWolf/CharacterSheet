@@ -57,14 +57,14 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
                 )
                 is Destination.EquipDialog -> showEquipItemDialog(destination.item)
                 is Destination.UnequipDialog -> {
-                    showTwoChoiceDialog(
+                    dialogHelper.showTwoChoiceDialog(
                         getString(R.string.item_unequip_slot_title),
                         getString(
                             R.string.item_unequip_slot_description,
                             destination.item.name,
                             destination.slot.getLocalizedName(requireContext())
                         ),
-                        getString(R.string.generic_continue),
+                        getString(R.string.generic_continue)
                     ) { viewModel.onUnequipItemConfirmed(destination.slot) }
                 }
             }
@@ -79,10 +79,11 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             is Item.Weapon -> listOf(Item.Slot.PRIMARY, Item.Slot.SECONDARY, Item.Slot.TERTIARY)
             else -> throw IllegalArgumentException("This should not happen")
         }
-        showListChoiceDialog<Item.Slot>(
+            .map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) }
+        dialogHelper.showListChoiceDialog(
             getString(R.string.item_equip_slot_selection_description, item.name),
             false,
-            items.map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) },
-        ) { list -> viewModel.onEquipSlotSelected(item.itemId, list.first()) }
+            items
+        ) { list: List<Item.Slot> -> viewModel.onEquipSlotSelected(item.itemId, list.first()) }
     }
 }
