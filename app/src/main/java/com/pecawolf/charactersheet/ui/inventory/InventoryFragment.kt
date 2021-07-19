@@ -56,29 +56,25 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
                     InventoryFragmentDirections.actionInventoryToItemDetail(destination.itemId)
                 )
                 is Destination.EquipDialog -> showEquipItemDialog(destination.item)
-                is Destination.UnequipDialog -> {
-                    dialogHelper.showTwoChoiceDialog(
-                        getString(R.string.item_unequip_slot_title),
-                        getString(
-                            R.string.item_unequip_slot_description,
-                            destination.item.name,
-                            destination.slot.getLocalizedName(requireContext())
-                        ),
-                        getString(R.string.generic_continue)
-                    ) { viewModel.onUnequipItemConfirmed(destination.slot) }
-                }
+                is Destination.UnequipDialog -> showUnequipItemDialog(destination)
             }
         }
     }
 
+    private fun showUnequipItemDialog(destination: Destination.UnequipDialog) {
+        dialogHelper.showTwoChoiceDialog(
+            getString(R.string.item_unequip_slot_title),
+            getString(
+                R.string.item_unequip_slot_description,
+                destination.item.name,
+                destination.slot.getLocalizedName(requireContext())
+            ),
+            getString(R.string.generic_continue)
+        ) { viewModel.onUnequipItemConfirmed(destination.slot) }
+    }
+
     private fun showEquipItemDialog(item: Item) {
-        val items = when (item) {
-            is Item.Armor.Clothing -> listOf(Item.Slot.CLOTHING, Item.Slot.ARMOR)
-            is Item.Armor -> listOf(Item.Slot.ARMOR)
-//            is Item.Weapon.Grenade -> listOf(Item.Slot.GRENADE)
-            is Item.Weapon -> listOf(Item.Slot.PRIMARY, Item.Slot.SECONDARY, Item.Slot.TERTIARY)
-            else -> throw IllegalArgumentException("This should not happen")
-        }
+        val items = item.allowedSlots
             .map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) }
         dialogHelper.showListChoiceDialog(
             getString(R.string.item_equip_slot_selection_description, item.name),

@@ -7,6 +7,11 @@ import com.pecawolf.charactersheet.common.extensions.isOneOf
 import com.pecawolf.charactersheet.common.extensions.setAll
 import com.pecawolf.domain.interactor.SaveItemChangesInteractor
 import com.pecawolf.model.Item
+import com.pecawolf.model.Item.Armor
+import com.pecawolf.model.Item.Damage
+import com.pecawolf.model.Item.DamageType
+import com.pecawolf.model.Item.LoadoutType
+import com.pecawolf.model.Item.Weapon
 import com.pecawolf.presentation.extensions.MergedLiveData2
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.extensions.mapNotNull
@@ -27,40 +32,39 @@ class ItemDetailViewModel(
             }
         }
     private val _isEditing = MutableLiveData<Boolean>(false)
-    private val _showLoadoutDialog = SingleLiveEvent<List<Pair<Item.LoadoutType, Boolean>>>()
-    private val _showDamageDialog = SingleLiveEvent<List<Pair<Item.Damage, Boolean>>>()
-    private val _showWieldDialog = SingleLiveEvent<List<Pair<Item.Weapon.Wield, Boolean>>>()
-    private val _showDamageTypesDialog = SingleLiveEvent<List<Pair<Item.DamageType, Boolean>>>()
+    private val _showLoadoutDialog = SingleLiveEvent<List<Pair<LoadoutType, Boolean>>>()
+    private val _showDamageDialog = SingleLiveEvent<List<Pair<Damage, Boolean>>>()
+    private val _showWieldDialog = SingleLiveEvent<List<Pair<Weapon.Wield, Boolean>>>()
+    private val _showDamageTypesDialog = SingleLiveEvent<List<Pair<DamageType, Boolean>>>()
     private val _navigateTo = SingleLiveEvent<Destination>()
 
     val item: LiveData<Item> = _item
-    val damageTypes: LiveData<List<Pair<Item.DamageType, Boolean>>> = _item.map { item ->
+    val damageTypes: LiveData<List<Pair<DamageType, Boolean>>> = _item.map { item ->
         when (item) {
-            is Item.Armor -> item.damageTypes.map { Pair(it, true) }
-            is Item.Weapon -> item.damageTypes.map { Pair(it, true) }
+            is Armor -> item.damageTypes.map { Pair(it, true) }
+            is Weapon -> item.damageTypes.map { Pair(it, true) }
             else -> listOf()
         }
     }
     val isEditingBaseData: LiveData<Boolean> = _isEditing
     val isEditingCount: LiveData<Boolean> = MergedLiveData2(_isEditing, _item) { isEditing, item ->
-        isEditing && item is Item.Other || item is Item.Weapon.Grenade
+        isEditing && item is Item.Other || item is Weapon.Grenade
     }
     val isEditingLoadoutAndDamage: LiveData<Boolean> =
         MergedLiveData2(_isEditing, _item) { isEditing, item ->
-            isEditing && item is Item.Weapon || item is Item.Armor
+            isEditing && item is Weapon || item is Armor
         }
     val isEditingAmmunition: LiveData<Boolean> =
         MergedLiveData2(_isEditing, _item) { isEditing, item ->
-            isEditing && item is Item.Weapon.Ranged
+            isEditing && item is Weapon.Ranged
         }
     val isEditingWield: LiveData<Boolean> = MergedLiveData2(_isEditing, _item) { isEditing, item ->
-        isEditing && item is Item.Weapon.Melee
+        isEditing && item is Weapon.Melee
     }
-    val showLoadoutDialog: LiveData<List<Pair<Item.LoadoutType, Boolean>>> = _showLoadoutDialog
-    val showDamageDialog: LiveData<List<Pair<Item.Damage, Boolean>>> = _showDamageDialog
-    val showWieldDialog: LiveData<List<Pair<Item.Weapon.Wield, Boolean>>> = _showWieldDialog
-    val showDamageTypesDialog: LiveData<List<Pair<Item.DamageType, Boolean>>> =
-        _showDamageTypesDialog
+    val showLoadoutDialog: LiveData<List<Pair<LoadoutType, Boolean>>> = _showLoadoutDialog
+    val showDamageDialog: LiveData<List<Pair<Damage, Boolean>>> = _showDamageDialog
+    val showWieldDialog: LiveData<List<Pair<Weapon.Wield, Boolean>>> = _showWieldDialog
+    val showDamageTypesDialog: LiveData<List<Pair<DamageType, Boolean>>> = _showDamageTypesDialog
     val navigateTo: LiveData<Destination> = _navigateTo
 
     fun onItemEquip(item: Item, slot: Item.Slot?) {
@@ -100,7 +104,7 @@ class ItemDetailViewModel(
     }
 
     fun onMagazineSizeChanged(magazine: Int) {
-        (_item.value as? Item.Weapon.Ranged)?.also { item ->
+        (_item.value as? Weapon.Ranged)?.also { item ->
             if (item.magazine != magazine) {
                 item.magazine = magazine
                 updateItem(item)
@@ -109,7 +113,7 @@ class ItemDetailViewModel(
     }
 
     fun onRateOfFireChanged(rateOfFire: Int) {
-        (_item.value as? Item.Weapon.Ranged)?.also { item ->
+        (_item.value as? Weapon.Ranged)?.also { item ->
             if (item.rateOfFire != rateOfFire) {
                 item.rateOfFire = rateOfFire
                 updateItem(item)
@@ -120,14 +124,14 @@ class ItemDetailViewModel(
     fun onLoadoutEditClicked() {
         _item.value?.also { item ->
             _showLoadoutDialog.postValue(
-                Item.LoadoutType.values().map {
+                LoadoutType.values().map {
                     it to (it.isOneOf(item.allowedLoadouts))
                 }
             )
         }
     }
 
-    fun onLoadoutChanged(loadoutType: List<Item.LoadoutType>) {
+    fun onLoadoutChanged(loadoutType: List<LoadoutType>) {
         _item.value?.also { item ->
             item.allowedLoadouts.setAll(loadoutType)
             updateItem(item)
@@ -137,14 +141,14 @@ class ItemDetailViewModel(
     fun onDamageEditClicked() {
         _item.value?.also { item ->
             _showDamageDialog.postValue(
-                Item.Damage.values().map {
+                Damage.values().map {
                     it to (it == item.damage)
                 }
             )
         }
     }
 
-    fun onDamageChanged(damage: Item.Damage) {
+    fun onDamageChanged(damage: Damage) {
         _item.value?.also { item ->
             item.damage = damage
             updateItem(item)
@@ -152,17 +156,17 @@ class ItemDetailViewModel(
     }
 
     fun onWieldEditClicked() {
-        (_item.value as? Item.Weapon)?.also { item ->
+        (_item.value as? Weapon)?.also { item ->
             _showWieldDialog.postValue(
-                Item.Weapon.Wield.values().map {
+                Weapon.Wield.values().map {
                     it to (it == item.wield)
                 }
             )
         }
     }
 
-    fun onWieldChanged(wield: Item.Weapon.Wield) {
-        (_item.value as? Item.Weapon)?.also { item ->
+    fun onWieldChanged(wield: Weapon.Wield) {
+        (_item.value as? Weapon)?.also { item ->
             item.wield = wield
             updateItem(item)
         }
@@ -171,14 +175,14 @@ class ItemDetailViewModel(
     fun onDamageTypesEditClicked() {
         _item.value?.also { item ->
             _showDamageTypesDialog.postValue(
-                Item.DamageType.values().map {
+                DamageType.values().map {
                     it to (it.isOneOf(item.damageTypes))
                 }
             )
         }
     }
 
-    fun onDamageTypesChanged(damageTypes: List<Item.DamageType>) {
+    fun onDamageTypesChanged(damageTypes: List<DamageType>) {
         _item.value?.also { item ->
             item.damageTypes.setAll(damageTypes)
             updateItem(item)

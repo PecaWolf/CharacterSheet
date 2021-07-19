@@ -15,6 +15,15 @@ sealed class Item(
     open var damageTypes: MutableSet<DamageType>,
 ) {
 
+    val allowedSlots: List<Slot>
+        get() = when (this) {
+            is Armor.Clothing -> listOf(Slot.CLOTHING, Slot.ARMOR)
+            is Armor -> listOf(Slot.ARMOR)
+//            is Weapon.Grenade -> listOf(Slot.GRENADE)
+            is Weapon -> listOf(Slot.PRIMARY, Slot.SECONDARY, Slot.TERTIARY)
+            else -> listOf()
+        }
+
     sealed class Weapon(
         itemId: Long,
         name: String,
