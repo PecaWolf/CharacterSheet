@@ -10,7 +10,9 @@ sealed class Item(
     open var description: String,
     open var count: Int,
     open var enhancements: List<Enhancement> = listOf(),
-    open var allowedLoadouts: MutableList<LoadoutType>
+    open var allowedLoadouts: MutableList<LoadoutType>,
+    open var damage: Damage,
+    open var damageTypes: MutableSet<DamageType>,
 ) {
 
     sealed class Weapon(
@@ -20,10 +22,10 @@ sealed class Item(
         count: Int,
         enhancements: List<Enhancement>,
         allowedLoadouts: MutableList<LoadoutType>,
-        open var damage: Damage,
+        damage: Damage,
         open var wield: Wield,
-        open var damageTypes: MutableSet<DamageType>,
-    ) : Item(itemId, name, description, count, enhancements, allowedLoadouts) {
+        damageTypes: MutableSet<DamageType>,
+    ) : Item(itemId, name, description, count, enhancements, allowedLoadouts, damage, damageTypes) {
 
         sealed class Melee(
             itemId: Long,
@@ -424,9 +426,9 @@ sealed class Item(
         count: Int,
         enhancements: List<Enhancement>,
         allowedLoadouts: MutableList<LoadoutType> = mutableListOf(),
-        open var damageMitigation: Damage,
-        open var protections: MutableSet<DamageType>,
-    ) : Item(itemId, name, description, count, enhancements, allowedLoadouts) {
+        damage: Damage,
+        damageTypes: MutableSet<DamageType>,
+    ) : Item(itemId, name, description, count, enhancements, allowedLoadouts, damage, damageTypes) {
 
         object None : Armor(-1, "", "", 0, listOf(), LoadoutType.ALL, Damage.NONE, mutableSetOf())
 
@@ -436,7 +438,7 @@ sealed class Item(
             override var description: String,
             override var count: Int,
             override var enhancements: List<Enhancement> = listOf(),
-            override var protections: MutableSet<DamageType> = mutableSetOf(),
+            override var damageTypes: MutableSet<DamageType> = mutableSetOf(),
         ) : Armor(
             itemId,
             name,
@@ -445,7 +447,7 @@ sealed class Item(
             enhancements,
             LoadoutType.ALL,
             Damage.NONE,
-            protections
+            damageTypes
         )
 
         data class Kevlar(
@@ -455,8 +457,8 @@ sealed class Item(
             override var count: Int,
             override var enhancements: List<Enhancement> = listOf(),
             override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
-            override var damageMitigation: Damage,
-            override var protections: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
+            override var damage: Damage,
+            override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
         ) : Armor(
             itemId,
             name,
@@ -464,8 +466,8 @@ sealed class Item(
             count,
             enhancements,
             allowedLoadouts,
-            damageMitigation,
-            protections
+            damage,
+            damageTypes
         )
 
         data class ExoSkeleton(
@@ -475,8 +477,8 @@ sealed class Item(
             override var count: Int,
             override var enhancements: List<Enhancement> = listOf(),
             override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
-            override var damageMitigation: Damage,
-            override var protections: MutableSet<DamageType> = mutableSetOf(
+            override var damage: Damage,
+            override var damageTypes: MutableSet<DamageType> = mutableSetOf(
                 DamageType.BALLISTIC,
                 DamageType.SLASH,
                 DamageType.PIERCE
@@ -488,8 +490,8 @@ sealed class Item(
             count,
             enhancements,
             allowedLoadouts,
-            damageMitigation,
-            protections
+            damage,
+            damageTypes
         )
 
         data class VacSuit(
@@ -499,8 +501,8 @@ sealed class Item(
             override var count: Int,
             override var enhancements: List<Enhancement> = listOf(),
             override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
-            override var damageMitigation: Damage,
-            override var protections: MutableSet<DamageType> = mutableSetOf(DamageType.BREATH),
+            override var damage: Damage,
+            override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BREATH),
         ) : Armor(
             itemId,
             name,
@@ -508,8 +510,8 @@ sealed class Item(
             count,
             enhancements,
             allowedLoadouts,
-            damageMitigation,
-            protections
+            damage,
+            damageTypes
         )
 
         data class VacArmor(
@@ -519,8 +521,8 @@ sealed class Item(
             override var count: Int,
             override var enhancements: List<Enhancement> = listOf(),
             override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
-            override var damageMitigation: Damage,
-            override var protections: MutableSet<DamageType> = mutableSetOf(
+            override var damage: Damage,
+            override var damageTypes: MutableSet<DamageType> = mutableSetOf(
                 DamageType.BREATH,
                 DamageType.BALLISTIC,
                 DamageType.SLASH,
@@ -533,8 +535,8 @@ sealed class Item(
             count,
             enhancements,
             allowedLoadouts,
-            damageMitigation,
-            protections
+            damage,
+            damageTypes
         )
 
         data class PoweredArmor(
@@ -549,8 +551,8 @@ sealed class Item(
                 )
             ),
             override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
-            override var damageMitigation: Damage,
-            override var protections: MutableSet<DamageType> = mutableSetOf(
+            override var damage: Damage,
+            override var damageTypes: MutableSet<DamageType> = mutableSetOf(
                 DamageType.BREATH,
                 DamageType.BALLISTIC,
                 DamageType.BLUNT,
@@ -564,8 +566,8 @@ sealed class Item(
             count,
             enhancements,
             allowedLoadouts,
-            damageMitigation,
-            protections
+            damage,
+            damageTypes
         )
     }
 
@@ -582,7 +584,16 @@ sealed class Item(
         override var description: String,
         override var count: Int,
         override var enhancements: List<Enhancement> = listOf()
-    ) : Item(itemId, name, description, count, enhancements, LoadoutType.ALL)
+    ) : Item(
+        itemId,
+        name,
+        description,
+        count,
+        enhancements,
+        LoadoutType.ALL,
+        Damage.NONE,
+        mutableSetOf()
+    )
 
     data class Enhancement(
         val name: String,

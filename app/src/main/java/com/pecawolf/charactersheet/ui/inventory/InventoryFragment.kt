@@ -10,6 +10,7 @@ import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.model.Item
+import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel.Destination
@@ -61,10 +62,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
                         getString(
                             R.string.item_unequip_slot_description,
                             destination.item.name,
-                            getString(
-                                destination.slot
-                                    .getLocalizedName()
-                            )
+                            destination.slot.getLocalizedName(requireContext())
                         ),
                         getString(R.string.generic_continue),
                     ) { viewModel.onUnequipItemConfirmed(destination.slot) }
@@ -81,10 +79,10 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             is Item.Weapon -> listOf(Item.Slot.PRIMARY, Item.Slot.SECONDARY, Item.Slot.TERTIARY)
             else -> throw IllegalArgumentException("This should not happen")
         }
-        showSingleChoiceListDialog(
+        showListChoiceDialog<Item.Slot>(
             getString(R.string.item_equip_slot_selection_description, item.name),
-            items,
-            { getString(it.getLocalizedName()) }
-        ) { slot -> viewModel.onEquipSlotSelected(item.itemId, slot) }
+            false,
+            items.map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) },
+        ) { list -> viewModel.onEquipSlotSelected(item.itemId, list.first()) }
     }
 }

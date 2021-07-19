@@ -1,8 +1,11 @@
 package com.pecawolf.charactersheet.ext
 
+import android.content.Context
 import com.pecawolf.charactersheet.R
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Item
+
+fun BaseStats.World.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun BaseStats.World.getLocalizedName() = when (this) {
     BaseStats.World.LAST_REALM -> R.string.world_last_realm
@@ -10,6 +13,8 @@ fun BaseStats.World.getLocalizedName() = when (this) {
     BaseStats.World.DARK_WAY -> R.string.world_dark_way
     BaseStats.World.COLD_FRONTIER -> R.string.world_cold_frontier
 }
+
+fun BaseStats.Species.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun BaseStats.Species.getLocalizedName() = when (this) {
     BaseStats.Species.HUMAN -> R.string.species_human
@@ -22,6 +27,8 @@ fun BaseStats.Species.getLocalizedName() = when (this) {
     BaseStats.Species.GUSMERIAN -> R.string.species_gusmerian
     BaseStats.Species.KRUNG -> R.string.species_krung
 }
+
+fun Item.ItemType.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.BARE_HANDS -> R.string.item_type_bare_hands
@@ -50,6 +57,8 @@ fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.OTHER -> R.string.item_type_other
 }
 
+fun Item.DamageType.getLocalizedName(context: Context) = context.getString(getLocalizedName())
+
 fun Item.DamageType.getLocalizedName() = when (this) {
     Item.DamageType.BLUNT -> R.string.damage_type_blunt
     Item.DamageType.SLASH -> R.string.damage_type_slash
@@ -64,12 +73,16 @@ fun Item.DamageType.getLocalizedName() = when (this) {
     Item.DamageType.KINETIC -> R.string.damage_type_kinetic
 }
 
+fun Item.Damage.getLocalizedName(context: Context) = context.getString(getLocalizedName())
+
 fun Item.Damage.getLocalizedName() = when (this) {
     Item.Damage.NONE -> R.string.damage_none
     Item.Damage.LIGHT -> R.string.damage_light
     Item.Damage.MEDIUM -> R.string.damage_medium
     Item.Damage.HEAVY -> R.string.damage_heavy
 }
+
+fun Item.Weapon.Wield.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.Weapon.Wield.getLocalizedName() = when (this) {
     Item.Weapon.Wield.ONE_HANDED -> R.string.wield_one_handed
@@ -78,11 +91,15 @@ fun Item.Weapon.Wield.getLocalizedName() = when (this) {
     Item.Weapon.Wield.DRONE -> R.string.wield_drone
 }
 
+fun Item.LoadoutType.getLocalizedName(context: Context) = context.getString(getLocalizedName())
+
 fun Item.LoadoutType.getLocalizedName() = when (this) {
     Item.LoadoutType.COMBAT -> R.string.new_item_loadout_combat
     Item.LoadoutType.SOCIAL -> R.string.new_item_loadout_social
     Item.LoadoutType.TRAVEL -> R.string.new_item_loadout_travel
 }
+
+fun Item.Slot.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.Slot.getLocalizedName() = when (this) {
     Item.Slot.PRIMARY -> R.string.equip_slot_primary

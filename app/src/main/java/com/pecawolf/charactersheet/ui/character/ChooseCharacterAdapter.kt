@@ -72,8 +72,8 @@ class ChooseCharacterAdapter(
         override fun bind(item: CharacterSnippet, listener: View.OnClickListener) {
             binding.characterName.text = item.name
             binding.characterSpecies.apply {
-                val localizedSpecies = resources.getString(item.species.getLocalizedName())
-                val localizedWorld = resources.getString(item.world.getLocalizedName())
+                val localizedSpecies = item.species.getLocalizedName(context)
+                val localizedWorld = item.world.getLocalizedName(context)
                 Timber.v("bind(): ${item.name}: $localizedSpecies in $localizedWorld")
                 text = resources.getString(
                     R.string.character_selection_species_world,

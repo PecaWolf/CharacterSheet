@@ -66,9 +66,7 @@ class InventoryAdapter(
                 setOnClickListener { itemEquipListener.invoke(item, slot) }
             }
             binding.itemSlot.apply {
-                text = slot?.getLocalizedName()?.let {
-                    resources.getString(it)
-                } ?: ""
+                text = slot?.getLocalizedName(context) ?: ""
 
                 when (slot) {
                     Item.Slot.PRIMARY -> R.color.activePrimary

@@ -44,29 +44,7 @@
             app:argType="long"
             app:nullable="false" />
 
-        <action
-            android:id="@+id/action_item_detail_to_multi_choice_dialog"
-            app:destination="@id/navigation_multi_choice_dialog" />
-
     </fragment>
-
-    <dialog
-        android:id="@+id/navigation_multi_choice_dialog"
-        android:name="com.pecawolf.charactersheet.ui.MultiChoiceFragment"
-        android:label="@string/title_multi_choice"
-        tools:layout="@layout/fragment_multi_choice">
-
-        <argument
-            android:name="itemId"
-            app:argType="long"
-            app:nullable="false" />
-
-        <argument
-            android:name="field"
-            app:argType="string"
-            app:nullable="false" />
-
-    </dialog>
 
     <fragment
         android:id="@+id/navigation_new_item_step_1"
@@ -109,10 +87,6 @@
             android:id="@+id/action_new_item_step_2_to_item_detail"
             app:destination="@id/navigation_item_detail" />
 
-        <!--                <action-->
-        <!--                    android:id="@+id/action_new_item_step_2_to_new_item_step_3"-->
-        <!--                    app:destination="@id/navigation_new_item_step_3" />-->
-
     </fragment>
 
     <fragment
@@ -136,10 +110,6 @@
             app:argType="string"
             app:nullable="false" />
 
-        <!--        <action-->
-        <!--            android:id="@+id/action_new_item_step_1_to_new_item_step_2"-->
-        <!--            app:destination="@id/navigation_new_item_step_2" />-->
-
     </fragment>
 
     <!--    <fragment-->
@@ -155,5 +125,4 @@
         tools:layout="@layout/fragment_other">
 
     </fragment>
-
 </navigation>

@@ -3,11 +3,13 @@ package com.pecawolf.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import com.pecawolf.domain.interactor.GetItemDetailInteractor
+import com.pecawolf.charactersheet.common.extensions.isOneOf
+import com.pecawolf.charactersheet.common.extensions.setAll
 import com.pecawolf.domain.interactor.SaveItemChangesInteractor
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.MergedLiveData2
 import com.pecawolf.presentation.extensions.SingleLiveEvent
+import com.pecawolf.presentation.extensions.mapNotNull
 import com.pecawolf.presentation.extensions.toggle
 import com.pecawolf.presentation.viewmodel.main.MainViewModel
 import timber.log.Timber
@@ -15,25 +17,34 @@ import timber.log.Timber
 class ItemDetailViewModel(
     private val itemId: Long,
     private val mainViewModel: MainViewModel,
-    private val getItemDetail: GetItemDetailInteractor,
     private val saveItemChanges: SaveItemChangesInteractor,
 ) : BaseViewModel() {
 
-    private val _item = mainViewModel.character
-        .map { it.inventory.backpack.first { it.itemId == itemId } }
+    private val _item = mainViewModel.inventory
+        .mapNotNull {
+            it.backpack.firstOrNull {
+                it.itemId == itemId
+            }
+        }
     private val _isEditing = MutableLiveData<Boolean>(false)
+    private val _showLoadoutDialog = SingleLiveEvent<List<Pair<Item.LoadoutType, Boolean>>>()
+    private val _showDamageDialog = SingleLiveEvent<List<Pair<Item.Damage, Boolean>>>()
+    private val _showWieldDialog = SingleLiveEvent<List<Pair<Item.Weapon.Wield, Boolean>>>()
+    private val _showDamageTypesDialog = SingleLiveEvent<List<Pair<Item.DamageType, Boolean>>>()
     private val _navigateTo = SingleLiveEvent<Destination>()
-    private val _showNotFound = SingleLiveEvent<Unit>()
 
     val item: LiveData<Item> = _item
     val damageTypes: LiveData<List<Pair<Item.DamageType, Boolean>>> = _item.map { item ->
         when (item) {
-            is Item.Armor -> item.protections.map { Pair(it, true) }
+            is Item.Armor -> item.damageTypes.map { Pair(it, true) }
             is Item.Weapon -> item.damageTypes.map { Pair(it, true) }
             else -> listOf()
         }
     }
     val isEditingBaseData: LiveData<Boolean> = _isEditing
+    val isEditingCount: LiveData<Boolean> = MergedLiveData2(_isEditing, _item) { isEditing, item ->
+        isEditing && item is Item.Other || item is Item.Weapon.Grenade
+    }
     val isEditingLoadoutAndDamage: LiveData<Boolean> =
         MergedLiveData2(_isEditing, _item) { isEditing, item ->
             isEditing && item is Item.Weapon || item is Item.Armor
@@ -45,36 +56,25 @@ class ItemDetailViewModel(
     val isEditingWield: LiveData<Boolean> = MergedLiveData2(_isEditing, _item) { isEditing, item ->
         isEditing && item is Item.Weapon.Melee
     }
+    val showLoadoutDialog: LiveData<List<Pair<Item.LoadoutType, Boolean>>> = _showLoadoutDialog
+    val showDamageDialog: LiveData<List<Pair<Item.Damage, Boolean>>> = _showDamageDialog
+    val showWieldDialog: LiveData<List<Pair<Item.Weapon.Wield, Boolean>>> = _showWieldDialog
+    val showDamageTypesDialog: LiveData<List<Pair<Item.DamageType, Boolean>>> =
+        _showDamageTypesDialog
     val navigateTo: LiveData<Destination> = _navigateTo
-    val showNotFound: LiveData<Unit> = _showNotFound
-
-//    override fun onRefresh() {
-//        getItemDetail.execute(itemId)
-//            .observe(FETCH, ::onGetItemError, _item::setValue, ::onGetItemComplete)
-//    }
 
     fun onItemEquip(item: Item, slot: Item.Slot?) {
-        if (slot == null) _navigateTo.postValue(Destination.EquipDialog(item))
-        else _navigateTo.postValue(Destination.UnequipDialog(item, slot))
+//        if (slot == null) _navigateTo.postValue(Destination.EquipDialog(item))
+//        else _navigateTo.postValue(Destination.UnequipDialog(item, slot))
     }
 
     fun onItemEditClicked() {
         _isEditing.toggle()
     }
 
-    private fun onGetItemComplete() {
-        Timber.v("onGetItemComplete()")
-        _showNotFound.postValue(Unit)
-    }
-
-    private fun onGetItemError(error: Throwable) {
-        Timber.w(error, "onGetItemError(): ")
-        _showNotFound.postValue(Unit)
-    }
-
     fun onNameChanged(name: String) {
         _item.value?.also { item ->
-            if (item.name == name) {
+            if (item.name != name) {
                 item.name = name
                 updateItem(item)
             }
@@ -83,7 +83,7 @@ class ItemDetailViewModel(
 
     fun onDescriptionChanged(description: String) {
         _item.value?.also { item ->
-            if (item.description == description) {
+            if (item.description != description) {
                 item.description = description
                 updateItem(item)
             }
@@ -92,7 +92,7 @@ class ItemDetailViewModel(
 
     fun onCountChanged(count: Int) {
         _item.value?.also { item ->
-            if (item.count == count) {
+            if (item.count != count) {
                 item.count = count
                 updateItem(item)
             }
@@ -118,46 +118,74 @@ class ItemDetailViewModel(
     }
 
     fun onLoadoutEditClicked() {
-        _item.value
-            ?.takeIf { it is Item.Weapon || it is Item.Armor }
-            ?.also {
-                _navigateTo.postValue(
-                    Destination.MultiChoice(it.itemId, MultiChoiceViewModel.LOADOUT)
-                )
-            }
+        _item.value?.also { item ->
+            _showLoadoutDialog.postValue(
+                Item.LoadoutType.values().map {
+                    it to (it.isOneOf(item.allowedLoadouts))
+                }
+            )
+        }
+    }
+
+    fun onLoadoutChanged(loadoutType: List<Item.LoadoutType>) {
+        _item.value?.also { item ->
+            item.allowedLoadouts.setAll(loadoutType)
+            updateItem(item)
+        }
     }
 
     fun onDamageEditClicked() {
-        _item.value
-            ?.takeIf { it is Item.Weapon || it is Item.Armor }
-            ?.also {
-                _navigateTo.postValue(
-                    Destination.MultiChoice(it.itemId, MultiChoiceViewModel.DAMAGE)
-                )
-            }
+        _item.value?.also { item ->
+            _showDamageDialog.postValue(
+                Item.Damage.values().map {
+                    it to (it == item.damage)
+                }
+            )
+        }
+    }
+
+    fun onDamageChanged(damage: Item.Damage) {
+        _item.value?.also { item ->
+            item.damage = damage
+            updateItem(item)
+        }
     }
 
     fun onWieldEditClicked() {
-        _item.value
-            ?.takeIf { it is Item.Weapon }
-            ?.also {
-                _navigateTo.postValue(
-                    Destination.MultiChoice(it.itemId, MultiChoiceViewModel.WIELD)
-                )
-            }
+        (_item.value as? Item.Weapon)?.also { item ->
+            _showWieldDialog.postValue(
+                Item.Weapon.Wield.values().map {
+                    it to (it == item.wield)
+                }
+            )
+        }
+    }
+
+    fun onWieldChanged(wield: Item.Weapon.Wield) {
+        (_item.value as? Item.Weapon)?.also { item ->
+            item.wield = wield
+            updateItem(item)
+        }
     }
 
     fun onDamageTypesEditClicked() {
-        _item.value
-            ?.takeIf { it is Item.Weapon || it is Item.Armor }
-            ?.also {
-                _navigateTo.postValue(
-                    Destination.MultiChoice(it.itemId, MultiChoiceViewModel.DAMAGE_TYPE)
-                )
-            }
+        _item.value?.also { item ->
+            _showDamageTypesDialog.postValue(
+                Item.DamageType.values().map {
+                    it to (it.isOneOf(item.damageTypes))
+                }
+            )
+        }
     }
 
-    private fun updateItem(it: Item) = saveItemChanges.execute(it)
+    fun onDamageTypesChanged(damageTypes: List<Item.DamageType>) {
+        _item.value?.also { item ->
+            item.damageTypes.setAll(damageTypes)
+            updateItem(item)
+        }
+    }
+
+    private fun updateItem(item: Item) = saveItemChanges.execute(item)
         .observe(UPDATE, ::onUpdateItemError, ::onUpdateItemSuccess)
 
     private fun onUpdateItemSuccess() {
@@ -169,9 +197,6 @@ class ItemDetailViewModel(
     }
 
     sealed class Destination {
-        data class MultiChoice(val itemId: Long, val field: String) : Destination()
-        data class EquipDialog(val item: Item) : Destination()
-        data class UnequipDialog(val item: Item, val slot: Item.Slot) : Destination()
     }
 
     companion object {

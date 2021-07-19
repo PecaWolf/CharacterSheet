@@ -8,23 +8,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
-import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
-import com.pecawolf.charactersheet.R
-import com.pecawolf.charactersheet.databinding.WidgetDialogEditTextBinding
-import com.pecawolf.charactersheet.databinding.WidgetDialogRecyclerBinding
 import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.viewmodel.BaseViewModel
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : DialogFragment() {
 
     protected val viewModel: VIEWMODEL by lazy { createViewModel() }
 
     protected lateinit var binding: BINDING
+
+    val dialogHelper: DialogHelper by inject { parametersOf(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +46,6 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
             val params: WindowManager.LayoutParams = window!!.attributes
             params.width = WindowManager.LayoutParams.MATCH_PARENT
             params.height = WindowManager.LayoutParams.WRAP_CONTENT
-            params.horizontalMargin = resources.getDimension(R.dimen.spacing_2)
-            params.verticalMargin = resources.getDimension(R.dimen.spacing_4)
             window!!.attributes = params
         }
 
@@ -58,13 +54,14 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = getBinding(LayoutInflater.from(requireContext()), null)
-        return Dialog(requireContext()).apply {
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setStyle(STYLE_NORMAL, android.R.style.Theme)
+        return AlertDialog.Builder(requireContext())
+            .show()
+            .apply {
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                setStyle(STYLE_NORMAL, android.R.style.Theme)
 
-            setContentView(binding.root)
-        }
+                setContentView(binding.root)
+            }
     }
 
     protected abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): BINDING
@@ -78,11 +75,7 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
         positiveButton: String,
         positive: () -> Unit
     ) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { dialog, _ -> positive.invoke() }
-            .show()
+        dialogHelper.showSingleChoiceDialog(title, message, positiveButton, positive)
     }
 
     protected fun showTwoChoiceDialog(
@@ -91,12 +84,7 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
         positiveButton: String,
         positive: () -> Unit
     ) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { dialog, _ -> positive.invoke() }
-            .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.cancel() }
-            .show()
+        dialogHelper.showTwoChoiceDialog(title, message, positiveButton, positive)
     }
 
     protected fun showThreeChoiceDialog(
@@ -107,63 +95,28 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
         negativeButton: String,
         negative: () -> Unit
     ) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { dialog, _ -> positive.invoke() }
-            .setNegativeButton(negativeButton) { dialog, _ -> negative.invoke() }
-            .setNeutralButton(R.string.generic_cancel) { dialog, _ -> dialog.cancel() }
-            .show()
-    }
-
-    protected fun <T> showSingleChoiceListDialog(
-        title: String,
-        items: List<T>,
-        itemMapper: (T) -> String,
-        onItemSelected: (T) -> Unit
-    ) {
-        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_list_item_1
+        dialogHelper.showThreeChoiceDialog(
+            title,
+            message,
+            positiveButton,
+            positive,
+            negativeButton,
+            negative
         )
-        arrayAdapter.addAll(items.map { itemMapper.invoke(it) })
-
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setAdapter(arrayAdapter) { _, which -> onItemSelected.invoke(items[which]) }
-            .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.dismiss() }
-            .show()
     }
 
-    protected fun <T> showMultiChoiceListDialog(
+    protected fun <T> showListChoiceDialog(
         title: String,
-        items: List<T>,
-        itemMapper: (T) -> String,
-        positiveButton: String,
-        positive: (List<T>) -> Unit
+        isSingleChoice: Boolean,
+        items: List<SimpleSelectionItem>,
+        positive: (List<T>) -> Unit,
     ) {
-        val initialItems = items.map {
-            SimpleSelectionItem(itemMapper.invoke(it), false, it)
-        }
-        val adapter = SimpleSelectionAdapter(initialItems) {}
-
-        val layout = WidgetDialogRecyclerBinding.inflate(LayoutInflater.from(requireContext()))
-            .also { binding ->
-                binding.dialogRecycler.adapter = adapter
-                binding.dialogRecycler.layoutManager = LinearLayoutManager(requireContext())
-            }
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setView(layout.root)
-            .setPositiveButton(positiveButton) { dialog, _ ->
-                positive.invoke(adapter.items.filter { it.isChecked }.mapNotNull { it.data as T })
-            }
-            .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.cancel() }
-            .show()
+        dialogHelper.showListChoiceDialog(title, isSingleChoice, items, positive)
     }
 
     protected fun showTextInputDialog(
         title: String,
+        message: String?,
         inputType: Int,
         lineCount: Int,
         defaultInput: String?,
@@ -171,26 +124,15 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
         positiveButton: String,
         positive: (String) -> Unit
     ) {
-        val layout = WidgetDialogEditTextBinding.inflate(LayoutInflater.from(requireContext()))
-            .also { binding ->
-                binding.dialogEditText.apply {
-                    this.inputType = inputType
-                    setLines(lineCount)
-
-                    setText(defaultInput)
-                    setSelection(defaultInput?.length ?: 0)
-                }
-                binding.dialogEditLayout.hint = hint
-            }
-        AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setView(layout.root)
-            .setPositiveButton(positiveButton) { dialog, _ ->
-                positive.invoke(
-                    layout.dialogEditText.text?.toString() ?: ""
-                )
-            }
-            .setNegativeButton(R.string.generic_cancel) { dialog, _ -> dialog.cancel() }
-            .show()
+        dialogHelper.showTextInputDialog(
+            title,
+            message,
+            inputType,
+            lineCount,
+            defaultInput,
+            hint,
+            positiveButton,
+            positive
+        )
     }
 }

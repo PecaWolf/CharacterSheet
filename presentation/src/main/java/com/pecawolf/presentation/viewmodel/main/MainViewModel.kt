@@ -2,9 +2,12 @@ package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.pecawolf.domain.interactor.ObserveCharacterInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
+import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
+import com.pecawolf.model.Inventory
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -15,7 +18,10 @@ class MainViewModel(
     BaseViewModel() {
 
     private val _character = MutableLiveData<Character>()
-    val character: LiveData<Character> = _character
+    val character: LiveData<BaseStats> = _character
+        .map { it.baseStats }
+    val inventory: LiveData<Inventory> = _character
+        .map { it.inventory }
 
     init {
         subscribeToActiveCharacter.execute(null)

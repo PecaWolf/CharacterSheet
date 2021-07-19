@@ -76,6 +76,7 @@ class CharacterRepository(
 
     fun equipItem(itemId: Long, slot: Item.Slot): Completable {
         return cache.getCharacter()
+            .firstOrError()
             .flatMapCompletable { character ->
                 when (slot) {
                     Item.Slot.PRIMARY -> character.primary = itemId

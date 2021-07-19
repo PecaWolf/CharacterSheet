@@ -4,7 +4,6 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
@@ -15,6 +14,7 @@ import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
 import com.pecawolf.model.Item
 import com.pecawolf.model.Item.Damage
+import com.pecawolf.model.Item.DamageType
 import com.pecawolf.model.Item.LoadoutType
 import com.pecawolf.model.Item.Weapon.Wield
 import com.pecawolf.presentation.SimpleSelectionItem
@@ -49,6 +49,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding.itemNameEditIcon.setOnClickListener {
             showTextInputDialog(
                 title = getString(R.string.item_edit_name_title),
+                message = getString(R.string.item_edit_name_message),
                 inputType = InputType.TYPE_CLASS_TEXT,
                 lineCount = 1,
                 defaultInput = viewModel.item.value?.name,
@@ -59,7 +60,8 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding.itemDescriptionEditIcon.setOnClickListener {
             showTextInputDialog(
                 title = getString(R.string.item_edit_description_title),
-                inputType = InputType.TYPE_CLASS_TEXT,
+                message = getString(R.string.item_edit_description_message),
+                inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE,
                 lineCount = 5,
                 defaultInput = viewModel.item.value?.description,
                 hint = getString(R.string.item_edit_description_hint),
@@ -69,6 +71,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding.itemCountEditIcon.setOnClickListener {
             showTextInputDialog(
                 title = getString(R.string.item_edit_count_title),
+                message = getString(R.string.item_edit_count_message),
                 inputType = InputType.TYPE_CLASS_NUMBER,
                 lineCount = 1,
                 defaultInput = viewModel.item.value?.count?.toString(),
@@ -85,6 +88,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding.itemDetailMagazineSizeEditIcon.setOnClickListener {
             showTextInputDialog(
                 title = getString(R.string.item_edit_magazine_size_title),
+                message = getString(R.string.item_edit_magazine_size_message),
                 inputType = InputType.TYPE_CLASS_NUMBER,
                 lineCount = 1,
                 defaultInput = (viewModel.item.value as? Item.Weapon.Ranged)?.magazine?.toString(),
@@ -95,6 +99,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         binding.itemDetailRateOfFireEditIcon.setOnClickListener {
             showTextInputDialog(
                 title = getString(R.string.item_edit_rate_of_fire_title),
+                message = getString(R.string.item_edit_rate_of_fire_message),
                 inputType = InputType.TYPE_CLASS_NUMBER,
                 lineCount = 1,
                 defaultInput = (viewModel.item.value as? Item.Weapon.Ranged)?.rateOfFire?.toString(),
@@ -125,6 +130,8 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         viewModel.isEditingBaseData.reObserve(this) { isEditing ->
             binding.itemNameEditIcon.isVisible = isEditing
             binding.itemDescriptionEditIcon.isVisible = isEditing
+        }
+        viewModel.isEditingCount.reObserve(this) { isEditing ->
             binding.itemCountEditIcon.isVisible = isEditing
         }
 
@@ -146,7 +153,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         viewModel.damageTypes.reObserve(this) { items ->
             damageTypeAdapter.items = items.map {
                 SimpleSelectionItem(
-                    getString(it.first.getLocalizedName()),
+                    it.first.getLocalizedName(requireContext()),
                     it.second,
                     it.first
                 )
@@ -157,29 +164,60 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             setupItemDetails(binding, item)
         }
 
-        viewModel.showNotFound.reObserve(this) {
-            showSingleChoiceDialog(
-                getString(R.string.item_detail_error_title),
-                getString(R.string.item_detail_error_message),
-                getString(R.string.generic_back),
-            ) { findNavController().popBackStack() }
+        viewModel.showLoadoutDialog.reObserve(this) { items ->
+            showListChoiceDialog<LoadoutType>(
+                getString(R.string.multi_choice_header_loadout),
+                false,
+                items.map {
+                    SimpleSelectionItem(
+                        it.first.getLocalizedName(requireContext()),
+                        it.second,
+                        it.first
+                    )
+                },
+            ) { list -> viewModel.onLoadoutChanged(list) }
         }
 
-        viewModel.navigateTo.reObserve(this) {
-            when (it) {
-                is ItemDetailViewModel.Destination.MultiChoice -> {
-                    findNavController().navigate(
-                        ItemDetailFragmentDirections.actionItemDetailToMultiChoiceDialog(
-                            itemId = it.itemId,
-                            field = it.field
-                        )
+        viewModel.showDamageDialog.reObserve(this) { items ->
+            showListChoiceDialog<Damage>(
+                getString(R.string.multi_choice_header_damage),
+                false,
+                items.map {
+                    SimpleSelectionItem(
+                        it.first.getLocalizedName(requireContext()),
+                        it.second,
+                        it.first
                     )
-                }
-                is ItemDetailViewModel.Destination.EquipDialog -> {
-                }
-                is ItemDetailViewModel.Destination.UnequipDialog -> {
-                }
-            }
+                },
+            ) { list -> viewModel.onDamageChanged(list.first()) }
+        }
+
+        viewModel.showWieldDialog.reObserve(this) { items ->
+            showListChoiceDialog<Wield>(
+                getString(R.string.multi_choice_header_wield),
+                false,
+                items.map {
+                    SimpleSelectionItem(
+                        it.first.getLocalizedName(requireContext()),
+                        it.second,
+                        it.first
+                    )
+                },
+            ) { list -> viewModel.onWieldChanged(list.first()) }
+        }
+
+        viewModel.showDamageTypesDialog.reObserve(this) { items ->
+            showListChoiceDialog<DamageType>(
+                getString(R.string.multi_choice_header_damage_type),
+                false,
+                items.map {
+                    SimpleSelectionItem(
+                        it.first.getLocalizedName(requireContext()),
+                        it.second,
+                        it.first
+                    )
+                },
+            ) { list -> viewModel.onDamageTypesChanged(list) }
         }
     }
 
@@ -229,9 +267,9 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                     itemDetailWieldDrone.isChecked = item.wield == Wield.DRONE
                 } else {
                     item as Item.Armor
-                    damageHeavy.isChecked = item.damageMitigation == Damage.HEAVY
-                    damageMedium.isChecked = item.damageMitigation == Damage.MEDIUM
-                    damageLight.isChecked = item.damageMitigation == Damage.LIGHT
+                    damageHeavy.isChecked = item.damage == Damage.HEAVY
+                    damageMedium.isChecked = item.damage == Damage.MEDIUM
+                    damageLight.isChecked = item.damage == Damage.LIGHT
 
                     itemDetailDamageHeader.text = getString(R.string.new_item_header_protection)
                     itemDetailDamageTypesHeader.text =

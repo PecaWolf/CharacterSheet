@@ -137,7 +137,7 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
         viewModel.damageTypes.reObserve(this) { items ->
             damageTypeAdapter.items = items.map {
                 SimpleSelectionItem(
-                    getString(it.first.getLocalizedName()),
+                    it.first.getLocalizedName(requireContext()),
                     it.second,
                     it.first
                 )

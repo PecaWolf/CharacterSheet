@@ -665,8 +665,7 @@
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu_colorNormal="@color/buttonBackgroundEnabled"
-        app:menu_icon="@drawable/ic_hamburger">
+        app:menu_colorNormal="@color/buttonBackgroundEnabled">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/item_detail_item_edit"

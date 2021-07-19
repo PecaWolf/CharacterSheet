@@ -21,7 +21,7 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         SimpleSelectionAdapter(
             Item.ItemType.items().map {
                 SimpleSelectionItem(
-                    getString(it.getLocalizedName()),
+                    it.getLocalizedName(requireContext()),
                     false,
                     it
                 )
@@ -69,7 +69,7 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         viewModel.itemTypes.reObserve(this) { items ->
             itemTypeAdapter.items = items.map {
                 SimpleSelectionItem(
-                    getString(it.first.getLocalizedName()),
+                    it.first.getLocalizedName(requireContext()),
                     it.second,
                     it.first
                 )

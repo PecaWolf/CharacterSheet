@@ -55,7 +55,7 @@ class SpeciesSelectionFragment :
         viewModel.worlds.reObserve(this) { list ->
             worldsAdapter.items = list.map {
                 SimpleSelectionItem(
-                    getString(it.first.getLocalizedName()),
+                    it.first.getLocalizedName(requireContext()),
                     it.second,
                     it.first
                 )
@@ -65,7 +65,7 @@ class SpeciesSelectionFragment :
             binding.speciesCard.isGone = list.isEmpty()
             speciesAdapter.items = list.map {
                 SimpleSelectionItem(
-                    getString(it.first.getLocalizedName()),
+                    it.first.getLocalizedName(requireContext()),
                     it.second,
                     it.first
                 )

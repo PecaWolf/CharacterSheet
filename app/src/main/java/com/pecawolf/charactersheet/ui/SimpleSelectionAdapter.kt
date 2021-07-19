@@ -13,6 +13,10 @@ class SimpleSelectionAdapter(
     private val onClick: (Any?) -> Unit
 ) : RecyclerView.Adapter<SimpleSelectionViewHolder>() {
 
+    init {
+        if (initialItems.isNotEmpty()) notifyDataSetChanged()
+    }
+
     var items: List<SimpleSelectionItem> = initialItems
         set(value) {
             field = value

@@ -1,7 +1,8 @@
 package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.map
 import com.pecawolf.domain.interactor.EquipItemInteractor
 import com.pecawolf.domain.interactor.UnequipItemInteractor
 import com.pecawolf.model.Item
@@ -20,29 +21,32 @@ class InventoryViewModel(
     val navigateTo: LiveData<Destination> = _navigateTo
 
     val backpack: LiveData<List<Pair<Item, Item.Slot?>>> =
-        Transformations.map(mainViewModel.character) { character ->
-            character.inventory.backpack
+        mainViewModel.inventory.map { inventory ->
+            inventory.backpack
                 .map {
                     Pair(
                         it,
                         when (it.itemId) {
-                            character.inventory.primary.itemId -> Item.Slot.PRIMARY
-                            character.inventory.secondary.itemId -> Item.Slot.SECONDARY
-                            character.inventory.tertiary.itemId -> Item.Slot.TERTIARY
-                            //                    character.inventory.grenade.itemId -> Item.Slot.GRENADE
-                            character.inventory.armor.itemId -> Item.Slot.ARMOR
-                            character.inventory.clothes.itemId -> Item.Slot.CLOTHING
+                            inventory.primary.itemId -> Item.Slot.PRIMARY
+                            inventory.secondary.itemId -> Item.Slot.SECONDARY
+                            inventory.tertiary.itemId -> Item.Slot.TERTIARY
+                            //                    inventory.grenade.itemId -> Item.Slot.GRENADE
+                            inventory.armor.itemId -> Item.Slot.ARMOR
+                            inventory.clothes.itemId -> Item.Slot.CLOTHING
                             else -> null
                         }
                     )
                 }
                 .sortedWith(
-                    compareBy({ it.second?.ordinal ?: Int.MAX_VALUE }, { it.first.name }),
+                    compareBy(
+                        { it.second?.ordinal ?: Int.MAX_VALUE },
+                        { it.first.name },
+                        { it.first.itemId }),
                 )
-        }
+        }.distinctUntilChanged()
 
-    val money: LiveData<Int> = Transformations.map(mainViewModel.character) {
-        it.inventory.money
+    val money: LiveData<Int> = mainViewModel.inventory.map {
+        it.money
     }
 
     override fun onRefresh() {

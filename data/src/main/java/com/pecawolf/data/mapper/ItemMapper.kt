@@ -2,9 +2,6 @@ package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.ItemEntity
 import com.pecawolf.model.Item
-import com.pecawolf.model.Item.Armor.None.protections
-import com.pecawolf.model.Item.Weapon.Melee.BareHands.damage
-import com.pecawolf.model.Item.Weapon.Melee.BareHands.damageTypes
 import com.pecawolf.model.Item.Weapon.Melee.BareHands.wield
 
 class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
@@ -456,7 +453,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 listOf(),
                 Item.Damage.NONE.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
@@ -471,7 +468,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 codeEnhancements(enhancements),
                 Item.Damage.NONE.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
@@ -484,9 +481,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                damageMitigation.name,
+                damage.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
@@ -499,9 +496,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                damageMitigation.name,
+                damage.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
@@ -514,9 +511,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                damageMitigation.name,
+                damage.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
@@ -529,9 +526,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                damageMitigation.name,
+                damage.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
@@ -544,9 +541,9 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                damageMitigation.name,
+                damage.name,
                 "",
-                protections.map { it.name },
+                damageTypes.map { it.name },
                 -1,
                 -1,
             )
