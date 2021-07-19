@@ -46,6 +46,7 @@ class ItemDetailViewModel(
             else -> listOf()
         }
     }
+    val isEquippable: LiveData<Boolean> = _item.map { it.allowedSlots.isNotEmpty() }
     val isEditingBaseData: LiveData<Boolean> = _isEditing
     val isEditingCount: LiveData<Boolean> = MergedLiveData2(_isEditing, _item) { isEditing, item ->
         isEditing && item is Item.Other || item is Weapon.Grenade

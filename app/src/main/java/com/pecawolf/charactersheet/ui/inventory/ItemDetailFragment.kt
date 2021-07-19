@@ -126,7 +126,9 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                 isVisible = it
             }
         }
-
+        viewModel.isEquippable.reObserve(this) { isEquippable ->
+            binding.itemDetailItemEquip.isVisible = isEquippable
+        }
         viewModel.isEditingBaseData.reObserve(this) { isEditing ->
             binding.itemNameEditIcon.isVisible = isEditing
             binding.itemDescriptionEditIcon.isVisible = isEditing

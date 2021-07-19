@@ -58,10 +58,9 @@ class InventoryAdapter(
             }
 
             binding.itemEquip.apply {
-                val isEquipable =
-                    item is Item.Weapon || item is Item.Armor || item is Item.Weapon.Grenade
-                isVisible = isEquipable
-                isEnabled = isEquipable
+                val isEquippable = item.allowedSlots.isNotEmpty()
+                isVisible = isEquippable
+                isEnabled = isEquippable
                 isChecked = slot != null
                 setOnClickListener { itemEquipListener.invoke(item, slot) }
             }
