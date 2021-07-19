@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.ItemInventoryBinding
+import com.pecawolf.charactersheet.ext.getIcon
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.inventory.InventoryAdapter.InventoryViewHolder
 import com.pecawolf.model.Item
@@ -46,6 +47,9 @@ class InventoryAdapter(
             val item = inventoryItem.first
             val slot = inventoryItem.second
 
+            binding.itemIcon.apply {
+                setImageDrawable(item.getIcon(resources))
+            }
             binding.itemName.text = item.name
             binding.itemId.apply {
                 isVisible = BuildConfig.DEBUG

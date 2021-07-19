@@ -4,6 +4,9 @@ import android.content.Context
 import com.pecawolf.charactersheet.R
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Item
+import java.text.NumberFormat
+
+fun Int.formatAmount(): String = NumberFormat.getIntegerInstance().format(this)
 
 fun BaseStats.World.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
@@ -35,6 +38,7 @@ fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.KNIFE -> R.string.item_type_knife
     Item.ItemType.SWORD -> R.string.item_type_sword
     Item.ItemType.AXE -> R.string.item_type_axe
+    Item.ItemType.HAMMER -> R.string.item_type_hammer
     Item.ItemType.BOW -> R.string.item_type_bow
     Item.ItemType.CROSSBOW -> R.string.item_type_crossbow
     Item.ItemType.PISTOL -> R.string.item_type_pistol

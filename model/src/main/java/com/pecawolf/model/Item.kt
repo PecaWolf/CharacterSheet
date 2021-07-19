@@ -143,6 +143,28 @@ sealed class Item(
                 wield,
                 damageTypes
             )
+
+            data class Hammer(
+                override var itemId: Long,
+                override var name: String,
+                override var description: String,
+                override var count: Int,
+                override var enhancements: List<Enhancement> = listOf(),
+                override var allowedLoadouts: MutableList<LoadoutType> = mutableListOf(LoadoutType.COMBAT),
+                override var damage: Damage = Damage.MEDIUM,
+                override var wield: Wield = Wield.ONE_HANDED,
+                override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BLUNT),
+            ) : Melee(
+                itemId,
+                name,
+                description,
+                count,
+                enhancements,
+                allowedLoadouts,
+                damage,
+                wield,
+                damageTypes
+            )
         }
 
         sealed class Ranged(
@@ -659,6 +681,14 @@ sealed class Item(
             mutableSetOf(DamageType.SLASH, DamageType.PIERCE)
         ),
         AXE(
+            true,
+            false,
+            false,
+            Weapon.Wield.ONE_HANDED,
+            Damage.LIGHT,
+            mutableSetOf(DamageType.BLUNT, DamageType.SLASH)
+        ),
+        HAMMER(
             true,
             false,
             false,

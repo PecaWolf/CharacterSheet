@@ -41,6 +41,17 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 parseWield(wield),
                 parseDamageTypes(damageTypes)
             )
+            Item.ItemType.HAMMER -> Item.Weapon.Melee.Hammer(
+                itemId,
+                name,
+                description,
+                count,
+                parseEnhancements(enhancements),
+                parseLoadouts(allowedLoadouts),
+                parseDamage(damage),
+                parseWield(wield),
+                parseDamageTypes(damageTypes)
+            )
             Item.ItemType.BOW -> Item.Weapon.Ranged.Bow(
                 itemId,
                 name,
@@ -281,6 +292,21 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 itemId,
                 ownerId,
                 Item.ItemType.AXE.name,
+                name,
+                description,
+                count,
+                allowedLoadouts.map { it.name },
+                codeEnhancements(enhancements),
+                damage.name,
+                wield.name,
+                damageTypes.map { it.name },
+                -1,
+                -1,
+            )
+            is Item.Weapon.Melee.Hammer -> ItemEntity(
+                itemId,
+                ownerId,
+                Item.ItemType.HAMMER.name,
                 name,
                 description,
                 count,

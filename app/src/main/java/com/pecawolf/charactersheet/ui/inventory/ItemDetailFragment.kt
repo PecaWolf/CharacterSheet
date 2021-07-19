@@ -7,8 +7,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
-import com.pecawolf.charactersheet.common.formatAmount
 import com.pecawolf.charactersheet.databinding.FragmentItemDetailBinding
+import com.pecawolf.charactersheet.ext.formatAmount
+import com.pecawolf.charactersheet.ext.getIcon
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
@@ -220,6 +221,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         item: Item
     ) {
         binding.run {
+            itemIcon.setImageDrawable(item.getIcon(resources))
             itemName.text = item.name
             itemId.apply {
                 isVisible = BuildConfig.DEBUG

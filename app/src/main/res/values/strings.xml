@@ -34,6 +34,7 @@
     <string name="item_type_knife">Knife</string>
     <string name="item_type_sword">Sword</string>
     <string name="item_type_axe">Axe</string>
+    <string name="item_type_hammer">Hammer</string>
     <string name="item_type_bow">Bow</string>
     <string name="item_type_crossbow">Crossbow</string>
     <string name="item_type_pistol">Pistol</string>
