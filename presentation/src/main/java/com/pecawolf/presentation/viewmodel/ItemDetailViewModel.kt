@@ -3,6 +3,8 @@ package com.pecawolf.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import com.pecawolf.charactersheet.common.extensions.isOneOf
+import com.pecawolf.charactersheet.common.extensions.setAll
 import com.pecawolf.domain.interactor.DeleteItemInteractor
 import com.pecawolf.domain.interactor.EquipItemInteractor
 import com.pecawolf.domain.interactor.SaveItemChangesInteractor
