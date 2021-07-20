@@ -36,14 +36,14 @@
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/item_icon"
+                        android:id="@+id/item_detail_icon"
                         android:layout_width="@dimen/icon_small"
                         android:layout_height="@dimen/icon_small"
                         android:layout_marginStart="@dimen/spacing_3"
-                        app:layout_constraintEnd_toStartOf="@id/item_name"
+                        app:layout_constraintEnd_toStartOf="@id/item_detail_name"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/item_id"
+                        app:layout_constraintTop_toTopOf="@id/item_detail_id"
                         app:srcCompat="@drawable/ic_backpack" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -52,14 +52,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="start|center_vertical"
-                        app:layout_constraintBottom_toTopOf="@id/item_description"
-                        app:layout_constraintEnd_toStartOf="@id/item_id"
-                        app:layout_constraintStart_toEndOf="@id/item_icon"
+                        app:layout_constraintBottom_toTopOf="@id/item_detail_description"
+                        app:layout_constraintEnd_toStartOf="@id/item_detail_id"
+                        app:layout_constraintStart_toEndOf="@id/item_detail_icon"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Can of beer" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/item_slot"
+                        android:id="@+id/item_detail_slot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_2"
@@ -74,28 +74,28 @@
                         tools:text="Primary" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/item_id"
+                        android:id="@+id/item_detail_id"
                         style="@style/Text.Label.Secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start|center_vertical"
                         app:layout_constraintBaseline_toBaselineOf="@id/item_detail_name"
-                        app:layout_constraintEnd_toStartOf="@id/item_count"
+                        app:layout_constraintEnd_toStartOf="@id/item_detail_count"
                         app:layout_constraintStart_toEndOf="@id/item_detail_name"
                         tools:text="#123456" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/item_count"
+                        android:id="@+id/item_detail_count"
                         style="@style/Text.Label.Secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBaseline_toBaselineOf="@id/item_detail_name"
                         app:layout_constraintEnd_toStartOf="@id/item_detail_count_edit_icon"
-                        app:layout_constraintStart_toEndOf="@id/item_id"
+                        app:layout_constraintStart_toEndOf="@id/item_detail_id"
                         tools:text="3x" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/item_description"
+                        android:id="@+id/item_detail_description"
                         style="@style/Text.Description"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -134,11 +134,11 @@
                         android:padding="@dimen/spacing_1"
                         android:src="@drawable/ic_wrench_inactive"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@id/item_count"
+                        app:layout_constraintBottom_toBottomOf="@id/item_detail_count"
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/item_count"
-                        app:layout_constraintTop_toTopOf="@id/item_count"
+                        app:layout_constraintStart_toEndOf="@id/item_detail_count"
+                        app:layout_constraintTop_toTopOf="@id/item_detail_count"
                         tools:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -149,9 +149,9 @@
                         android:padding="@dimen/spacing_1"
                         android:src="@drawable/ic_wrench_inactive"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@id/item_description"
+                        app:layout_constraintBottom_toBottomOf="@id/item_detail_description"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="@id/item_description"
+                        app:layout_constraintEnd_toEndOf="@id/item_detail_description"
                         tools:visibility="visible" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -189,18 +189,18 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/new_item_header_loadout"
-                        app:layout_constraintBottom_toTopOf="@id/loadout_combat"
+                        app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_combat"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/loadout_combat"
+                        android:id="@+id/item_detail_loadout_combat"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         app:checkedSrc="@drawable/ic_loadout_combat_active"
-                        app:layout_constraintBottom_toTopOf="@id/loadout_social"
+                        app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_social"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_header"
@@ -208,20 +208,20 @@
                         app:uncheckedSrc="@drawable/ic_loadout_combat_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/loadout_social"
+                        android:id="@+id/item_detail_loadout_social"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         app:checkedSrc="@drawable/ic_loadout_social_active"
-                        app:layout_constraintBottom_toTopOf="@id/loadout_travel"
+                        app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_travel"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/loadout_combat"
+                        app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_combat"
                         app:text="@string/new_item_loadout_social"
                         app:uncheckedSrc="@drawable/ic_loadout_social_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/loadout_travel"
+                        android:id="@+id/item_detail_loadout_travel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
@@ -229,7 +229,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/loadout_social"
+                        app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_social"
                         app:text="@string/new_item_loadout_travel"
                         app:uncheckedSrc="@drawable/ic_loadout_travel_inactive" />
 
@@ -291,13 +291,13 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/damage_light"
+                        android:id="@+id/item_detail_damage_light"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
-                        app:layout_constraintBottom_toTopOf="@id/damage_medium"
+                        app:layout_constraintBottom_toTopOf="@id/item_detail_damage_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_damage_header"
@@ -305,21 +305,21 @@
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/damage_medium"
+                        android:id="@+id/item_detail_damage_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
-                        app:layout_constraintBottom_toTopOf="@id/damage_heavy"
+                        app:layout_constraintBottom_toTopOf="@id/item_detail_damage_heavy"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/damage_light"
+                        app:layout_constraintTop_toBottomOf="@id/item_detail_damage_light"
                         app:text="@string/new_item_damage_medium"
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/damage_heavy"
+                        android:id="@+id/item_detail_damage_heavy"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
@@ -327,7 +327,7 @@
                         app:isChecked="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/damage_medium"
+                        app:layout_constraintTop_toBottomOf="@id/item_detail_damage_medium"
                         app:text="@string/new_item_damage_heavy"
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 

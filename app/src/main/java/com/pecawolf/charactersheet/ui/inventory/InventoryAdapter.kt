@@ -62,9 +62,13 @@ class InventoryAdapter(
             binding.itemSlot.apply {
                 text = slot?.getLocalizedName(context) ?: ""
 
-                (if (slot == null) R.color.disabled else R.color.activePrimary).let {
-                    setTextColor(ResourcesCompat.getColor(resources, it, null))
-                }
+                setTextColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        if (slot == null) R.color.disabled else R.color.activePrimary,
+                        null
+                    )
+                )
             }
             binding.itemClicker.setOnClickListener { itemEditListener.invoke(item.itemId) }
         }

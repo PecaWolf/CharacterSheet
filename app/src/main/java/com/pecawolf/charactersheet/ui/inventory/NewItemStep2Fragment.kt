@@ -13,6 +13,7 @@ import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
 import com.pecawolf.model.Item
+import com.pecawolf.model.Item.Weapon.Wield
 import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.NewItemStep2ViewModel
@@ -43,53 +44,30 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
     }.value
 
     override fun bindView(binding: FragmentNewItemStep2Binding, viewModel: NewItemStep2ViewModel) {
-        binding.loadoutCombat.setOnClickListener {
-            viewModel.loadoutCombatClicked()
-        }
-        binding.loadoutSocial.setOnClickListener {
-            viewModel.loadoutSocialClicked()
-        }
-        binding.loadoutTravel.setOnClickListener {
-            viewModel.loadoutTravelClicked()
-        }
-        binding.damageLight.setOnClickListener {
-            viewModel.damageLightClicked()
-        }
-        binding.damageMedium.setOnClickListener {
-            viewModel.damageMediumClicked()
-        }
-        binding.damageHeavy.setOnClickListener {
-            viewModel.damageHeavyClicked()
-        }
-        binding.magazineSizeInput.doOnTextChanged { text, start, before, count ->
+        binding.newItemStep2LoadoutCombat.setOnClickListener { viewModel.loadoutCombatClicked() }
+        binding.newItemStep2LoadoutSocial.setOnClickListener { viewModel.loadoutSocialClicked() }
+        binding.newItemStep2LoadoutTravel.setOnClickListener { viewModel.loadoutTravelClicked() }
+        binding.newItemStep2DamageLight.setOnClickListener { viewModel.damageLightClicked() }
+        binding.newItemStep2DamageMedium.setOnClickListener { viewModel.damageMediumClicked() }
+        binding.newItemStep2DamageHeavy.setOnClickListener { viewModel.damageHeavyClicked() }
+        binding.newItemStep2MagazineSizeInput.doOnTextChanged { text, start, before, count ->
             viewModel.onMagazineSizeInputChanged(
                 text.toString().toIntOrNull() ?: -1
             )
         }
-        binding.rateOfFireInput.doOnTextChanged { text, start, before, count ->
+        binding.newItemStep2RateOfFireInput.doOnTextChanged { text, start, before, count ->
             viewModel.onRateOfFireInputChanged(
                 text.toString().toIntOrNull() ?: -1
             )
         }
-        binding.damageTypesRecycler.apply {
+        binding.newItemStep2DamageTypesRecycler.apply {
             adapter = damageTypeAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        binding.wieldOneHanded.setOnClickListener {
-            viewModel.onWieldSelected(Item.Weapon.Wield.ONE_HANDED)
-        }
-        binding.wieldTwoHanded.setOnClickListener {
-            viewModel.onWieldSelected(Item.Weapon.Wield.TWO_HANDED)
-        }
-        binding.wieldMounted.setOnClickListener {
-            viewModel.onWieldSelected(Item.Weapon.Wield.MOUNTED)
-        }
-        binding.wieldDrone.setOnClickListener {
-//            viewModel.onWieldSelected(Item.Weapon.Wield.DRONE)
-        }
-        binding.buttonNext.setOnClickListener {
-            viewModel.onNextClicked()
-        }
+        binding.newItemStep2WieldOneHanded.setOnClickListener { viewModel.onWieldSelected(Wield.ONE_HANDED) }
+        binding.newItemStep2WieldTwoHanded.setOnClickListener { viewModel.onWieldSelected(Wield.TWO_HANDED) }
+        binding.newItemStep2WieldMounted.setOnClickListener { viewModel.onWieldSelected(Wield.MOUNTED) }
+        binding.newItemStep2ButtonNext.setOnClickListener { viewModel.onNextClicked() }
     }
 
     override fun observeViewModel(
@@ -97,40 +75,40 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
         viewModel: NewItemStep2ViewModel
     ) {
         viewModel.isWieldVisible.reObserve(this) { isVisible ->
-            binding.wieldCard.isVisible = isVisible
+            binding.newItemStep2WieldCard.isVisible = isVisible
         }
         viewModel.isDamageTypesVisible.reObserve(this) { isVisible ->
-            binding.damageTypesCard.isVisible = isVisible
-            binding.loadoutsCard.isVisible = isVisible
+            binding.newItemStep2DamageTypesCard.isVisible = isVisible
+            binding.newItemStep2LoadoutsCard.isVisible = isVisible
         }
         viewModel.isAmmoVisible.reObserve(this) { isVisible ->
-            binding.ammoCard.isVisible = isVisible
+            binding.newItemStep2AmmoCard.isVisible = isVisible
         }
         viewModel.loadoutCombatChecked.reObserve(this) { isChecked ->
-            binding.loadoutCombat.isChecked = isChecked
+            binding.newItemStep2LoadoutCombat.isChecked = isChecked
         }
         viewModel.loadoutSocialChecked.reObserve(this) { isChecked ->
-            binding.loadoutSocial.isChecked = isChecked
+            binding.newItemStep2LoadoutSocial.isChecked = isChecked
         }
         viewModel.loadoutTravelChecked.reObserve(this) { isChecked ->
-            binding.loadoutTravel.isChecked = isChecked
+            binding.newItemStep2LoadoutTravel.isChecked = isChecked
         }
         viewModel.damageLightChecked.reObserve(this) { isChecked ->
-            binding.damageLight.isChecked = isChecked
+            binding.newItemStep2DamageLight.isChecked = isChecked
         }
         viewModel.damageMediumChecked.reObserve(this) { isChecked ->
-            binding.damageMedium.isChecked = isChecked
+            binding.newItemStep2DamageMedium.isChecked = isChecked
         }
         viewModel.damageHeavyChecked.reObserve(this) { isChecked ->
-            binding.damageHeavy.isChecked = isChecked
+            binding.newItemStep2DamageHeavy.isChecked = isChecked
         }
         viewModel.magazineSize.reObserve(this) {
-            binding.magazineSizeInput.apply {
+            binding.newItemStep2MagazineSizeInput.apply {
                 if (text.toString() != it) setText(it)
             }
         }
         viewModel.rateOfFire.reObserve(this) {
-            binding.rateOfFireInput.apply {
+            binding.newItemStep2RateOfFireInput.apply {
                 if (text.toString() != it) setText(it)
             }
         }
@@ -144,19 +122,16 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
             }
         }
         viewModel.selectedWield.reObserve(this) {
-            binding.wieldOneHanded.isChecked = it == Item.Weapon.Wield.ONE_HANDED
-            binding.wieldTwoHanded.isChecked = it == Item.Weapon.Wield.TWO_HANDED
-            binding.wieldMounted.isChecked = it == Item.Weapon.Wield.MOUNTED
-//            binding.wieldDrone.isChecked = it == Item.Weapon.Wield.DRONE
+            binding.newItemStep2WieldOneHanded.isChecked = it == Wield.ONE_HANDED
+            binding.newItemStep2WieldTwoHanded.isChecked = it == Wield.TWO_HANDED
+            binding.newItemStep2WieldMounted.isChecked = it == Wield.MOUNTED
         }
         viewModel.isWeapon.reObserve(this) {
-            binding.damageHeader.text =
-                getString(if (it) R.string.new_item_header_damage else R.string.new_item_header_protection)
-            binding.damageTypesHeader.text =
-                getString(if (it) R.string.new_item_damage_types_header else R.string.new_item_protection_types_header)
+            binding.newItemStep2DamageHeader.setText(if (it) R.string.new_item_header_damage else R.string.new_item_header_protection)
+            binding.newItemStep2DamageTypesHeader.setText(if (it) R.string.new_item_damage_types_header else R.string.new_item_protection_types_header)
         }
         viewModel.isNextEnabled.reObserve(this) { isEnabled ->
-            binding.buttonNext.isEnabled = isEnabled
+            binding.newItemStep2ButtonNext.isEnabled = isEnabled
         }
         viewModel.navigateTo.reObserve(this) {
             when (it) {

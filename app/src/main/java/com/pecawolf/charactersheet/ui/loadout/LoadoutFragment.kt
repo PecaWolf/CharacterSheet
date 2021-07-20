@@ -20,17 +20,9 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
     override fun createViewModel() = injectVM<LoadoutViewModel>().value
 
     override fun bindView(binding: FragmentLoadoutBinding, viewModel: LoadoutViewModel) {
-//        viewModel.isLoadoutCombat
-//        viewModel.equipment.primary.name
-//        viewModel.equipment.secondary.name
-//        viewModel.equipment.tertiary.name
-//        viewModel.equipment.clothes.name
-//        viewModel.equipment.armor.name
-//        viewModel.money
-
-        binding.loadoutCombat.setOnClickListener { viewModel.onLoadoutCombatClicked() }
-        binding.loadoutSocial.setOnClickListener { viewModel.onLoadoutSocialClicked() }
-        binding.loadoutTravel.setOnClickListener { viewModel.onLoadoutTravelClicked() }
+        binding.loadoutCombatCheckbox.setOnClickListener { viewModel.onLoadoutCombatClicked() }
+        binding.loadoutSocialCheckbox.setOnClickListener { viewModel.onLoadoutSocialClicked() }
+        binding.loadoutTravelCheckbox.setOnClickListener { viewModel.onLoadoutTravelClicked() }
     }
 
     override fun observeViewModel(
@@ -38,9 +30,9 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         viewModel: LoadoutViewModel
     ) {
         viewModel.loadoutType.reObserve(this) { type ->
-            binding.loadoutCombat.isChecked = type == Item.LoadoutType.COMBAT
-            binding.loadoutSocial.isChecked = type == Item.LoadoutType.SOCIAL
-            binding.loadoutTravel.isChecked = type == Item.LoadoutType.TRAVEL
+            binding.loadoutCombatCheckbox.isChecked = type == Item.LoadoutType.COMBAT
+            binding.loadoutSocialCheckbox.isChecked = type == Item.LoadoutType.SOCIAL
+            binding.loadoutTravelCheckbox.isChecked = type == Item.LoadoutType.TRAVEL
         }
 
         viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->
@@ -48,64 +40,64 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
                 resources,
                 R.dimen.inactive_item_alpha
             )
-            binding.primaryWeaponLabel.alpha = alpha
-            binding.primaryWeaponValue.alpha = alpha
+            binding.loadoutWeaponPrimaryLabel.alpha = alpha
+            binding.loadoutWeaponPrimaryValue.alpha = alpha
         }
         viewModel.isSecondaryAllowed.reObserve(this) { isAllowed ->
             val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
                 resources,
                 R.dimen.inactive_item_alpha
             )
-            binding.secondaryWeaponLabel.alpha = alpha
-            binding.secondaryWeaponValue.alpha = alpha
+            binding.loadoutWeaponSecondaryLabel.alpha = alpha
+            binding.loadoutWeaponSecondaryValue.alpha = alpha
         }
         viewModel.isTertiaryAllowed.reObserve(this) { isAllowed ->
             val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
                 resources,
                 R.dimen.inactive_item_alpha
             )
-            binding.tertiaryWeaponLabel.alpha = alpha
-            binding.tertiaryWeaponValue.alpha = alpha
+            binding.loadoutWeaponTertiaryLabel.alpha = alpha
+            binding.loadoutWeaponTertiaryValue.alpha = alpha
         }
         viewModel.isClothingAllowed.reObserve(this) { isAllowed ->
             val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
                 resources,
                 R.dimen.inactive_item_alpha
             )
-            binding.civilianClothesLabel.alpha = alpha
-            binding.civilianClothesValue.alpha = alpha
+            binding.loadoutClothesLabel.alpha = alpha
+            binding.loadoutClothesValue.alpha = alpha
         }
         viewModel.isArmorAllowed.reObserve(this) { isAllowed ->
             val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
                 resources,
                 R.dimen.inactive_item_alpha
             )
-            binding.combatGearLabel.alpha = alpha
-            binding.combatGearValue.alpha = alpha
+            binding.loadoutArmorLabel.alpha = alpha
+            binding.loadoutArmorValue.alpha = alpha
         }
         viewModel.inventory.reObserve(this) { inventory ->
-            binding.primaryWeaponValue.text = inventory.primary.name
-            binding.primaryWeaponId.apply {
+            binding.loadoutWeaponPrimaryValue.text = inventory.primary.name
+            binding.loadoutWeaponPrimaryId.apply {
                 text = String.format("#%06d", inventory.primary.itemId)
                 isVisible = BuildConfig.DEBUG && inventory.primary.itemId > 0
             }
-            binding.secondaryWeaponValue.text = inventory.secondary.name
-            binding.secondaryWeaponId.apply {
+            binding.loadoutWeaponSecondaryValue.text = inventory.secondary.name
+            binding.loadoutWeaponSecondaryId.apply {
                 text = String.format("#%06d", inventory.secondary.itemId)
                 isVisible = BuildConfig.DEBUG && inventory.secondary.itemId > 0
             }
-            binding.tertiaryWeaponValue.text = inventory.tertiary.name
-            binding.tertiaryWeaponId.apply {
+            binding.loadoutWeaponTertiaryValue.text = inventory.tertiary.name
+            binding.loadoutWeaponTertiaryId.apply {
                 text = String.format("#%06d", inventory.tertiary.itemId)
                 isVisible = BuildConfig.DEBUG && inventory.tertiary.itemId > 0
             }
-            binding.civilianClothesValue.text = inventory.clothes.name
-            binding.civilianClothesId.apply {
+            binding.loadoutClothesValue.text = inventory.clothes.name
+            binding.loadoutClothesId.apply {
                 text = String.format("#%06d", inventory.clothes.itemId)
                 isVisible = BuildConfig.DEBUG && inventory.clothes.itemId > 0
             }
-            binding.combatGearValue.text = inventory.armor.name
-            binding.combatGearId.apply {
+            binding.loadoutArmorValue.text = inventory.armor.name
+            binding.loadoutArmorId.apply {
                 text = String.format("#%06d", inventory.armor.itemId)
                 isVisible = BuildConfig.DEBUG && inventory.armor.itemId > 0
             }

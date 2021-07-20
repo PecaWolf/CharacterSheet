@@ -18,7 +18,9 @@ import com.pecawolf.charactersheet.databinding.DialogSingleChoiceBinding
 import com.pecawolf.charactersheet.databinding.DialogTextInputBinding
 import com.pecawolf.charactersheet.databinding.DialogThreeChoiceBinding
 import com.pecawolf.charactersheet.databinding.DialogTwoChoiceBinding
+import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.view.showKeyboard
+import com.pecawolf.model.Item
 import com.pecawolf.presentation.SimpleSelectionItem
 import kotlin.math.min
 
@@ -237,6 +239,34 @@ class DialogHelper(private val context: Context) {
     // endregion generic dialogs
 
     // region specific dialogs
+
+    fun showEquipConfirmDialog(
+        name: String,
+        allowedSlots: List<Item.Slot>,
+        positive: (Dialog, List<Item.Slot>) -> Unit
+    ) {
+        val items = allowedSlots
+            .map { SimpleSelectionItem(it.getLocalizedName(context), false, it) }
+        showListChoiceDialog(
+            getString(R.string.item_equip_slot_selection_description, name),
+            true,
+            items,
+            positive
+        )
+    }
+
+    fun showUnequipConfirmDialog(name: String, slot: Item.Slot, positive: (Dialog) -> Unit) {
+        showTwoChoiceDialog(
+            getString(R.string.item_unequip_slot_title),
+            getString(
+                R.string.item_unequip_slot_description,
+                name,
+                slot.getLocalizedName(context)
+            ),
+            getString(R.string.generic_continue),
+            positive
+        )
+    }
 
     fun showDeleteItemDialog(
         name: String,

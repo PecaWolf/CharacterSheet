@@ -111,7 +111,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         viewModel.slot.reObserve(this) {
             val isEquipped = it.isNotEmpty()
 
-            binding.itemSlot.apply {
+            binding.itemDetailSlot.apply {
                 isVisible = isEquipped
                 text = it.firstOrNull()?.getLocalizedName(requireContext())
             }
@@ -128,10 +128,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                 is Destination.DamageTypesDialog -> showDamageTypesDialog(it.items)
                 is Destination.DeleteConfirmDialog -> showDeleteDialog(it.name)
                 is Destination.DescriptionDialog -> showDescriptionDialog(it.description)
-                is Destination.EquipConfirmDialog -> showEquipConfirmDialog(
-                    it.name,
-                    it.allowedSlots
-                )
+                is Destination.EquipConfirmDialog -> showEquipConfirmDialog(it.name, it.slots)
                 is Destination.UnequipConfirmDialog -> showUnequipConfirmDialog(it.name, it.slot)
                 Destination.Leave -> leaveItemDetail()
                 is Destination.LoadoutDialog -> showLoadoutDialog(it.items)
@@ -145,14 +142,14 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
 
     private fun setupItemDetails(item: Item) {
         binding.run {
-            itemIcon.setImageDrawable(item.getIcon(resources))
+            itemDetailIcon.setImageDrawable(item.getIcon(resources))
             itemDetailName.text = item.name
-            itemId.apply {
+            itemDetailId.apply {
                 isVisible = BuildConfig.DEBUG
                 text = String.format("#%06d", item.itemId)
             }
-            itemDescription.text = item.description
-            itemCount.apply {
+            itemDetailDescription.text = item.description
+            itemDetailCount.apply {
                 text = resources.getString(R.string.item_count, item.count)
             }
 
@@ -162,44 +159,34 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
             itemDetailDamageTypesCard.isVisible = item is Item.Weapon || item is Item.Armor
             itemDetailAmmoCard.isVisible = item is Item.Weapon.Ranged
 
-            if (item is Item.Weapon || item is Item.Armor) {
-                loadoutCombat.isChecked = item.allowedLoadouts.contains(LoadoutType.COMBAT)
-                loadoutSocial.isChecked = item.allowedLoadouts.contains(LoadoutType.SOCIAL)
-                loadoutTravel.isChecked = item.allowedLoadouts.contains(LoadoutType.TRAVEL)
+            itemDetailDamageHeavy.isChecked = item.damage == Damage.HEAVY
+            itemDetailDamageMedium.isChecked = item.damage == Damage.MEDIUM
+            itemDetailDamageLight.isChecked = item.damage == Damage.LIGHT
 
-                itemDetailDamageTypesRecycler.apply {
-                    adapter = damageTypeAdapter
-                    layoutManager = LinearLayoutManager(requireContext())
-                }
+            itemDetailLoadoutCombat.isChecked = item.allowedLoadouts.contains(LoadoutType.COMBAT)
+            itemDetailLoadoutSocial.isChecked = item.allowedLoadouts.contains(LoadoutType.SOCIAL)
+            itemDetailLoadoutTravel.isChecked = item.allowedLoadouts.contains(LoadoutType.TRAVEL)
 
-                if (item is Item.Weapon) {
-                    damageHeavy.isChecked = item.damage == Damage.HEAVY
-                    damageMedium.isChecked = item.damage == Damage.MEDIUM
-                    damageLight.isChecked = item.damage == Damage.LIGHT
-
-                    itemDetailDamageHeader.text = getString(R.string.new_item_header_damage)
-                    itemDetailDamageTypesHeader.text =
-                        getString(R.string.new_item_damage_types_header)
-
-                    itemDetailWieldOneHanded.isChecked = item.wield == Wield.ONE_HANDED
-                    itemDetailWieldTwoHanded.isChecked = item.wield == Wield.TWO_HANDED
-                    itemDetailWieldMounted.isChecked = item.wield == Wield.MOUNTED
-//                    itemDetailWieldDrone.isChecked = item.wield == Wield.DRONE
-                } else {
-                    item as Item.Armor
-                    damageHeavy.isChecked = item.damage == Damage.HEAVY
-                    damageMedium.isChecked = item.damage == Damage.MEDIUM
-                    damageLight.isChecked = item.damage == Damage.LIGHT
-
-                    itemDetailDamageHeader.text = getString(R.string.new_item_header_protection)
-                    itemDetailDamageTypesHeader.text =
-                        getString(R.string.new_item_protection_types_header)
-                }
+            itemDetailDamageTypesRecycler.apply {
+                adapter = damageTypeAdapter
+                layoutManager = LinearLayoutManager(requireContext())
             }
 
-            if (item is Item.Weapon.Ranged) {
-                itemDetailMagazineSizeValue.text = item.magazine.formatAmount()
-                itemDetailRateOfFireValue.text = item.rateOfFire.formatAmount()
+            if (item is Item.Weapon) {
+                itemDetailDamageHeader.setText(R.string.new_item_header_damage)
+                itemDetailDamageTypesHeader.setText(R.string.new_item_damage_types_header)
+
+                itemDetailWieldOneHanded.isChecked = item.wield == Wield.ONE_HANDED
+                itemDetailWieldTwoHanded.isChecked = item.wield == Wield.TWO_HANDED
+                itemDetailWieldMounted.isChecked = item.wield == Wield.MOUNTED
+
+                if (item is Item.Weapon.Ranged) {
+                    itemDetailMagazineSizeValue.text = item.magazine.formatAmount()
+                    itemDetailRateOfFireValue.text = item.rateOfFire.formatAmount()
+                }
+            } else if (item is Item.Armor) {
+                itemDetailDamageHeader.setText(R.string.new_item_header_protection)
+                itemDetailDamageTypesHeader.setText(R.string.new_item_protection_types_header)
             }
         }
     }
@@ -274,28 +261,14 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
     }
 
     private fun showEquipConfirmDialog(name: String, allowedSlots: List<Item.Slot>) {
-        val items = allowedSlots
-            .map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) }
-        dialogHelper.showListChoiceDialog(
-            getString(R.string.item_equip_slot_selection_description, name),
-            true,
-            items
-        ) { dialog, list: List<Item.Slot> ->
+        dialogHelper.showEquipConfirmDialog(name, allowedSlots) { dialog, list: List<Item.Slot> ->
             viewModel.onEquipSlotSelected(list.first())
             dialog.cancel()
         }
     }
 
     private fun showUnequipConfirmDialog(name: String, slot: Item.Slot) {
-        dialogHelper.showTwoChoiceDialog(
-            getString(R.string.item_unequip_slot_title),
-            getString(
-                R.string.item_unequip_slot_description,
-                name,
-                slot.getLocalizedName(requireContext())
-            ),
-            getString(R.string.generic_continue)
-        ) { dialog ->
+        dialogHelper.showUnequipConfirmDialog(name, slot) { dialog ->
             viewModel.onUnequipItemConfirmed()
             dialog.cancel()
         }
