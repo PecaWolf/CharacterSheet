@@ -109,6 +109,10 @@
     <string name="new_item_damage_light">Light</string>
     <string name="new_item_damage_medium">Medium</string>
     <string name="new_item_damage_heavy">Heavy</string>
+    <string name="new_item_damage_types_header">Damage types</string>
+    <string name="new_item_protection_types_header">Protection against damage types</string>
+    <string name="new_item_ammunition_header">Ammunition</string>
+    <string name="new_item_wield_header">Wielded</string>
 
     <string name="wield_one_handed">One-handed</string>
     <string name="wield_two_handed">Two-handed</string>
@@ -132,32 +136,22 @@
     <string name="damage_type_breath">Breath</string>
     <string name="damage_type_kinetic">Kinetic</string>
 
-    <string name="new_item_damage_types_header">Damage types</string>
-    <string name="new_item_protection_types_header">Protection against damage types</string>
-    <string name="new_item_ammunition_header">Ammunition</string>
-    <string name="new_item_wield_header">Wielded</string>
     <string name="item_detail_error_title">Item not found</string>
     <string name="item_detail_error_message">The item was not found, possibly there was some error</string>
-    <string name="title_activity_main2">MainActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="item_count">%1$dx</string>
     <string name="item_equip_slot_selection_title">Slot selection</string>
     <string name="item_equip_slot_selection_description">Select a slot to equip %1$s.</string>
     <string name="item_unequip_slot_title">Unequip item</string>
     <string name="item_unequip_slot_description">Do you want to unequip %1$s from %2$s slot?</string>
+
     <string name="equip_slot_armor">Armor</string>
     <string name="equip_slot_clothing">Clothing</string>
     <string name="equip_slot_grenade">Grenade</string>
     <string name="equip_slot_primary">Primary</string>
     <string name="equip_slot_secondary">Secondary</string>
     <string name="equip_slot_tertiary">Tertiary</string>
+
     <string name="item_edit_name_title">Item name</string>
     <string name="item_edit_name_message">Fill in the new item name</string>
     <string name="item_edit_name_hint">Item Name</string>
@@ -183,6 +177,7 @@
     <string name="item_delete_message">Do you want to delete %1$s? It will be removed permanently.</string>
     <string name="item_delete_sell">Sell</string>
     <string name="item_delete_discard">Discard</string>
+
     <string name="item_sell_title">Sell item</string>
     <string name="item_sell_message">Fill in the selling price of %1$s. It will be automatically added to your balance.</string>
     <string name="item_sell_hint">Item price</string>

@@ -62,7 +62,6 @@ class InventoryAdapter(
             binding.itemSlot.apply {
                 text = slot?.getLocalizedName(context) ?: ""
 
-
                 setTextColor(
                     ResourcesCompat.getColor(
                         resources,

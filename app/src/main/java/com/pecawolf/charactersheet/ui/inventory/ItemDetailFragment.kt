@@ -261,28 +261,14 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
     }
 
     private fun showEquipConfirmDialog(name: String, allowedSlots: List<Item.Slot>) {
-        val items = allowedSlots
-            .map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) }
-        dialogHelper.showListChoiceDialog(
-            getString(R.string.item_equip_slot_selection_description, name),
-            true,
-            items
-        ) { dialog, list: List<Item.Slot> ->
+        dialogHelper.showEquipConfirmDialog(name, allowedSlots) { dialog, list: List<Item.Slot> ->
             viewModel.onEquipSlotSelected(list.first())
             dialog.cancel()
         }
     }
 
     private fun showUnequipConfirmDialog(name: String, slot: Item.Slot) {
-        dialogHelper.showTwoChoiceDialog(
-            getString(R.string.item_unequip_slot_title),
-            getString(
-                R.string.item_unequip_slot_description,
-                name,
-                slot.getLocalizedName(requireContext())
-            ),
-            getString(R.string.generic_continue)
-        ) { dialog ->
+        dialogHelper.showUnequipConfirmDialog(name, slot) { dialog ->
             viewModel.onUnequipItemConfirmed()
             dialog.cancel()
         }
