@@ -56,10 +56,6 @@
             android:id="@+id/action_new_item_step_1_to_new_item_step_2"
             app:destination="@id/navigation_new_item_step_2" />
 
-        <action
-            android:id="@+id/action_new_item_step_1_to_new_item_step_3"
-            app:destination="@id/navigation_new_item_step_3" />
-
     </fragment>
 
     <fragment
@@ -86,29 +82,6 @@
         <action
             android:id="@+id/action_new_item_step_2_to_item_detail"
             app:destination="@id/navigation_item_detail" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_new_item_step_3"
-        android:name="com.pecawolf.charactersheet.ui.inventory.NewItemStep3Fragment"
-        android:label="@string/title_new_item"
-        tools:layout="@layout/fragment_new_item_step_3">
-
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="false" />
-
-        <argument
-            android:name="description"
-            app:argType="string"
-            app:nullable="false" />
-
-        <argument
-            android:name="type"
-            app:argType="string"
-            app:nullable="false" />
 
     </fragment>
 

@@ -10,11 +10,6 @@ class SelectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_selection)
 
-//        setupActionBarWithNavController(
-//            findNavController(R.id.nav_host_fragment),
-//            AppBarConfiguration(setOf(R.id.navigation_choose_character))
-//        )
-
         intent.extras?.let {
             findNavController(R.id.nav_host_fragment).navigate(
                 R.id.navigation_species_selection

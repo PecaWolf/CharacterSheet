@@ -10,7 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/button_next"
+        app:layout_constraintBottom_toTopOf="@id/new_item_step_2_button_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,12 +20,12 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/loadouts_card"
+                android:id="@+id/new_item_step_2_loadouts_card"
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/header_guide"
-                app:layout_constraintEnd_toStartOf="@id/damage_card"
+                app:layout_constraintBottom_toBottomOf="@id/new_item_step_2_header_guide"
+                app:layout_constraintEnd_toStartOf="@id/new_item_step_2_damage_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -36,14 +36,14 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/loadout_header"
+                        android:id="@+id/new_item_step_2_loadout_header"
                         style="@style/Text.Header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/new_item_header_loadout" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/loadout_combat"
+                        android:id="@+id/new_item_step_2_loadout_combat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_loadout_combat_active"
@@ -51,7 +51,7 @@
                         app:uncheckedSrc="@drawable/ic_loadout_combat_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/loadout_social"
+                        android:id="@+id/new_item_step_2_loadout_social"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_loadout_social_active"
@@ -59,7 +59,7 @@
                         app:uncheckedSrc="@drawable/ic_loadout_social_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/loadout_travel"
+                        android:id="@+id/new_item_step_2_loadout_travel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_loadout_travel_active"
@@ -71,13 +71,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/damage_card"
+                android:id="@+id/new_item_step_2_damage_card"
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/header_guide"
+                app:layout_constraintBottom_toBottomOf="@id/new_item_step_2_header_guide"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loadouts_card"
+                app:layout_constraintStart_toEndOf="@id/new_item_step_2_loadouts_card"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -87,14 +87,14 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/damage_header"
+                        android:id="@+id/new_item_step_2_damage_header"
                         style="@style/Text.Header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/new_item_header_damage" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/damage_light"
+                        android:id="@+id/new_item_step_2_damage_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_checkmark_active"
@@ -103,7 +103,7 @@
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/damage_medium"
+                        android:id="@+id/new_item_step_2_damage_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_checkmark_active"
@@ -112,7 +112,7 @@
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/damage_heavy"
+                        android:id="@+id/new_item_step_2_damage_heavy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_checkmark_active"
@@ -125,22 +125,22 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/header_guide"
+                android:id="@+id/new_item_step_2_header_guide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:constraint_referenced_ids="loadouts_card,damage_card"
+                app:constraint_referenced_ids="new_item_step_2_loadouts_card,new_item_step_2_damage_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/ammo_card"
+                android:id="@+id/new_item_step_2_ammo_card"
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_guide">
+                app:layout_constraintTop_toBottomOf="@id/new_item_step_2_header_guide">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     style="@style/Box"
@@ -155,14 +155,14 @@
                         android:text="@string/new_item_ammunition_header" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/magazine_size_layout"
+                        android:id="@+id/new_item_step_2_magazine_size_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_2"
                         android:hint="@string/new_item_magazine_size_hint">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/magazine_size_input"
+                            android:id="@+id/new_item_step_2_magazine_size_input"
                             style="@style/Input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -172,14 +172,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/rate_of_fire_layout"
+                        android:id="@+id/new_item_step_2_rate_of_fire_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_2"
                         android:hint="@string/new_item_rate_of_fire_hint">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/rate_of_fire_input"
+                            android:id="@+id/new_item_step_2_rate_of_fire_input"
                             style="@style/Input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -193,14 +193,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/wield_card"
+                android:id="@+id/new_item_step_2_wield_card"
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/damage_types_card"
+                app:layout_constraintBottom_toTopOf="@id/new_item_step_2_damage_types_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ammo_card">
+                app:layout_constraintTop_toBottomOf="@id/new_item_step_2_ammo_card">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     style="@style/Box"
@@ -209,7 +209,7 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/wield_header"
+                        android:id="@+id/new_item_step_2_wield_header"
                         style="@style/Text.Header"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -219,44 +219,44 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/wield_one_handed"
+                        android:id="@+id/new_item_step_2_wield_one_handed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
-                        app:layout_constraintEnd_toStartOf="@id/wield_two_handed"
+                        app:layout_constraintEnd_toStartOf="@id/new_item_step_2_wield_two_handed"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/wield_header"
+                        app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_header"
                         app:text="@string/wield_one_handed"
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/wield_two_handed"
+                        android:id="@+id/new_item_step_2_wield_two_handed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/wield_one_handed"
-                        app:layout_constraintTop_toBottomOf="@id/wield_header"
+                        app:layout_constraintStart_toEndOf="@id/new_item_step_2_wield_one_handed"
+                        app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_header"
                         app:text="@string/wield_two_handed"
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/wield_mounted"
+                        android:id="@+id/new_item_step_2_wield_mounted"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/wield_drone"
+                        app:layout_constraintEnd_toStartOf="@id/new_item_step_2_wield_drone"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/wield_one_handed"
+                        app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_one_handed"
                         app:text="@string/wield_mounted"
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                        android:id="@+id/wield_drone"
+                        android:id="@+id/new_item_step_2_wield_drone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
@@ -265,8 +265,8 @@
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/wield_mounted"
-                        app:layout_constraintTop_toBottomOf="@id/wield_two_handed"
+                        app:layout_constraintStart_toEndOf="@id/new_item_step_2_wield_mounted"
+                        app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_two_handed"
                         app:text="@string/wield_drone"
                         app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
@@ -275,14 +275,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/damage_types_card"
+                android:id="@+id/new_item_step_2_damage_types_card"
                 style="@style/Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/wield_card">
+                app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_card">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -290,14 +290,14 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/damage_types_header"
+                        android:id="@+id/new_item_step_2_damage_types_header"
                         style="@style/Text.Header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/new_item_protection_types_header" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/damage_types_recycler"
+                        android:id="@+id/new_item_step_2_damage_types_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_1"
@@ -317,7 +317,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_next"
+        android:id="@+id/new_item_step_2_button_next"
         style="@style/Button.Positive"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

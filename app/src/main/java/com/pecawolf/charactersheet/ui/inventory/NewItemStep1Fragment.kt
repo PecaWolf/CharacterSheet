@@ -18,15 +18,12 @@ import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItemStep1Binding>() {
 
     private val itemTypeAdapter: SimpleSelectionAdapter by lazy {
-        SimpleSelectionAdapter(
-            Item.ItemType.items().map {
-                SimpleSelectionItem(
-                    it.getLocalizedName(requireContext()),
-                    false,
-                    it
-                )
+        SimpleSelectionAdapter { viewModel.onItemTypeSelected(it as Item.ItemType) }
+            .apply {
+                items = Item.ItemType.items().map {
+                    SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it)
+                }
             }
-        ) { viewModel.onItemTypeSelected(it as Item.ItemType) }
     }
 
     override fun getBinding(
@@ -37,17 +34,17 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
     override fun createViewModel() = injectVM<NewItemStep1ViewModel>().value
 
     override fun bindView(binding: FragmentNewItemStep1Binding, viewModel: NewItemStep1ViewModel) {
-        binding.nameInput.doAfterTextChanged {
+        binding.newItemStep1NameInput.doAfterTextChanged {
             viewModel.onNameChanged(it.toString())
         }
-        binding.descriptionInput.doAfterTextChanged {
+        binding.newItemStep1DescriptionInput.doAfterTextChanged {
             viewModel.onDescriptionChanged(it.toString())
         }
-        binding.itemTypeRecycler.apply {
+        binding.newItemStep1TypeRecycler.apply {
             adapter = itemTypeAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        binding.buttonNext.setOnClickListener {
+        binding.newItemStep1ButtonNext.setOnClickListener {
             viewModel.onNextClicked()
         }
     }
@@ -57,12 +54,12 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         viewModel: NewItemStep1ViewModel
     ) {
         viewModel.nameInput.reObserve(this) {
-            binding.nameInput.apply {
+            binding.newItemStep1NameInput.apply {
                 if (text.toString() != it) setText(it)
             }
         }
         viewModel.descriptionInput.reObserve(this) {
-            binding.descriptionInput.apply {
+            binding.newItemStep1DescriptionInput.apply {
                 if (text.toString() != it) setText(it)
             }
         }
@@ -74,12 +71,12 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
                     it.first
                 )
             }
-            binding.itemTypeRecycler.post {
+            binding.newItemStep1TypeRecycler.post {
                 binding.root.requestLayout()
             }
         }
         viewModel.isNextEnabled.reObserve(this) { isEnabled ->
-            binding.buttonNext.isEnabled = isEnabled
+            binding.newItemStep1ButtonNext.isEnabled = isEnabled
         }
         viewModel.navigateToNext.reObserve(this) {
             findNavController().navigate(
