@@ -92,7 +92,7 @@ fun Item.Weapon.Wield.getLocalizedName() = when (this) {
     Item.Weapon.Wield.ONE_HANDED -> R.string.wield_one_handed
     Item.Weapon.Wield.TWO_HANDED -> R.string.wield_two_handed
     Item.Weapon.Wield.MOUNTED -> R.string.wield_mounted
-    Item.Weapon.Wield.DRONE -> R.string.wield_drone
+//    Item.Weapon.Wield.DRONE -> R.string.wield_drone
 }
 
 fun Item.LoadoutType.getLocalizedName(context: Context) = context.getString(getLocalizedName())

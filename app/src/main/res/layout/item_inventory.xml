@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="start|center_vertical"
             app:layout_constraintBaseline_toBaselineOf="@id/item_name"
-            app:layout_constraintEnd_toStartOf="@id/item_count"
+            app:layout_constraintEnd_toStartOf="@id/item_go"
             app:layout_constraintStart_toEndOf="@id/item_name"
             tools:text="#123456" />
 
@@ -53,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBaseline_toBaselineOf="@id/item_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_id"
+            app:layout_constraintEnd_toStartOf="@id/item_id"
+            app:layout_constraintStart_toEndOf="@id/item_name"
             tools:text="3x" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -66,22 +66,10 @@
             android:gravity="start|top"
             android:lines="4"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_equip"
+            app:layout_constraintEnd_toStartOf="@id/item_go"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_name"
             tools:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos." />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_slot"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textSize="@dimen/text_tiny"
-            app:layout_constraintBottom_toTopOf="@id/item_equip"
-            app:layout_constraintEnd_toEndOf="@id/item_equip"
-            app:layout_constraintStart_toStartOf="@id/item_equip"
-            tools:text="Primary" />
 
         <View
             android:id="@+id/item_clicker"
@@ -93,15 +81,28 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
-        <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-            android:id="@+id/item_equip"
-            android:layout_width="@dimen/icon_medium"
-            android:layout_height="@dimen/icon_medium"
-            app:checkedSrc="@drawable/ic_equip_active"
-            app:isChecked="false"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_2"
+            android:gravity="center"
+            android:lines="1"
+            android:maxLines="1"
+            android:textSize="@dimen/text_tiny"
+            app:layout_constraintBottom_toBottomOf="@id/item_name"
+            app:layout_constraintStart_toStartOf="@id/item_name"
+            app:layout_constraintTop_toBottomOf="@id/item_name"
+            tools:text="Primary" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_go"
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:uncheckedSrc="@drawable/ic_equip_inactive" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_right" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

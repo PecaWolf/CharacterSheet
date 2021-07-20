@@ -46,4 +46,3 @@ inline fun <X, Y> LiveData<X>.mapNotNull(crossinline transform: (X) -> Y?): Live
 
     return result
 }
-

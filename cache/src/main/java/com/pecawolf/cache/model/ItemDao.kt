@@ -15,8 +15,8 @@ interface ItemDao {
     @Query("SELECT * FROM ItemEntity")
     fun getAll(): Single<List<ItemEntity>>
 
-    @Query("SELECT * FROM ItemEntity WHERE itemId IN (:itemIds)")
-    fun getAllByIds(itemIds: Array<Long>): Single<List<ItemEntity>>
+    @Query("SELECT * FROM ItemEntity WHERE itemId IS (:itemId)")
+    fun getById(itemId: Long): Single<ItemEntity>
 
     @Query("SELECT * FROM ItemEntity WHERE ownerId IS (:ownerId)")
     fun getAllByOwnerId(ownerId: Long): Observable<List<ItemEntity>>

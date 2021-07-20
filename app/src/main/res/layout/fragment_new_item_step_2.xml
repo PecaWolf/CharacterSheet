@@ -298,12 +298,13 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/damage_types_recycler"
-                        style="@style/Box"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_1"
                         android:layout_weight="1"
                         android:nestedScrollingEnabled="false"
                         android:orientation="vertical"
+                        android:padding="@dimen/spacing_1"
                         tools:itemCount="10"
                         tools:listitem="@layout/item_simple_selection" />
 

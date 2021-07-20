@@ -3,17 +3,12 @@ package com.pecawolf.presentation.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
-import com.pecawolf.domain.interactor.EquipItemInteractor
-import com.pecawolf.domain.interactor.UnequipItemInteractor
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.viewmodel.BaseViewModel
-import timber.log.Timber
 
 class InventoryViewModel(
-    private val mainViewModel: MainViewModel,
-    private val equipItem: EquipItemInteractor,
-    private val unequipItem: UnequipItemInteractor
+    private val mainViewModel: MainViewModel
 ) : BaseViewModel() {
 
     private val _navigateTo = SingleLiveEvent<Destination>()
@@ -57,42 +52,15 @@ class InventoryViewModel(
         _navigateTo.postValue(Destination.ItemDetail(itemId))
     }
 
-    fun onItemEquip(item: Item, slot: Item.Slot?) {
-        if (slot == null) _navigateTo.postValue(Destination.EquipDialog(item))
-        else _navigateTo.postValue(Destination.UnequipDialog(item, slot))
-    }
-
     fun onAddItem() {
         _navigateTo.postValue(Destination.NewItem)
-    }
-
-    fun onEquipSlotSelected(itemId: Long, slot: Item.Slot) {
-        equipItem.execute(itemId to slot)
-            .observe(EQUIP, ::onEquipItemError, ::onEquipItemSuccess)
-    }
-
-    fun onUnequipItemConfirmed(slot: Item.Slot) {
-        unequipItem.execute(slot)
-            .observe(UNEQUIP, ::onEquipItemError, ::onEquipItemSuccess)
-    }
-
-    private fun onEquipItemSuccess() {
-        Timber.v("onEquipItemSuccess()")
-    }
-
-    private fun onEquipItemError(error: Throwable) {
-        Timber.w(error, "onEquipItemError(): ")
     }
 
     sealed class Destination {
         object NewItem : Destination()
         data class ItemDetail(val itemId: Long) : Destination()
-        data class EquipDialog(val item: Item) : Destination()
-        data class UnequipDialog(val item: Item, val slot: Item.Slot) : Destination()
     }
 
     companion object {
-        private const val EQUIP = "EQUIP"
-        private const val UNEQUIP = "UNEQUIP"
     }
 }

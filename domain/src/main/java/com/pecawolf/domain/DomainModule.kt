@@ -4,6 +4,7 @@ import com.pecawolf.data.DataModule
 import com.pecawolf.domain.interactor.ClearActiveCharacterInteractor
 import com.pecawolf.domain.interactor.CreateChracterInteractor
 import com.pecawolf.domain.interactor.CreateNewItemInteractor
+import com.pecawolf.domain.interactor.DeleteItemInteractor
 import com.pecawolf.domain.interactor.EquipItemInteractor
 import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
@@ -30,6 +31,7 @@ object DomainModule {
         factory { SaveItemChangesInteractor(get()) }
         factory { EquipItemInteractor(get()) }
         factory { UnequipItemInteractor(get()) }
+        factory { DeleteItemInteractor(get()) }
     }
 
     fun start() {

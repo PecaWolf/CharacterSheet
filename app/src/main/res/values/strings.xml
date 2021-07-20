@@ -177,6 +177,15 @@
     <string name="item_detail_fab_label_edit">Edit item</string>
     <string name="item_detail_fab_label_equip">Equip item</string>
     <string name="item_detail_fab_label_unequip">Unequip item</string>
+    <string name="item_detail_fab_label_delete">Delete item</string>
+
+    <string name="item_delete_title">Delete this item?</string>
+    <string name="item_delete_message">Do you want to delete %1$s? It will be removed permanently.</string>
+    <string name="item_delete_sell">Sell</string>
+    <string name="item_delete_discard">Discard</string>
+    <string name="item_sell_title">Sell item</string>
+    <string name="item_sell_message">Fill in the selling price of %1$s. It will be automatically added to your balance.</string>
+    <string name="item_sell_hint">Item price</string>
 
     <string name="multi_choice_header_loadout">Select allowed loadouts</string>
     <string name="multi_choice_header_damage_type">Select damage types</string>

@@ -27,8 +27,17 @@ object PresentationModule {
 
         viewModel { LoadoutViewModel(get()) }
 
-        viewModel { InventoryViewModel(get(), get(), get()) }
-        viewModel { (itemId: Long) -> ItemDetailViewModel(itemId, get(), get()) }
+        viewModel { InventoryViewModel(get()) }
+        viewModel { (itemId: Long) ->
+            ItemDetailViewModel(
+                itemId,
+                get(),
+                get(),
+                get(),
+                get(),
+                get()
+            )
+        }
         viewModel { NewItemStep1ViewModel() }
         viewModel { (name: String, description: String, type: Item.ItemType) ->
             NewItemStep2ViewModel(

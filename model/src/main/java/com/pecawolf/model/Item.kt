@@ -441,12 +441,12 @@ sealed class Item(
             enhancements,
             mutableListOf(LoadoutType.COMBAT),
             damage,
-            Wield.DRONE,
+            Wield.ONE_HANDED,
             damageTypes
         )
 
         enum class Wield {
-            ONE_HANDED, TWO_HANDED, MOUNTED, DRONE
+            ONE_HANDED, TWO_HANDED, MOUNTED //, DRONE
         }
     }
 

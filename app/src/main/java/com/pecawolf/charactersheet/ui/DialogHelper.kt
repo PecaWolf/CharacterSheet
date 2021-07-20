@@ -1,11 +1,14 @@
 package com.pecawolf.charactersheet.ui
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +24,13 @@ import kotlin.math.min
 
 class DialogHelper(private val context: Context) {
 
+    // region generic dialogs
+
     fun showSingleChoiceDialog(
         title: String,
         message: String,
         positiveButton: String,
-        positive: () -> Unit
+        positive: (Dialog) -> Unit
     ) {
         val binding = DialogSingleChoiceBinding.inflate(LayoutInflater.from(context))
         val dialog: AlertDialog = AlertDialog.Builder(context)
@@ -40,8 +45,7 @@ class DialogHelper(private val context: Context) {
         binding.singleChoiceButton.apply {
             text = positiveButton
             setOnClickListener {
-                positive.invoke()
-                dialog.cancel()
+                positive.invoke(dialog)
             }
         }
     }
@@ -50,7 +54,7 @@ class DialogHelper(private val context: Context) {
         title: String,
         message: String,
         positiveButton: String,
-        positive: () -> Unit
+        positive: (Dialog) -> Unit
     ) {
         val binding = DialogTwoChoiceBinding.inflate(LayoutInflater.from(context))
         val dialog: AlertDialog = AlertDialog.Builder(context)
@@ -65,8 +69,7 @@ class DialogHelper(private val context: Context) {
         binding.twoChoiceButtonPositive.apply {
             text = positiveButton
             setOnClickListener {
-                positive.invoke()
-                dialog.cancel()
+                positive.invoke(dialog)
             }
         }
         binding.twoChoiceButtonNegative.apply {
@@ -79,9 +82,9 @@ class DialogHelper(private val context: Context) {
         title: String,
         message: String,
         positiveButton: String,
-        positive: () -> Unit,
+        positive: (Dialog) -> Unit,
         negativeButton: String,
-        negative: () -> Unit
+        negative: (Dialog) -> Unit
     ) {
         val binding = DialogThreeChoiceBinding.inflate(LayoutInflater.from(context))
         val dialog: AlertDialog = AlertDialog.Builder(context)
@@ -96,14 +99,14 @@ class DialogHelper(private val context: Context) {
         binding.threeChoiceButtonPositive.apply {
             text = positiveButton
             setOnClickListener {
-                positive.invoke()
+                positive.invoke(dialog)
                 dialog.cancel()
             }
         }
         binding.threeChoiceButtonNegative.apply {
             text = negativeButton
             setOnClickListener {
-                negative.invoke()
+                negative.invoke(dialog)
                 dialog.cancel()
             }
         }
@@ -117,7 +120,7 @@ class DialogHelper(private val context: Context) {
         title: String,
         isSingleChoice: Boolean,
         items: List<SimpleSelectionItem>,
-        positive: (List<T>) -> Unit,
+        positive: (Dialog, List<T>) -> Unit,
     ) {
         val binding = DialogMultiChoiceBinding.inflate(LayoutInflater.from(context))
 
@@ -135,15 +138,19 @@ class DialogHelper(private val context: Context) {
             post {
                 requestLayout()
 
-                adapter = SimpleSelectionAdapter {
-                    (adapter as SimpleSelectionAdapter).items =
-                        if (isSingleChoice) items.map { item ->
-                            item.copy(isChecked = item.data == it)
+                adapter = SimpleSelectionAdapter { clicked ->
+                    val adapter = (adapter as SimpleSelectionAdapter)
+
+                    if (isSingleChoice) {
+                        adapter.items = adapter.items.map { item ->
+                            item.copy(isChecked = item.data == clicked)
                         }
-                        else items.map { item: SimpleSelectionItem ->
-                            if (item.data == it) item.copy(isChecked = !item.isChecked)
+                    } else {
+                        adapter.items = adapter.items.map { item ->
+                            if (item.data == clicked) item.copy(isChecked = !item.isChecked)
                             else item
                         }
+                    }
                 }
                 layoutManager = LinearLayoutManager(context)
                 (adapter as SimpleSelectionAdapter).items = items
@@ -157,10 +164,7 @@ class DialogHelper(private val context: Context) {
                 (binding.multiChoiceRecycler.adapter as SimpleSelectionAdapter).items
                     .filter { it.isChecked }
                     .map { it.data as T }
-                    .let { list ->
-                        positive.invoke(list)
-                        dialog.cancel()
-                    }
+                    .let { list -> positive.invoke(dialog, list) }
             }
         }
         binding.multiChoiceButtonNegative.apply {
@@ -177,7 +181,7 @@ class DialogHelper(private val context: Context) {
         defaultInput: String?,
         hint: String,
         positiveButton: String,
-        positive: (String) -> Unit
+        positive: (Dialog, String) -> Unit
     ) {
 
         val binding = DialogTextInputBinding.inflate(LayoutInflater.from(context))
@@ -219,8 +223,7 @@ class DialogHelper(private val context: Context) {
         binding.textInputButtonPositive.apply {
             text = positiveButton
             setOnClickListener {
-                positive.invoke(binding.textInputInput.text?.toString() ?: "")
-                dialog.cancel()
+                positive.invoke(dialog, binding.textInputInput.text?.toString() ?: "")
             }
         }
         binding.textInputButtonNegative.apply {
@@ -230,4 +233,47 @@ class DialogHelper(private val context: Context) {
             }
         }
     }
+
+    // endregion generic dialogs
+
+    // region specific dialogs
+
+    fun showDeleteItemDialog(
+        name: String,
+        onClick: (Dialog, Int) -> Unit
+    ) {
+        showThreeChoiceDialog(
+            getString(R.string.item_delete_title),
+            getString(R.string.item_delete_message, name),
+            getString(R.string.item_delete_sell),
+            { dialog ->
+                showSellItemDialog(name, onClick)
+                dialog.cancel()
+            },
+            getString(R.string.item_delete_discard),
+            { dialog -> onClick.invoke(dialog, 0) },
+        )
+    }
+
+    fun showSellItemDialog(name: String, positive: (Dialog, Int) -> Unit) {
+        showTextInputDialog(
+            getString(R.string.item_sell_title),
+            getString(R.string.item_sell_message, name),
+            InputType.TYPE_CLASS_NUMBER,
+            1,
+            null,
+            getString(R.string.item_sell_hint),
+            getString(R.string.generic_continue)
+        ) { dialog, result ->
+            val price = result.toInt()
+            if (price != 0) positive.invoke(dialog, price) // TODO: Error case
+        }
+    }
+
+    // endregion specific dialogs
+
+    private fun getString(@StringRes resId: Int, vararg formatArgs: Any?) =
+        context.resources.getString(resId, *formatArgs)
+
+    private fun getString(@StringRes resId: Int) = context.resources.getString(resId)
 }

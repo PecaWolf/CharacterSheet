@@ -47,7 +47,7 @@
                         app:srcCompat="@drawable/ic_backpack" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/item_name"
+                        android:id="@+id/item_detail_name"
                         style="@style/Text.Label.Primary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -59,14 +59,29 @@
                         tools:text="Can of beer" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/item_slot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_2"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textColor="@color/activePrimary"
+                        android:textSize="@dimen/text_tiny"
+                        app:layout_constraintBottom_toBottomOf="@id/item_detail_name"
+                        app:layout_constraintStart_toStartOf="@id/item_detail_name"
+                        app:layout_constraintTop_toBottomOf="@id/item_detail_name"
+                        tools:text="Primary" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/item_id"
                         style="@style/Text.Label.Secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start|center_vertical"
-                        app:layout_constraintBaseline_toBaselineOf="@id/item_name"
+                        app:layout_constraintBaseline_toBaselineOf="@id/item_detail_name"
                         app:layout_constraintEnd_toStartOf="@id/item_count"
-                        app:layout_constraintStart_toEndOf="@id/item_name"
+                        app:layout_constraintStart_toEndOf="@id/item_detail_name"
                         tools:text="#123456" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -74,8 +89,8 @@
                         style="@style/Text.Label.Secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBaseline_toBaselineOf="@id/item_name"
-                        app:layout_constraintEnd_toStartOf="@id/item_count_edit_icon"
+                        app:layout_constraintBaseline_toBaselineOf="@id/item_detail_name"
+                        app:layout_constraintEnd_toStartOf="@id/item_detail_count_edit_icon"
                         app:layout_constraintStart_toEndOf="@id/item_id"
                         tools:text="3x" />
 
@@ -89,7 +104,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/item_name"
+                        app:layout_constraintTop_toBottomOf="@id/item_detail_name"
                         tools:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos." />
 
                     <androidx.constraintlayout.widget.Group
@@ -97,21 +112,21 @@
                         android:layout_height="wrap_content" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/item_name_edit_icon"
+                        android:id="@+id/item_detail_name_edit_icon"
                         android:layout_width="@dimen/icon_small"
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
                         android:src="@drawable/ic_wrench_inactive"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@id/item_name"
+                        app:layout_constraintBottom_toBottomOf="@id/item_detail_name"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="@id/item_name"
-                        app:layout_constraintTop_toTopOf="@id/item_name"
+                        app:layout_constraintEnd_toEndOf="@id/item_detail_name"
+                        app:layout_constraintTop_toTopOf="@id/item_detail_name"
                         tools:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/item_count_edit_icon"
+                        android:id="@+id/item_detail_count_edit_icon"
                         android:layout_width="@dimen/icon_small"
                         android:layout_height="@dimen/icon_small"
                         android:layout_marginEnd="@dimen/spacing_1"
@@ -127,7 +142,7 @@
                         tools:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/item_description_edit_icon"
+                        android:id="@+id/item_detail_description_edit_icon"
                         android:layout_width="@dimen/icon_small"
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
@@ -612,11 +627,12 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/item_detail_damage_types_recycler"
-                        style="@style/Box"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_1"
                         android:layout_weight="1"
                         android:nestedScrollingEnabled="false"
+                        android:padding="@dimen/spacing_1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -647,9 +663,9 @@
 
     <ProgressBar
         android:id="@+id/item_detail_progress_bar"
-        android:background="@drawable/bg_circle_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_circle_card"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -665,10 +681,12 @@
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu_colorNormal="@color/buttonBackgroundEnabled">
+        app:menu_colorNormal="@color/buttonBackgroundPositiveEnabled"
+        app:menu_icon="@drawable/ic_add"
+        app:menu_openDirection="up">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/item_detail_item_edit"
+            android:id="@+id/item_detail_item_edit_fab"
             style="@style/Button.Fab.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -676,12 +694,20 @@
             app:fab_label="@string/item_detail_fab_label_edit" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/item_detail_item_equip"
+            android:id="@+id/item_detail_item_equip_fab"
             style="@style/Button.Fab.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_equip_24"
             app:fab_label="@string/item_detail_fab_label_equip" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/item_detail_item_delete_fab"
+            style="@style/Button.Fab.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_minus"
+            app:fab_label="@string/item_detail_fab_label_delete" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

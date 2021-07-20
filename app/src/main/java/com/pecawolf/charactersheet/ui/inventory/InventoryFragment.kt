@@ -4,13 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ext.formatAmount
-import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
-import com.pecawolf.model.Item
-import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel.Destination
@@ -19,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {
 
     private val backpackAdapter: InventoryAdapter by lazy {
-        InventoryAdapter(viewModel::onItemEdit, viewModel::onItemEquip)
+        InventoryAdapter(viewModel::onItemEdit)
     }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -55,31 +51,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
                 is Destination.ItemDetail -> findNavController().navigate(
                     InventoryFragmentDirections.actionInventoryToItemDetail(destination.itemId)
                 )
-                is Destination.EquipDialog -> showEquipItemDialog(destination.item)
-                is Destination.UnequipDialog -> showUnequipItemDialog(destination)
             }
         }
-    }
-
-    private fun showUnequipItemDialog(destination: Destination.UnequipDialog) {
-        dialogHelper.showTwoChoiceDialog(
-            getString(R.string.item_unequip_slot_title),
-            getString(
-                R.string.item_unequip_slot_description,
-                destination.item.name,
-                destination.slot.getLocalizedName(requireContext())
-            ),
-            getString(R.string.generic_continue)
-        ) { viewModel.onUnequipItemConfirmed(destination.slot) }
-    }
-
-    private fun showEquipItemDialog(item: Item) {
-        val items = item.allowedSlots
-            .map { SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it) }
-        dialogHelper.showListChoiceDialog(
-            getString(R.string.item_equip_slot_selection_description, item.name),
-            false,
-            items
-        ) { list: List<Item.Slot> -> viewModel.onEquipSlotSelected(item.itemId, list.first()) }
     }
 }

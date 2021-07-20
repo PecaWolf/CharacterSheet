@@ -15,7 +15,6 @@ import com.pecawolf.model.Item
 
 class InventoryAdapter(
     private val itemEditListener: (Long) -> Unit,
-    private val itemEquipListener: (Item, Item.Slot?) -> Unit,
 ) : RecyclerView.Adapter<InventoryViewHolder>() {
 
     var items: List<Pair<Item, Item.Slot?>> = listOf()
@@ -30,7 +29,7 @@ class InventoryAdapter(
         )
 
     override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
-        holder.bind(items[position], itemEditListener, itemEquipListener)
+        holder.bind(items[position], itemEditListener)
     }
 
     override fun getItemCount() = items.size
@@ -42,7 +41,6 @@ class InventoryAdapter(
         fun bind(
             inventoryItem: Pair<Item, Item.Slot?>,
             itemEditListener: (Long) -> Unit,
-            itemEquipListener: (Item, Item.Slot?) -> Unit
         ) {
             val item = inventoryItem.first
             val slot = inventoryItem.second
@@ -61,24 +59,10 @@ class InventoryAdapter(
                 text = resources.getString(R.string.item_count, item.count)
             }
 
-            binding.itemEquip.apply {
-                val isEquippable = item.allowedSlots.isNotEmpty()
-                isVisible = isEquippable
-                isEnabled = isEquippable
-                isChecked = slot != null
-                setOnClickListener { itemEquipListener.invoke(item, slot) }
-            }
             binding.itemSlot.apply {
                 text = slot?.getLocalizedName(context) ?: ""
 
-                when (slot) {
-                    Item.Slot.PRIMARY -> R.color.activePrimary
-                    Item.Slot.SECONDARY -> R.color.activePrimary
-                    Item.Slot.TERTIARY -> R.color.activePrimary
-                    Item.Slot.ARMOR -> R.color.activePrimary
-                    Item.Slot.CLOTHING -> R.color.activePrimary
-                    null -> R.color.disabled
-                }.let {
+                (if (slot == null) R.color.disabled else R.color.activePrimary).let {
                     setTextColor(ResourcesCompat.getColor(resources, it, null))
                 }
             }

@@ -85,7 +85,7 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
             viewModel.onWieldSelected(Item.Weapon.Wield.MOUNTED)
         }
         binding.wieldDrone.setOnClickListener {
-            viewModel.onWieldSelected(Item.Weapon.Wield.DRONE)
+//            viewModel.onWieldSelected(Item.Weapon.Wield.DRONE)
         }
         binding.buttonNext.setOnClickListener {
             viewModel.onNextClicked()
@@ -147,7 +147,7 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
             binding.wieldOneHanded.isChecked = it == Item.Weapon.Wield.ONE_HANDED
             binding.wieldTwoHanded.isChecked = it == Item.Weapon.Wield.TWO_HANDED
             binding.wieldMounted.isChecked = it == Item.Weapon.Wield.MOUNTED
-            binding.wieldDrone.isChecked = it == Item.Weapon.Wield.DRONE
+//            binding.wieldDrone.isChecked = it == Item.Weapon.Wield.DRONE
         }
         viewModel.isWeapon.reObserve(this) {
             binding.damageHeader.text =
