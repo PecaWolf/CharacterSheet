@@ -1,9 +1,11 @@
 package com.pecawolf.charactersheet.ui.inventory
 
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ext.formatAmount
 import com.pecawolf.charactersheet.ui.BaseFragment
@@ -15,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {
 
     private val backpackAdapter: InventoryAdapter by lazy {
-        InventoryAdapter(viewModel::onItemEdit)
+        InventoryAdapter(viewModel::onItemDetailClicked)
     }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
@@ -24,11 +26,12 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
     override fun createViewModel() = injectVM<InventoryViewModel>().value
 
     override fun bindView(binding: FragmentInventoryBinding, viewModel: InventoryViewModel) {
-        binding.backpackRecycler.apply {
+        binding.inventoryRecycler.apply {
             adapter = backpackAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        binding.addItemButton.setOnClickListener { viewModel.onAddItem() }
+        binding.inventoryMoneyClicker.setOnClickListener { viewModel.onMoneyClicked() }
+        binding.inventoryAddItemButton.setOnClickListener { viewModel.onAddItemClicked() }
     }
 
     override fun observeViewModel(
@@ -36,7 +39,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
         viewModel: InventoryViewModel
     ) {
         viewModel.money.reObserve(this) { money ->
-            binding.moneyValue.text = money.formatAmount()
+            binding.inventoryMoneyValue.text = money.formatAmount()
         }
 
         viewModel.backpack.reObserve(this) { items ->
@@ -51,6 +54,18 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
                 is Destination.ItemDetail -> findNavController().navigate(
                     InventoryFragmentDirections.actionInventoryToItemDetail(destination.itemId)
                 )
+                is Destination.EditMoney -> dialogHelper.showTextInputDialog(
+                    getString(R.string.money_edit_title),
+                    getString(R.string.money_edit_message),
+                    InputType.TYPE_CLASS_NUMBER,
+                    1,
+                    "${destination.money}",
+                    getString(R.string.money_edit_hint),
+                    getString(R.string.generic_continue)
+                ) { dialog, money ->
+                    viewModel.onMoneyConfirmed(money.toInt())
+                    dialog.cancel()
+                }
             }
         }
     }

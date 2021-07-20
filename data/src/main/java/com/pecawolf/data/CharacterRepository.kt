@@ -12,7 +12,6 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.subjects.BehaviorSubject
 import timber.log.Timber
 
 class CharacterRepository(
@@ -21,8 +20,6 @@ class CharacterRepository(
     private val chracterSnippetMapper: CharacterSnippetMapper,
     private val itemMapper: ItemMapper
 ) {
-    private val activeCharacter: BehaviorSubject<List<CharacterEntity>> = BehaviorSubject.create()
-
     fun createCharacter(baseStats: BaseStats) =
         cache.createCharacter(characterMapper.toEntity(Character.new(baseStats)))
 
@@ -45,7 +42,6 @@ class CharacterRepository(
 
     fun clearActiveCharacter(): Completable {
         return Completable.complete()
-            .doOnComplete { activeCharacter.onNext(listOf()) }
             .doOnComplete { cache.setActiveCharacterId(null) }
     }
 
@@ -112,5 +108,12 @@ class CharacterRepository(
         .flatMapCompletable {
             it.money += money
             cache.updateCharacter(it)
+        }
+
+    fun updateMoney(money: Int) = cache.getCharacter()
+        .firstOrError()
+        .flatMapCompletable { character ->
+            character.money = money
+            cache.updateCharacter(character)
         }
 }

@@ -191,4 +191,8 @@
     <string name="multi_choice_header_damage_type">Select damage types</string>
     <string name="multi_choice_header_damage">Select damage level</string>
     <string name="multi_choice_header_wield">Select wield option</string>
+
+    <string name="money_edit_title">New amount</string>
+    <string name="money_edit_message">Fill in new amount of money you own, not just the change.</string>
+    <string name="money_edit_hint">Amount</string>
 </resources>

@@ -14,6 +14,7 @@ import com.pecawolf.domain.interactor.SaveItemChangesInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import com.pecawolf.domain.interactor.UnequipItemInteractor
+import com.pecawolf.domain.interactor.UpdateMoneyInteractor
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -32,6 +33,7 @@ object DomainModule {
         factory { EquipItemInteractor(get()) }
         factory { UnequipItemInteractor(get()) }
         factory { DeleteItemInteractor(get()) }
+        factory { UpdateMoneyInteractor(get()) }
     }
 
     fun start() {
