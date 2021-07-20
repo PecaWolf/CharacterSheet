@@ -20,13 +20,11 @@ data class CharacterEntity(
     val inl: Int,
     val wis: Int,
     val cha: Int,
-    val money: Int,
-    val primary: Long,
-    val secondary: Long,
-    val tertiary: Long,
-    val clothes: Long,
-    val armor: Long,
-    val backpack: List<Long> = listOf(),
-    val storage: List<Long> = listOf(),
-) {
-}
+    var money: Int,
+    var primary: Long,
+    var secondary: Long,
+    var tertiary: Long,
+    var clothes: Long,
+    var armor: Long,
+    val backpack: MutableList<Long> = mutableListOf(),
+)

@@ -8,5 +8,4 @@ data class Inventory(
     val clothes: Item.Armor = Item.Armor.None,
     val armor: Item.Armor = Item.Armor.None,
     val backpack: List<Item> = listOf(),
-    val storage: List<Item> = listOf()
 )

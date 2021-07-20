@@ -2,196 +2,237 @@ package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.ItemEntity
 import com.pecawolf.model.Item
-import com.pecawolf.model.Item.Armor.None.protections
-import com.pecawolf.model.Item.Weapon.Melee.BareHands.damage
-import com.pecawolf.model.Item.Weapon.Melee.BareHands.damageTypes
 import com.pecawolf.model.Item.Weapon.Melee.BareHands.wield
 
 class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
 
     override fun fromEntity(entity: ItemEntity, additional: List<Nothing>) = entity.run {
-        when (type) {
-            ItemEntity.ItemType.BARE_HANDS -> Item.Weapon.Melee.BareHands
-            ItemEntity.ItemType.KNIFE -> Item.Weapon.Melee.Knife(
+        when (Item.ItemType.valueOf(type)) {
+            Item.ItemType.BARE_HANDS -> Item.Weapon.Melee.BareHands
+            Item.ItemType.KNIFE -> Item.Weapon.Melee.Knife(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!)
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.SWORD -> Item.Weapon.Melee.Sword(
+            Item.ItemType.SWORD -> Item.Weapon.Melee.Sword(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseWield(wield!!),
-                parseDamageTypes(damageTypes!!)
+                parseDamage(damage),
+                parseWield(wield),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.AXE -> Item.Weapon.Melee.Axe(
+            Item.ItemType.AXE -> Item.Weapon.Melee.Axe(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseWield(wield!!),
-                parseDamageTypes(damageTypes!!)
+                parseDamage(damage),
+                parseWield(wield),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.BOW -> Item.Weapon.Ranged.Bow(
+            Item.ItemType.HAMMER -> Item.Weapon.Melee.Hammer(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseWield(wield),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.CROSSBOW -> Item.Weapon.Ranged.Crossbow(
+            Item.ItemType.BOW -> Item.Weapon.Ranged.Bow(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.PISTOL -> Item.Weapon.Ranged.Pistol(
+            Item.ItemType.CROSSBOW -> Item.Weapon.Ranged.Crossbow(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.REVOLVER -> Item.Weapon.Ranged.Revolver(
+            Item.ItemType.PISTOL -> Item.Weapon.Ranged.Pistol(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.RIFLE -> Item.Weapon.Ranged.Rifle(
+            Item.ItemType.REVOLVER -> Item.Weapon.Ranged.Revolver(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.SUBMACHINE_GUN -> Item.Weapon.Ranged.SubmachineGun(
+            Item.ItemType.RIFLE -> Item.Weapon.Ranged.Rifle(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.SHOTGUN -> Item.Weapon.Ranged.Shotgun(
+            Item.ItemType.SUBMACHINE_GUN -> Item.Weapon.Ranged.SubmachineGun(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.MACHINE_GUN -> Item.Weapon.Ranged.MachineGun(
+            Item.ItemType.SHOTGUN -> Item.Weapon.Ranged.Shotgun(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.ANTIMATERIAL_GUN -> Item.Weapon.Ranged.AntimaterialGun(
+            Item.ItemType.MACHINE_GUN -> Item.Weapon.Ranged.MachineGun(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamage(damage!!),
-                parseDamageTypes(damageTypes!!),
-                magazine!!,
-                rateOfFire!!
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.NONE -> Item.Armor.None
-            ItemEntity.ItemType.CLOTHING -> Item.Armor.Clothing(
+            Item.ItemType.ANTIMATERIAL_GUN -> Item.Weapon.Ranged.AntimaterialGun(
                 itemId,
                 name,
                 description,
-                parseEnhancements(enhancements),
-                parseDamageTypes(protections!!)
-            )
-            ItemEntity.ItemType.KEVLAR -> Item.Armor.Kevlar(
-                itemId,
-                name,
-                description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamageTypes(protections!!)
+                parseDamage(damage),
+                parseDamageTypes(damageTypes),
+                magazine,
+                rateOfFire
             )
-            ItemEntity.ItemType.EXO_SKELETON -> Item.Armor.ExoSkeleton(
+            Item.ItemType.GRENADE -> Item.Weapon.Grenade(
                 itemId,
                 name,
                 description,
+                count,
+                parseEnhancements(enhancements),
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
+            )
+            Item.ItemType.NONE -> Item.Armor.None
+            Item.ItemType.CLOTHING -> Item.Armor.Clothing(
+                itemId,
+                name,
+                description,
+                count,
+                parseEnhancements(enhancements),
+                parseDamageTypes(damageTypes)
+            )
+            Item.ItemType.KEVLAR -> Item.Armor.Kevlar(
+                itemId,
+                name,
+                description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamageTypes(protections!!)
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.VAC_SUIT -> Item.Armor.VacSuit(
+            Item.ItemType.EXO_SKELETON -> Item.Armor.ExoSkeleton(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamageTypes(protections!!)
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.VAC_ARMOR -> Item.Armor.VacArmor(
+            Item.ItemType.VAC_SUIT -> Item.Armor.VacSuit(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamageTypes(protections!!)
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.POWERED_ARMOR -> Item.Armor.PoweredArmor(
+            Item.ItemType.VAC_ARMOR -> Item.Armor.VacArmor(
                 itemId,
                 name,
                 description,
+                count,
                 parseEnhancements(enhancements),
                 parseLoadouts(allowedLoadouts),
-                parseDamageTypes(protections!!)
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
             )
-            ItemEntity.ItemType.OTHER -> Item.Other(
+            Item.ItemType.POWERED_ARMOR -> Item.Armor.PoweredArmor(
                 itemId,
                 name,
                 description,
+                count,
+                parseEnhancements(enhancements),
+                parseLoadouts(allowedLoadouts),
+                parseDamage(damage),
+                parseDamageTypes(damageTypes)
+            )
+            Item.ItemType.OTHER -> Item.Other(
+                itemId,
+                name,
+                description,
+                count,
                 parseEnhancements(enhancements)
             )
         }
@@ -200,73 +241,90 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
     override fun toEntity(model: Item, additional: List<Long>) = model.run {
         val ownerId = additional[0]
 
+        // TODO: Simplify
         when (this) {
             is Item.Weapon.Melee.BareHands -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.BARE_HANDS,
+                Item.ItemType.BARE_HANDS.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
             )
             is Item.Weapon.Melee.Knife -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.KNIFE,
+                Item.ItemType.KNIFE.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
             )
             is Item.Weapon.Melee.Sword -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.SWORD,
+                Item.ItemType.SWORD.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
             )
             is Item.Weapon.Melee.Axe -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.AXE,
+                Item.ItemType.AXE.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
                 wield.name,
                 damageTypes.map { it.name },
-                null,
-                null,
-                null
+                -1,
+                -1,
+            )
+            is Item.Weapon.Melee.Hammer -> ItemEntity(
+                itemId,
+                ownerId,
+                Item.ItemType.HAMMER.name,
+                name,
+                description,
+                count,
+                allowedLoadouts.map { it.name },
+                codeEnhancements(enhancements),
+                damage.name,
+                wield.name,
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Weapon.Ranged.Bow -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.BOW,
+                Item.ItemType.BOW.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -274,14 +332,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.Crossbow -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.CROSSBOW,
+                Item.ItemType.CROSSBOW.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -289,14 +347,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.Pistol -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.PISTOL,
+                Item.ItemType.PISTOL.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -304,14 +362,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.Revolver -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.REVOLVER,
+                Item.ItemType.REVOLVER.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -319,14 +377,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.Rifle -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.RIFLE,
+                Item.ItemType.RIFLE.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -334,14 +392,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.SubmachineGun -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.SUBMACHINE_GUN,
+                Item.ItemType.SUBMACHINE_GUN.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -349,14 +407,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.Shotgun -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.SHOTGUN,
+                Item.ItemType.SHOTGUN.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -364,14 +422,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.MachineGun -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.MACHINE_GUN,
+                Item.ItemType.MACHINE_GUN.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -379,14 +437,14 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
             )
             is Item.Weapon.Ranged.AntimaterialGun -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.ANTIMATERIAL_GUN,
+                Item.ItemType.ANTIMATERIAL_GUN.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
                 damage.name,
@@ -394,127 +452,141 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
                 damageTypes.map { it.name },
                 magazine,
                 rateOfFire,
-                null
+            )
+            is Item.Weapon.Grenade -> ItemEntity(
+                itemId,
+                ownerId,
+                Item.ItemType.ANTIMATERIAL_GUN.name,
+                name,
+                description,
+                count,
+                allowedLoadouts.map { it.name },
+                codeEnhancements(enhancements),
+                damage.name,
+                wield.name,
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.None -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.NONE,
+                Item.ItemType.NONE.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 listOf(),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                Item.Damage.NONE.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.Clothing -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.CLOTHING,
+                Item.ItemType.CLOTHING.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                Item.Damage.NONE.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.Kevlar -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.KEVLAR,
+                Item.ItemType.KEVLAR.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                damage.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.ExoSkeleton -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.EXO_SKELETON,
+                Item.ItemType.EXO_SKELETON.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                damage.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.VacSuit -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.VAC_SUIT,
+                Item.ItemType.VAC_SUIT.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                damage.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.VacArmor -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.VAC_ARMOR,
+                Item.ItemType.VAC_ARMOR.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                damage.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Armor.PoweredArmor -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.POWERED_ARMOR,
+                Item.ItemType.POWERED_ARMOR.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                protections.map { it.name }
+                damage.name,
+                "",
+                damageTypes.map { it.name },
+                -1,
+                -1,
             )
             is Item.Other -> ItemEntity(
                 itemId,
                 ownerId,
-                ItemEntity.ItemType.OTHER,
+                Item.ItemType.OTHER.name,
                 name,
                 description,
+                count,
                 allowedLoadouts.map { it.name },
                 codeEnhancements(enhancements),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
+                "",
+                "",
+                listOf(),
+                -1,
+                -1,
             )
         }
     }
@@ -528,7 +600,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
 
     private fun parseLoadouts(allowedLoadouts: List<String>) = allowedLoadouts.map {
         Item.LoadoutType.valueOf(it)
-    }
+    }.toMutableList()
 
     private fun parseDamage(damage: String) =
         damage.let { Item.Damage.valueOf(it) }
@@ -538,7 +610,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
 
     private fun parseDamageTypes(damageTypes: List<String>) = damageTypes.map {
         Item.DamageType.valueOf(it)
-    }.toSet()
+    }.toMutableSet()
 
     companion object {
         private const val SEPARATOR_ENHANCEMENT = ":"

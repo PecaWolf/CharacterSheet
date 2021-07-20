@@ -2,6 +2,7 @@ package com.pecawolf.presentation.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
@@ -36,4 +37,12 @@ fun MutableLiveData<Int>.inc() {
 
 fun MutableLiveData<Int>.dec() {
     postValue(value?.dec() ?: 0)
+}
+
+inline fun <X, Y> LiveData<X>.mapNotNull(crossinline transform: (X) -> Y?): LiveData<Y> {
+    val result = MediatorLiveData<Y>()
+
+    result.addSource(this) { transform(it)?.let { result.value = it } }
+
+    return result
 }

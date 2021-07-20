@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.pecawolf.presentation.viewmodel.BaseViewModel
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : Fragment() {
 
     protected val viewModel: VIEWMODEL by lazy { createViewModel() }
 
     protected lateinit var binding: BINDING
+
+    val dialogHelper: DialogHelper by inject { parametersOf(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,7 @@ abstract class BaseFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding> : 
 
     override fun onResume() {
         super.onResume()
+
         viewModel.onRefresh()
     }
 

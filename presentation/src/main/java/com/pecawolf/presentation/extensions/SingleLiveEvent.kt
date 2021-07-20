@@ -31,9 +31,4 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
         pending.set(true)
         super.setValue(t)
     }
-
-    @MainThread
-    fun call() {
-        value = null
-    }
 }

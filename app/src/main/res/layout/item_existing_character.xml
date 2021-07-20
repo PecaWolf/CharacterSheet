@@ -24,7 +24,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_species"
-            style="@style/Text.Label"
+            style="@style/Text.Label.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,8 +34,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/character_arrow"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

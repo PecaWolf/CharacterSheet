@@ -29,7 +29,7 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/header_card"
+        android:id="@+id/item_detail_base_data_card"
         style="@style/Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/name_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_name"
@@ -73,7 +73,7 @@
 
             <TextView
                 android:id="@+id/species_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_species"
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/guide_75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_card">
+        app:layout_constraintTop_toBottomOf="@id/item_detail_base_data_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
 
             <TextView
                 android:id="@+id/str_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_str"
@@ -169,7 +169,7 @@
 
             <TextView
                 android:id="@+id/dex_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_dex"
@@ -212,7 +212,7 @@
 
             <TextView
                 android:id="@+id/vit_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_vit"
@@ -255,7 +255,7 @@
 
             <TextView
                 android:id="@+id/int_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_int"
@@ -298,7 +298,7 @@
 
             <TextView
                 android:id="@+id/wis_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_wis"
@@ -341,7 +341,7 @@
 
             <TextView
                 android:id="@+id/cha_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_cha"
@@ -392,7 +392,7 @@
         app:layout_constraintBottom_toTopOf="@id/luck_and_hp_recycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guide_75"
-        app:layout_constraintTop_toBottomOf="@id/header_card">
+        app:layout_constraintTop_toBottomOf="@id/item_detail_base_data_card">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

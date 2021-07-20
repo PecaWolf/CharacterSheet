@@ -12,8 +12,16 @@
 
     <dimen name="text_size_primary">18sp</dimen>
     <dimen name="text_size_secondary">16sp</dimen>
-    <dimen name="icon_size">48dp</dimen>
+    <dimen name="text_size_description">14sp</dimen>
+    <dimen name="text_tiny">10sp</dimen>
     <dimen name="menu_item_height">96dp</dimen>
 
-    <item name="inactive_item_alpha" type="dimen" format="float">0.2</item>
+    <item name="inactive_item_alpha" format="float" type="dimen">0.2</item>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="icon_large">64dp</dimen>
+    <dimen name="icon_medium">48dp</dimen>
+    <dimen name="icon_small">32dp</dimen>
+
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="slection_item_height">68dp</dimen>
 </resources>

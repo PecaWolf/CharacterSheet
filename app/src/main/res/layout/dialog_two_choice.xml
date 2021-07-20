@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/two_choice_header"
+            style="@style/Text.Header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/two_choice_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Placeholder header" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/two_choice_message"
+            style="@style/Text.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_2"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/two_choice_button_negative"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/two_choice_header"
+            tools:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur bibendum justo non orci. Cras elementum. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Fusce wisi. Integer in sapien. Etiam commodo dui eget wisi. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Sed convallis magna eu sem. Vivamus porttitor turpis ac leo. Nunc dapibus tortor vel mi dapibus sollicitudin. Sed convallis magna eu sem. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede." />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/two_choice_button_negative"
+            style="@style/Button.Negative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/generic_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/two_choice_button_positive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/two_choice_message" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/two_choice_button_positive"
+            style="@style/Button.Positive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/generic_ok"
+            app:layout_constraintBottom_toBottomOf="@id/two_choice_button_negative"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/two_choice_button_negative"
+            app:layout_constraintTop_toTopOf="@id/two_choice_button_negative" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -2,6 +2,8 @@ package com.pecawolf.cache
 
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.CharacterSnippetEntity
+import com.pecawolf.cache.model.ItemEntity
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
@@ -13,6 +15,9 @@ class Cache(
     fun createCharacter(character: CharacterEntity) = database.characterDao().insert(character)
         .doOnSuccess { applicationPreferences.activeCharacterId = it }
         .ignoreElement()
+
+    fun updateCharacter(character: CharacterEntity): Completable =
+        database.characterDao().update(character)
 
     fun getCharacters(): Single<List<CharacterSnippetEntity>> {
         return database.characterDao()
@@ -34,7 +39,48 @@ class Cache(
     }
 
     fun getCharacter(characterId: Long? = applicationPreferences.activeCharacterId) =
-        if (characterId == null) Maybe.empty()
-        else database.characterDao().loadAllByIds(arrayOf(characterId))
-            .flatMapMaybe { it.firstOrNull()?.let { Maybe.just(it) } }
+        database.characterDao().getAllByIds(listOfNotNull(characterId).toTypedArray())
+            .map { it.first { it.characterId == characterId } }
+
+    fun getItemsForOwner(ownerId: Long? = applicationPreferences.activeCharacterId) =
+        database.itemDao().getAllByOwnerId(ownerId ?: -1)
+
+    fun createItemForCharacter(
+        name: String,
+        description: String,
+        type: String,
+        loadouts: List<String>,
+        damage: String,
+        wield: String,
+        magazineSize: Int,
+        rateOfFire: Int,
+        damageTypes: List<String>,
+        ownerId: Long? = applicationPreferences.activeCharacterId,
+    ): Single<Long> = database.itemDao().insert(
+        ItemEntity(
+            0,
+            ownerId ?: throw IllegalArgumentException("User id $ownerId not found!"),
+            type,
+            name,
+            description,
+            1,
+            loadouts,
+            listOf(),
+            damage,
+            wield,
+            damageTypes,
+            magazineSize,
+            rateOfFire
+        )
+    )
+
+    fun getItemById(itemId: Long): Maybe<ItemEntity> = database.itemDao()
+        .getById(itemId)
+        .toMaybe()
+//        .flatMapMaybe { items -> items.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty() }
+
+    fun updateItem(item: ItemEntity) = database.itemDao().update(item)
+
+    fun deleteItem(itemId: Long) = database.itemDao().getById(itemId)
+        .flatMapCompletable { database.itemDao().delete(it) }
 }

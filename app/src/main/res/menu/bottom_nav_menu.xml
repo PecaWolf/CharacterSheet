@@ -7,6 +7,11 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_loadout"
+        android:icon="@drawable/ic_loadout_combat_inactive"
+        android:title="@string/title_loadout" />
+
+    <item
         android:id="@+id/navigation_inventory"
         android:icon="@drawable/ic_backpack"
         android:title="@string/title_inventory" />

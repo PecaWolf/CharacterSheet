@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/header_card"
+        android:id="@+id/item_detail_base_data_card"
         style="@style/Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -69,7 +69,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_str_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"
@@ -92,7 +92,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/basic_info_str_value"
                 app:layout_constraintTop_toTopOf="@id/basic_info_str_label"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_str_value"
@@ -121,7 +121,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_dex_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"
@@ -144,7 +144,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/basic_info_str_plus"
                 app:layout_constraintTop_toTopOf="@id/basic_info_dex_label"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_dex_value"
@@ -173,7 +173,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_vit_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"
@@ -196,7 +196,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/basic_info_str_plus"
                 app:layout_constraintTop_toTopOf="@id/basic_info_vit_label"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_vit_value"
@@ -225,7 +225,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_int_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"
@@ -248,7 +248,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/basic_info_str_plus"
                 app:layout_constraintTop_toTopOf="@id/basic_info_int_label"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_int_value"
@@ -277,7 +277,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_wis_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"
@@ -300,7 +300,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/basic_info_str_plus"
                 app:layout_constraintTop_toTopOf="@id/basic_info_wis_label"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_wis_value"
@@ -329,7 +329,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_cha_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"
@@ -352,7 +352,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/basic_info_str_plus"
                 app:layout_constraintTop_toTopOf="@id/basic_info_cha_label"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_24" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_cha_value"
@@ -381,7 +381,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/basic_info_remaining_label"
-                style="@style/Text.Label"
+                style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/spacing_2"

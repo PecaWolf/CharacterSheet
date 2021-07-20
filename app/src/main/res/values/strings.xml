@@ -1,11 +1,19 @@
 <resources>
+    <string name="generic_ok">Ok</string>
     <string name="generic_continue">Continue</string>
+    <string name="generic_cancel">Cancel</string>
+    <string name="generic_back">Back</string>
 
     <string name="app_name">Character Sheet</string>
     <string name="title_home">Home</string>
+    <string name="title_loadout">Loadout</string>
     <string name="title_inventory">Inventory</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_multi_choice">Multi choice</string>
+    <string name="title_new_item">New Item</string>
     <string name="title_skills">Skills</string>
     <string name="title_other">Other</string>
+    <string name="title_refresh">Refresh</string>
 
     <string name="world_last_realm">Last Realm</string>
     <string name="world_blue_way">Blue Way</string>
@@ -21,6 +29,30 @@
     <string name="species_searian">Searian</string>
     <string name="species_gusmerian">Gusmerian</string>
     <string name="species_krung">Krung</string>
+
+    <string name="item_type_bare_hands">Bare hands</string>
+    <string name="item_type_knife">Knife</string>
+    <string name="item_type_sword">Sword</string>
+    <string name="item_type_axe">Axe</string>
+    <string name="item_type_hammer">Hammer</string>
+    <string name="item_type_bow">Bow</string>
+    <string name="item_type_crossbow">Crossbow</string>
+    <string name="item_type_pistol">Pistol</string>
+    <string name="item_type_revolver">Revolver</string>
+    <string name="item_type_rifle">Rifle</string>
+    <string name="item_type_submachine_gun">Submachine gun</string>
+    <string name="item_type_shotgun">Shotgun</string>
+    <string name="item_type_machine_gun">Machine gun</string>
+    <string name="item_type_antimaterial_gun">Antimaterial gun</string>
+    <string name="item_type_grenade">Grenade</string>
+    <string name="item_type_none">None</string>
+    <string name="item_type_clothing">Clothing</string>
+    <string name="item_type_kevlar">Kevlar</string>
+    <string name="item_type_exo_skeleton">Exo-skeleton</string>
+    <string name="item_type_vac_suit">Vac-suit</string>
+    <string name="item_type_vac_armor">Vac-armor</string>
+    <string name="item_type_powered_armor">Powered armor</string>
+    <string name="item_type_other">Other</string>
 
     <string name="character_name">Name:</string>
     <string name="character_species">Species:</string>
@@ -39,13 +71,10 @@
     <string name="civilian_clothes">Civilian clothes:</string>
     <string name="combat_gear">Armor:</string>
     <string name="current_loadout">Current loadout:</string>
-    <string name="combat">Combat</string>
-    <string name="civilian">Civilian</string>
     <string name="switch_loadout">Switch</string>
     <string name="money">Money:</string>
     <string name="backpack">Backpack</string>
     <string name="storage">Storage</string>
-    <string name="loadout">Loadout</string>
     <string name="home_luck_and_hp">"%1$d + %2$d "</string>
     <string name="other_create_character">Create a new character</string>
     <string name="create_character_name_hint">Character name</string>
@@ -65,4 +94,105 @@
 
     <string name="character_selection_species_world">"%1$s in the world of %2$s"</string>
     <string name="other_select_character">Select different character</string>
+
+    <string name="new_item_name_hint">Item name</string>
+    <string name="new_item_description_hint">Item description </string>
+    <string name="new_item_magazine_size_hint">Magazine size</string>
+    <string name="new_item_rate_of_fire_hint">Rate of fire</string>
+
+    <string name="new_item_loadout_combat">Combat</string>
+    <string name="new_item_loadout_social">Social</string>
+    <string name="new_item_loadout_travel">Travel</string>
+    <string name="new_item_header_loadout">Loadout</string>
+    <string name="new_item_header_damage">Damage</string>
+    <string name="new_item_header_protection">Protection</string>
+    <string name="new_item_damage_light">Light</string>
+    <string name="new_item_damage_medium">Medium</string>
+    <string name="new_item_damage_heavy">Heavy</string>
+
+    <string name="wield_one_handed">One-handed</string>
+    <string name="wield_two_handed">Two-handed</string>
+    <string name="wield_mounted">Mounted</string>
+    <string name="wield_drone">Drone</string>
+
+    <string name="damage_none">None</string>
+    <string name="damage_light">Light</string>
+    <string name="damage_medium">Medium</string>
+    <string name="damage_heavy">Heavy</string>
+
+    <string name="damage_type_blunt">Blunt</string>
+    <string name="damage_type_slash">Slash</string>
+    <string name="damage_type_pierce">Pierce</string>
+    <string name="damage_type_magic">Magic</string>
+    <string name="damage_type_electricity">Electricity</string>
+    <string name="damage_type_fire">Fire</string>
+    <string name="damage_type_ballistic">Ballistic</string>
+    <string name="damage_type_radiation">Radiation</string>
+    <string name="damage_type_particle">Particle</string>
+    <string name="damage_type_breath">Breath</string>
+    <string name="damage_type_kinetic">Kinetic</string>
+
+    <string name="new_item_damage_types_header">Damage types</string>
+    <string name="new_item_protection_types_header">Protection against damage types</string>
+    <string name="new_item_ammunition_header">Ammunition</string>
+    <string name="new_item_wield_header">Wielded</string>
+    <string name="item_detail_error_title">Item not found</string>
+    <string name="item_detail_error_message">The item was not found, possibly there was some error</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="item_count">%1$dx</string>
+    <string name="item_equip_slot_selection_title">Slot selection</string>
+    <string name="item_equip_slot_selection_description">Select a slot to equip %1$s.</string>
+    <string name="item_unequip_slot_title">Unequip item</string>
+    <string name="item_unequip_slot_description">Do you want to unequip %1$s from %2$s slot?</string>
+    <string name="equip_slot_armor">Armor</string>
+    <string name="equip_slot_clothing">Clothing</string>
+    <string name="equip_slot_grenade">Grenade</string>
+    <string name="equip_slot_primary">Primary</string>
+    <string name="equip_slot_secondary">Secondary</string>
+    <string name="equip_slot_tertiary">Tertiary</string>
+    <string name="item_edit_name_title">Item name</string>
+    <string name="item_edit_name_message">Fill in the new item name</string>
+    <string name="item_edit_name_hint">Item Name</string>
+    <string name="item_edit_description_title">Item description</string>
+    <string name="item_edit_description_message">Fill in the new item description</string>
+    <string name="item_edit_description_hint">Item Description</string>
+    <string name="item_edit_count_title">Item count</string>
+    <string name="item_edit_count_message">Fill in the new item count</string>
+    <string name="item_edit_count_hint">Item Count</string>
+    <string name="item_edit_magazine_size_title">Magazine size</string>
+    <string name="item_edit_magazine_size_message">Fill in the new magazine size</string>
+    <string name="item_edit_magazine_size_hint">Magazine size</string>
+    <string name="item_edit_rate_of_fire_title">Rate of fire</string>
+    <string name="item_edit_rate_of_fire_message">Fill in the new rate of fire</string>
+    <string name="item_edit_rate_of_fire_hint">Rate of fire</string>
+
+    <string name="item_detail_fab_label_edit">Edit item</string>
+    <string name="item_detail_fab_label_equip">Equip item</string>
+    <string name="item_detail_fab_label_unequip">Unequip item</string>
+    <string name="item_detail_fab_label_delete">Delete item</string>
+
+    <string name="item_delete_title">Delete this item?</string>
+    <string name="item_delete_message">Do you want to delete %1$s? It will be removed permanently.</string>
+    <string name="item_delete_sell">Sell</string>
+    <string name="item_delete_discard">Discard</string>
+    <string name="item_sell_title">Sell item</string>
+    <string name="item_sell_message">Fill in the selling price of %1$s. It will be automatically added to your balance.</string>
+    <string name="item_sell_hint">Item price</string>
+
+    <string name="multi_choice_header_loadout">Select allowed loadouts</string>
+    <string name="multi_choice_header_damage_type">Select damage types</string>
+    <string name="multi_choice_header_damage">Select damage level</string>
+    <string name="multi_choice_header_wield">Select wield option</string>
+
+    <string name="money_edit_title">New amount</string>
+    <string name="money_edit_message">Fill in new amount of money you own, not just the change.</string>
+    <string name="money_edit_hint">Amount</string>
 </resources>

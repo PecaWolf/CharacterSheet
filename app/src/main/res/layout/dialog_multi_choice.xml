@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/multi_choice_header"
+            style="@style/Text.Header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/multi_choice_recycler"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Placeholder header" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/multi_choice_recycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing_2"
+            app:layout_constraintBottom_toTopOf="@id/multi_choice_button_negative"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/multi_choice_header"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_simple_selection" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/multi_choice_button_negative"
+            style="@style/Button.Negative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/generic_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/multi_choice_button_positive"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/multi_choice_button_positive"
+            style="@style/Button.Positive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/generic_ok"
+            app:layout_constraintBottom_toBottomOf="@id/multi_choice_button_negative"
+            app:layout_constraintTop_toTopOf="@id/multi_choice_button_negative"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/multi_choice_button_negative" />
+
+        <ProgressBar
+            android:id="@+id/multi_choice_progress"
+            android:background="@drawable/bg_circle_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/multi_choice_recycler"
+            app:layout_constraintEnd_toEndOf="@id/multi_choice_recycler"
+            app:layout_constraintStart_toStartOf="@id/multi_choice_recycler"
+            app:layout_constraintTop_toTopOf="@id/multi_choice_recycler"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

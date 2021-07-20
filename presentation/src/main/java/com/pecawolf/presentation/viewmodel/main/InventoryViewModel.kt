@@ -1,65 +1,86 @@
 package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.pecawolf.model.Inventory
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.map
+import com.pecawolf.domain.interactor.UpdateMoneyInteractor
 import com.pecawolf.model.Item
-import com.pecawolf.presentation.extensions.MergedLiveData2
+import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.viewmodel.BaseViewModel
+import timber.log.Timber
 
-class InventoryViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
+class InventoryViewModel(
+    private val mainViewModel: MainViewModel,
+    private val updateMoney: UpdateMoneyInteractor
+) : BaseViewModel() {
 
-    private val _loadoutType = MutableLiveData<Item.LoadoutType>().apply {
-        value = Item.LoadoutType.COMBAT
-    }
-    private val _inventory = MutableLiveData<Inventory>()
+    private val _navigateTo = SingleLiveEvent<Destination>()
 
-    val loadoutType: LiveData<Item.LoadoutType> = _loadoutType
-    val isPrimaryAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
-        _inventory,
-        _loadoutType
-    ) { inventory, type ->
-        inventory.primary.allowedLoadouts.contains(type)
+    val navigateTo: LiveData<Destination> = _navigateTo
+
+    val backpack: LiveData<List<Pair<Item, Item.Slot?>>> =
+        mainViewModel.inventory.map { inventory ->
+            inventory.backpack
+                .map {
+                    Pair(
+                        it,
+                        when (it.itemId) {
+                            inventory.primary.itemId -> Item.Slot.PRIMARY
+                            inventory.secondary.itemId -> Item.Slot.SECONDARY
+                            inventory.tertiary.itemId -> Item.Slot.TERTIARY
+                            //                    inventory.grenade.itemId -> Item.Slot.GRENADE
+                            inventory.armor.itemId -> Item.Slot.ARMOR
+                            inventory.clothes.itemId -> Item.Slot.CLOTHING
+                            else -> null
+                        }
+                    )
+                }
+                .sortedWith(
+                    compareBy(
+                        { it.second?.ordinal ?: Int.MAX_VALUE },
+                        { it.first.name },
+                        { it.first.itemId }),
+                )
+        }.distinctUntilChanged()
+
+    val money: LiveData<Int> = mainViewModel.inventory.map {
+        it.money
     }
-    val isSecondaryAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
-        _inventory,
-        _loadoutType
-    ) { inventory, type ->
-        inventory.secondary.allowedLoadouts.contains(type)
+
+    fun onItemDetailClicked(itemId: Long) {
+        _navigateTo.postValue(Destination.ItemDetail(itemId))
     }
-    val isTertiaryAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
-        _inventory,
-        _loadoutType
-    ) { inventory, type ->
-        inventory.tertiary.allowedLoadouts.contains(type)
-    }
-    val isClothingAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
-        _inventory,
-        _loadoutType
-    ) { inventory, type ->
-        when (type) {
-            Item.LoadoutType.COMBAT -> inventory.armor is Item.Armor.None
-            Item.LoadoutType.SOCIAL -> true
-            Item.LoadoutType.TRAVEL -> true
+
+    fun onMoneyClicked() {
+        money.value?.also {
+            _navigateTo.postValue(Destination.EditMoney(it))
         }
     }
-    val isArmorAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
-        _inventory,
-        _loadoutType
-    ) { inventory, type ->
-        inventory.armor.allowedLoadouts.contains(type)
-    }
-    val inventory: LiveData<Inventory> = _inventory
 
-    fun onLoadoutCombatClicked() {
-        _loadoutType.value = Item.LoadoutType.COMBAT
+    fun onMoneyConfirmed(newMoney: Int) {
+        updateMoney.execute(newMoney)
+            .observe(UPDATE_MONEY, ::onUpdateMoneyError, ::onUpdateMoneySuccess)
     }
 
-    fun onLoadoutSocialClicked() {
-        _loadoutType.value = Item.LoadoutType.SOCIAL
+    private fun onUpdateMoneySuccess() {
+        Timber.v("onUpdateMoneySuccess()")
     }
 
-    fun onLoadoutTravelClicked() {
-        _loadoutType.value = Item.LoadoutType.TRAVEL
+    private fun onUpdateMoneyError(error: Throwable) {
+        Timber.w(error, "onUpdateMoneyError(): ")
+    }
+
+    fun onAddItemClicked() {
+        _navigateTo.postValue(Destination.NewItem)
+    }
+
+    sealed class Destination {
+        object NewItem : Destination()
+        data class ItemDetail(val itemId: Long) : Destination()
+        data class EditMoney(val money: Int) : Destination()
+    }
+
+    companion object {
+        private const val UPDATE_MONEY = "UPDATE_MONEY"
     }
 }

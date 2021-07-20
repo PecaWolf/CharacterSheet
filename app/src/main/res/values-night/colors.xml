@@ -5,15 +5,15 @@
     <color name="primary">#FFF</color>
     <color name="secondary">#AAA</color>
     <color name="inverse">#000</color>
-    <color name="activePrimary">@color/teal_200</color>
-    <color name="activeSecondary">@color/teal_700</color>
-    <color name="buttonBackgroundEnabled">@color/teal_700</color>
+    <color name="activePrimary">@color/raw_teal_200</color>
+    <color name="activeSecondary">@color/raw_teal_700</color>
+    <color name="buttonBackgroundEnabled">@color/raw_teal_700</color>
     <color name="buttonBackgroundDisabled">@color/background</color>
-    <color name="buttonBackgroundPositiveEnabled">@color/green_dark</color>
-    <color name="buttonBackgroundPositiveDisabled">@color/green_medium</color>
-    <color name="buttonBackgroundNegativeEnabled">@color/red_dark</color>
-    <color name="buttonBackgroundNegativeDisabled">@color/red_medium</color>
+    <color name="buttonBackgroundPositiveEnabled">@color/raw_green_dark</color>
+    <color name="buttonBackgroundPositiveDisabled">@color/raw_green_medium</color>
+    <color name="buttonBackgroundNegativeEnabled">@color/raw_red_dark</color>
+    <color name="buttonBackgroundNegativeDisabled">@color/raw_red_medium</color>
 
-    <color name="wound">@color/red_light</color>
-    <color name="luck">@color/green_light</color>
+    <color name="wound">@color/raw_red_light</color>
+    <color name="luck">@color/raw_green_light</color>
 </resources>

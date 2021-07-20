@@ -31,10 +31,11 @@ class SimpleSelectionAdapter(
     class SimpleSelectionViewHolder(private val binding: Binding) : ViewHolder(binding.root) {
 
         fun bind(item: SimpleSelectionItem, listener: (Any?) -> Unit) {
-            binding.selectionClicker.setOnClickListener { listener.invoke(item.data) }
-            binding.selectionText.text = item.text
-            binding.selectionCheckbox.isChecked = item.isChecked
+            binding.selectionCheckbox.apply {
+                text = item.text
+                setOnClickListener { listener.invoke(item.data) }
+                isChecked = item.isChecked
+            }
         }
     }
-
 }

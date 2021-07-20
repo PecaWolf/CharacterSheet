@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:background="@color/background">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/new_item_step_1_base_data_card"
+        style="@style/Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/new_item_step_1_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_2"
+                android:hint="@string/new_item_name_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/new_item_step_1_name_input"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/new_item_step_1_description_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_2"
+                android:hint="@string/new_item_description_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/new_item_step_1_description_input"
+                    style="@style/Input"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/menu_item_height"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:maxLines="10"
+                    android:gravity="start|top"
+                    android:minLines="1"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rhoncus fermentum ullamcorper. Donec ut risus sed tortor rutrum tristique quis at sapien. Curabitur dignissim, risus vel rhoncus tincidunt, augue odio luctus turpis, ut feugiat felis arcu ut libero. Pellentesque malesuada lorem id pretium sodales. Phasellus interdum felis id." />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/new_item_step_1_type_card"
+        style="@style/Card"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/new_item_step_1_type_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/spacing_2"
+            android:nestedScrollingEnabled="true"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_simple_selection" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/new_item_step_1_button_next"
+        style="@style/Button.Positive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/generic_continue" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

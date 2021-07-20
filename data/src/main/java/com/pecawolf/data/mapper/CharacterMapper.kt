@@ -1,7 +1,6 @@
 package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.CharacterEntity
-import com.pecawolf.charactersheet.common.extensions.isNotOneOf
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
 import com.pecawolf.model.Inventory
@@ -32,8 +31,7 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
                 lookUpWeapon(items, tertiary),
                 lookUpArmor(items, clothes),
                 lookUpArmor(items, armor),
-                filterContainers(items, backpack),
-                filterContainers(items, storage),
+                filterContainers(items),
             )
         )
     }
@@ -44,10 +42,9 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
     private fun lookUpArmor(items: List<Item>, armorId: Long) =
         (items.find { it.itemId == armorId } as? Item.Armor) ?: Item.Armor.None
 
-    private fun CharacterEntity.filterContainers(items: List<Item>, container: List<Long>) =
+    private fun CharacterEntity.filterContainers(items: List<Item>) =
         items
-            .filter { it.isNotOneOf(primary, secondary, tertiary, armor, clothes) }
-            .filter { container.contains(it.itemId) }
+//            .filter { it.itemId.isNotOneOf(primary, secondary, tertiary, armor, clothes) }
 
     override fun toEntity(model: Character, additional: List<Nothing>) = model.run {
         CharacterEntity(
@@ -69,8 +66,7 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
             inventory.tertiary.itemId,
             inventory.clothes.itemId,
             inventory.armor.itemId,
-            inventory.backpack.map { it.itemId },
-            inventory.storage.map { it.itemId }
+            inventory.backpack.map { it.itemId }.toMutableList(),
         )
     }
 }

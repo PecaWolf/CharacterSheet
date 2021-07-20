@@ -35,7 +35,6 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation project(path: ':model')
 
     implementation "org.koin:koin-core:2.2.2"
 
