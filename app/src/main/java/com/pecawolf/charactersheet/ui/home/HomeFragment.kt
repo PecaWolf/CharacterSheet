@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.common.extensions.let
 import com.pecawolf.charactersheet.databinding.FragmentHomeBinding
