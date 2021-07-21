@@ -55,6 +55,7 @@
             android:id="@+id/stat_widget_trap"
             style="@style/Text.Value.Secondary"
             android:layout_width="0dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
             app:layout_constraintBaseline_toBaselineOf="@id/stat_widget_value"
             app:layout_constraintEnd_toEndOf="@id/stat_widget_guide_stats_2"
@@ -63,7 +64,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/stat_widget_roll_button"
-            style="@style/Button.Roll"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -73,27 +74,6 @@
             app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_roll" />
-
-        <ProgressBar
-            android:id="@+id/stat_widget_progress"
-            style="@style/Progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/stat_widget_roll_button"
-            app:layout_constraintEnd_toEndOf="@id/stat_widget_roll_button"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_roll_button"
-            app:layout_constraintTop_toTopOf="@id/stat_widget_roll_button"
-            tools:visibility="visible" />
-
-        <View
-            android:id="@+id/stat_widget_clicker"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

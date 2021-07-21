@@ -25,8 +25,6 @@ import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
-    private val hpAdapter: HpAdapter by lazy { HpAdapter() }
-
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentHomeBinding.inflate(inflater, container, false)
 
