@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="@dimen/spacing_1"
+    style="@style/Box"
     tools:context=".ui.inventory.InventoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/inventory_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/inventory_add_item_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,8 +22,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/inventory_money_card"
         style="@style/Card"
+        android:layout_marginHorizontal="@dimen/spacing_1"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/bar_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/inventory_add_item_button"
@@ -65,6 +66,7 @@
             <View
                 android:id="@+id/inventory_money_clicker"
                 android:layout_width="0dp"
+                tools:visibility="gone"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
+        android:layout_marginBottom="@dimen/spacing_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
