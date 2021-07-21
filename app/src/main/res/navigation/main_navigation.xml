@@ -85,11 +85,11 @@
 
     </fragment>
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/navigation_skills"-->
-    <!--        android:name="com.pecawolf.charactersheet.ui.skills.SkillsFragment"-->
-    <!--        android:label="@string/title_skills"-->
-    <!--        tools:layout="@layout/fragment_skills" />-->
+    <fragment
+        android:id="@+id/navigation_skills"
+        android:name="com.pecawolf.charactersheet.ui.skills.SkillsFragment"
+        android:label="@string/title_skills"
+        tools:layout="@layout/fragment_skills" />
 
     <fragment
         android:id="@+id/navigation_other"
