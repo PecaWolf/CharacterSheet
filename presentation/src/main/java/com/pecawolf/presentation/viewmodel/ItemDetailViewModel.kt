@@ -67,7 +67,7 @@ class ItemDetailViewModel(
     }
     val isEditingLoadoutAndDamage: LiveData<Boolean> =
         MergedLiveData2(_isEditing, _item) { isEditing, item ->
-            isEditing && item is Weapon || item is Armor
+            isEditing && (item is Weapon || item is Armor)
         }
     val isEditingAmmunition: LiveData<Boolean> =
         MergedLiveData2(_isEditing, _item) { isEditing, item ->

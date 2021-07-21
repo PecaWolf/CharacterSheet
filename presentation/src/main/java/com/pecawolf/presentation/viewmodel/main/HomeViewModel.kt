@@ -1,6 +1,7 @@
 package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.distinctUntilChanged
 import com.pecawolf.charactersheet.common.extensions.let
@@ -9,6 +10,7 @@ import com.pecawolf.domain.interactor.UpdateCharacterInteractor
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
 import com.pecawolf.presentation.extensions.SingleLiveEvent
+import com.pecawolf.presentation.extensions.toggle
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 import kotlin.math.max
@@ -19,10 +21,27 @@ class HomeViewModel(
     private val updateCharacter: UpdateCharacterInteractor,
 ) : BaseViewModel() {
 
+    private val _isEditing = MutableLiveData<Boolean>(false)
     private val _navigateTo = SingleLiveEvent<Destination>()
     val baseStats: LiveData<BaseStats> = mainViewModel.character.distinctUntilChanged()
     val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(baseStats) { it.luckAndWounds }
+    val isEditing: LiveData<Boolean> = _isEditing
     val navigateTo: LiveData<Destination> = _navigateTo
+
+    fun onNameEdit() {
+        baseStats.value?.also {
+            _navigateTo.postValue(Destination.EditNameDialog(it.name))
+        }
+    }
+
+    fun onNameChanged(name: String) {
+        baseStats.value?.also { baseStats ->
+            baseStats.name = name
+
+            updateCharacter.execute(baseStats)
+                .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
+        }
+    }
 
     fun onRollClicked(stat: BaseStats.Stat) {
         baseStats.value?.also {
@@ -64,6 +83,10 @@ class HomeViewModel(
         }
     }
 
+    fun onEditClicked() {
+        _isEditing.toggle()
+    }
+
     private fun onUpdateCharacterSuccess() {
         Timber.v("onUpdateCharacterSuccess()")
     }
@@ -95,6 +118,7 @@ class HomeViewModel(
     sealed class Destination {
         data class RollModifierDialog(val stat: BaseStats.Stat) : Destination()
         data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
+        data class EditNameDialog(val name: String) : Destination()
     }
 
     companion object {

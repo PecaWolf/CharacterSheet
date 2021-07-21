@@ -31,6 +31,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun createViewModel() = injectVM<HomeViewModel>().value
 
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
+        binding.homeNameEditIcon.setOnClickListener { viewModel.onNameEdit() }
         binding.homeStrStat.setOnClickListener { viewModel.onRollClicked(it) }
         binding.homeDexStat.setOnClickListener { viewModel.onRollClicked(it) }
         binding.homeVitStat.setOnClickListener { viewModel.onRollClicked(it) }
@@ -45,6 +46,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             viewModel.onDamageClicked(clicks)
         })
         binding.homeDamage.setOnLongClickListener { true.also { viewModel.onDamageLongClicked() } }
+        binding.homeCharacterEditFab.setOnClickListener { viewModel.onEditClicked() }
     }
 
     override fun observeViewModel(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
@@ -83,8 +85,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
         }
 
+        viewModel.isEditing.reObserve(this) { isEditing ->
+            binding.homeNameEditIcon.isVisible = isEditing
+        }
+
         viewModel.navigateTo.reObserve(this) { destination ->
             when (destination) {
+                is Destination.EditNameDialog -> showNameDialog(destination.name)
                 is Destination.RollModifierDialog -> showRollModifierDialog(destination.stat)
                 is Destination.RollResultDialog -> showRollResultDialog(
                     destination.roll,
@@ -109,6 +116,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 )
             }.root
         )
+
+    private fun showNameDialog(name: String) {
+        dialogHelper.showTextInputDialog(
+            title = getString(R.string.character_name_title),
+            message = getString(R.string.character_name_message),
+            inputType = InputType.TYPE_CLASS_TEXT,
+            lineCount = 1,
+            defaultInput = name,
+            hint = getString(R.string.character_name_hint),
+            positiveButton = getString(R.string.generic_ok)
+        ) { dialog, name ->
+            viewModel.onNameChanged(name)
+            dialog.cancel()
+        }
+    }
 
     private fun showRollModifierDialog(stat: BaseStats.Stat) {
         dialogHelper.showTextInputDialog(

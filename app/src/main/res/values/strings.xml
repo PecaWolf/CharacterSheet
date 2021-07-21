@@ -196,6 +196,13 @@
     <string name="money_edit_message">Fill in new amount of money you own, not just the change.</string>
     <string name="money_edit_hint">Amount</string>
 
+    <string name="character_name_title">Character name</string>
+    <string name="character_name_message">Fill in the new character name</string>
+    <string name="character_name_hint">Character name</string>
+
+    <string name="stat_value">Value</string>
+    <string name="stat_trap">Trap</string>
+
     <string name="roll_modifier_title">Roll against %1$s</string>
     <string name="roll_modifier_message">Please input roll modifier or leave it at zero.</string>
     <string name="roll_modifier_hint">Roll modifier</string>

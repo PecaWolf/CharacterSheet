@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/spacing_1"
+    style="@style/Box"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -64,6 +64,21 @@
                 app:layout_constraintHorizontal_weight="3"
                 app:layout_constraintStart_toStartOf="@id/home_guide_header_25"
                 tools:text="Ahsoka Tano" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/home_name_edit_icon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:background="@drawable/bg_circle_card"
+                android:padding="@dimen/spacing_1"
+                android:src="@drawable/ic_wrench_inactive"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/home_name_value"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/home_name_value"
+                app:layout_constraintTop_toTopOf="@id/home_name_value"
+                tools:visibility="visible" />
+
 
             <TextView
                 android:id="@+id/home_species_label"
@@ -186,19 +201,6 @@
         tools:itemCount="14"
         tools:listitem="@layout/item_hit_point" />
 
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/home_luck_and_hp_recycler"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginHorizontal="@dimen/spacing_1"-->
-    <!--        android:layout_marginBottom="@dimen/spacing_1"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/home_damage"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/home_guide_75"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/home_heal"-->
-    <!--        tools:itemCount="14"-->
-    <!--        tools:listitem="@layout/item_hit_point" />-->
-
     <TextView
         android:id="@+id/home_damage"
         style="@style/Button.Negative"
@@ -206,7 +208,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:text="@string/damage"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/home_character_edit_fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/home_guide_75" />
 
@@ -228,5 +230,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/home_character_edit_fab"
+        style="@style/Button.Fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_wrench_24"
+        app:fab_label="@string/item_detail_fab_label_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

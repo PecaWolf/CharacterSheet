@@ -12,17 +12,17 @@ import java.io.Serializable
 
 @Parcelize
 class BaseStats(
-    val name: String,
+    var name: String,
     val species: Species,
     val world: World,
     var luck: Int,
     var wounds: Int,
-    val str: Strength,
-    val dex: Dexterity,
-    val vit: Vitality,
-    val inl: Intelligence,
-    val wis: Wisdom,
-    val cha: Charisma
+    var str: Strength,
+    var dex: Dexterity,
+    var vit: Vitality,
+    var inl: Intelligence,
+    var wis: Wisdom,
+    var cha: Charisma
 ) : Parcelable, Serializable {
     val luckAndWounds: Pair<Int, Int>
         get() = luck to wounds
