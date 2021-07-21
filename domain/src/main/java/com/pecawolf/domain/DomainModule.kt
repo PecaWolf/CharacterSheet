@@ -10,6 +10,7 @@ import com.pecawolf.domain.interactor.GetCharacterInteractor
 import com.pecawolf.domain.interactor.GetCharactersInteractor
 import com.pecawolf.domain.interactor.GetItemDetailInteractor
 import com.pecawolf.domain.interactor.ObserveCharacterInteractor
+import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.domain.interactor.SaveItemChangesInteractor
 import com.pecawolf.domain.interactor.SetActiveCharacterIdInteractor
 import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
@@ -34,6 +35,7 @@ object DomainModule {
         factory { UnequipItemInteractor(get()) }
         factory { DeleteItemInteractor(get()) }
         factory { UpdateMoneyInteractor(get()) }
+        factory { RollDiceInteractor(get()) }
     }
 
     fun start() {

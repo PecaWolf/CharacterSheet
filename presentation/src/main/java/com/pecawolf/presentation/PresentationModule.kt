@@ -23,7 +23,7 @@ object PresentationModule {
     val instance = module {
         viewModel { MainViewModel(get(), get()) }
 
-        viewModel { HomeViewModel(get()) }
+        viewModel { HomeViewModel(get(), get()) }
 
         viewModel { LoadoutViewModel(get()) }
 

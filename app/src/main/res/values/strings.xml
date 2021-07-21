@@ -152,6 +152,11 @@
     <string name="equip_slot_secondary">Secondary</string>
     <string name="equip_slot_tertiary">Tertiary</string>
 
+    <string name="roll_result_failure_critical">Critical Failure</string>
+    <string name="roll_result_success_critical">Critical Success</string>
+    <string name="roll_result_failure">Failure</string>
+    <string name="roll_result_success">Success</string>
+
     <string name="item_edit_name_title">Item name</string>
     <string name="item_edit_name_message">Fill in the new item name</string>
     <string name="item_edit_name_hint">Item Name</string>
@@ -190,4 +195,13 @@
     <string name="money_edit_title">New amount</string>
     <string name="money_edit_message">Fill in new amount of money you own, not just the change.</string>
     <string name="money_edit_hint">Amount</string>
+
+    <string name="roll_modifier_title">Roll against %1$s</string>
+    <string name="roll_modifier_message">Please input roll modifier or leave it at zero.</string>
+    <string name="roll_modifier_hint">Roll modifier</string>
+    <string name="roll_modifier_positive">Roll</string>
+
+    <string name="roll_result_title">Roll result</string>
+    <string name="roll_result_message">Your roll of <b>%1$d</b> was a <b>%2$s</b>.</string>
+
 </resources>

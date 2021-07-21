@@ -214,7 +214,7 @@ class NewItemStep2ViewModel(
     }
 
     private fun onCreateNewItemError(error: Throwable) {
-        Timber.w(error, "onCreateNewItemError(): ")
+        Timber.e(error, "onCreateNewItemError(): ")
     }
 
     sealed class Destination() {

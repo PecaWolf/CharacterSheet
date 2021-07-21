@@ -161,7 +161,7 @@ class ItemDetailViewModel(
     }
 
     private fun onDeleteItemError(error: Throwable) {
-        Timber.w(error, "onDeleteItemError(): ")
+        Timber.e(error, "onDeleteItemError(): ")
     }
 
     fun onNameChanged(name: String) {
@@ -285,7 +285,7 @@ class ItemDetailViewModel(
     }
 
     private fun onUpdateItemError(error: Throwable) {
-        Timber.w(error, "onUpdateItemError(): ")
+        Timber.e(error, "onUpdateItemError(): ")
     }
 
     private fun onEquipItemSuccess() {
@@ -293,7 +293,7 @@ class ItemDetailViewModel(
     }
 
     private fun onEquipItemError(error: Throwable) {
-        Timber.w(error, "onEquipItemError(): ")
+        Timber.e(error, "onEquipItemError(): ")
     }
 
     sealed class Destination {

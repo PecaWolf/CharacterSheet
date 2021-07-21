@@ -12,3 +12,5 @@ fun <T> MutableCollection<T>.setAll(items: Collection<T>) {
     clear()
     addAll(items)
 }
+
+fun <T, U, V> Pair<T, U>.let(lambda: (T, U) -> V): V = lambda.invoke(first, second)

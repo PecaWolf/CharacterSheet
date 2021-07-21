@@ -67,7 +67,7 @@ class InventoryViewModel(
     }
 
     private fun onUpdateMoneyError(error: Throwable) {
-        Timber.w(error, "onUpdateMoneyError(): ")
+        Timber.e(error, "onUpdateMoneyError(): ")
     }
 
     fun onAddItemClicked() {

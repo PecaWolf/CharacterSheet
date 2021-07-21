@@ -12,7 +12,7 @@ class GetCharacterInteractor(
     override fun execute(params: Nothing?) = repository.observeActiveCharacter()
         .firstElement()
         .onErrorResumeNext {
-            Timber.w(it, "execute(): ")
+            Timber.e(it, "execute(): ")
             Maybe.empty()
         }
 }

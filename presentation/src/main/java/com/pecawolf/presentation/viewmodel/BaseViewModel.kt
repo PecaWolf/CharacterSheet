@@ -12,12 +12,14 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 
 open class BaseViewModel : ViewModel() {
 
     private val _loading = MutableLiveData<MutableSet<String>>(mutableSetOf())
 
     val isLoading = Transformations.map(_loading) {
+        Timber.w("isLoading(): $it")
         it.isNotEmpty()
     }
 
