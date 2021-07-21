@@ -27,12 +27,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun createViewModel() = injectVM<HomeViewModel>().value
 
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
-        binding.homeStrRoll.setOnClickListener { viewModel.onStrRollClicked() }
-        binding.homeDexRoll.setOnClickListener { viewModel.onDexRollClicked() }
-        binding.homeVitRoll.setOnClickListener { viewModel.onVitRollClicked() }
-        binding.homeIntRoll.setOnClickListener { viewModel.onIntRollClicked() }
-        binding.homeWisRoll.setOnClickListener { viewModel.onWisRollClicked() }
-        binding.homeChaRoll.setOnClickListener { viewModel.onChaRollClicked() }
+        binding.homeStrStat.setOnClickListener { viewModel.onRollClicked(it) }
+        binding.homeDexStat.setOnClickListener { viewModel.onRollClicked(it) }
+        binding.homeVitStat.setOnClickListener { viewModel.onRollClicked(it) }
+        binding.homeInlStat.setOnClickListener { viewModel.onRollClicked(it) }
+        binding.homeWisStat.setOnClickListener { viewModel.onRollClicked(it) }
+        binding.homeChaStat.setOnClickListener { viewModel.onRollClicked(it) }
         binding.homeLuckAndHpRecycler.apply {
             adapter = hpAdapter
             layoutManager = LinearLayoutManager(
@@ -58,18 +58,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         viewModel.baseStats.reObserve(this, { stats ->
             binding.homeNameValue.text = stats.name
             binding.homeSpeciesValue.text = stats.species.getLocalizedName(requireContext())
-            binding.homeStrValue.text = stats.str.value.toString()
-            binding.homeStrTrap.text = stats.str.trap.toString()
-            binding.homeDexValue.text = stats.dex.value.toString()
-            binding.homeDexTrap.text = stats.dex.trap.toString()
-            binding.homeVitValue.text = stats.vit.value.toString()
-            binding.homeVitTrap.text = stats.vit.trap.toString()
-            binding.homeIntValue.text = stats.inl.value.toString()
-            binding.homeIntTrap.text = stats.inl.trap.toString()
-            binding.homeWisValue.text = stats.wis.value.toString()
-            binding.homeWisTrap.text = stats.wis.trap.toString()
-            binding.homeChaValue.text = stats.cha.value.toString()
-            binding.homeChaTrap.text = stats.cha.trap.toString()
+            binding.homeStrStat.data = stats.str
+            binding.homeDexStat.data = stats.dex
+            binding.homeVitStat.data = stats.vit
+            binding.homeInlStat.data = stats.inl
+            binding.homeWisStat.data = stats.wis
+            binding.homeChaStat.data = stats.cha
         })
 
         viewModel.luckAndHp.reObserve(this) { luckAndHp ->

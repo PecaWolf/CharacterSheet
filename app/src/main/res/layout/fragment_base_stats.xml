@@ -10,6 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/item_detail_base_data_card"
         style="@style/Card"
+        android:layout_margin="@dimen/spacing_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -47,6 +48,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/stats_card"
         style="@style/Card"
+        android:layout_margin="@dimen/spacing_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

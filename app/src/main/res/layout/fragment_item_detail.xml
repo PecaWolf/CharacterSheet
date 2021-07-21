@@ -22,6 +22,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_base_data_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/header_guide_1"
@@ -170,6 +171,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_loadouts_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide_2"
@@ -267,6 +269,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_damage_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide_2"
@@ -374,6 +377,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_ammo_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/item_detail_wield_card"
@@ -482,6 +486,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_wield_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/item_detail_damage_types_card"
@@ -594,6 +599,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_damage_types_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

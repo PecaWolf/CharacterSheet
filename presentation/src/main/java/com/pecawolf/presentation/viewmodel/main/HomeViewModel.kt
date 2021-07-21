@@ -22,39 +22,9 @@ class HomeViewModel(
     val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(_baseStats) { it.luckAndWounds }
     val navigateTo: LiveData<Destination> = _navigateTo
 
-    fun onStrRollClicked() {
+    fun onRollClicked(stat: BaseStats.Stat) {
         _baseStats.value?.also {
-            _navigateTo.postValue(Destination.RollModifierDialog(it.str))
-        }
-    }
-
-    fun onDexRollClicked() {
-        _baseStats.value?.also {
-            _navigateTo.postValue(Destination.RollModifierDialog(it.dex))
-        }
-    }
-
-    fun onVitRollClicked() {
-        _baseStats.value?.also {
-            _navigateTo.postValue(Destination.RollModifierDialog(it.vit))
-        }
-    }
-
-    fun onIntRollClicked() {
-        _baseStats.value?.also {
-            _navigateTo.postValue(Destination.RollModifierDialog(it.inl))
-        }
-    }
-
-    fun onWisRollClicked() {
-        _baseStats.value?.also {
-            _navigateTo.postValue(Destination.RollModifierDialog(it.wis))
-        }
-    }
-
-    fun onChaRollClicked() {
-        _baseStats.value?.also {
-            _navigateTo.postValue(Destination.RollModifierDialog(it.cha))
+            _navigateTo.postValue(Destination.RollModifierDialog(stat))
         }
     }
 

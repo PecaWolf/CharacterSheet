@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/Box"
@@ -51,9 +52,9 @@
             android:layout_height="wrap_content"
             android:text="@string/generic_ok"
             app:layout_constraintBottom_toBottomOf="@id/multi_choice_button_negative"
-            app:layout_constraintTop_toTopOf="@id/multi_choice_button_negative"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/multi_choice_button_negative" />
+            app:layout_constraintStart_toEndOf="@id/multi_choice_button_negative"
+            app:layout_constraintTop_toTopOf="@id/multi_choice_button_negative" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
