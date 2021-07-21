@@ -50,7 +50,7 @@ class MainViewModel(
     }
 
     private fun onGetCharacterError(error: Throwable) {
-        Timber.w(error, "onGetCharacterError(): ")
+        Timber.e(error, "onGetCharacterError(): ")
     }
 
     companion object {

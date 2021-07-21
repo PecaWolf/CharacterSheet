@@ -11,6 +11,7 @@ import org.koin.dsl.module
 object DataModule {
     val instance = module {
         single { CharacterRepository(get(), get(), get(), get()) }
+        single { DiceRepository(get(), get()) }
 
         single { CharacterSnippetMapper() } // TODO: make it factory probably
         single { CharacterMapper() } // TODO: make it factory probably

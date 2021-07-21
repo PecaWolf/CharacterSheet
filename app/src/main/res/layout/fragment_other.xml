@@ -10,6 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/select_character"
         style="@style/Card"
+        android:layout_margin="@dimen/spacing_1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/menu_item_height">
 
@@ -42,6 +43,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/create_character"
         style="@style/Card"
+        android:layout_margin="@dimen/spacing_1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/menu_item_height">
 
@@ -65,7 +67,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_add" />
+                app:srcCompat="@drawable/ic_add_circled" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

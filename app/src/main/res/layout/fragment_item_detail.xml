@@ -22,6 +22,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_base_data_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/header_guide_1"
@@ -170,6 +171,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_loadouts_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide_2"
@@ -267,6 +269,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_damage_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide_2"
@@ -374,6 +377,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_ammo_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/item_detail_wield_card"
@@ -482,6 +486,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_wield_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/item_detail_damage_types_card"
@@ -594,6 +599,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_damage_types_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -663,10 +669,7 @@
 
     <ProgressBar
         android:id="@+id/item_detail_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_circle_card"
-        android:visibility="gone"
+        style="@style/Progress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -702,7 +705,7 @@
             style="@style/Button.Fab.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_minus"
+            android:src="@drawable/ic_delete_24"
             app:fab_label="@string/item_detail_fab_label_delete" />
 
     </com.github.clans.fab.FloatingActionMenu>

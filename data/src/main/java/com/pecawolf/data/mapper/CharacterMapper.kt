@@ -2,6 +2,12 @@ package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.model.BaseStats
+import com.pecawolf.model.BaseStats.Stat.Charisma
+import com.pecawolf.model.BaseStats.Stat.Dexterity
+import com.pecawolf.model.BaseStats.Stat.Intelligence
+import com.pecawolf.model.BaseStats.Stat.Strength
+import com.pecawolf.model.BaseStats.Stat.Vitality
+import com.pecawolf.model.BaseStats.Stat.Wisdom
 import com.pecawolf.model.Character
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
@@ -17,12 +23,12 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
                 BaseStats.World.valueOf(world),
                 luck,
                 wounds,
-                str,
-                dex,
-                vit,
-                inl,
-                wis,
-                cha
+                Strength(str),
+                Dexterity(dex),
+                Vitality(vit),
+                Intelligence(inl),
+                Wisdom(wis),
+                Charisma(cha)
             ),
             Inventory(
                 money,
@@ -54,12 +60,12 @@ class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
             baseStats.world.name,
             baseStats.luck,
             baseStats.wounds,
-            baseStats.str,
-            baseStats.dex,
-            baseStats.vit,
-            baseStats.inl,
-            baseStats.wis,
-            baseStats.cha,
+            baseStats.str.value,
+            baseStats.dex.value,
+            baseStats.vit.value,
+            baseStats.inl.value,
+            baseStats.wis.value,
+            baseStats.cha.value,
             inventory.money,
             inventory.primary.itemId,
             inventory.secondary.itemId,

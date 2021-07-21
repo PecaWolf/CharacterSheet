@@ -23,6 +23,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/world_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -53,6 +54,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/species_card"
                 style="@style/Card"
+                android:layout_margin="@dimen/spacing_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"

@@ -4,6 +4,7 @@ import android.content.Context
 import com.pecawolf.charactersheet.R
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Item
+import com.pecawolf.model.RollResult
 import java.text.NumberFormat
 
 fun Int.formatAmount(): String = NumberFormat.getIntegerInstance().format(this)
@@ -112,4 +113,24 @@ fun Item.Slot.getLocalizedName() = when (this) {
 //    Item.Slot.GRENADE -> R.string.equip_slot_grenade
     Item.Slot.ARMOR -> R.string.equip_slot_armor
     Item.Slot.CLOTHING -> R.string.equip_slot_clothing
+}
+
+fun BaseStats.Stat.getLocalizedName(context: Context) = context.getString(getLocalizedName())
+
+fun BaseStats.Stat.getLocalizedName() = when (this) {
+    is BaseStats.Stat.Strength -> R.string.basic_info_str
+    is BaseStats.Stat.Dexterity -> R.string.basic_info_dex
+    is BaseStats.Stat.Vitality -> R.string.basic_info_vit
+    is BaseStats.Stat.Intelligence -> R.string.basic_info_int
+    is BaseStats.Stat.Wisdom -> R.string.basic_info_wis
+    is BaseStats.Stat.Charisma -> R.string.basic_info_cha
+}
+
+fun RollResult.getLocalizedName(context: Context) = context.getString(getLocalizedName())
+
+fun RollResult.getLocalizedName() = when (this) {
+    RollResult.CriticalFailure -> R.string.roll_result_failure_critical
+    RollResult.CriticalSuccess -> R.string.roll_result_success_critical
+    is RollResult.Failure -> R.string.roll_result_failure
+    is RollResult.Success -> R.string.roll_result_success
 }

@@ -4,35 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/spacing_1"
+    style="@style/Box"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_50"
+        android:id="@+id/home_guide_50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_75"
+        android:id="@+id/home_guide_75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_detail_base_data_card"
+        android:id="@+id/home_item_detail_base_data_card"
         style="@style/Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,411 +36,209 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide_header_25"
+                android:id="@+id/home_guide_header_25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.25" />
 
             <TextView
-                android:id="@+id/name_label"
+                android:id="@+id/home_name_label"
                 style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_name"
-                app:layout_constraintEnd_toEndOf="@id/guide_header_25"
+                app:layout_constraintEnd_toEndOf="@id/home_guide_header_25"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/name_value"
+                android:id="@+id/home_name_value"
                 style="@style/Text.Value.Primary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                app:layout_constraintBaseline_toBaselineOf="@id/name_label"
+                app:layout_constraintBaseline_toBaselineOf="@id/home_name_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="3"
-                app:layout_constraintStart_toStartOf="@id/guide_header_25"
+                app:layout_constraintStart_toStartOf="@id/home_guide_header_25"
                 tools:text="Ahsoka Tano" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/home_name_edit_icon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:background="@drawable/bg_circle_card"
+                android:padding="@dimen/spacing_1"
+                android:src="@drawable/ic_wrench_inactive"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/home_name_value"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/home_name_value"
+                app:layout_constraintTop_toTopOf="@id/home_name_value"
+                tools:visibility="visible" />
+
+
             <TextView
-                android:id="@+id/species_label"
+                android:id="@+id/home_species_label"
                 style="@style/Text.Label.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/character_species"
-                app:layout_constraintEnd_toEndOf="@id/guide_header_25"
+                app:layout_constraintEnd_toEndOf="@id/home_guide_header_25"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name_label" />
+                app:layout_constraintTop_toBottomOf="@id/home_name_label" />
 
             <TextView
-                android:id="@+id/species_value"
+                android:id="@+id/home_species_value"
                 style="@style/Text.Value.Primary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                app:layout_constraintBaseline_toBaselineOf="@id/species_label"
+                app:layout_constraintBaseline_toBaselineOf="@id/home_species_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_header_25"
+                app:layout_constraintStart_toStartOf="@id/home_guide_header_25"
                 tools:text="Togruta" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_1"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="home_str_stat, home_dex_stat, home_vit_stat,home_inl_stat, home_wis_stat, home_cha_stat,"
+        app:flow_firstVerticalStyle="spread_inside"
+        app:flow_verticalBias="0"
+        app:flow_verticalGap="@dimen/spacing_1"
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/home_guide_75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_item_detail_base_data_card" />
+
+    <com.pecawolf.charactersheet.ui.view.StatView
+        android:id="@+id/home_str_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <com.pecawolf.charactersheet.ui.view.StatView
+        android:id="@+id/home_dex_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <com.pecawolf.charactersheet.ui.view.StatView
+        android:id="@+id/home_vit_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <com.pecawolf.charactersheet.ui.view.StatView
+        android:id="@+id/home_inl_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <com.pecawolf.charactersheet.ui.view.StatView
+        android:id="@+id/home_wis_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <com.pecawolf.charactersheet.ui.view.StatView
+        android:id="@+id/home_cha_stat"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/stats_card"
+        android:id="@+id/home_hit_point_card"
         style="@style/Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/guide_75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_detail_base_data_card">
+        android:layout_margin="@dimen/spacing_1"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@id/home_heal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/home_guide_75"
+        app:layout_constraintTop_toBottomOf="@id/home_item_detail_base_data_card">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/home_luck_and_hp_value"
+            style="@style/Text.Value.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_1">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide_stats_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.333" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide_stats_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.666" />
-
-            <TextView
-                android:id="@+id/str_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/character_str"
-                app:layout_constraintBaseline_toBaselineOf="@id/str_roll"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/str_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/str_label"
-                app:layout_constraintEnd_toStartOf="@id/str_trap"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
-                tools:text="10" />
-
-            <TextView
-                android:id="@+id/str_trap"
-                style="@style/Text.Value.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/str_label"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
-                app:layout_constraintStart_toEndOf="@id/str_value"
-                tools:text="20" />
-
-            <TextView
-                android:id="@+id/str_roll"
-                style="@style/Button.Roll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/roll"
-                app:layout_constraintBottom_toTopOf="@id/dex_roll"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-            <TextView
-                android:id="@+id/dex_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/character_dex"
-                app:layout_constraintBaseline_toBaselineOf="@id/dex_roll"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/dex_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
-                app:layout_constraintEnd_toStartOf="@id/dex_trap"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
-                tools:text="10" />
-
-            <TextView
-                android:id="@+id/dex_trap"
-                style="@style/Text.Value.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/dex_label"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
-                app:layout_constraintStart_toEndOf="@id/dex_value"
-                tools:text="20" />
-
-            <TextView
-                android:id="@+id/dex_roll"
-                style="@style/Button.Roll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/roll"
-                app:layout_constraintBottom_toTopOf="@id/vit_roll"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
-                app:layout_constraintTop_toBottomOf="@id/str_roll" />
-
-            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-            <TextView
-                android:id="@+id/vit_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/character_vit"
-                app:layout_constraintBaseline_toBaselineOf="@id/vit_roll"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/vit_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
-                app:layout_constraintEnd_toStartOf="@id/vit_trap"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
-                tools:text="10" />
-
-            <TextView
-                android:id="@+id/vit_trap"
-                style="@style/Text.Value.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/vit_label"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
-                app:layout_constraintStart_toEndOf="@id/vit_value"
-                tools:text="20" />
-
-            <TextView
-                android:id="@+id/vit_roll"
-                style="@style/Button.Roll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/roll"
-                app:layout_constraintBottom_toTopOf="@id/int_roll"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
-                app:layout_constraintTop_toBottomOf="@id/dex_roll" />
-
-            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-            <TextView
-                android:id="@+id/int_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/character_int"
-                app:layout_constraintBaseline_toBaselineOf="@id/int_roll"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/int_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/int_label"
-                app:layout_constraintEnd_toStartOf="@id/int_trap"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
-                tools:text="10" />
-
-            <TextView
-                android:id="@+id/int_trap"
-                style="@style/Text.Value.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/int_label"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
-                app:layout_constraintStart_toEndOf="@id/int_value"
-                tools:text="20" />
-
-            <TextView
-                android:id="@+id/int_roll"
-                style="@style/Button.Roll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/roll"
-                app:layout_constraintBottom_toTopOf="@id/wis_roll"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
-                app:layout_constraintTop_toBottomOf="@id/vit_roll" />
-
-            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-            <TextView
-                android:id="@+id/wis_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/character_wis"
-                app:layout_constraintBaseline_toBaselineOf="@id/wis_roll"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/wis_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
-                app:layout_constraintEnd_toStartOf="@id/wis_trap"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
-                tools:text="10" />
-
-            <TextView
-                android:id="@+id/wis_trap"
-                style="@style/Text.Value.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/wis_label"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
-                app:layout_constraintStart_toEndOf="@id/wis_value"
-                tools:text="20" />
-
-            <TextView
-                android:id="@+id/wis_roll"
-                style="@style/Button.Roll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/roll"
-                app:layout_constraintBottom_toTopOf="@id/cha_roll"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
-                app:layout_constraintTop_toBottomOf="@id/int_roll" />
-
-            <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-
-            <TextView
-                android:id="@+id/cha_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/character_cha"
-                app:layout_constraintBaseline_toBaselineOf="@id/cha_roll"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_1"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/cha_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
-                app:layout_constraintEnd_toStartOf="@id/cha_trap"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_1"
-                tools:text="10" />
-
-            <TextView
-                android:id="@+id/cha_trap"
-                style="@style/Text.Value.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/cha_label"
-                app:layout_constraintEnd_toEndOf="@id/guide_stats_2"
-                app:layout_constraintStart_toEndOf="@id/cha_value"
-                tools:text="20" />
-
-            <TextView
-                android:id="@+id/cha_roll"
-                style="@style/Button.Roll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/roll"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guide_stats_2"
-                app:layout_constraintTop_toBottomOf="@id/wis_roll" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/home_heal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10+4" />
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/hit_point_card"
-        style="@style/Card"
+    <TextView
+        android:id="@+id/home_heal"
+        style="@style/Button.Positive"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@id/luck_and_hp_recycler"
+        android:text="@string/heal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guide_75"
-        app:layout_constraintTop_toBottomOf="@id/item_detail_base_data_card">
+        app:layout_constraintStart_toStartOf="@id/home_guide_75"
+        app:layout_constraintTop_toBottomOf="@id/home_hit_point_card" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/luck_and_hp_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                app:layout_constraintBottom_toTopOf="@id/heal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="10+4" />
-
-            <TextView
-                android:id="@+id/heal"
-                style="@style/Button.Positive"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/heal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/luck_and_hp_value" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/luck_and_hp_recycler"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/home_luck_and_hp_recycler"
         android:layout_width="0dp"
+        android:orientation="vertical"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/spacing_1"
-        android:layout_marginHorizontal="@dimen/spacing_1"
-        app:layout_constraintBottom_toTopOf="@id/damage"
+        android:padding="@dimen/spacing_1"
+        app:layout_constraintBottom_toTopOf="@id/home_damage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guide_75"
-        app:layout_constraintTop_toBottomOf="@id/hit_point_card"
+        app:layout_constraintStart_toStartOf="@id/home_guide_75"
+        app:layout_constraintTop_toBottomOf="@id/home_heal"
         tools:itemCount="14"
         tools:listitem="@layout/item_hit_point" />
 
     <TextView
-        android:id="@+id/damage"
+        android:id="@+id/home_damage"
         style="@style/Button.Negative"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:text="@string/damage"
+        app:layout_constraintBottom_toTopOf="@id/home_character_edit_fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/home_guide_75" />
+
+    <View
+        android:id="@+id/home_clicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guide_75" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/home_progress"
+        style="@style/Progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/home_character_edit_fab"
+        style="@style/Button.Fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_wrench_24"
+        app:fab_label="@string/item_detail_fab_label_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

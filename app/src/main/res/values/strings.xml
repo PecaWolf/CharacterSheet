@@ -75,7 +75,7 @@
     <string name="money">Money:</string>
     <string name="backpack">Backpack</string>
     <string name="storage">Storage</string>
-    <string name="home_luck_and_hp">"%1$d + %2$d "</string>
+    <string name="home_luck_and_wounds">"%1$d + %2$d "</string>
     <string name="other_create_character">Create a new character</string>
     <string name="create_character_name_hint">Character name</string>
     <string name="create_character_species_hint">Species</string>
@@ -152,6 +152,11 @@
     <string name="equip_slot_secondary">Secondary</string>
     <string name="equip_slot_tertiary">Tertiary</string>
 
+    <string name="roll_result_failure_critical">Critical Failure</string>
+    <string name="roll_result_success_critical">Critical Success</string>
+    <string name="roll_result_failure">Failure</string>
+    <string name="roll_result_success">Success</string>
+
     <string name="item_edit_name_title">Item name</string>
     <string name="item_edit_name_message">Fill in the new item name</string>
     <string name="item_edit_name_hint">Item Name</string>
@@ -190,4 +195,24 @@
     <string name="money_edit_title">New amount</string>
     <string name="money_edit_message">Fill in new amount of money you own, not just the change.</string>
     <string name="money_edit_hint">Amount</string>
+
+    <string name="character_name_title">Character name</string>
+    <string name="character_name_message">Fill in the new character name</string>
+    <string name="character_name_hint">Character name</string>
+
+    <string name="stat_value">Value</string>
+    <string name="stat_trap">Trap</string>
+
+    <string name="roll_modifier_title">Roll against %1$s</string>
+    <string name="roll_modifier_message">Please fill in a modifier or leave it at zero.</string>
+    <string name="roll_modifier_hint">Roll modifier</string>
+    <string name="roll_modifier_positive">Roll</string>
+
+    <string name="stat_edit_title">Editing %1$s</string>
+    <string name="stat_edit_message">Please fill in new value.</string>
+    <string name="stat_edit_hint">New %1$s value</string>
+
+    <string name="roll_result_title">Roll result</string>
+    <string name="roll_result_message">Your roll of <b>%1$d</b> was a <b>%2$s</b>.</string>
+
 </resources>

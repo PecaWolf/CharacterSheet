@@ -140,6 +140,9 @@ class DialogHelper(private val context: Context) {
             post {
                 requestLayout()
 
+                binding.multiChoiceButtonPositive.isEnabled =
+                    items.any { it.isChecked }
+
                 adapter = SimpleSelectionAdapter { clicked ->
                     val adapter = (adapter as SimpleSelectionAdapter)
 
@@ -153,6 +156,8 @@ class DialogHelper(private val context: Context) {
                             else item
                         }
                     }
+                    binding.multiChoiceButtonPositive.isEnabled =
+                        adapter.items.any { it.isChecked }
                 }
                 layoutManager = LinearLayoutManager(context)
                 (adapter as SimpleSelectionAdapter).items = items

@@ -82,12 +82,12 @@ class BaseStatsViewModel(
                 world,
                 10,
                 _vitality.value!!,
-                _vitality.value!!,
-                _strength.value!!,
-                _dexterity.value!!,
-                _vitality.value!!,
-                _intelligence.value!!,
-                _wisdom.value!!
+                BaseStats.Stat.Strength(_strength.value!!),
+                BaseStats.Stat.Dexterity(_dexterity.value!!),
+                BaseStats.Stat.Vitality(_vitality.value!!),
+                BaseStats.Stat.Intelligence(_intelligence.value!!),
+                BaseStats.Stat.Wisdom(_wisdom.value!!),
+                BaseStats.Stat.Charisma(_charisma.value!!),
             )
         ).observe(CREATE_CHARACTER, ::onCreateCharacterError, ::onCreateCharacterSuccess)
     }
