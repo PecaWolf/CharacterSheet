@@ -116,4 +116,21 @@ class CharacterRepository(
             character.money = money
             cache.updateCharacter(character)
         }
+
+    fun updateCharacter(baseStats: BaseStats) = cache.getCharacter()
+        .firstOrError()
+        .flatMapCompletable { character ->
+            character.name = baseStats.name
+            character.species = baseStats.species.name
+            character.luck = baseStats.luck
+            character.wounds = baseStats.wounds
+            character.str = baseStats.str.value
+            character.dex = baseStats.dex.value
+            character.vit = baseStats.vit.value
+            character.inl = baseStats.inl.value
+            character.wis = baseStats.wis.value
+            character.cha = baseStats.cha.value
+
+            cache.updateCharacter(character)
+        }
 }

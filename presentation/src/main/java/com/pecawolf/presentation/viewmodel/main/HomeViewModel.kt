@@ -5,53 +5,71 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.distinctUntilChanged
 import com.pecawolf.charactersheet.common.extensions.let
 import com.pecawolf.domain.interactor.RollDiceInteractor
+import com.pecawolf.domain.interactor.UpdateCharacterInteractor
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
+import kotlin.math.max
 
 class HomeViewModel(
     private val mainViewModel: MainViewModel,
-    private val roll: RollDiceInteractor
+    private val roll: RollDiceInteractor,
+    private val updateCharacter: UpdateCharacterInteractor,
 ) : BaseViewModel() {
 
-    private val _baseStats = mainViewModel.character
     private val _navigateTo = SingleLiveEvent<Destination>()
-    val baseStats: LiveData<BaseStats> = _baseStats.distinctUntilChanged()
-    val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(_baseStats) { it.luckAndWounds }
+    val baseStats: LiveData<BaseStats> = mainViewModel.character.distinctUntilChanged()
+    val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(baseStats) { it.luckAndWounds }
     val navigateTo: LiveData<Destination> = _navigateTo
 
     fun onRollClicked(stat: BaseStats.Stat) {
-        _baseStats.value?.also {
+        baseStats.value?.also {
             _navigateTo.postValue(Destination.RollModifierDialog(stat))
         }
     }
 
-    fun onHealClicked() {
-        _baseStats.value?.apply {
-            if (wounds < vit.value) wounds++
-            else luck++
+    fun onHealClicked(heal: Int) {
+        baseStats.value?.also { baseStats ->
+            if (baseStats.wounds < baseStats.vit.value) {
+                baseStats.wounds += heal
+                val over = baseStats.wounds - baseStats.vit.value
+                baseStats.luck += over
+                baseStats.wounds -= max(over, 0)
+            } else baseStats.luck += heal
 
-//            updateCharacter.execute(this)
+            updateCharacter.execute(baseStats)
+                .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
         }
     }
 
-    fun onDamageClicked() {
-        _baseStats.value?.apply {
-            if (luck > 0) luck--
-            else wounds = maxOf(wounds - 1, 0)
+    fun onDamageClicked(damage: Int) {
+        baseStats.value?.also { baseStats ->
+            if (baseStats.luck > 0) {
+                baseStats.luck -= damage
+            } else baseStats.wounds = maxOf(baseStats.wounds - damage, 0)
 
-//            updateCharacter.execute(this)
+            updateCharacter.execute(baseStats)
+                .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
         }
     }
 
     fun onDamageLongClicked() {
-        _baseStats.value?.apply {
-            wounds = maxOf(wounds - 1, 0)
+        baseStats.value?.also { baseStats ->
+            baseStats.wounds = maxOf(baseStats.wounds - 1, 0)
 
-//            updateCharacter.execute(this)
+            updateCharacter.execute(baseStats)
+                .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
         }
+    }
+
+    private fun onUpdateCharacterSuccess() {
+        Timber.v("onUpdateCharacterSuccess()")
+    }
+
+    private fun onUpdateCharacterError(error: Throwable) {
+        Timber.e(error, "onUpdateCharacterError(): ")
     }
 
     fun onRollConfirmed(stat: BaseStats.Stat, modifier: String) {
@@ -81,5 +99,6 @@ class HomeViewModel(
 
     companion object {
         const val ROLL = "ROLL_"
+        const val UPDATE = "UPDATE"
     }
 }

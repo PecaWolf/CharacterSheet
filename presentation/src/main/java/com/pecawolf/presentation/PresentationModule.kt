@@ -23,29 +23,17 @@ object PresentationModule {
     val instance = module {
         viewModel { MainViewModel(get(), get()) }
 
-        viewModel { HomeViewModel(get(), get()) }
+        viewModel { HomeViewModel(get(), get(), get()) }
 
         viewModel { LoadoutViewModel(get()) }
 
         viewModel { InventoryViewModel(get(), get()) }
         viewModel { (itemId: Long) ->
-            ItemDetailViewModel(
-                itemId,
-                get(),
-                get(),
-                get(),
-                get(),
-                get()
-            )
+            ItemDetailViewModel(itemId, get(), get(), get(), get(), get())
         }
         viewModel { NewItemStep1ViewModel() }
         viewModel { (name: String, description: String, type: Item.ItemType) ->
-            NewItemStep2ViewModel(
-                name,
-                description,
-                type,
-                get()
-            )
+            NewItemStep2ViewModel(name, description, type, get())
         }
 
         viewModel { OtherViewModel(get()) }
@@ -53,11 +41,7 @@ object PresentationModule {
         viewModel { CharacterSelectionViewModel(get(), get(), get()) }
         viewModel { SpeciesSelectionViewModel() }
         viewModel { (world: BaseStats.World, species: BaseStats.Species) ->
-            BaseStatsViewModel(
-                world,
-                species,
-                get()
-            )
+            BaseStatsViewModel(world, species, get())
         }
     }
 

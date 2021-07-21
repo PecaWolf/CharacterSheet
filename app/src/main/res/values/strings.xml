@@ -75,7 +75,7 @@
     <string name="money">Money:</string>
     <string name="backpack">Backpack</string>
     <string name="storage">Storage</string>
-    <string name="home_luck_and_hp">"%1$d + %2$d "</string>
+    <string name="home_luck_and_wounds">"%1$d + %2$d "</string>
     <string name="other_create_character">Create a new character</string>
     <string name="create_character_name_hint">Character name</string>
     <string name="create_character_species_hint">Species</string>

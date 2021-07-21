@@ -4,17 +4,23 @@ import android.text.Html
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.R
+import com.pecawolf.charactersheet.common.extensions.let
 import com.pecawolf.charactersheet.databinding.FragmentHomeBinding
+import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel.Destination
+import timber.log.Timber
+import androidx.appcompat.widget.LinearLayoutCompat.LayoutParams as LinearLayoutParams
 import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -33,18 +39,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.homeInlStat.setOnClickListener { viewModel.onRollClicked(it) }
         binding.homeWisStat.setOnClickListener { viewModel.onRollClicked(it) }
         binding.homeChaStat.setOnClickListener { viewModel.onRollClicked(it) }
-        binding.homeLuckAndHpRecycler.apply {
-            adapter = hpAdapter
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL,
-                false
-            ).apply {
-                stackFromEnd = true
-            }
-        }
-        binding.homeHeal.setOnClickListener { viewModel.onHealClicked() }
-        binding.homeDamage.setOnClickListener { viewModel.onDamageClicked() }
+
+        binding.homeHeal.setOnClickListener(DebouncedOnClickListener { clicks ->
+            viewModel.onHealClicked(clicks)
+        })
+        binding.homeDamage.setOnClickListener(DebouncedOnClickListener { clicks ->
+            viewModel.onDamageClicked(clicks)
+        })
         binding.homeDamage.setOnLongClickListener { true.also { viewModel.onDamageLongClicked() } }
     }
 
@@ -67,9 +68,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         })
 
         viewModel.luckAndHp.reObserve(this) { luckAndHp ->
-            binding.homeLuckAndHpValue.text =
-                resources.getString(R.string.home_luck_and_hp, luckAndHp.first, luckAndHp.second)
-            hpAdapter.items = luckAndHp
+            luckAndHp.let { luck, wounds ->
+                binding.homeLuckAndHpValue.text =
+                    resources.getString(R.string.home_luck_and_wounds, luck, wounds)
+                binding.homeLuckAndHpRecycler.apply {
+                    removeAllViews()
+                    for (i in 1..luck) {
+                        Timber.d("luck")
+                        inflateHitPoint(R.color.luck)
+                    }
+                    for (i in 1..wounds) {
+                        Timber.e("wound")
+                        inflateHitPoint(R.color.wound)
+                    }
+                }
+            }
         }
 
         viewModel.navigateTo.reObserve(this) { destination ->
@@ -82,6 +95,22 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
         }
     }
+
+    private fun LinearLayoutCompat.inflateHitPoint(color: Int) =
+        addView(
+            ItemHitPointBinding.inflate(
+                layoutInflater,
+                this,
+                false
+            ).apply {
+                this.item.setCardBackgroundColor(ResourcesCompat.getColor(resources, color, null))
+                this.item.layoutParams = LinearLayoutParams(
+                    LinearLayoutParams.MATCH_PARENT,
+                    0,
+                    1f
+                )
+            }.root
+        )
 
     private fun showRollModifierDialog(stat: BaseStats.Stat) {
         dialogHelper.showTextInputDialog(
