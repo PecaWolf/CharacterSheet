@@ -705,7 +705,7 @@
             style="@style/Button.Fab.Item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_minus"
+            android:src="@drawable/ic_delete_24"
             app:fab_label="@string/item_detail_fab_label_delete" />
 
     </com.github.clans.fab.FloatingActionMenu>

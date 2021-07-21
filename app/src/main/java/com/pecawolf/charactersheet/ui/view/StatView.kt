@@ -20,6 +20,33 @@ class StatView : FrameLayout {
             refreshData()
         }
 
+    var isEditing: Boolean = false
+        set(value) {
+            field = value
+            refreshEditIcon()
+        }
+
+    private var onRollClick: ((BaseStats.Stat) -> Unit)? = null
+        set(value) {
+            field = value
+            binding.statWidgetRollButton.isEnabled = value != null
+            binding.statWidgetRollButton.setOnClickListener {
+                data?.let(value!!)
+            }
+        }
+    private var onEditClick: ((BaseStats.Stat) -> Unit)? = null
+        set(value) {
+            field = value
+            binding.statWidgetEditIcon.setOnClickListener {
+                data?.let(value!!)
+            }
+            refreshEditIcon()
+        }
+
+    private fun refreshEditIcon() {
+        binding.statWidgetEditIcon.isVisible = (isEditing && onEditClick != null)
+    }
+
     // region constructors
 
     constructor(context: Context) : super(context)
@@ -31,14 +58,15 @@ class StatView : FrameLayout {
     // endregion constructors
 
     init {
-        setOnClickListener(onClick = null)
+        setOnRollClickListener(onClick = null)
     }
 
-    fun setOnClickListener(onClick: ((BaseStats.Stat) -> Unit)?) {
-        binding.statWidgetRollButton.isEnabled = onClick != null
-        binding.statWidgetRollButton.setOnClickListener {
-            data?.let(onClick!!)
-        }
+    fun setOnRollClickListener(onClick: ((BaseStats.Stat) -> Unit)?) {
+        onRollClick = onClick
+    }
+
+    fun setOnEditClickListener(onClick: ((BaseStats.Stat) -> Unit)?) {
+        onEditClick = onClick
     }
 
     private fun refreshData() {

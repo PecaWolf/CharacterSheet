@@ -204,9 +204,13 @@
     <string name="stat_trap">Trap</string>
 
     <string name="roll_modifier_title">Roll against %1$s</string>
-    <string name="roll_modifier_message">Please input roll modifier or leave it at zero.</string>
+    <string name="roll_modifier_message">Please fill in a modifier or leave it at zero.</string>
     <string name="roll_modifier_hint">Roll modifier</string>
     <string name="roll_modifier_positive">Roll</string>
+
+    <string name="stat_edit_title">Editing %1$s</string>
+    <string name="stat_edit_message">Please fill in new value.</string>
+    <string name="stat_edit_hint">New %1$s value</string>
 
     <string name="roll_result_title">Roll result</string>
     <string name="roll_result_message">Your roll of <b>%1$d</b> was a <b>%2$s</b>.</string>

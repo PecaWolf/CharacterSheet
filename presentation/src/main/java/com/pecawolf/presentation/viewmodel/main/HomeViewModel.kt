@@ -49,6 +49,12 @@ class HomeViewModel(
         }
     }
 
+    fun onStatEditClicked(stat: BaseStats.Stat) {
+        baseStats.value?.also {
+            _navigateTo.postValue(Destination.StatEditDialog(stat))
+        }
+    }
+
     fun onHealClicked(heal: Int) {
         baseStats.value?.also { baseStats ->
             if (baseStats.wounds < baseStats.vit.value) {
@@ -104,6 +110,22 @@ class HomeViewModel(
             )
     }
 
+    fun onEditConnfirmed(stat: BaseStats.Stat) {
+        baseStats.value?.also { baseStats ->
+            when (stat) {
+                is BaseStats.Stat.Strength -> baseStats.str = stat
+                is BaseStats.Stat.Dexterity -> baseStats.dex = stat
+                is BaseStats.Stat.Vitality -> baseStats.vit = stat
+                is BaseStats.Stat.Intelligence -> baseStats.inl = stat
+                is BaseStats.Stat.Wisdom -> baseStats.wis = stat
+                is BaseStats.Stat.Charisma -> baseStats.cha = stat
+            }
+
+            updateCharacter.execute(baseStats)
+                .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
+        }
+    }
+
     private fun onRollSuccess(result: Pair<Int, RollResult>) {
         Timber.v("onRollSuccess(): $result")
         _navigateTo.postValue(
@@ -119,6 +141,7 @@ class HomeViewModel(
         data class RollModifierDialog(val stat: BaseStats.Stat) : Destination()
         data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
         data class EditNameDialog(val name: String) : Destination()
+        data class StatEditDialog(val stat: BaseStats.Stat) : Destination()
     }
 
     companion object {

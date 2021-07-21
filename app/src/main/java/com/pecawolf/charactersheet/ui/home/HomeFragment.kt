@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.common.extensions.let
 import com.pecawolf.charactersheet.databinding.FragmentHomeBinding
@@ -32,12 +31,30 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         binding.homeNameEditIcon.setOnClickListener { viewModel.onNameEdit() }
-        binding.homeStrStat.setOnClickListener { viewModel.onRollClicked(it) }
-        binding.homeDexStat.setOnClickListener { viewModel.onRollClicked(it) }
-        binding.homeVitStat.setOnClickListener { viewModel.onRollClicked(it) }
-        binding.homeInlStat.setOnClickListener { viewModel.onRollClicked(it) }
-        binding.homeWisStat.setOnClickListener { viewModel.onRollClicked(it) }
-        binding.homeChaStat.setOnClickListener { viewModel.onRollClicked(it) }
+        binding.homeStrStat.apply {
+            setOnRollClickListener { viewModel.onRollClicked(it) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+        }
+        binding.homeDexStat.apply {
+            setOnRollClickListener { viewModel.onRollClicked(it) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+        }
+        binding.homeVitStat.apply {
+            setOnRollClickListener { viewModel.onRollClicked(it) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+        }
+        binding.homeInlStat.apply {
+            setOnRollClickListener { viewModel.onRollClicked(it) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+        }
+        binding.homeWisStat.apply {
+            setOnRollClickListener { viewModel.onRollClicked(it) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+        }
+        binding.homeChaStat.apply {
+            setOnRollClickListener { viewModel.onRollClicked(it) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+        }
 
         binding.homeHeal.setOnClickListener(DebouncedOnClickListener { clicks ->
             viewModel.onHealClicked(clicks)
@@ -87,6 +104,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         viewModel.isEditing.reObserve(this) { isEditing ->
             binding.homeNameEditIcon.isVisible = isEditing
+
+            binding.homeStrStat.isEditing = isEditing
+            binding.homeDexStat.isEditing = isEditing
+            binding.homeVitStat.isEditing = isEditing
+            binding.homeInlStat.isEditing = isEditing
+            binding.homeWisStat.isEditing = isEditing
+            binding.homeChaStat.isEditing = isEditing
         }
 
         viewModel.navigateTo.reObserve(this) { destination ->
@@ -97,6 +121,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     destination.roll,
                     destination.rollResult
                 )
+                is Destination.StatEditDialog -> showStatEditDialog(destination.stat)
             }
         }
     }
@@ -160,5 +185,20 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 .toString(),
             getString(R.string.generic_ok)
         ) { dialog -> dialog.cancel() }
+    }
+
+    private fun showStatEditDialog(stat: BaseStats.Stat) {
+        dialogHelper.showTextInputDialog(
+            getString(R.string.stat_edit_title, stat.getLocalizedName(requireContext())),
+            getString(R.string.stat_edit_message),
+            InputType.TYPE_CLASS_NUMBER,
+            1,
+            stat.value.toString(),
+            getString(R.string.stat_edit_hint, stat.getLocalizedName(requireContext()).lowercase()),
+            getString(R.string.generic_continue)
+        ) { dialog, value ->
+            viewModel.onEditConnfirmed(stat.also { it.value = value.toInt() })
+            dialog.cancel()
+        }
     }
 }

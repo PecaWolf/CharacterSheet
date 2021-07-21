@@ -27,24 +27,24 @@ class BaseStats(
     val luckAndWounds: Pair<Int, Int>
         get() = luck to wounds
 
-    sealed class Stat(open val value: Int) : Parcelable {
+    sealed class Stat(open var value: Int) : Parcelable {
         @Parcelize
-        data class Strength(override val value: Int) : Stat(value)
+        data class Strength(override var value: Int) : Stat(value)
 
         @Parcelize
-        data class Dexterity(override val value: Int) : Stat(value)
+        data class Dexterity(override var value: Int) : Stat(value)
 
         @Parcelize
-        data class Vitality(override val value: Int) : Stat(value)
+        data class Vitality(override var value: Int) : Stat(value)
 
         @Parcelize
-        data class Intelligence(override val value: Int) : Stat(value)
+        data class Intelligence(override var value: Int) : Stat(value)
 
         @Parcelize
-        data class Wisdom(override val value: Int) : Stat(value)
+        data class Wisdom(override var value: Int) : Stat(value)
 
         @Parcelize
-        data class Charisma(override val value: Int) : Stat(value)
+        data class Charisma(override var value: Int) : Stat(value)
 
         val trap: Int
             get() = value * 2
