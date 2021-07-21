@@ -9,7 +9,6 @@ import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentInventoryBinding
 import com.pecawolf.charactersheet.ext.formatAmount
 import com.pecawolf.charactersheet.ui.BaseFragment
-import com.pecawolf.charactersheet.ui.view.BottomSpacingDecoration
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel.Destination
@@ -29,9 +28,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
     override fun bindView(binding: FragmentInventoryBinding, viewModel: InventoryViewModel) {
         binding.inventoryRecycler.apply {
             adapter = backpackAdapter
-            layoutManager = LinearLayoutManager(requireContext()).apply {
-                addItemDecoration(BottomSpacingDecoration(R.dimen.bar_height))
-            }
+            layoutManager = LinearLayoutManager(requireContext())
         }
         binding.inventoryMoneyClicker.setOnClickListener { viewModel.onMoneyClicked() }
         binding.inventoryAddItemButton.setOnClickListener { viewModel.onAddItemClicked() }
