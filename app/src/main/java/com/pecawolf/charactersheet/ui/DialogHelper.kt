@@ -135,7 +135,7 @@ class DialogHelper(private val context: Context) {
 
         binding.multiChoiceRecycler.apply {
             layoutParams.height = min(items.size, 5)
-                .times(resources.getDimensionPixelSize(R.dimen.slection_item_height))
+                .times(resources.getDimensionPixelSize(R.dimen.bar_height))
 
             post {
                 requestLayout()

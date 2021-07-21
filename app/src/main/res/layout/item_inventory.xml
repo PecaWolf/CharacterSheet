@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="start|top"
-            android:lines="4"
+            android:maxLines="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_go"
             app:layout_constraintStart_toStartOf="parent"
