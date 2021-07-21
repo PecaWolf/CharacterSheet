@@ -34,6 +34,7 @@ class StatView : FrameLayout {
                 data?.let(value!!)
             }
         }
+
     private var onEditClick: ((BaseStats.Stat) -> Unit)? = null
         set(value) {
             field = value
@@ -42,10 +43,6 @@ class StatView : FrameLayout {
             }
             refreshEditIcon()
         }
-
-    private fun refreshEditIcon() {
-        binding.statWidgetEditIcon.isVisible = (isEditing && onEditClick != null)
-    }
 
     // region constructors
 
@@ -75,5 +72,9 @@ class StatView : FrameLayout {
             binding.statWidgetValue.text = value.toString()
             binding.statWidgetTrap.text = trap.toString()
         }
+    }
+
+    private fun refreshEditIcon() {
+        binding.statWidgetEditIcon.isVisible = (isEditing && onEditClick != null)
     }
 }
