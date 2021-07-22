@@ -116,6 +116,11 @@ fun Item.Slot.getLocalizedName() = when (this) {
     Item.Slot.CLOTHING -> R.string.equip_slot_clothing
 }
 
+fun Rollable.getName(context: Context) = when (this) {
+    is Rollable.Stat -> getLocalizedName(context)
+    is Rollable.Skill -> name
+}
+
 fun Rollable.Stat.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Rollable.Stat.getLocalizedName() = when (this) {

@@ -1,6 +1,5 @@
 package com.pecawolf.charactersheet.ui.home
 
-import android.text.Html
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -159,14 +158,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun showRollModifierDialog(stat: Rollable.Stat) {
-        dialogHelper.showTextInputDialog(
-            getString(R.string.roll_modifier_title, stat.getLocalizedName(requireContext())),
-            getString(R.string.roll_modifier_message),
-            InputType.TYPE_CLASS_NUMBER,
-            1,
-            "0",
-            getString(R.string.roll_modifier_hint),
-            getString(R.string.roll_modifier_positive)
+        dialogHelper.showRollModifierDialog(
+            stat
         ) { dialog, modifier ->
             viewModel.onRollConfirmed(stat, modifier)
             dialog.cancel()
@@ -174,18 +167,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
-        dialogHelper.showSingleChoiceDialog(
-            getString(R.string.roll_result_title),
-            Html.fromHtml(
-                getString(
-                    R.string.roll_result_message,
-                    roll,
-                    rollResult.getLocalizedName(requireContext())
-                )
-            )
-                .toString(),
-            getString(R.string.generic_ok)
-        ) { dialog -> dialog.cancel() }
+        dialogHelper.showRollResultDialog(roll, rollResult)
     }
 
     private fun showStatEditDialog(stat: Rollable.Stat) {

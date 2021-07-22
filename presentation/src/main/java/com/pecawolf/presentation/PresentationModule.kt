@@ -37,7 +37,7 @@ object PresentationModule {
             NewItemStep2ViewModel(name, description, type, get())
         }
 
-        viewModel { SkillsViewModel(get()) }
+        viewModel { SkillsViewModel(get(), get()) }
         viewModel { OtherViewModel(get()) }
 
         viewModel { CharacterSelectionViewModel(get(), get(), get()) }

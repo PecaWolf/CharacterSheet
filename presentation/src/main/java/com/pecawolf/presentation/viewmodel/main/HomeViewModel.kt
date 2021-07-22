@@ -105,7 +105,7 @@ class HomeViewModel(
     fun onRollConfirmed(stat: Rollable.Stat, modifier: String) {
         roll.execute(stat to modifier.toInt())
             .observe(
-                ROLL + stat::class.java.simpleName.toUpperCase(),
+                ROLL + stat::class.java.simpleName.uppercase(),
                 ::onRollError,
                 ::onRollSuccess
             )
@@ -146,7 +146,7 @@ class HomeViewModel(
     }
 
     companion object {
-        const val ROLL = "ROLL_"
-        const val UPDATE = "UPDATE"
+        private const val ROLL = "ROLL_"
+        private const val UPDATE = "UPDATE"
     }
 }

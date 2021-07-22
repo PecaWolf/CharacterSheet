@@ -12,10 +12,13 @@ import com.pecawolf.charactersheet.ui.skills.SkillsAdapter.SkillAdapterItem
 import com.pecawolf.charactersheet.ui.skills.SkillsAdapter.SkillAdapterItem.SkillAdapterHeader
 import com.pecawolf.charactersheet.ui.skills.SkillsAdapter.SkillAdapterItem.SkillAdapterSkill
 import com.pecawolf.charactersheet.ui.skills.SkillsAdapter.SkillsViewHolder
+import com.pecawolf.model.Rollable
 import com.pecawolf.model.Rollable.Skill
 import com.pecawolf.model.Rollable.Stat
 
-class SkillsAdapter : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, ViewBinding>>() {
+class SkillsAdapter(
+    private val onRollClicked: (Rollable) -> Unit,
+) : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, ViewBinding>>() {
 
     var items: List<Set<Skill>> = listOf()
         set(value) {
@@ -68,7 +71,13 @@ class SkillsAdapter : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, Vi
         holder: SkillsViewHolder<SkillAdapterItem, ViewBinding>,
         position: Int,
     ) {
-        holder.bind(itemsInternal[position])
+        when (getItemViewType(position)) {
+            HEADER -> (holder as HeaderViewHolder).bind(itemsInternal[position] as SkillAdapterHeader)
+            SKILL -> (holder as SkillViewHolder).bind(
+                itemsInternal[position] as SkillAdapterSkill,
+                onRollClicked
+            )
+        }
     }
 
     sealed class SkillAdapterItem(val itemType: Int) {
@@ -78,13 +87,12 @@ class SkillsAdapter : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, Vi
 
     abstract class SkillsViewHolder<T : SkillAdapterItem, B : ViewBinding>(open val binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        abstract fun bind(item: T)
     }
 
     class HeaderViewHolder(override val binding: ItemSkillHeaderBinding) :
         SkillsViewHolder<SkillAdapterHeader, ItemSkillHeaderBinding>(binding) {
 
-        override fun bind(item: SkillAdapterHeader) {
+        fun bind(item: SkillAdapterHeader) {
             binding.itemSkillHeader.apply {
                 text = resources.getString(R.string.skill_group_header,
                     item.stat.getLocalizedName(context),
@@ -96,8 +104,11 @@ class SkillsAdapter : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, Vi
     class SkillViewHolder(override val binding: ItemSkillSkillBinding) :
         SkillsViewHolder<SkillAdapterSkill, ItemSkillSkillBinding>(binding) {
 
-        override fun bind(item: SkillAdapterSkill) {
-            binding.itemSkillStatView.data = item.skill
+        fun bind(item: SkillAdapterSkill, onRollClicked: (Rollable) -> Unit) {
+            binding.itemSkillStatView.apply {
+                data = item.skill
+                setOnRollClickListener(onRollClicked)
+            }
         }
     }
 

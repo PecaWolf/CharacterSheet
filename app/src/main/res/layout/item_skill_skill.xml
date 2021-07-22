@@ -3,4 +3,4 @@
     android:id="@+id/item_skill_stat_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_1" />
+    android:layout_marginVertical="@dimen/spacing_1" />

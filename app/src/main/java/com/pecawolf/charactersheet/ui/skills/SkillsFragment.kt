@@ -2,9 +2,12 @@ package com.pecawolf.charactersheet.ui.skills
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.databinding.FragmentSkillsBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.model.RollResult
+import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.SkillsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -13,7 +16,9 @@ import org.koin.core.parameter.parametersOf
 class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
 
     private val skillsAdapter: SkillsAdapter by lazy {
-        SkillsAdapter()
+        SkillsAdapter { skill ->
+            viewModel.onRollClicked(skill as Rollable.Skill)
+        }
     }
 
     override fun getBinding(
@@ -31,8 +36,31 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
     }
 
     override fun observeViewModel(binding: FragmentSkillsBinding, viewModel: SkillsViewModel) {
+        viewModel.isLoading.reObserve(this) { isLoading ->
+            binding.skillsProgress.isVisible = isLoading
+        }
         viewModel.items.reObserve(this) {
             skillsAdapter.items = it
         }
+        viewModel.navigateTo.reObserve(this) {
+            when (it) {
+                is SkillsViewModel.Destination.RollModifierDialog -> showRollModifierDialog(it.skill)
+                is SkillsViewModel.Destination.RollResultDialog -> showRollResultDialog(it.roll,
+                    it.rollResult)
+            }
+        }
+    }
+
+    private fun showRollModifierDialog(skill: Rollable.Skill) {
+        dialogHelper.showRollModifierDialog(
+            skill
+        ) { dialog, modifier ->
+            viewModel.onRollConfirmed(skill, modifier)
+            dialog.cancel()
+        }
+    }
+
+    private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
+        dialogHelper.showRollResultDialog(roll, rollResult)
     }
 }

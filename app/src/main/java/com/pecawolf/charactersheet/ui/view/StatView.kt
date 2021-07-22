@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import com.pecawolf.charactersheet.databinding.WidgetStatViewBinding
-import com.pecawolf.charactersheet.ext.getLocalizedName
+import com.pecawolf.charactersheet.ext.getName
 import com.pecawolf.model.Rollable
 
 class StatView : FrameLayout {
@@ -78,9 +78,4 @@ class StatView : FrameLayout {
     private fun refreshEditIcon() {
         binding.statWidgetEditIcon.isVisible = (isEditing && onEditClick != null)
     }
-}
-
-private fun Rollable.getName(context: Context) = when (this) {
-    is Rollable.Stat -> getLocalizedName(context)
-    is Rollable.Skill -> name
 }
