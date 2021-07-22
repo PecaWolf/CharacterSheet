@@ -14,8 +14,8 @@ import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
-import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
+import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel.Destination
@@ -33,28 +33,28 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         binding.homeNameEditIcon.setOnClickListener { viewModel.onNameEdit() }
         binding.homeStrStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Strength) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Strength) }
         }
         binding.homeDexStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Dexterity) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Dexterity) }
         }
         binding.homeVitStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Vitality) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Vitality) }
         }
         binding.homeInlStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Intelligence) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Intelligence) }
         }
         binding.homeWisStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Wisdom) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Wisdom) }
         }
         binding.homeChaStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Charisma) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Charisma) }
         }
 
         binding.homeHeal.setOnClickListener(DebouncedOnClickListener { clicks ->
@@ -158,7 +158,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    private fun showRollModifierDialog(stat: BaseStats.Stat) {
+    private fun showRollModifierDialog(stat: Rollable.Stat) {
         dialogHelper.showTextInputDialog(
             getString(R.string.roll_modifier_title, stat.getLocalizedName(requireContext())),
             getString(R.string.roll_modifier_message),
@@ -188,7 +188,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         ) { dialog -> dialog.cancel() }
     }
 
-    private fun showStatEditDialog(stat: BaseStats.Stat) {
+    private fun showStatEditDialog(stat: Rollable.Stat) {
         dialogHelper.showTextInputDialog(
             getString(R.string.stat_edit_title, stat.getLocalizedName(requireContext())),
             getString(R.string.stat_edit_message),

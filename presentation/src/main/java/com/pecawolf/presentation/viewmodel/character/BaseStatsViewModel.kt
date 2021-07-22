@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.pecawolf.domain.interactor.CreateChracterInteractor
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Constants
+import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.MergedLiveData3
 import com.pecawolf.presentation.extensions.MergedLiveData6
 import com.pecawolf.presentation.extensions.SingleLiveEvent
@@ -82,12 +83,12 @@ class BaseStatsViewModel(
                 world,
                 10,
                 _vitality.value!!,
-                BaseStats.Stat.Strength(_strength.value!!),
-                BaseStats.Stat.Dexterity(_dexterity.value!!),
-                BaseStats.Stat.Vitality(_vitality.value!!),
-                BaseStats.Stat.Intelligence(_intelligence.value!!),
-                BaseStats.Stat.Wisdom(_wisdom.value!!),
-                BaseStats.Stat.Charisma(_charisma.value!!),
+                Rollable.Stat.Strength(_strength.value!!),
+                Rollable.Stat.Dexterity(_dexterity.value!!),
+                Rollable.Stat.Vitality(_vitality.value!!),
+                Rollable.Stat.Intelligence(_intelligence.value!!),
+                Rollable.Stat.Wisdom(_wisdom.value!!),
+                Rollable.Stat.Charisma(_charisma.value!!),
             )
         ).observe(CREATE_CHARACTER, ::onCreateCharacterError, ::onCreateCharacterSuccess)
     }

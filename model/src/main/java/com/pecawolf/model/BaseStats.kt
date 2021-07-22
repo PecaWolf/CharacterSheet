@@ -1,12 +1,12 @@
 package com.pecawolf.model
 
 import android.os.Parcelable
-import com.pecawolf.model.BaseStats.Stat.Charisma
-import com.pecawolf.model.BaseStats.Stat.Dexterity
-import com.pecawolf.model.BaseStats.Stat.Intelligence
-import com.pecawolf.model.BaseStats.Stat.Strength
-import com.pecawolf.model.BaseStats.Stat.Vitality
-import com.pecawolf.model.BaseStats.Stat.Wisdom
+import com.pecawolf.model.Rollable.Stat.Charisma
+import com.pecawolf.model.Rollable.Stat.Dexterity
+import com.pecawolf.model.Rollable.Stat.Intelligence
+import com.pecawolf.model.Rollable.Stat.Strength
+import com.pecawolf.model.Rollable.Stat.Vitality
+import com.pecawolf.model.Rollable.Stat.Wisdom
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
@@ -26,29 +26,6 @@ class BaseStats(
 ) : Parcelable, Serializable {
     val luckAndWounds: Pair<Int, Int>
         get() = luck to wounds
-
-    sealed class Stat(open var value: Int) : Parcelable {
-        @Parcelize
-        data class Strength(override var value: Int) : Stat(value)
-
-        @Parcelize
-        data class Dexterity(override var value: Int) : Stat(value)
-
-        @Parcelize
-        data class Vitality(override var value: Int) : Stat(value)
-
-        @Parcelize
-        data class Intelligence(override var value: Int) : Stat(value)
-
-        @Parcelize
-        data class Wisdom(override var value: Int) : Stat(value)
-
-        @Parcelize
-        data class Charisma(override var value: Int) : Stat(value)
-
-        val trap: Int
-            get() = value * 2
-    }
 
     enum class Species {
         HUMAN,

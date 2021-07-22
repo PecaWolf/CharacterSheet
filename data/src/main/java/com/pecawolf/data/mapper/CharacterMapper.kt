@@ -2,15 +2,15 @@ package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.model.BaseStats
-import com.pecawolf.model.BaseStats.Stat.Charisma
-import com.pecawolf.model.BaseStats.Stat.Dexterity
-import com.pecawolf.model.BaseStats.Stat.Intelligence
-import com.pecawolf.model.BaseStats.Stat.Strength
-import com.pecawolf.model.BaseStats.Stat.Vitality
-import com.pecawolf.model.BaseStats.Stat.Wisdom
 import com.pecawolf.model.Character
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
+import com.pecawolf.model.Rollable.Stat.Charisma
+import com.pecawolf.model.Rollable.Stat.Dexterity
+import com.pecawolf.model.Rollable.Stat.Intelligence
+import com.pecawolf.model.Rollable.Stat.Strength
+import com.pecawolf.model.Rollable.Stat.Vitality
+import com.pecawolf.model.Rollable.Stat.Wisdom
 
 class CharacterMapper : BaseMapper<Character, CharacterEntity, Nothing, Item> {
 
