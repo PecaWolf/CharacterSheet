@@ -9,7 +9,7 @@ import com.pecawolf.charactersheet.databinding.WidgetStatViewBinding
 import com.pecawolf.charactersheet.ext.getName
 import com.pecawolf.model.Rollable
 
-class StatView : FrameLayout {
+class RollView : FrameLayout {
 
     private val binding: WidgetStatViewBinding = WidgetStatViewBinding.inflate(
         LayoutInflater.from(context), this, true
@@ -39,7 +39,7 @@ class StatView : FrameLayout {
     private var onEditClick: ((Rollable) -> Unit)? = null
         set(value) {
             field = value
-            binding.statWidgetEditIcon.setOnClickListener {
+            binding.statWidgetEditButton.setOnClickListener {
                 data?.let(value!!)
             }
             refreshEditIcon()
@@ -76,6 +76,8 @@ class StatView : FrameLayout {
     }
 
     private fun refreshEditIcon() {
-        binding.statWidgetEditIcon.isVisible = (isEditing && onEditClick != null)
+        val isEditVisible = isEditing && onEditClick != null
+        binding.statWidgetEditButton.isVisible = isEditVisible
+        binding.statWidgetRollButton.isVisible = !isEditVisible
     }
 }

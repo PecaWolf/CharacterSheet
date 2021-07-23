@@ -171,15 +171,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun showStatEditDialog(stat: Rollable.Stat) {
-        dialogHelper.showTextInputDialog(
-            getString(R.string.stat_edit_title, stat.getLocalizedName(requireContext())),
-            getString(R.string.stat_edit_message),
-            InputType.TYPE_CLASS_NUMBER,
-            1,
-            stat.value.toString(),
-            getString(R.string.stat_edit_hint, stat.getLocalizedName(requireContext()).lowercase()),
-            getString(R.string.generic_continue)
-        ) { dialog, value ->
+        dialogHelper.showRollableEditDialog(stat) { dialog, value ->
             viewModel.onEditConnfirmed(stat.also { it.value = value.toInt() })
             dialog.cancel()
         }

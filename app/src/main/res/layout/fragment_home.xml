@@ -121,32 +121,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_item_detail_base_data_card" />
 
-    <com.pecawolf.charactersheet.ui.view.StatView
+    <com.pecawolf.charactersheet.ui.view.RollView
         android:id="@+id/home_str_stat"
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <com.pecawolf.charactersheet.ui.view.StatView
+    <com.pecawolf.charactersheet.ui.view.RollView
         android:id="@+id/home_dex_stat"
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <com.pecawolf.charactersheet.ui.view.StatView
+    <com.pecawolf.charactersheet.ui.view.RollView
         android:id="@+id/home_vit_stat"
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <com.pecawolf.charactersheet.ui.view.StatView
+    <com.pecawolf.charactersheet.ui.view.RollView
         android:id="@+id/home_inl_stat"
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <com.pecawolf.charactersheet.ui.view.StatView
+    <com.pecawolf.charactersheet.ui.view.RollView
         android:id="@+id/home_wis_stat"
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <com.pecawolf.charactersheet.ui.view.StatView
+    <com.pecawolf.charactersheet.ui.view.RollView
         android:id="@+id/home_cha_stat"
         android:layout_width="0dp"
         android:layout_height="0dp" />

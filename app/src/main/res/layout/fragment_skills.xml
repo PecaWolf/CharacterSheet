@@ -128,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_wrench_24"
-            app:fab_label="@string/item_detail_fab_label_edit" />
+            app:fab_label="@string/skills_edit" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/skills_show_unknown_fab"

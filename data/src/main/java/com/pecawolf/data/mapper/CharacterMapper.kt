@@ -86,7 +86,6 @@ class CharacterMapper {
             inventory.tertiary.itemId,
             inventory.clothes.itemId,
             inventory.armor.itemId,
-            inventory.backpack.map { it.itemId }.toMutableList(),
             skills.run {
                 listOf(
                     strength.map { it.code to it.value },

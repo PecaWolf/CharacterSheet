@@ -18,8 +18,14 @@ import com.pecawolf.model.Rollable.Stat
 
 class SkillsAdapter(
     private val onRollClicked: (Rollable) -> Unit,
+    private val onEditClicked: (Rollable) -> Unit,
 ) : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, ViewBinding>>() {
 
+    var isEditing: Boolean = false
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     var items: List<List<Skill>> = listOf()
         set(value) {
             field = value
@@ -79,7 +85,9 @@ class SkillsAdapter(
             HEADER -> (holder as HeaderViewHolder).bind(itemsInternal[position] as SkillAdapterHeader)
             SKILL -> (holder as SkillViewHolder).bind(
                 itemsInternal[position] as SkillAdapterSkill,
-                onRollClicked
+                isEditing,
+                onRollClicked,
+                onEditClicked,
             )
         }
     }
@@ -108,10 +116,17 @@ class SkillsAdapter(
     class SkillViewHolder(override val binding: ItemSkillSkillBinding) :
         SkillsViewHolder<SkillAdapterSkill, ItemSkillSkillBinding>(binding) {
 
-        fun bind(item: SkillAdapterSkill, onRollClicked: (Rollable) -> Unit) {
-            binding.itemSkillStatView.apply {
-                data = item.skill
-                setOnRollClickListener(onRollClicked)
+        fun bind(
+            item: SkillAdapterSkill,
+            isEditing: Boolean,
+            onRollClicked: (Rollable) -> Unit,
+            onEditClicked: (Rollable) -> Unit,
+        ) {
+            binding.itemSkillStatView.also { view ->
+                view.data = item.skill
+                view.isEditing = isEditing
+                view.setOnRollClickListener(onRollClicked)
+                view.setOnEditClickListener(onEditClicked)
             }
         }
     }

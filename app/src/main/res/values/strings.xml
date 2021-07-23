@@ -217,6 +217,7 @@
     <string name="skill_group_header">%1$s: %2$d</string>
     <string name="skills_unknown_show">Show unknown</string>
     <string name="skills_unknown_hide">Hide unknown</string>
+    <string name="skills_edit">Edit skills</string>
     <string name="skills_search">Search</string>
 
 </resources>

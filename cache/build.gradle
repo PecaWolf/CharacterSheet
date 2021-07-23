@@ -47,4 +47,6 @@ dependencies {
     implementation "androidx.room:room-rxjava3:$room_version"
 
     implementation "org.koin:koin-core:2.2.2"
+
+    testImplementation 'junit:junit:4.13.2'
 }

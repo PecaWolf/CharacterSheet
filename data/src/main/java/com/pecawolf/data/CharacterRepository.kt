@@ -8,6 +8,7 @@ import com.pecawolf.data.mapper.ItemMapper
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
 import com.pecawolf.model.Item
+import com.pecawolf.model.Rollable
 import com.pecawolf.remote.model.StatSkillsResponse
 import com.pecawolf.remote.skills.ISkillsRemote
 import io.reactivex.rxjava3.core.Completable
@@ -44,10 +45,8 @@ class CharacterRepository(
         .doOnSuccess { cache.setActiveCharacterId(characterId) }
         .ignoreElement()
 
-    fun clearActiveCharacter(): Completable {
-        return Completable.complete()
-            .doOnComplete { cache.setActiveCharacterId(null) }
-    }
+    fun clearActiveCharacter() = Completable.complete()
+        .doOnComplete { cache.setActiveCharacterId(null) }
 
     fun createItemForActiveCharacter(
         name: String,
@@ -58,7 +57,7 @@ class CharacterRepository(
         wield: Item.Weapon.Wield?,
         magazineSize: Int,
         rateOfFire: Int,
-        damageTypes: MutableSet<Item.DamageType>
+        damageTypes: MutableSet<Item.DamageType>,
     ): Single<Long> = cache.createItemForCharacter(
         name,
         description,
@@ -135,6 +134,14 @@ class CharacterRepository(
             character.wis = baseStats.wis.value
             character.cha = baseStats.cha.value
 
+            cache.updateCharacter(character)
+        }
+
+    fun updateSkill(skill: Rollable.Skill) = cache.getCharacter()
+        .firstOrError()
+        .flatMapCompletable { character ->
+            character.skills[skill.code] = skill.value
+            Timber.w("updateSkill(): ${character.skills}")
             cache.updateCharacter(character)
         }
 }

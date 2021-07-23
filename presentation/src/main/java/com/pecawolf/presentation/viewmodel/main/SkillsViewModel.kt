@@ -16,6 +16,7 @@ import timber.log.Timber
 class SkillsViewModel(
     private val mainViewModel: MainViewModel,
     private val roll: RollDiceInteractor,
+    private val updateSkill: com.pecawolf.domain.interactor.UpdateSkillInteractor,
 ) : BaseViewModel() {
 
     private val _navigateTo = SingleLiveEvent<Destination>()
@@ -81,13 +82,18 @@ class SkillsViewModel(
         _navigateTo.postValue(Destination.RollModifierDialog(skill))
     }
 
+    fun onEditClicked(skill: Skill) {
+        _navigateTo.postValue(Destination.SkillEditDialog(skill))
+    }
+
     fun onRollConfirmed(skill: Skill, modifier: String) {
         roll.execute(skill to modifier.toInt())
-            .observe(
-                ROLL + skill.code,
-                ::onRollError,
-                ::onRollSuccess
-            )
+            .observe(ROLL + skill.code, ::onRollError, ::onRollSuccess)
+    }
+
+    fun onEditConnfirmed(skill: Skill) {
+        updateSkill.execute(skill)
+            .observe(UPDATE, ::onUpdateSkillsError, ::onUpdateSkillsSuccess)
     }
 
     private fun onRollSuccess(result: Pair<Int, RollResult>) {
@@ -101,12 +107,22 @@ class SkillsViewModel(
         Timber.e(error, "onRollError(): ")
     }
 
+    private fun onUpdateSkillsSuccess() {
+        Timber.v("onUpdateSkillsSuccess()")
+    }
+
+    private fun onUpdateSkillsError(error: Throwable) {
+        Timber.e(error, "onUpdateSkillsError(): ")
+    }
+
     sealed class Destination {
         data class RollModifierDialog(val skill: Skill) : Destination()
         data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
+        data class SkillEditDialog(val skill: Skill) : Destination()
     }
 
     companion object {
         private const val ROLL = "ROLL_"
+        private const val UPDATE = "UPDATE"
     }
 }

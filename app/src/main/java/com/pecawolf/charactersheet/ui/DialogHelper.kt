@@ -337,6 +337,19 @@ class DialogHelper(private val context: Context) {
         ) { dialog -> dialog.cancel() }
     }
 
+    fun showRollableEditDialog(stat: Rollable, onPositive: (Dialog, String) -> Unit) {
+        showTextInputDialog(
+            getString(R.string.stat_edit_title, stat.getName(context)),
+            getString(R.string.stat_edit_message),
+            InputType.TYPE_CLASS_NUMBER,
+            1,
+            stat.value.toString(),
+            getString(R.string.stat_edit_hint, stat.getName(context).lowercase()),
+            getString(R.string.generic_continue),
+            onPositive
+        )
+    }
+
     // endregion specific dialogs
 
     private fun getString(@StringRes resId: Int, vararg formatArgs: Any?) =

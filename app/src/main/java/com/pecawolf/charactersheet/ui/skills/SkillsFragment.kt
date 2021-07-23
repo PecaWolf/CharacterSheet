@@ -13,6 +13,7 @@ import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.SkillsViewModel
+import com.pecawolf.presentation.viewmodel.main.SkillsViewModel.Destination
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
@@ -20,9 +21,10 @@ import timber.log.Timber
 class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
 
     private val skillsAdapter: SkillsAdapter by lazy {
-        SkillsAdapter { skill ->
-            viewModel.onRollClicked(skill as Rollable.Skill)
-        }
+        SkillsAdapter(
+            { skill -> viewModel.onRollClicked(skill as Rollable.Skill) },
+            { skill -> viewModel.onEditClicked(skill as Rollable.Skill) },
+        )
     }
 
     override fun getBinding(
@@ -56,6 +58,7 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
             skillsAdapter.items = it
         }
         viewModel.isEditing.reObserve(this) { isEditing ->
+            skillsAdapter.isEditing = isEditing
         }
         viewModel.isShowingUnknown.reObserve(this) { isShowingUnknown ->
             binding.skillsShowUnknownFab.labelText =
@@ -68,9 +71,9 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
         }
         viewModel.navigateTo.reObserve(this) {
             when (it) {
-                is SkillsViewModel.Destination.RollModifierDialog -> showRollModifierDialog(it.skill)
-                is SkillsViewModel.Destination.RollResultDialog -> showRollResultDialog(it.roll,
-                    it.rollResult)
+                is Destination.RollModifierDialog -> showRollModifierDialog(it.skill)
+                is Destination.RollResultDialog -> showRollResultDialog(it.roll, it.rollResult)
+                is Destination.SkillEditDialog -> showSkillEditDialog(it.skill)
             }
         }
     }
@@ -86,5 +89,12 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
 
     private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
         dialogHelper.showRollResultDialog(roll, rollResult)
+    }
+
+    private fun showSkillEditDialog(skill: Rollable.Skill) {
+        dialogHelper.showRollableEditDialog(skill) { dialog, value ->
+            viewModel.onEditConnfirmed(skill.also { it.value = value.toInt() })
+            dialog.cancel()
+        }
     }
 }
