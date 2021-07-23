@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     style="@style/Box"
     android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:padding="0dp"
     tools:context=".ui.skills.SkillsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/skills_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/spacing_2"
         android:layout_marginBottom="@dimen/spacing_2"
         app:layout_constraintBottom_toTopOf="@id/skills_filter_card"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,11 +33,12 @@
         android:id="@+id/skills_filter_card"
         style="@style/Card"
         android:layout_width="0dp"
+        android:layout_marginStart="@dimen/spacing_2"
+        android:layout_marginBottom="@dimen/spacing_2"
         android:layout_height="@dimen/bar_height"
-        app:layout_constraintBottom_toBottomOf="@id/skills_fab"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/skills_fab"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/skills_fab">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,26 +50,44 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:checkedSrc="@drawable/ic_checkmark_active"
-                app:isChecked="true"
+                app:isChecked="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:text="@string/skills_show_all"
+                app:text="@string/skills_unknown_show"
                 app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <com.github.clans.fab.FloatingActionButton
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/skills_fab"
-        style="@style/Button.Fab"
+        style="@style/Button.Fab.Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_wrench_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/skills_edit_fab"
+            style="@style/Button.Fab.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wrench_24"
+            app:fab_label="@string/item_detail_fab_label_edit" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/skills_show_unknown_fab"
+            style="@style/Button.Fab.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_24"
+            app:fab_label="@string/skills_unknown_show" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,14 +23,15 @@ class SkillsAdapter(
     var items: List<List<Skill>> = listOf()
         set(value) {
             field = value
-            itemsInternal = value.flatMap { list ->
-                listOf(
+            itemsInternal = value.mapNotNull { list ->
+                if (list.isNotEmpty()) listOf(
                     listOf(SkillAdapterHeader(list.first().stat)),
                     list.map {
                         SkillAdapterSkill(it)
                     }
                 ).flatten()
-            }
+                else null
+            }.flatten()
         }
 
     private var itemsInternal: List<SkillAdapterItem> = listOf()
@@ -39,9 +40,12 @@ class SkillsAdapter(
             notifyDataSetChanged()
         }
 
-    override fun getItemCount() = items.map { it.size + 1 }.sum()
+    override fun getItemCount(): Int {
+        return items.mapNotNull { it.size.takeIf { it > 0 }?.plus(1) }.sum()
+    }
 
-    override fun getItemViewType(position: Int) = itemsInternal[position].itemType
+    override fun getItemViewType(position: Int) =
+        itemsInternal.getOrNull(position)?.itemType ?: HEADER
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

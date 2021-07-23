@@ -1,6 +1,7 @@
 package com.pecawolf.data.mapper
 
 import com.pecawolf.cache.model.CharacterEntity
+import com.pecawolf.charactersheet.common.extensions.isOneOf
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
 import com.pecawolf.model.Inventory
@@ -55,12 +56,12 @@ class CharacterMapper {
                 items,
             ),
             Skills(
-                strength = lookupSkills(skills, strength, entity, STRENGTH),
-                dexterity = lookupSkills(skills, dexterity, entity, DEXTERITY),
-                vitality = lookupSkills(skills, vitality, entity, VITALITY),
-                intelligence = lookupSkills(skills, intelligence, entity, INTELLIGENCE),
-                wisdom = lookupSkills(skills, wisdom, entity, WISDOM),
-                charisma = lookupSkills(skills, charisma, entity, CHARISMA),
+                strength = lookupSkills(skills, strength, entity, STRENGTH, world),
+                dexterity = lookupSkills(skills, dexterity, entity, DEXTERITY, world),
+                vitality = lookupSkills(skills, vitality, entity, VITALITY, world),
+                intelligence = lookupSkills(skills, intelligence, entity, INTELLIGENCE, world),
+                wisdom = lookupSkills(skills, wisdom, entity, WISDOM, world),
+                charisma = lookupSkills(skills, charisma, entity, CHARISMA, world),
             )
         )
     }
@@ -113,8 +114,12 @@ class CharacterMapper {
         stat: Rollable.Stat,
         entity: CharacterEntity,
         statCode: String,
+        world: String,
     ) = skills.firstOrNull { it.stat == statCode }
         ?.skills
+        ?.filter {
+            world.isOneOf(it.worlds)
+        }
         ?.map { response ->
             Rollable.Skill(
                 response.code,
@@ -122,7 +127,8 @@ class CharacterMapper {
                 stat,
                 entity.skills[response.code] ?: 0
             )
-        } ?: listOf()
+        }
+        ?: listOf()
 
     companion object {
         private const val STRENGTH = "STR"

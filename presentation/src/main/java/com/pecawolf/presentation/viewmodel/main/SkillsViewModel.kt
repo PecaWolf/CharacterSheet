@@ -1,12 +1,14 @@
 package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
+import androidx.lifecycle.MutableLiveData
 import com.pecawolf.charactersheet.common.extensions.let
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable.Skill
+import com.pecawolf.presentation.extensions.MergedLiveData2
 import com.pecawolf.presentation.extensions.SingleLiveEvent
+import com.pecawolf.presentation.extensions.toggle
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -16,18 +18,45 @@ class SkillsViewModel(
 ) : BaseViewModel() {
 
     private val _navigateTo = SingleLiveEvent<Destination>()
-    val items: LiveData<List<List<Skill>>> = mainViewModel.skills.map {
-        Timber.w("onSkills(): $it")
-        listOf(
-            it.strength,
-            it.dexterity,
-            it.vitality,
-            it.intelligence,
-            it.wisdom,
-            it.charisma,
-        )
-    }
+    private val _isEditing = MutableLiveData<Boolean>(false)
+    private val _isShowingUnknown = MutableLiveData<Boolean>(true)
+    val items: LiveData<List<List<Skill>>> =
+        MergedLiveData2(mainViewModel.skills, _isShowingUnknown) { skills, isShowingUnknown ->
+            Timber.w("onSkills(): $isShowingUnknown, ${skills.strength.size}, ${skills.dexterity.size}, ${skills.vitality.size}, ${skills.intelligence.size}, ${skills.wisdom.size}, ${skills.charisma.size}")
+            listOf(
+                skills.strength.filter { skill ->
+                    isShowingUnknown || (skill.value > 0)
+                },
+                skills.dexterity.filter { skill ->
+                    isShowingUnknown || (skill.value > 0)
+
+                },
+                skills.vitality.filter { skill ->
+                    isShowingUnknown || (skill.value > 0)
+                },
+                skills.intelligence.filter { skill ->
+                    isShowingUnknown || (skill.value > 0)
+                },
+                skills.wisdom.filter { skill ->
+                    isShowingUnknown || (skill.value > 0)
+                },
+                skills.charisma.filter { skill ->
+                    isShowingUnknown || (skill.value > 0)
+                },
+            )
+        }
+
     val navigateTo: LiveData<Destination> = _navigateTo
+    val isEditing: LiveData<Boolean> = _isEditing
+    val isShowingUnknown: LiveData<Boolean> = _isShowingUnknown
+
+    fun onSkillsEditClicked() {
+        _isEditing.toggle()
+    }
+
+    fun onSkillsShowUnknownClicked() {
+        _isShowingUnknown.toggle()
+    }
 
 
     fun onRollClicked(skill: Skill) {
