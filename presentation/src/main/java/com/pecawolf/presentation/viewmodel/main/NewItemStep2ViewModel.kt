@@ -131,7 +131,7 @@ class NewItemStep2ViewModel(
         val loadoutsSelected = loadouts.isNotEmpty()
         val validDamage =
             (type.isWeapon && damage != Item.Damage.NONE && damageTypes.isNotEmpty()) || !type.isWeapon
-        val validRanged = (type.isRanged && magazine != 0 && rateOfFire != 0) || !type.isRanged
+        val validRanged = (type.isRanged && magazine > 0 && rateOfFire > 0) || !type.isRanged
 
         loadoutsSelected && validDamage && validRanged
     }
