@@ -20,17 +20,17 @@ class SkillsAdapter(
     private val onRollClicked: (Rollable) -> Unit,
 ) : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, ViewBinding>>() {
 
-    var items: List<Set<Skill>> = listOf()
+    var items: List<List<Skill>> = listOf()
         set(value) {
             field = value
-            itemsInternal = value.map { list ->
+            itemsInternal = value.flatMap { list ->
                 listOf(
                     listOf(SkillAdapterHeader(list.first().stat)),
                     list.map {
                         SkillAdapterSkill(it)
                     }
                 ).flatten()
-            }.flatten()
+            }
         }
 
     private var itemsInternal: List<SkillAdapterItem> = listOf()

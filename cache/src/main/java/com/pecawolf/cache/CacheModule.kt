@@ -12,7 +12,7 @@ object CacheModule {
             Room.databaseBuilder(
                 get(),
                 AppDatabase::class.java,
-                "sport_results"
+                "local_characters"
             ).build()
         }
     }
