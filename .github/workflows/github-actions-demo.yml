@@ -1,7 +1,7 @@
 name: Run lint and all tests
 on: [ push ]
 jobs:
-  Explore-GitHub-Actions:
+  Run-lint-and-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
