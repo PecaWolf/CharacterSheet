@@ -57,20 +57,19 @@ class MainActivity : AppCompatActivity() {
         navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-
-        menu?.let {
-            for (i in 0 until it.size()) {
-                it.getItem(i).isVisible = viewModel.isLoading.value != true
-            }
-        }
+//        menuInflater.inflate(R.menu.toolbar_menu, menu)
+//        menu?.let {
+//            for (i in 0 until it.size()) {
+//                it.getItem(i).isVisible = viewModel.isLoading.value != true
+//            }
+//        }
 
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.toolbar_refresh -> viewModel.onRefresh()
+//            R.id.toolbar_refresh -> viewModel.onRefresh()
             else -> return false
         }
         return true
