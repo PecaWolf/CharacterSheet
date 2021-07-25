@@ -12,7 +12,7 @@ import com.pecawolf.charactersheet.databinding.FragmentItemDetailBinding
 import com.pecawolf.charactersheet.ext.formatAmount
 import com.pecawolf.charactersheet.ext.getIcon
 import com.pecawolf.charactersheet.ext.getLocalizedName
-import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.charactersheet.ui.FabMenuFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
 import com.pecawolf.model.Item
 import com.pecawolf.model.Item.Damage
@@ -26,14 +26,14 @@ import com.pecawolf.presentation.viewmodel.ItemDetailViewModel.Destination
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailBinding>() {
+class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDetailBinding>() {
 
     private val damageTypeAdapter: SimpleSelectionAdapter by lazy {
         SimpleSelectionAdapter {}
     }
 
     override fun getBinding(
-        inflater: LayoutInflater, container: ViewGroup?
+        inflater: LayoutInflater, container: ViewGroup?,
     ) = FragmentItemDetailBinding.inflate(inflater, container, false)
 
     override fun createViewModel() = viewModel<ItemDetailViewModel> {
@@ -42,9 +42,15 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         }
     }.value
 
+    override fun getMenuFab() = binding.itemDetailFabMenu
+
+    override fun getMenuFabItems() = binding.run {
+        listOf(itemDetailItemEditFab, itemDetailItemEquipFab, itemDetailItemDeleteFab)
+    }
+
     override fun bindView(
         binding: FragmentItemDetailBinding,
-        viewModel: ItemDetailViewModel
+        viewModel: ItemDetailViewModel,
     ) {
         binding.itemDetailItemEditFab.setOnClickListener { viewModel.onItemEditClicked() }
         binding.itemDetailItemEquipFab.setOnClickListener { viewModel.onItemEquipClicked() }
@@ -115,7 +121,7 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
                 isVisible = isEquipped
                 text = it.firstOrNull()?.getLocalizedName(requireContext())
             }
-            binding.itemDetailItemEquipFab.labelText = getString(
+            binding.itemDetailItemEquipFab.text = getString(
                 if (isEquipped) R.string.item_detail_fab_label_unequip
                 else R.string.item_detail_fab_label_equip
             )

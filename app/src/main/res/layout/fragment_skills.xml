@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:layout_margin="0dp"
     tools:background="@color/background"
-    android:padding="0dp"
     tools:context=".ui.skills.SkillsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -30,23 +29,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <View
-        android:id="@+id/skills_fab_dummy"
-        android:layout_width="@dimen/fab_size_normal"
-        android:layout_height="@dimen/fab_size_normal"
-        android:layout_marginEnd="@dimen/spacing_4"
-        android:layout_marginBottom="@dimen/spacing_3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/skills_filter_card"
         style="@style/Card"
         android:layout_width="0dp"
-        android:layout_margin="@dimen/spacing_2"
         android:layout_height="@dimen/bar_height"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/skills_fab_dummy"
+        app:layout_constraintEnd_toStartOf="@id/skills_fab"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,31 +102,46 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.github.clans.fab.FloatingActionMenu
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/skills_edit_fab"
+        style="@style/Button.Fab.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="@string/skills_edit"
+        app:icon="@drawable/ic_wrench_24"
+        app:iconTint="@color/textPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/skills_fab"
+        app:layout_constraintEnd_toEndOf="@id/skills_fab"
+        app:layout_constraintTop_toTopOf="@id/skills_fab"
+        tools:alpha="1"
+        tools:translationY="-136dp" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/skills_show_unknown_fab"
+        style="@style/Button.Fab.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="@string/skills_unknown_show"
+        app:icon="@drawable/ic_search_24_inactive"
+        app:iconTint="@color/textPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/skills_fab"
+        app:layout_constraintEnd_toEndOf="@id/skills_fab"
+        app:layout_constraintTop_toTopOf="@id/skills_fab"
+        tools:alpha="1"
+        tools:translationY="-68dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/skills_fab"
+        android:layout_marginBottom="@dimen/spacing_2"
+        android:paddingBottom="@dimen/spacing_2"
         style="@style/Button.Fab.Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_wrench_24"
+        android:src="@drawable/ic_add_24"
+        app:iconTint="@color/textPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/skills_edit_fab"
-            style="@style/Button.Fab.Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_wrench_24"
-            app:fab_label="@string/skills_edit" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/skills_show_unknown_fab"
-            style="@style/Button.Fab.Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search_24_inactive"
-            app:fab_label="@string/skills_unknown_show" />
-
-    </com.github.clans.fab.FloatingActionMenu>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

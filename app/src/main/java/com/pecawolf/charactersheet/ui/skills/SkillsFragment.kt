@@ -7,7 +7,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentSkillsBinding
-import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.charactersheet.ui.FabMenuFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedTextChangeListener
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
@@ -18,7 +18,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
+class SkillsFragment : FabMenuFragment<SkillsViewModel, FragmentSkillsBinding>() {
 
     private val skillsAdapter: SkillsAdapter by lazy {
         SkillsAdapter(
@@ -33,6 +33,10 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
     ) = FragmentSkillsBinding.inflate(inflater, container, false)
 
     override fun createViewModel() = viewModel<SkillsViewModel> { parametersOf() }.value
+
+    override fun getMenuFab() = binding.skillsFab
+
+    override fun getMenuFabItems() = binding.run { listOf(skillsEditFab, skillsShowUnknownFab) }
 
     override fun bindView(binding: FragmentSkillsBinding, viewModel: SkillsViewModel) {
         binding.skillsRecycler.apply {
@@ -61,7 +65,7 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
             skillsAdapter.isEditing = isEditing
         }
         viewModel.isShowingUnknown.reObserve(this) { isShowingUnknown ->
-            binding.skillsShowUnknownFab.labelText =
+            binding.skillsShowUnknownFab.text =
                 getString(if (isShowingUnknown) R.string.skills_unknown_hide else R.string.skills_unknown_show)
         }
         viewModel.search.reObserve(this) { search ->

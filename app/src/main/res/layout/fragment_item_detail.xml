@@ -676,38 +676,60 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <com.github.clans.fab.FloatingActionMenu
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/item_detail_item_edit_fab"
+        style="@style/Button.Fab.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="@string/item_detail_fab_label_edit"
+        app:icon="@drawable/ic_wrench_24"
+        app:iconTint="@color/textPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_fab_menu"
+        app:layout_constraintEnd_toEndOf="@id/item_detail_fab_menu"
+        app:layout_constraintTop_toTopOf="@id/item_detail_fab_menu"
+        tools:alpha="1"
+        tools:translationY="-204dp" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/item_detail_item_equip_fab"
+        style="@style/Button.Fab.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="@string/item_detail_fab_label_equip"
+        app:icon="@drawable/ic_equip_24"
+        app:iconTint="@color/textPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_fab_menu"
+        app:layout_constraintEnd_toEndOf="@id/item_detail_fab_menu"
+        app:layout_constraintTop_toTopOf="@id/item_detail_fab_menu"
+        tools:alpha="1"
+        tools:translationY="-136dp" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/item_detail_item_delete_fab"
+        style="@style/Button.Fab.Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="@string/item_detail_fab_label_delete"
+        app:icon="@drawable/ic_delete_24"
+        app:iconTint="@color/textPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_fab_menu"
+        app:layout_constraintEnd_toEndOf="@id/item_detail_fab_menu"
+        app:layout_constraintTop_toTopOf="@id/item_detail_fab_menu"
+        tools:alpha="1"
+        tools:translationY="-68dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/item_detail_fab_menu"
         style="@style/Button.Fab.Menu"
+        android:src="@drawable/ic_add_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/item_detail_item_edit_fab"
-            style="@style/Button.Fab.Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_wrench_24"
-            app:fab_label="@string/item_detail_fab_label_edit" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/item_detail_item_equip_fab"
-            style="@style/Button.Fab.Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_equip_24"
-            app:fab_label="@string/item_detail_fab_label_equip" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/item_detail_item_delete_fab"
-            style="@style/Button.Fab.Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete_24"
-            app:fab_label="@string/item_detail_fab_label_delete" />
-
-    </com.github.clans.fab.FloatingActionMenu>
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,13 +22,11 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/inventory_money_card"
         style="@style/Card"
-        android:layout_marginHorizontal="@dimen/spacing_1"
         android:layout_width="0dp"
         android:layout_height="@dimen/bar_height"
-        app:layout_constraintBottom_toBottomOf="@id/inventory_add_item_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/inventory_add_item_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/inventory_add_item_button">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,12 +74,12 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.github.clans.fab.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/inventory_add_item_button"
         style="@style/Button.Fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_add_24"
         android:layout_marginBottom="@dimen/spacing_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
