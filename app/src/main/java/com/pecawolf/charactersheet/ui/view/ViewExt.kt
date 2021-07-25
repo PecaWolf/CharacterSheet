@@ -46,12 +46,12 @@ class DebouncedTextChangeListener(val afterTextChanged: (String) -> Unit) : Text
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
     override fun afterTextChanged(s: Editable?) {
-        handler.removeCallbacks(runnable)
+        runnable?.let { handler.removeCallbacks(it) }
 
         runnable = Runnable {
             afterTextChanged.invoke(s?.toString() ?: "")
         }
 
-        handler.postDelayed(runnable, debounce)
+        handler.postDelayed(runnable!!, debounce)
     }
 }

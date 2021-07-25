@@ -3,7 +3,7 @@ package com.pecawolf.charactersheet.ui.inventory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
+import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,12 +50,12 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
         binding.newItemStep2DamageLight.setOnClickListener { viewModel.damageLightClicked() }
         binding.newItemStep2DamageMedium.setOnClickListener { viewModel.damageMediumClicked() }
         binding.newItemStep2DamageHeavy.setOnClickListener { viewModel.damageHeavyClicked() }
-        binding.newItemStep2MagazineSizeInput.doOnTextChanged { text, start, before, count ->
+        binding.newItemStep2MagazineSizeInput.doAfterTextChanged { text ->
             viewModel.onMagazineSizeInputChanged(
                 text.toString().toIntOrNull() ?: -1
             )
         }
-        binding.newItemStep2RateOfFireInput.doOnTextChanged { text, start, before, count ->
+        binding.newItemStep2RateOfFireInput.doAfterTextChanged { text ->
             viewModel.onRateOfFireInputChanged(
                 text.toString().toIntOrNull() ?: -1
             )

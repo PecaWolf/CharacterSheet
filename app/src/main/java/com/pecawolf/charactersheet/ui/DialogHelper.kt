@@ -174,7 +174,7 @@ class DialogHelper(private val context: Context) {
             setOnClickListener {
                 (binding.multiChoiceRecycler.adapter as SimpleSelectionAdapter).items
                     .filter { it.isChecked }
-                    .map { it.data as T }
+                    .mapNotNull { it.data as? T }
                     .let { list -> positive.invoke(dialog, list) }
             }
         }

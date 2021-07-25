@@ -44,7 +44,7 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
         binding.skillSearchInput.apply {
             addTextChangedListener(DebouncedTextChangeListener { viewModel.onSearchChanged(it) })
             addTextChangedListener { binding.skillSearchCancel.isVisible = !it.isNullOrBlank() }
-            setOnFocusChangeListener { v, hasFocus -> binding.skillSearchIcon.isChecked = hasFocus }
+            setOnFocusChangeListener { _, hasFocus -> binding.skillSearchIcon.isChecked = hasFocus }
         }
         binding.skillSearchCancel.setOnClickListener { viewModel.onSearchCancelClicked() }
     }
