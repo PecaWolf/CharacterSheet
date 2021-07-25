@@ -3,34 +3,39 @@
     <color name="background">#DDD</color>
     <color name="backgroundCard">#FFF</color>
     <color name="backgroundInput">#EBEBEB</color>
-    <color name="primary">#000</color>
-    <color name="secondary">#444</color>
-    <color name="disabled">@color/raw_greyish</color>
-    <color name="inverse">#FFF</color>
-    <color name="activePrimary">@color/raw_purple_500</color>
-    <color name="activeSecondary">@color/raw_purple_700</color>
-    <color name="buttonBackgroundEnabled">@color/raw_purple_200</color>
-    <color name="buttonBackgroundDisabled">@color/background</color>
-    <color name="buttonBackgroundPositiveEnabled">@color/raw_green_medium</color>
+    <color name="textPrimary">#000</color>
+    <color name="textSecondary">#333</color>
+    <color name="textDisabled">@color/raw_greyish</color>
+    <color name="textInverse">#FFF</color>
+
+    <color name="activePrimary">@color/raw_orange_dark</color>
+    <color name="activeSecondary">@color/raw_orange_dark</color>
+    <color name="buttonBackgroundEnabled">@color/raw_orange_dark</color>
+    <color name="buttonBackgroundDisabled">@color/raw_orange_light</color>
+    <color name="buttonBackgroundPositiveEnabled">@color/raw_green_dark</color>
     <color name="buttonBackgroundPositiveDisabled">@color/raw_green_light</color>
-    <color name="buttonBackgroundNegativeEnabled">@color/raw_red_medium</color>
+    <color name="buttonBackgroundNegativeEnabled">@color/raw_red_dark</color>
     <color name="buttonBackgroundNegativeDisabled">@color/raw_red_light</color>
 
     <color name="wound">@color/raw_red_dark</color>
     <color name="luck">@color/raw_green_dark</color>
 
-    <color name="raw_purple_200">#FFBB86FC</color>
-    <color name="raw_purple_500">#FF6200EE</color>
-    <color name="raw_purple_700">#FF3700B3</color>
-    <color name="raw_teal_200">#FF03DAC5</color>
-    <color name="raw_teal_700">#FF018786</color>
     <color name="raw_greyish">#707070</color>
 
-    <color name="raw_green_dark">#239443</color>
-    <color name="raw_green_medium">#4CE076</color>
-    <color name="raw_green_light">#70FF99</color>
+    <color name="raw_green_light">#B3E07E</color>
+    <color name="raw_green_dark">#6B9A33</color>
 
-    <color name="raw_red_dark">#942327</color>
-    <color name="raw_red_medium">#E04C51</color>
-    <color name="raw_red_light">#FF7074</color>
+    <color name="raw_red_light">#933157</color>
+    <color name="raw_red_dark">#500924</color>
+
+    <!--    <color name="raw_red_light">#D6789C</color>-->
+    <!--    <color name="raw_red_dark">#933157</color>-->
+
+    <!--    <color name="raw_blue_light">#6478A6</color>-->
+    <!--    <color name="raw_blue_dark">#2E4272</color>-->
+
+    <color name="raw_blue_light">#2E4272</color>
+    <color name="raw_blue_dark">#0C1B3E</color>
+    <color name="raw_orange_light">#AA7539</color>
+    <color name="raw_orange_dark">#AB671A</color>
 </resources>
