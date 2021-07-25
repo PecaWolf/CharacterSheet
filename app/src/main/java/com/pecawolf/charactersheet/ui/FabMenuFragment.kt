@@ -55,6 +55,6 @@ abstract class FabMenuFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding>
     }
 
     companion object {
-        private const val MENU_ANIMATION_DURATION = 1000L
+        private const val MENU_ANIMATION_DURATION = 500L
     }
 }
