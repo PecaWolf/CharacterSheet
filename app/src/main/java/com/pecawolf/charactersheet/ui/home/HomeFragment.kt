@@ -1,6 +1,5 @@
 package com.pecawolf.charactersheet.ui.home
 
-import android.text.Html
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,8 +13,8 @@ import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
-import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
+import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel.Destination
@@ -33,28 +32,28 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         binding.homeNameEditIcon.setOnClickListener { viewModel.onNameEdit() }
         binding.homeStrStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Strength) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Strength) }
         }
         binding.homeDexStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Dexterity) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Dexterity) }
         }
         binding.homeVitStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Vitality) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Vitality) }
         }
         binding.homeInlStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Intelligence) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Intelligence) }
         }
         binding.homeWisStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Wisdom) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Wisdom) }
         }
         binding.homeChaStat.apply {
-            setOnRollClickListener { viewModel.onRollClicked(it) }
-            setOnEditClickListener { viewModel.onStatEditClicked(it) }
+            setOnRollClickListener { viewModel.onRollClicked(it as Rollable.Stat.Charisma) }
+            setOnEditClickListener { viewModel.onStatEditClicked(it as Rollable.Stat.Charisma) }
         }
 
         binding.homeHeal.setOnClickListener(DebouncedOnClickListener { clicks ->
@@ -158,15 +157,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    private fun showRollModifierDialog(stat: BaseStats.Stat) {
-        dialogHelper.showTextInputDialog(
-            getString(R.string.roll_modifier_title, stat.getLocalizedName(requireContext())),
-            getString(R.string.roll_modifier_message),
-            InputType.TYPE_CLASS_NUMBER,
-            1,
-            "0",
-            getString(R.string.roll_modifier_hint),
-            getString(R.string.roll_modifier_positive)
+    private fun showRollModifierDialog(stat: Rollable.Stat) {
+        dialogHelper.showRollModifierDialog(
+            stat
         ) { dialog, modifier ->
             viewModel.onRollConfirmed(stat, modifier)
             dialog.cancel()
@@ -174,30 +167,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
-        dialogHelper.showSingleChoiceDialog(
-            getString(R.string.roll_result_title),
-            Html.fromHtml(
-                getString(
-                    R.string.roll_result_message,
-                    roll,
-                    rollResult.getLocalizedName(requireContext())
-                )
-            )
-                .toString(),
-            getString(R.string.generic_ok)
-        ) { dialog -> dialog.cancel() }
+        dialogHelper.showRollResultDialog(roll, rollResult)
     }
 
-    private fun showStatEditDialog(stat: BaseStats.Stat) {
-        dialogHelper.showTextInputDialog(
-            getString(R.string.stat_edit_title, stat.getLocalizedName(requireContext())),
-            getString(R.string.stat_edit_message),
-            InputType.TYPE_CLASS_NUMBER,
-            1,
-            stat.value.toString(),
-            getString(R.string.stat_edit_hint, stat.getLocalizedName(requireContext()).lowercase()),
-            getString(R.string.generic_continue)
-        ) { dialog, value ->
+    private fun showStatEditDialog(stat: Rollable.Stat) {
+        dialogHelper.showRollableEditDialog(stat) { dialog, value ->
             viewModel.onEditConnfirmed(stat.also { it.value = value.toInt() })
             dialog.cancel()
         }

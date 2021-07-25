@@ -26,5 +26,5 @@ data class CharacterEntity(
     var tertiary: Long,
     var clothes: Long,
     var armor: Long,
-    val backpack: MutableList<Long> = mutableListOf(),
+    val skills: MutableMap<String, Int> = mutableMapOf(),
 )

@@ -8,6 +8,7 @@ import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
 import com.pecawolf.model.Inventory
+import com.pecawolf.model.Skills
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -22,6 +23,8 @@ class MainViewModel(
         .map { it.baseStats }
     val inventory: LiveData<Inventory> = _character
         .map { it.inventory }
+    val skills: LiveData<Skills> = _character
+        .map { it.skills }
 
     init {
         subscribeToActiveCharacter.execute(null)

@@ -14,6 +14,7 @@ import com.pecawolf.presentation.viewmodel.main.MainViewModel
 import com.pecawolf.presentation.viewmodel.main.NewItemStep1ViewModel
 import com.pecawolf.presentation.viewmodel.main.NewItemStep2ViewModel
 import com.pecawolf.presentation.viewmodel.main.OtherViewModel
+import com.pecawolf.presentation.viewmodel.main.SkillsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -36,6 +37,7 @@ object PresentationModule {
             NewItemStep2ViewModel(name, description, type, get())
         }
 
+        viewModel { SkillsViewModel(get(), get(), get()) }
         viewModel { OtherViewModel(get()) }
 
         viewModel { CharacterSelectionViewModel(get(), get(), get()) }

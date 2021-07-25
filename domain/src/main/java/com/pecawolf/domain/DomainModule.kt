@@ -17,6 +17,7 @@ import com.pecawolf.domain.interactor.SubscribeToActiveCharacter
 import com.pecawolf.domain.interactor.UnequipItemInteractor
 import com.pecawolf.domain.interactor.UpdateCharacterInteractor
 import com.pecawolf.domain.interactor.UpdateMoneyInteractor
+import com.pecawolf.domain.interactor.UpdateSkillInteractor
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -38,6 +39,7 @@ object DomainModule {
         factory { UpdateMoneyInteractor(get()) }
         factory { RollDiceInteractor(get()) }
         factory { UpdateCharacterInteractor(get()) }
+        factory { UpdateSkillInteractor(get()) }
     }
 
     fun start() {

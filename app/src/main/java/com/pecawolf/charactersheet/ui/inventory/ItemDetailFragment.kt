@@ -310,13 +310,13 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         }
     }
 
-    private fun showNameDialog(name: String) {
+    private fun showNameDialog(currentName: String) {
         dialogHelper.showTextInputDialog(
             title = getString(R.string.item_edit_name_title),
             message = getString(R.string.item_edit_name_message),
             inputType = InputType.TYPE_CLASS_TEXT,
             lineCount = 1,
-            defaultInput = name,
+            defaultInput = currentName,
             hint = getString(R.string.item_edit_name_hint),
             positiveButton = getString(R.string.generic_ok)
         ) { dialog, name ->
@@ -325,13 +325,13 @@ class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailB
         }
     }
 
-    private fun showRateOfFireDialog(rateOfFire: Int) {
+    private fun showRateOfFireDialog(currentRateOfFire: Int) {
         dialogHelper.showTextInputDialog(
             title = getString(R.string.item_edit_rate_of_fire_title),
             message = getString(R.string.item_edit_rate_of_fire_message),
             inputType = InputType.TYPE_CLASS_NUMBER,
             lineCount = 1,
-            defaultInput = rateOfFire.toString(),
+            defaultInput = currentRateOfFire.toString(),
             hint = getString(R.string.item_edit_rate_of_fire_hint),
             positiveButton = getString(R.string.generic_ok)
         ) { dialog, rateOfFire ->

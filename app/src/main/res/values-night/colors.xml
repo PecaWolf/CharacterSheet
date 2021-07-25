@@ -2,6 +2,7 @@
 <resources>
     <color name="background">#333</color>
     <color name="backgroundCard">#666</color>
+    <color name="backgroundInput">#EBEBEB</color>
     <color name="primary">#FFF</color>
     <color name="secondary">#AAA</color>
     <color name="inverse">#000</color>

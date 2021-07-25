@@ -4,9 +4,9 @@ import com.pecawolf.cache.model.ItemEntity
 import com.pecawolf.model.Item
 import com.pecawolf.model.Item.Weapon.Melee.BareHands.wield
 
-class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
+class ItemMapper {
 
-    override fun fromEntity(entity: ItemEntity, additional: List<Nothing>) = entity.run {
+    fun fromEntity(entity: ItemEntity) = entity.run {
         when (Item.ItemType.valueOf(type)) {
             Item.ItemType.BARE_HANDS -> Item.Weapon.Melee.BareHands
             Item.ItemType.KNIFE -> Item.Weapon.Melee.Knife(
@@ -238,9 +238,7 @@ class ItemMapper : BaseMapper<Item, ItemEntity, Long, Nothing> {
         }
     }
 
-    override fun toEntity(model: Item, additional: List<Long>) = model.run {
-        val ownerId = additional[0]
-
+    fun toEntity(model: Item, ownerId: Long) = model.run {
         // TODO: Simplify
         when (this) {
             is Item.Weapon.Melee.BareHands -> ItemEntity(

@@ -8,6 +8,9 @@ import com.pecawolf.data.mapper.ItemMapper
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Character
 import com.pecawolf.model.Item
+import com.pecawolf.model.Rollable
+import com.pecawolf.remote.model.StatSkillsResponse
+import com.pecawolf.remote.skills.ISkillsRemote
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
@@ -15,10 +18,11 @@ import io.reactivex.rxjava3.core.Single
 import timber.log.Timber
 
 class CharacterRepository(
+    private val remote: ISkillsRemote,
     private val cache: Cache,
     private val characterMapper: CharacterMapper,
-    private val chracterSnippetMapper: CharacterSnippetMapper,
-    private val itemMapper: ItemMapper
+    private val characterSnippetMapper: CharacterSnippetMapper,
+    private val itemMapper: ItemMapper,
 ) {
     fun createCharacter(baseStats: BaseStats) =
         cache.createCharacter(characterMapper.toEntity(Character.new(baseStats)))
@@ -26,24 +30,23 @@ class CharacterRepository(
     fun observeActiveCharacter(): Observable<Character> = Observable.combineLatest(
         cache.getCharacter(),
         cache.getItemsForOwner().map { list -> list.map { itemMapper.fromEntity(it) } },
-        { character: CharacterEntity, items: List<Item> ->
-            characterMapper.fromEntity(character, items)
+        remote.observeSkills().distinctUntilChanged(),
+        { character: CharacterEntity, items: List<Item>, skills: List<StatSkillsResponse> ->
+            characterMapper.fromEntity(character, items, skills)
         }
     )
         .doOnNext { Timber.v("activeCharacter(): $it") }
 
     fun getCharacterSnippets() = cache.getCharacters()
-        .map { characters -> characters.map { chracterSnippetMapper.fromEntity(it) } }
+        .map { characters -> characters.map { characterSnippetMapper.fromEntity(it) } }
 
     fun setActiveCharacterId(characterId: Long) = cache.getCharacter(characterId)
         .firstOrError()
         .doOnSuccess { cache.setActiveCharacterId(characterId) }
         .ignoreElement()
 
-    fun clearActiveCharacter(): Completable {
-        return Completable.complete()
-            .doOnComplete { cache.setActiveCharacterId(null) }
-    }
+    fun clearActiveCharacter() = Completable.complete()
+        .doOnComplete { cache.setActiveCharacterId(null) }
 
     fun createItemForActiveCharacter(
         name: String,
@@ -54,7 +57,7 @@ class CharacterRepository(
         wield: Item.Weapon.Wield?,
         magazineSize: Int,
         rateOfFire: Int,
-        damageTypes: MutableSet<Item.DamageType>
+        damageTypes: MutableSet<Item.DamageType>,
     ): Single<Long> = cache.createItemForCharacter(
         name,
         description,
@@ -100,7 +103,7 @@ class CharacterRepository(
         }
 
     fun updateItem(item: Item) = cache.getItemById(item.itemId)
-        .flatMapCompletable { cache.updateItem(itemMapper.toEntity(item, listOf(it.ownerId))) }
+        .flatMapCompletable { cache.updateItem(itemMapper.toEntity(item, it.ownerId)) }
 
     fun deleteItem(itemId: Long, money: Int) = cache.deleteItem(itemId)
         .andThen(cache.getCharacter())
@@ -131,6 +134,14 @@ class CharacterRepository(
             character.wis = baseStats.wis.value
             character.cha = baseStats.cha.value
 
+            cache.updateCharacter(character)
+        }
+
+    fun updateSkill(skill: Rollable.Skill) = cache.getCharacter()
+        .firstOrError()
+        .flatMapCompletable { character ->
+            character.skills[skill.code] = skill.value
+            Timber.w("updateSkill(): ${character.skills}")
             cache.updateCharacter(character)
         }
 }

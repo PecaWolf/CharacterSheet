@@ -4,13 +4,9 @@ import com.pecawolf.cache.model.CharacterSnippetEntity
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.CharacterSnippet
 
-class CharacterSnippetMapper :
-    BaseMapper<CharacterSnippet, CharacterSnippetEntity, Nothing, Nothing> {
+class CharacterSnippetMapper {
 
-    override fun fromEntity(
-        entity: CharacterSnippetEntity,
-        additional: List<Nothing>
-    ) = entity.run {
+    fun fromEntity(entity: CharacterSnippetEntity) = entity.run {
         CharacterSnippet(
             characterId,
             name,
@@ -18,9 +14,4 @@ class CharacterSnippetMapper :
             BaseStats.World.valueOf(world)
         )
     }
-
-    override fun toEntity(
-        model: CharacterSnippet,
-        additional: List<Nothing>
-    ) = model.run { CharacterSnippetEntity(characterId, name, species.name, world.name) }
 }

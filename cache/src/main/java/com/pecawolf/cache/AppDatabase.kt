@@ -8,6 +8,7 @@ import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.ItemDao
 import com.pecawolf.cache.model.ItemEntity
 import com.pecawolf.cache.model.LongListConverter
+import com.pecawolf.cache.model.StringIntMapConverter
 import com.pecawolf.cache.model.StringListConverter
 
 @Database(
@@ -18,7 +19,8 @@ import com.pecawolf.cache.model.StringListConverter
 )
 @TypeConverters(
     LongListConverter::class,
-    StringListConverter::class
+    StringListConverter::class,
+    StringIntMapConverter::class,
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao

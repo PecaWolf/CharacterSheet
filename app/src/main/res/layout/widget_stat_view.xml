@@ -92,7 +92,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/stat_widget_roll_button"
-            style="@style/Button"
+            style="@style/Button.Positive"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
@@ -104,18 +104,18 @@
             app:srcCompat="@drawable/ic_roll" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/stat_widget_edit_icon"
-            android:layout_width="@dimen/icon_small"
-            android:layout_height="@dimen/icon_small"
-            android:background="@drawable/bg_circle_card"
-            android:padding="@dimen/spacing_1"
-            android:src="@drawable/ic_wrench_inactive"
+            android:id="@+id/stat_widget_edit_button"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:padding="@dimen/spacing_4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/stat_widget_label"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_label"
-            app:layout_constraintTop_toTopOf="@id/stat_widget_label"
-            tools:visibility="visible" />
+            app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_wrench_inactive" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

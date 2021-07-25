@@ -9,6 +9,7 @@ import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.domain.interactor.UpdateCharacterInteractor
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
+import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.extensions.toggle
 import com.pecawolf.presentation.viewmodel.BaseViewModel
@@ -43,13 +44,13 @@ class HomeViewModel(
         }
     }
 
-    fun onRollClicked(stat: BaseStats.Stat) {
+    fun onRollClicked(stat: Rollable.Stat) {
         baseStats.value?.also {
             _navigateTo.postValue(Destination.RollModifierDialog(stat))
         }
     }
 
-    fun onStatEditClicked(stat: BaseStats.Stat) {
+    fun onStatEditClicked(stat: Rollable.Stat) {
         baseStats.value?.also {
             _navigateTo.postValue(Destination.StatEditDialog(stat))
         }
@@ -101,24 +102,24 @@ class HomeViewModel(
         Timber.e(error, "onUpdateCharacterError(): ")
     }
 
-    fun onRollConfirmed(stat: BaseStats.Stat, modifier: String) {
+    fun onRollConfirmed(stat: Rollable.Stat, modifier: String) {
         roll.execute(stat to modifier.toInt())
             .observe(
-                ROLL + stat::class.java.simpleName.toUpperCase(),
+                ROLL + stat::class.java.simpleName.uppercase(),
                 ::onRollError,
                 ::onRollSuccess
             )
     }
 
-    fun onEditConnfirmed(stat: BaseStats.Stat) {
+    fun onEditConnfirmed(stat: Rollable.Stat) {
         baseStats.value?.also { baseStats ->
             when (stat) {
-                is BaseStats.Stat.Strength -> baseStats.str = stat
-                is BaseStats.Stat.Dexterity -> baseStats.dex = stat
-                is BaseStats.Stat.Vitality -> baseStats.vit = stat
-                is BaseStats.Stat.Intelligence -> baseStats.inl = stat
-                is BaseStats.Stat.Wisdom -> baseStats.wis = stat
-                is BaseStats.Stat.Charisma -> baseStats.cha = stat
+                is Rollable.Stat.Strength -> baseStats.str = stat
+                is Rollable.Stat.Dexterity -> baseStats.dex = stat
+                is Rollable.Stat.Vitality -> baseStats.vit = stat
+                is Rollable.Stat.Intelligence -> baseStats.inl = stat
+                is Rollable.Stat.Wisdom -> baseStats.wis = stat
+                is Rollable.Stat.Charisma -> baseStats.cha = stat
             }
 
             updateCharacter.execute(baseStats)
@@ -138,14 +139,14 @@ class HomeViewModel(
     }
 
     sealed class Destination {
-        data class RollModifierDialog(val stat: BaseStats.Stat) : Destination()
+        data class RollModifierDialog(val stat: Rollable.Stat) : Destination()
         data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
         data class EditNameDialog(val name: String) : Destination()
-        data class StatEditDialog(val stat: BaseStats.Stat) : Destination()
+        data class StatEditDialog(val stat: Rollable.Stat) : Destination()
     }
 
     companion object {
-        const val ROLL = "ROLL_"
-        const val UPDATE = "UPDATE"
+        private const val ROLL = "ROLL_"
+        private const val UPDATE = "UPDATE"
     }
 }

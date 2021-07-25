@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import com.pecawolf.charactersheet.databinding.WidgetStatViewBinding
-import com.pecawolf.charactersheet.ext.getLocalizedName
-import com.pecawolf.model.BaseStats
+import com.pecawolf.charactersheet.ext.getName
+import com.pecawolf.model.Rollable
 
-class StatView : FrameLayout {
+class RollView : FrameLayout {
 
     private val binding: WidgetStatViewBinding = WidgetStatViewBinding.inflate(
         LayoutInflater.from(context), this, true
     )
 
-    var data: BaseStats.Stat? = null
+    var data: Rollable? = null
         set(value) {
             field = value
             refreshData()
@@ -27,7 +27,7 @@ class StatView : FrameLayout {
             refreshEditIcon()
         }
 
-    private var onRollClick: ((BaseStats.Stat) -> Unit)? = null
+    private var onRollClick: ((Rollable) -> Unit)? = null
         set(value) {
             field = value
             binding.statWidgetRollButton.isEnabled = value != null
@@ -36,10 +36,10 @@ class StatView : FrameLayout {
             }
         }
 
-    private var onEditClick: ((BaseStats.Stat) -> Unit)? = null
+    private var onEditClick: ((Rollable) -> Unit)? = null
         set(value) {
             field = value
-            binding.statWidgetEditIcon.setOnClickListener {
+            binding.statWidgetEditButton.setOnClickListener {
                 data?.let(value!!)
             }
             refreshEditIcon()
@@ -59,23 +59,25 @@ class StatView : FrameLayout {
         setOnRollClickListener(onClick = null)
     }
 
-    fun setOnRollClickListener(onClick: ((BaseStats.Stat) -> Unit)?) {
+    fun setOnRollClickListener(onClick: ((Rollable) -> Unit)?) {
         onRollClick = onClick
     }
 
-    fun setOnEditClickListener(onClick: ((BaseStats.Stat) -> Unit)?) {
+    fun setOnEditClickListener(onClick: ((Rollable) -> Unit)?) {
         onEditClick = onClick
     }
 
     private fun refreshData() {
         data?.run {
-            binding.statWidgetLabel.text = getLocalizedName(context)
+            binding.statWidgetLabel.text = getName(context)
             binding.statWidgetValue.text = value.toString()
             binding.statWidgetTrap.text = trap.toString()
         }
     }
 
     private fun refreshEditIcon() {
-        binding.statWidgetEditIcon.isVisible = (isEditing && onEditClick != null)
+        val isEditVisible = isEditing && onEditClick != null
+        binding.statWidgetEditButton.isVisible = isEditVisible
+        binding.statWidgetRollButton.isVisible = !isEditVisible
     }
 }

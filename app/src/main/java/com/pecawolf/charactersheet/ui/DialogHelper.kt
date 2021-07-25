@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.Html
 import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -19,8 +20,11 @@ import com.pecawolf.charactersheet.databinding.DialogTextInputBinding
 import com.pecawolf.charactersheet.databinding.DialogThreeChoiceBinding
 import com.pecawolf.charactersheet.databinding.DialogTwoChoiceBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
+import com.pecawolf.charactersheet.ext.getName
 import com.pecawolf.charactersheet.ui.view.showKeyboard
 import com.pecawolf.model.Item
+import com.pecawolf.model.RollResult
+import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.SimpleSelectionItem
 import kotlin.math.min
 
@@ -170,7 +174,7 @@ class DialogHelper(private val context: Context) {
             setOnClickListener {
                 (binding.multiChoiceRecycler.adapter as SimpleSelectionAdapter).items
                     .filter { it.isChecked }
-                    .map { it.data as T }
+                    .mapNotNull { it.data as? T }
                     .let { list -> positive.invoke(dialog, list) }
             }
         }
@@ -303,6 +307,47 @@ class DialogHelper(private val context: Context) {
             val price = result.toInt()
             if (price != 0) positive.invoke(dialog, price) // TODO: Error case
         }
+    }
+
+    fun showRollModifierDialog(rollable: Rollable, onPositive: (Dialog, String) -> Unit) {
+        showTextInputDialog(
+            getString(R.string.roll_modifier_title, rollable.getName(context)),
+            getString(R.string.roll_modifier_message),
+            InputType.TYPE_CLASS_NUMBER,
+            1,
+            "0",
+            getString(R.string.roll_modifier_hint),
+            getString(R.string.roll_modifier_positive),
+            onPositive
+        )
+    }
+
+    fun showRollResultDialog(roll: Int, rollResult: RollResult) {
+        showSingleChoiceDialog(
+            getString(R.string.roll_result_title),
+            Html.fromHtml(
+                getString(
+                    R.string.roll_result_message,
+                    roll,
+                    rollResult.getLocalizedName(context)
+                )
+            )
+                .toString(),
+            getString(R.string.generic_ok)
+        ) { dialog -> dialog.cancel() }
+    }
+
+    fun showRollableEditDialog(stat: Rollable, onPositive: (Dialog, String) -> Unit) {
+        showTextInputDialog(
+            getString(R.string.stat_edit_title, stat.getName(context)),
+            getString(R.string.stat_edit_message),
+            InputType.TYPE_CLASS_NUMBER,
+            1,
+            stat.value.toString(),
+            getString(R.string.stat_edit_hint, stat.getName(context).lowercase()),
+            getString(R.string.generic_continue),
+            onPositive
+        )
     }
 
     // endregion specific dialogs
