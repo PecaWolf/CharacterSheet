@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     style="@style/Box"
     android:layout_height="match_parent"
-    android:layout_margin="0dp"
     tools:background="@color/background"
     tools:context=".ui.skills.SkillsFragment">
 
@@ -13,8 +12,8 @@
         android:id="@+id/skills_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingHorizontal="@dimen/spacing_2"
         android:layout_marginBottom="@dimen/spacing_2"
+        tools:listitem="@layout/item_skill_skill"
         app:layout_constraintBottom_toTopOf="@id/skills_filter_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,12 +133,10 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/skills_fab"
-        android:layout_marginBottom="@dimen/spacing_2"
-        android:paddingBottom="@dimen/spacing_2"
         style="@style/Button.Fab.Menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_24"
+        android:src="@drawable/ic_add"
         app:iconTint="@color/textPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

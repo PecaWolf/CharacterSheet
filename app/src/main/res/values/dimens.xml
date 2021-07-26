@@ -26,4 +26,5 @@
 
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="bar_height">68dp</dimen>
+    <dimen name="bar_height_double">136dp</dimen>
 </resources>

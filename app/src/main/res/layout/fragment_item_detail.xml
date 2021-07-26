@@ -22,7 +22,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_base_data_card"
                 style="@style/Card"
-                android:layout_margin="@dimen/spacing_1"
+                android:layout_marginBottom="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/header_guide_1"
@@ -171,7 +171,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_loadouts_card"
                 style="@style/Card"
-                android:layout_margin="@dimen/spacing_1"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="@dimen/spacing_1"
+                android:layout_marginEnd="@dimen/spacing_1"
+                android:layout_marginBottom="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide_2"
@@ -269,7 +272,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_damage_card"
                 style="@style/Card"
-                android:layout_margin="@dimen/spacing_1"
+                android:layout_marginStart="@dimen/spacing_1"
+                android:layout_marginEnd="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/header_guide_2"
@@ -377,7 +381,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_ammo_card"
                 style="@style/Card"
-                android:layout_margin="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/item_detail_wield_card"
@@ -486,7 +490,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_wield_card"
                 style="@style/Card"
-                android:layout_margin="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/item_detail_damage_types_card"
@@ -599,7 +603,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_detail_damage_types_card"
                 style="@style/Card"
-                android:layout_margin="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -724,7 +728,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/item_detail_fab_menu"
         style="@style/Button.Fab.Menu"
-        android:src="@drawable/ic_add_24"
+        android:src="@drawable/ic_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

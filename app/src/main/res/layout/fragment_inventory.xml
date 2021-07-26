@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Box"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/Box"
+    tools:background="@color/background"
     tools:context=".ui.inventory.InventoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,8 +25,9 @@
         style="@style/Card"
         android:layout_width="0dp"
         android:layout_height="@dimen/bar_height"
+        android:layout_marginEnd="@dimen/spacing_2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/inventory_add_item_button"
+        app:layout_constraintEnd_toStartOf="@id/inventory_add_item_fab"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,11 +77,11 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/inventory_add_item_button"
+        android:id="@+id/inventory_add_item_fab"
         style="@style/Button.Fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_24"
+        android:src="@drawable/ic_add"
         android:layout_marginBottom="@dimen/spacing_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
