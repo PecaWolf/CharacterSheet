@@ -109,7 +109,7 @@
         android:alpha="0"
         android:text="@string/skills_edit"
         app:icon="@drawable/ic_wrench_24"
-        app:iconTint="@color/textPrimary"
+        app:iconTint="@color/contentPrimary"
         app:layout_constraintBottom_toBottomOf="@id/skills_fab"
         app:layout_constraintEnd_toEndOf="@id/skills_fab"
         app:layout_constraintTop_toTopOf="@id/skills_fab"
@@ -124,7 +124,7 @@
         android:alpha="0"
         android:text="@string/skills_unknown_show"
         app:icon="@drawable/ic_search_24_inactive"
-        app:iconTint="@color/textPrimary"
+        app:iconTint="@color/contentPrimary"
         app:layout_constraintBottom_toBottomOf="@id/skills_fab"
         app:layout_constraintEnd_toEndOf="@id/skills_fab"
         app:layout_constraintTop_toTopOf="@id/skills_fab"
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:iconTint="@color/textPrimary"
+        app:iconTint="@color/contentPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

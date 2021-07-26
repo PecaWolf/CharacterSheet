@@ -34,5 +34,8 @@ fun Item.getIcon() = when (this) {
     is Item.Armor.ExoSkeleton -> R.drawable.ic_exo_skeleton
     is Item.Armor.PoweredArmor -> R.drawable.ic_power_armor
 
+    is Item.Electronics -> R.drawable.ic_electronics
+    is Item.Food -> R.drawable.ic_hamburger
+    is Item.Potion -> R.drawable.ic_potion
     is Item.Other -> R.drawable.ic_bag
 }

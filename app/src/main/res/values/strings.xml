@@ -52,6 +52,9 @@
     <string name="item_type_vac_suit">Vac-suit</string>
     <string name="item_type_vac_armor">Vac-armor</string>
     <string name="item_type_powered_armor">Powered armor</string>
+    <string name="item_type_electronics">Electronics</string>
+    <string name="item_type_food">Food</string>
+    <string name="item_type_potion">Potion</string>
     <string name="item_type_other">Other</string>
 
     <string name="character_name">Name:</string>

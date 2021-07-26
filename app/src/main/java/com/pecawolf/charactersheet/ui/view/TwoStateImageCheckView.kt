@@ -85,7 +85,7 @@ class TwoStateImageCheckView : ConstraintLayout {
         binding.label.setTextColor(
             ResourcesCompat.getColor(
                 resources,
-                if (isChecked) R.color.activePrimary else R.color.textSecondary,
+                if (isChecked) R.color.activePrimary else R.color.contentSecondary,
                 null
             )
         )

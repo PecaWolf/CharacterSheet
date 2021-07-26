@@ -32,7 +32,7 @@
         <item name="android:textSize">@dimen/text_size_primary</item>
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/contentPrimary</item>
     </style>
 
     <style name="Text">
@@ -45,7 +45,7 @@
     </style>
 
     <style name="Text.Header">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/contentPrimary</item>
         <item name="android:textSize">@dimen/text_size_primary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
@@ -53,20 +53,20 @@
 
     <style name="Text.Label">
         <item name="android:textSize">@dimen/text_size_secondary</item>
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/contentSecondary</item>
     </style>
 
     <style name="Text.Label.Primary">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/contentPrimary</item>
     </style>
 
     <style name="Text.Label.Secondary">
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/contentSecondary</item>
     </style>
 
     <style name="Text.Description">
         <item name="android:textSize">@dimen/text_size_description</item>
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/contentSecondary</item>
     </style>
 
     <style name="Text.Value">
@@ -75,11 +75,11 @@
     </style>
 
     <style name="Text.Value.Primary">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/contentPrimary</item>
     </style>
 
     <style name="Text.Value.Secondary">
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/contentSecondary</item>
     </style>
 
     <style name="Button" parent="Text">

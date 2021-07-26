@@ -8,9 +8,9 @@
     <color name="background">#333</color>
     <color name="backgroundCard">#666</color>
     <color name="backgroundInput">#616161</color>
-    <color name="textPrimary">#FFF</color>
-    <color name="textSecondary">#AAA</color>
-    <color name="textInverse">#000</color>
+    <color name="contentPrimary">#FFF</color>
+    <color name="contentSecondary">#AAA</color>
+    <color name="contentInverse">#000</color>
 
     <color name="activePrimary">@color/raw_orange_dark</color>
     <color name="activeSecondary">@color/raw_orange_dark</color>

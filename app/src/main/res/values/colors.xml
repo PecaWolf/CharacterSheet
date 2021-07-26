@@ -8,10 +8,10 @@
     <color name="background">#DDD</color>
     <color name="backgroundCard">#FFF</color>
     <color name="backgroundInput">#EBEBEB</color>
-    <color name="textPrimary">#000</color>
-    <color name="textSecondary">#333</color>
-    <color name="textDisabled">@color/raw_greyish</color>
-    <color name="textInverse">#FFF</color>
+    <color name="contentPrimary">#000</color>
+    <color name="contentSecondary">#333</color>
+    <color name="contentDisabled">@color/raw_greyish</color>
+    <color name="contentInverse">#FFF</color>
 
     <color name="activePrimary">@color/raw_orange_medium</color>
     <color name="activeSecondary">@color/raw_orange_medium</color>

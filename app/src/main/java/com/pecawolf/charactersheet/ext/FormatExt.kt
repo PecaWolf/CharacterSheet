@@ -60,6 +60,9 @@ fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.VAC_ARMOR -> R.string.item_type_vac_armor
     Item.ItemType.POWERED_ARMOR -> R.string.item_type_powered_armor
 
+    Item.ItemType.ELECTRONICS -> R.string.item_type_electronics
+    Item.ItemType.FOOD -> R.string.item_type_food
+    Item.ItemType.POTION -> R.string.item_type_potion
     Item.ItemType.OTHER -> R.string.item_type_other
 }
 
