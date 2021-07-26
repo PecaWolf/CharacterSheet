@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentLoadoutBinding
+import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.skills.SkillsAdapter
 import com.pecawolf.model.Item
@@ -50,6 +51,7 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
             binding.loadoutCombatCheckbox.isChecked = type == Item.LoadoutType.COMBAT
             binding.loadoutSocialCheckbox.isChecked = type == Item.LoadoutType.SOCIAL
             binding.loadoutTravelCheckbox.isChecked = type == Item.LoadoutType.TRAVEL
+            binding.loadoutCurrentValue.text = type.getLocalizedName(requireContext())
         }
 
         viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->
