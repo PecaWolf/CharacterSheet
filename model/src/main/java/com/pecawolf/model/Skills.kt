@@ -7,4 +7,7 @@ data class Skills(
     val intelligence: List<Rollable.Skill> = listOf(),
     val wisdom: List<Rollable.Skill> = listOf(),
     val charisma: List<Rollable.Skill> = listOf(),
-)
+) {
+    val merged: List<Rollable.Skill>
+        get() = listOf(strength, dexterity, vitality, intelligence, wisdom, charisma).flatten()
+}

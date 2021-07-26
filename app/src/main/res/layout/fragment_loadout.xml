@@ -9,7 +9,7 @@
     tools:context=".ui.loadout.LoadoutFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/loadout_card"
+        android:id="@+id/loadout_overview_card"
         style="@style/Card"
         android:layout_margin="@dimen/spacing_1"
         android:layout_width="0dp"
@@ -267,5 +267,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/loadout_skills_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loadout_overview_card"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_skill_skill" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

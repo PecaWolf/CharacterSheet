@@ -18,7 +18,7 @@ import com.pecawolf.model.Rollable.Stat
 
 class SkillsAdapter(
     private val onRollClicked: (Rollable) -> Unit,
-    private val onEditClicked: (Rollable) -> Unit,
+    private val onEditClicked: (Rollable) -> Unit = {},
 ) : RecyclerView.Adapter<SkillsViewHolder<SkillAdapterItem, ViewBinding>>() {
 
     var isEditing: Boolean = false
@@ -26,29 +26,27 @@ class SkillsAdapter(
             field = value
             notifyDataSetChanged()
         }
-    var items: List<List<Skill>> = listOf()
+    var showGroups: Boolean = true
         set(value) {
             field = value
-            itemsInternal = value.mapNotNull { list ->
-                if (list.isNotEmpty()) listOf(
-                    listOf(SkillAdapterHeader(list.first().stat)),
-                    list.map {
-                        SkillAdapterSkill(it)
-                    }
-                ).flatten()
-                else null
-            }.flatten()
+            notifyDataSetChanged()
         }
-
-    private var itemsInternal: List<SkillAdapterItem> = listOf()
+    var items: List<List<Skill>> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun getItemCount(): Int {
-        return items.mapNotNull { it.size.takeIf { it > 0 }?.plus(1) }.sum()
-    }
+    private val itemsInternal: List<SkillAdapterItem>
+        get() = items.mapNotNull { list ->
+            if (list.isNotEmpty()) listOfNotNull(
+                listOf(SkillAdapterHeader(list.first().stat)).takeIf { showGroups },
+                list.map { SkillAdapterSkill(it) }
+            ).flatten()
+            else null
+        }.flatten()
+
+    override fun getItemCount() = itemsInternal.size
 
     override fun getItemViewType(position: Int) =
         itemsInternal.getOrNull(position)?.itemType ?: HEADER
