@@ -17,7 +17,8 @@ import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.LoadoutViewModel
 import com.pecawolf.presentation.viewmodel.main.LoadoutViewModel.Destination
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>() {
 
@@ -30,7 +31,7 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentLoadoutBinding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<LoadoutViewModel>().value
+    override fun createViewModel() = viewModel<LoadoutViewModel> { parametersOf() }.value
 
     override fun bindView(binding: FragmentLoadoutBinding, viewModel: LoadoutViewModel) {
         binding.loadoutCombatCheckbox.setOnClickListener { viewModel.onLoadoutCombatClicked() }

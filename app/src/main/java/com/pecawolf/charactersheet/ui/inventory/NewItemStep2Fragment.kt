@@ -17,8 +17,8 @@ import com.pecawolf.model.Item.Weapon.Wield
 import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.NewItemStep2ViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItemStep2Binding>() {
 
@@ -33,7 +33,7 @@ class NewItemStep2Fragment : BaseFragment<NewItemStep2ViewModel, FragmentNewItem
         container: ViewGroup?
     ) = FragmentNewItemStep2Binding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<NewItemStep2ViewModel> {
+    override fun createViewModel() = viewModel<NewItemStep2ViewModel> {
         NewItemStep2FragmentArgs.fromBundle(requireArguments()).run {
             parametersOf(
                 name,

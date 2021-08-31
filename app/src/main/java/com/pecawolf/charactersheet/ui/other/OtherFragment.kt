@@ -8,14 +8,15 @@ import com.pecawolf.charactersheet.databinding.FragmentOtherBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.OtherViewModel
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class OtherFragment : BaseFragment<OtherViewModel, FragmentOtherBinding>() {
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentOtherBinding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<OtherViewModel>().value
+    override fun createViewModel() = viewModel<OtherViewModel> { parametersOf() }.value
 
     override fun bindView(binding: FragmentOtherBinding, viewModel: OtherViewModel) {
         binding.selectCharacter.setOnClickListener { viewModel.onSelectCharacterClicked() }

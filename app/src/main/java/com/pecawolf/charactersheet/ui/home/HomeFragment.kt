@@ -17,16 +17,17 @@ import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel
 import com.pecawolf.presentation.viewmodel.main.HomeViewModel.Destination
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 import androidx.appcompat.widget.LinearLayoutCompat.LayoutParams as LinearLayoutParams
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentHomeBinding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<HomeViewModel>().value
+    override fun createViewModel() = viewModel<HomeViewModel> { parametersOf() }.value
 
     override fun bindView(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         binding.homeNameEditIcon.setOnClickListener { viewModel.onNameEdit() }

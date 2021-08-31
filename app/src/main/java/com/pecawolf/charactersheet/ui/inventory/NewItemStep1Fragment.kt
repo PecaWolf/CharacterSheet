@@ -13,7 +13,8 @@ import com.pecawolf.model.Item
 import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.NewItemStep1ViewModel
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItemStep1Binding>() {
 
@@ -31,7 +32,7 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         container: ViewGroup?
     ) = FragmentNewItemStep1Binding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<NewItemStep1ViewModel>().value
+    override fun createViewModel() = viewModel<NewItemStep1ViewModel> { parametersOf() }.value
 
     override fun bindView(binding: FragmentNewItemStep1Binding, viewModel: NewItemStep1ViewModel) {
         binding.newItemStep1NameInput.doAfterTextChanged {
