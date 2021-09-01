@@ -226,6 +226,27 @@ class ItemDataMapper {
                 parseDamage(),
                 parseDamageTypes(),
             )
+            Item.ItemType.ELECTRONICS -> Item.Electronics(
+                itemId,
+                name,
+                description,
+                count,
+                parseEnhancements(),
+            )
+            Item.ItemType.FOOD -> Item.Food(
+                itemId,
+                name,
+                description,
+                count,
+                parseEnhancements(),
+            )
+            Item.ItemType.POTION -> Item.Potion(
+                itemId,
+                name,
+                description,
+                count,
+                parseEnhancements(),
+            )
             Item.ItemType.OTHER -> Item.Other(
                 itemId,
                 name,
@@ -261,6 +282,9 @@ class ItemDataMapper {
             is Item.Weapon.Ranged.Rifle -> Item.ItemType.RIFLE
             is Item.Weapon.Ranged.Shotgun -> Item.ItemType.SHOTGUN
             is Item.Weapon.Ranged.SubmachineGun -> Item.ItemType.SUBMACHINE_GUN
+            is Item.Electronics -> Item.ItemType.ELECTRONICS
+            is Item.Food -> Item.ItemType.FOOD
+            is Item.Potion -> Item.ItemType.POTION
         }
 
         return item.run {
