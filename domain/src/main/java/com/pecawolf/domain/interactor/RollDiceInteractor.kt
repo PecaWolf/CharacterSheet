@@ -1,12 +1,12 @@
 package com.pecawolf.domain.interactor
 
-import com.pecawolf.charactersheet.common.extensions.let
-import com.pecawolf.data.DiceRepository
+import com.pecawolf.common.extensions.let
+import com.pecawolf.domain.repository.IDiceRepository
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import io.reactivex.rxjava3.core.Single
 
-class RollDiceInteractor(private val repository: DiceRepository) :
+class RollDiceInteractor(private val repository: IDiceRepository) :
     SingleInteractor<Pair<Rollable, Int>, Pair<Int, RollResult>>() {
 
     override fun execute(params: Pair<Rollable, Int>): Single<Pair<Int, RollResult>> =

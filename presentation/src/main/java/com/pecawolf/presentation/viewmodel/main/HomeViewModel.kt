@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.distinctUntilChanged
-import com.pecawolf.charactersheet.common.extensions.let
+import com.pecawolf.common.extensions.let
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.domain.interactor.UpdateCharacterInteractor
 import com.pecawolf.model.BaseStats
@@ -142,7 +142,7 @@ class HomeViewModel(
         data class RollModifierDialog(val stat: Rollable.Stat) : Destination()
         data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
         data class EditNameDialog(val name: String) : Destination()
-        data class StatEditDialog(val stat: Rollable.Stat) : Destination()
+        data class StatEditDialog(val stat: com.pecawolf.model.Rollable.Stat) : Destination()
     }
 
     companion object {

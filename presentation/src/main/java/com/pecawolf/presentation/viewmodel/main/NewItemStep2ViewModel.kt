@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
-import com.pecawolf.charactersheet.common.extensions.isOneOf
+import com.pecawolf.common.extensions.isOneOf
 import com.pecawolf.domain.interactor.CreateNewItemInteractor
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.MergedLiveData3
@@ -49,24 +49,27 @@ class NewItemStep2ViewModel(
         )
     }
     private val _damageLightChecked = MutableLiveData(type.defaultDamage == Item.Damage.LIGHT)
-    private val _damageMediumChecked = MutableLiveData(type.defaultDamage == Item.Damage.MEDIUM)
-    private val _damageHeavyChecked = MutableLiveData(type.defaultDamage == Item.Damage.HEAVY)
-    private val _damageSelected: LiveData<Item.Damage> = MergedLiveData3(
+    private val _damageMediumChecked =
+        MutableLiveData(type.defaultDamage == com.pecawolf.model.Item.Damage.MEDIUM)
+    private val _damageHeavyChecked =
+        MutableLiveData(type.defaultDamage == com.pecawolf.model.Item.Damage.HEAVY)
+    private val _damageSelected: LiveData<com.pecawolf.model.Item.Damage> = MergedLiveData3(
         _damageLightChecked,
         _damageMediumChecked,
         _damageHeavyChecked
     ) { isLightChecked, isMediumChecked, isHeavyChecked ->
         when {
-            isLightChecked -> Item.Damage.LIGHT
-            isMediumChecked -> Item.Damage.MEDIUM
-            isHeavyChecked -> Item.Damage.HEAVY
-            else -> Item.Damage.NONE
+            isLightChecked -> com.pecawolf.model.Item.Damage.LIGHT
+            isMediumChecked -> com.pecawolf.model.Item.Damage.MEDIUM
+            isHeavyChecked -> com.pecawolf.model.Item.Damage.HEAVY
+            else -> com.pecawolf.model.Item.Damage.NONE
         }
     }
     private val _magazineSize = MutableLiveData<Int>(-1)
     private val _rateOfFire = MutableLiveData<Int>(-1)
     private val _selectedDamageTypes = MutableLiveData(type.defaultDamageTypes.toMutableSet())
-    private val _selectedWield = MutableLiveData<Item.Weapon.Wield>(type.defaultWield)
+    private val _selectedWield =
+        MutableLiveData<com.pecawolf.model.Item.Weapon.Wield>(type.defaultWield)
     private val _navigateTo = SingleLiveEvent<Destination>()
 
     val isWieldVisible: LiveData<Boolean> = _selectedType.map { type ->
@@ -109,15 +112,15 @@ class NewItemStep2ViewModel(
     val rateOfFire: LiveData<String> = _rateOfFire
         .distinctUntilChanged()
         .map { it.takeIf { it > 0 }?.toString() ?: "" }
-    val damageTypes: LiveData<List<Pair<Item.DamageType, Boolean>>> =
+    val damageTypes: LiveData<List<Pair<com.pecawolf.model.Item.DamageType, Boolean>>> =
         _selectedDamageTypes.map { selected ->
-            Item.DamageType.values()
+            com.pecawolf.model.Item.DamageType.values()
                 .sortedBy { it.name }
                 .map { type ->
                     Pair(type, type.isOneOf(selected))
                 }
         }
-    val selectedWield: LiveData<Item.Weapon.Wield> = _selectedWield
+    val selectedWield: LiveData<com.pecawolf.model.Item.Weapon.Wield> = _selectedWield
     val isWeapon: LiveData<Boolean> = _selectedType.map {
         it.isWeapon
     }
@@ -130,7 +133,7 @@ class NewItemStep2ViewModel(
     ) { loadouts, damage, magazine, rateOfFire, damageTypes ->
         val loadoutsSelected = loadouts.isNotEmpty()
         val validDamage =
-            (type.isWeapon && damage != Item.Damage.NONE && damageTypes.isNotEmpty()) || !type.isWeapon
+            (type.isWeapon && damage != com.pecawolf.model.Item.Damage.NONE && damageTypes.isNotEmpty()) || !type.isWeapon
         val validRanged = (type.isRanged && magazine > 0 && rateOfFire > 0) || !type.isRanged
 
         loadoutsSelected && validDamage && validRanged
@@ -177,7 +180,7 @@ class NewItemStep2ViewModel(
         _rateOfFire.value = input
     }
 
-    fun onDamageTypeSelected(damageType: Item.DamageType) {
+    fun onDamageTypeSelected(damageType: com.pecawolf.model.Item.DamageType) {
         Timber.v("onDamageTypeSelected(): $damageType")
         if (_selectedDamageTypes.value?.contains(damageType) == true) {
             _selectedDamageTypes.remove(damageType)
@@ -186,7 +189,7 @@ class NewItemStep2ViewModel(
         }
     }
 
-    fun onWieldSelected(wield: Item.Weapon.Wield) {
+    fun onWieldSelected(wield: com.pecawolf.model.Item.Weapon.Wield) {
         Timber.v("onWieldSelected(): $wield")
         _selectedWield.value = wield
     }

@@ -43,23 +43,24 @@ class LoadoutViewModel(val mainViewModel: MainViewModel) : BaseViewModel() {
             Item.LoadoutType.TRAVEL -> true
         }
     }
-    val isArmorAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
-        _inventory,
-        _loadoutType
-    ) { inventory, type ->
-        inventory.armor.allowedLoadouts.contains(type)
-    }
-    val inventory: LiveData<Inventory> = _inventory
+    val isArmorAllowed =
+        MergedLiveData2<com.pecawolf.model.Inventory, com.pecawolf.model.Item.LoadoutType, Boolean>(
+            _inventory,
+            _loadoutType
+        ) { inventory, type ->
+            inventory.armor.allowedLoadouts.contains(type)
+        }
+    val inventory: LiveData<com.pecawolf.model.Inventory> = _inventory
 
     fun onLoadoutCombatClicked() {
-        _loadoutType.value = Item.LoadoutType.COMBAT
+        _loadoutType.value = com.pecawolf.model.Item.LoadoutType.COMBAT
     }
 
     fun onLoadoutSocialClicked() {
-        _loadoutType.value = Item.LoadoutType.SOCIAL
+        _loadoutType.value = com.pecawolf.model.Item.LoadoutType.SOCIAL
     }
 
     fun onLoadoutTravelClicked() {
-        _loadoutType.value = Item.LoadoutType.TRAVEL
+        _loadoutType.value = com.pecawolf.model.Item.LoadoutType.TRAVEL
     }
 }

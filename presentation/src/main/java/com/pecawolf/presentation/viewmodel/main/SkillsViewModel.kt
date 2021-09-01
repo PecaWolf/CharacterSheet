@@ -3,7 +3,7 @@ package com.pecawolf.presentation.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
-import com.pecawolf.charactersheet.common.extensions.let
+import com.pecawolf.common.extensions.let
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable.Skill

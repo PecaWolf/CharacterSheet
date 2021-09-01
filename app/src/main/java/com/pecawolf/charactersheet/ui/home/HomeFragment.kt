@@ -7,12 +7,12 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import com.pecawolf.charactersheet.R
-import com.pecawolf.charactersheet.common.extensions.let
 import com.pecawolf.charactersheet.databinding.FragmentHomeBinding
 import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
+import com.pecawolf.common.extensions.let
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve

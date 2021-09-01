@@ -6,4 +6,5 @@ include ':data'
 include ':cache'
 include ':remote'
 rootProject.name = "CharacterSheet"
+include ':injection'
 include ':model'

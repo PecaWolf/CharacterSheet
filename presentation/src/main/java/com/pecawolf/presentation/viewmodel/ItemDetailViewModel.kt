@@ -3,8 +3,8 @@ package com.pecawolf.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import com.pecawolf.charactersheet.common.extensions.isOneOf
-import com.pecawolf.charactersheet.common.extensions.setAll
+import com.pecawolf.common.extensions.isOneOf
+import com.pecawolf.common.extensions.setAll
 import com.pecawolf.domain.interactor.DeleteItemInteractor
 import com.pecawolf.domain.interactor.EquipItemInteractor
 import com.pecawolf.domain.interactor.SaveItemChangesInteractor
@@ -302,10 +302,15 @@ class ItemDetailViewModel(
         data class DamageTypesDialog(val items: List<Pair<DamageType, Boolean>>) : Destination()
         data class DeleteConfirmDialog(val name: String) : Destination()
         data class DescriptionDialog(val description: String) : Destination()
-        data class EquipConfirmDialog(val name: String, val slots: List<Item.Slot>) :
+        data class EquipConfirmDialog(
+            val name: String,
+            val slots: List<com.pecawolf.model.Item.Slot>,
+        ) :
             Destination()
 
-        data class UnequipConfirmDialog(val name: String, val slot: Item.Slot) : Destination()
+        data class UnequipConfirmDialog(val name: String, val slot: com.pecawolf.model.Item.Slot) :
+            Destination()
+
         object Leave : Destination()
         data class LoadoutDialog(val items: List<Pair<LoadoutType, Boolean>>) : Destination()
         data class MagazineSizeDialog(val magazine: Int) : Destination()

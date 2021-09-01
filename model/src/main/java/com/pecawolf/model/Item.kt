@@ -1,8 +1,6 @@
 package com.pecawolf.model
 
-import android.os.Parcelable
-import com.pecawolf.charactersheet.common.extensions.isNotOneOf
-import kotlinx.android.parcel.Parcelize
+import com.pecawolf.common.extensions.isNotOneOf
 
 sealed class Item(
     open var itemId: Long,
@@ -631,8 +629,7 @@ sealed class Item(
         val description: String
     )
 
-    @Parcelize
-    enum class DamageType(val mask: Int) : Parcelable {
+    enum class DamageType(val mask: Int) {
         BLUNT(1),             // hammer
         SLASH(2),             // sword
         PIERCE(4),            // dagger, arrow, bullet

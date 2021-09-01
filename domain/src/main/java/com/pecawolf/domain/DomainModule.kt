@@ -1,6 +1,5 @@
 package com.pecawolf.domain
 
-import com.pecawolf.data.DataModule
 import com.pecawolf.domain.interactor.ClearActiveCharacterInteractor
 import com.pecawolf.domain.interactor.CreateChracterInteractor
 import com.pecawolf.domain.interactor.CreateNewItemInteractor
@@ -43,7 +42,6 @@ object DomainModule {
     }
 
     fun start() {
-        DataModule.start()
         loadKoinModules(instance)
     }
 }
