@@ -5,12 +5,12 @@
     android:id="@+id/stat_widget_stats_card"
     style="@style/Card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:showIn="@layout/fragment_home">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="@dimen/spacing_1">
 
         <androidx.constraintlayout.widget.Guideline

@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@color/background"
-    android:layout_height="match_parent"
     style="@style/Box"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -109,7 +109,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.helper.widget.Flow
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/spacing_1"
@@ -124,37 +124,51 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/home_guide_75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_item_detail_base_data_card" />
+        app:layout_constraintTop_toBottomOf="@id/home_item_detail_base_data_card">
 
-    <com.pecawolf.charactersheet.ui.view.RollView
-        android:id="@+id/home_str_stat"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+        <com.pecawolf.charactersheet.ui.view.RollView
+            android:id="@+id/home_str_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing_0_5"
+            android:layout_weight="1" />
 
-    <com.pecawolf.charactersheet.ui.view.RollView
-        android:id="@+id/home_dex_stat"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+        <com.pecawolf.charactersheet.ui.view.RollView
+            android:id="@+id/home_dex_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/spacing_0_5"
+            android:layout_weight="1" />
 
-    <com.pecawolf.charactersheet.ui.view.RollView
-        android:id="@+id/home_vit_stat"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+        <com.pecawolf.charactersheet.ui.view.RollView
+            android:id="@+id/home_vit_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/spacing_0_5"
+            android:layout_weight="1" />
 
-    <com.pecawolf.charactersheet.ui.view.RollView
-        android:id="@+id/home_inl_stat"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+        <com.pecawolf.charactersheet.ui.view.RollView
+            android:id="@+id/home_inl_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/spacing_0_5"
+            android:layout_weight="1" />
 
-    <com.pecawolf.charactersheet.ui.view.RollView
-        android:id="@+id/home_wis_stat"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+        <com.pecawolf.charactersheet.ui.view.RollView
+            android:id="@+id/home_wis_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/spacing_0_5"
+            android:layout_weight="1" />
 
-    <com.pecawolf.charactersheet.ui.view.RollView
-        android:id="@+id/home_cha_stat"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+        <com.pecawolf.charactersheet.ui.view.RollView
+            android:id="@+id/home_cha_stat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing_0_5"
+            android:layout_weight="1" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/home_hit_point_card"
@@ -239,21 +253,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
+    <FrameLayout
         android:id="@+id/home_progress"
-        style="@style/Progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            style="@style/Progress"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/home_character_edit_fab"
         style="@style/Button.Fab"
         android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/spacing_2"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_2"
         android:src="@drawable/ic_wrench_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
