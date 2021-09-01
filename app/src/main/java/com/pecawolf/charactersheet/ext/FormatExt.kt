@@ -2,38 +2,38 @@ package com.pecawolf.charactersheet.ext
 
 import android.content.Context
 import com.pecawolf.charactersheet.R
+import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Item
+import com.pecawolf.model.RollResult
+import com.pecawolf.model.Rollable
 import java.text.NumberFormat
 
 fun Int.formatAmount(): String = NumberFormat.getIntegerInstance().format(this)
 
-fun com.pecawolf.model.BaseStats.World.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun BaseStats.World.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
-fun com.pecawolf.model.BaseStats.World.getLocalizedName() = when (this) {
-    com.pecawolf.model.BaseStats.World.LAST_REALM -> R.string.world_last_realm
-    com.pecawolf.model.BaseStats.World.BLUE_WAY -> R.string.world_blue_way
-    com.pecawolf.model.BaseStats.World.DARK_WAY -> R.string.world_dark_way
-    com.pecawolf.model.BaseStats.World.COLD_FRONTIER -> R.string.world_cold_frontier
+fun BaseStats.World.getLocalizedName() = when (this) {
+    BaseStats.World.LAST_REALM -> R.string.world_last_realm
+    BaseStats.World.BLUE_WAY -> R.string.world_blue_way
+    BaseStats.World.DARK_WAY -> R.string.world_dark_way
+    BaseStats.World.COLD_FRONTIER -> R.string.world_cold_frontier
 }
 
-fun com.pecawolf.model.BaseStats.Species.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun BaseStats.Species.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
-fun com.pecawolf.model.BaseStats.Species.getLocalizedName() = when (this) {
-    com.pecawolf.model.BaseStats.Species.HUMAN -> R.string.species_human
-    com.pecawolf.model.BaseStats.Species.DWARF -> R.string.species_dwarf
-    com.pecawolf.model.BaseStats.Species.ELF -> R.string.species_elf
-    com.pecawolf.model.BaseStats.Species.HAVLIN -> R.string.species_havlin
-    com.pecawolf.model.BaseStats.Species.KARANTI -> R.string.species_karanti
-    com.pecawolf.model.BaseStats.Species.NATHOREAN -> R.string.species_nathorean
-    com.pecawolf.model.BaseStats.Species.SEARIAN -> R.string.species_searian
-    com.pecawolf.model.BaseStats.Species.GUSMERIAN -> R.string.species_gusmerian
-    com.pecawolf.model.BaseStats.Species.KRUNG -> R.string.species_krung
+fun BaseStats.Species.getLocalizedName() = when (this) {
+    BaseStats.Species.HUMAN -> R.string.species_human
+    BaseStats.Species.DWARF -> R.string.species_dwarf
+    BaseStats.Species.ELF -> R.string.species_elf
+    BaseStats.Species.HAVLIN -> R.string.species_havlin
+    BaseStats.Species.KARANTI -> R.string.species_karanti
+    BaseStats.Species.NATHOREAN -> R.string.species_nathorean
+    BaseStats.Species.SEARIAN -> R.string.species_searian
+    BaseStats.Species.GUSMERIAN -> R.string.species_gusmerian
+    BaseStats.Species.KRUNG -> R.string.species_krung
 }
 
-fun Item.ItemType.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Item.ItemType.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.BARE_HANDS -> R.string.item_type_bare_hands
@@ -63,8 +63,7 @@ fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.OTHER -> R.string.item_type_other
 }
 
-fun Item.DamageType.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Item.DamageType.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.DamageType.getLocalizedName() = when (this) {
     Item.DamageType.BLUNT -> R.string.damage_type_blunt
@@ -80,8 +79,7 @@ fun Item.DamageType.getLocalizedName() = when (this) {
     Item.DamageType.KINETIC -> R.string.damage_type_kinetic
 }
 
-fun Item.Damage.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Item.Damage.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.Damage.getLocalizedName() = when (this) {
     Item.Damage.NONE -> R.string.damage_none
@@ -90,8 +88,7 @@ fun Item.Damage.getLocalizedName() = when (this) {
     Item.Damage.HEAVY -> R.string.damage_heavy
 }
 
-fun Item.Weapon.Wield.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Item.Weapon.Wield.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.Weapon.Wield.getLocalizedName() = when (this) {
     Item.Weapon.Wield.ONE_HANDED -> R.string.wield_one_handed
@@ -100,8 +97,7 @@ fun Item.Weapon.Wield.getLocalizedName() = when (this) {
 //    Item.Weapon.Wield.DRONE -> R.string.wield_drone
 }
 
-fun Item.LoadoutType.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Item.LoadoutType.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.LoadoutType.getLocalizedName() = when (this) {
     Item.LoadoutType.COMBAT -> R.string.new_item_loadout_combat
@@ -109,8 +105,7 @@ fun Item.LoadoutType.getLocalizedName() = when (this) {
     Item.LoadoutType.TRAVEL -> R.string.new_item_loadout_travel
 }
 
-fun Item.Slot.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Item.Slot.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
 fun Item.Slot.getLocalizedName() = when (this) {
     Item.Slot.PRIMARY -> R.string.equip_slot_primary
@@ -121,29 +116,27 @@ fun Item.Slot.getLocalizedName() = when (this) {
     Item.Slot.CLOTHING -> R.string.equip_slot_clothing
 }
 
-fun com.pecawolf.model.Rollable.getName(context: Context) = when (this) {
-    is com.pecawolf.model.Rollable.Stat -> getLocalizedName(context)
-    is com.pecawolf.model.Rollable.Skill -> name
+fun Rollable.getName(context: Context) = when (this) {
+    is Rollable.Stat -> getLocalizedName(context)
+    is Rollable.Skill -> name
 }
 
-fun com.pecawolf.model.Rollable.Stat.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun Rollable.Stat.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
-fun com.pecawolf.model.Rollable.Stat.getLocalizedName() = when (this) {
-    is com.pecawolf.model.Rollable.Stat.Strength -> R.string.basic_info_str
-    is com.pecawolf.model.Rollable.Stat.Dexterity -> R.string.basic_info_dex
-    is com.pecawolf.model.Rollable.Stat.Vitality -> R.string.basic_info_vit
-    is com.pecawolf.model.Rollable.Stat.Intelligence -> R.string.basic_info_int
-    is com.pecawolf.model.Rollable.Stat.Wisdom -> R.string.basic_info_wis
-    is com.pecawolf.model.Rollable.Stat.Charisma -> R.string.basic_info_cha
+fun Rollable.Stat.getLocalizedName() = when (this) {
+    is Rollable.Stat.Strength -> R.string.basic_info_str
+    is Rollable.Stat.Dexterity -> R.string.basic_info_dex
+    is Rollable.Stat.Vitality -> R.string.basic_info_vit
+    is Rollable.Stat.Intelligence -> R.string.basic_info_int
+    is Rollable.Stat.Wisdom -> R.string.basic_info_wis
+    is Rollable.Stat.Charisma -> R.string.basic_info_cha
 }
 
-fun com.pecawolf.model.RollResult.getLocalizedName(context: Context) =
-    context.getString(getLocalizedName())
+fun RollResult.getLocalizedName(context: Context) = context.getString(getLocalizedName())
 
-fun com.pecawolf.model.RollResult.getLocalizedName() = when (this) {
-    com.pecawolf.model.RollResult.CriticalFailure -> R.string.roll_result_failure_critical
-    com.pecawolf.model.RollResult.CriticalSuccess -> R.string.roll_result_success_critical
-    is com.pecawolf.model.RollResult.Failure -> R.string.roll_result_failure
-    is com.pecawolf.model.RollResult.Success -> R.string.roll_result_success
+fun RollResult.getLocalizedName() = when (this) {
+    RollResult.CriticalFailure -> R.string.roll_result_failure_critical
+    RollResult.CriticalSuccess -> R.string.roll_result_success_critical
+    is RollResult.Failure -> R.string.roll_result_failure
+    is RollResult.Success -> R.string.roll_result_success
 }
