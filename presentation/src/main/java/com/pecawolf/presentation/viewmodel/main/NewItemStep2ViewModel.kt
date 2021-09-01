@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.map
-import com.pecawolf.charactersheet.common.extensions.isOneOf
+import com.pecawolf.common.extensions.isOneOf
 import com.pecawolf.domain.interactor.CreateNewItemInteractor
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.extensions.MergedLiveData3
@@ -49,8 +49,10 @@ class NewItemStep2ViewModel(
         )
     }
     private val _damageLightChecked = MutableLiveData(type.defaultDamage == Item.Damage.LIGHT)
-    private val _damageMediumChecked = MutableLiveData(type.defaultDamage == Item.Damage.MEDIUM)
-    private val _damageHeavyChecked = MutableLiveData(type.defaultDamage == Item.Damage.HEAVY)
+    private val _damageMediumChecked =
+        MutableLiveData(type.defaultDamage == Item.Damage.MEDIUM)
+    private val _damageHeavyChecked =
+        MutableLiveData(type.defaultDamage == Item.Damage.HEAVY)
     private val _damageSelected: LiveData<Item.Damage> = MergedLiveData3(
         _damageLightChecked,
         _damageMediumChecked,
@@ -66,7 +68,8 @@ class NewItemStep2ViewModel(
     private val _magazineSize = MutableLiveData<Int>(-1)
     private val _rateOfFire = MutableLiveData<Int>(-1)
     private val _selectedDamageTypes = MutableLiveData(type.defaultDamageTypes.toMutableSet())
-    private val _selectedWield = MutableLiveData<Item.Weapon.Wield>(type.defaultWield)
+    private val _selectedWield =
+        MutableLiveData<Item.Weapon.Wield>(type.defaultWield)
     private val _navigateTo = SingleLiveEvent<Destination>()
 
     val isWieldVisible: LiveData<Boolean> = _selectedType.map { type ->

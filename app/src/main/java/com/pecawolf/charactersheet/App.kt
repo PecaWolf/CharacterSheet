@@ -3,7 +3,7 @@ package com.pecawolf.charactersheet
 import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
-import com.pecawolf.charactersheet.common.CommonModule
+import com.pecawolf.injection.BaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -28,6 +28,6 @@ class App: Application() {
         }
 
         UiModule.start()
-        CommonModule.start()
+        BaseModule.start()
     }
 }

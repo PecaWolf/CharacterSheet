@@ -1,6 +1,5 @@
 package com.pecawolf.presentation
 
-import com.pecawolf.domain.DomainModule
 import com.pecawolf.model.BaseStats
 import com.pecawolf.model.Item
 import com.pecawolf.presentation.viewmodel.ItemDetailViewModel
@@ -48,7 +47,6 @@ object PresentationModule {
     }
 
     fun start() {
-        DomainModule.start()
         loadKoinModules(instance)
     }
 }

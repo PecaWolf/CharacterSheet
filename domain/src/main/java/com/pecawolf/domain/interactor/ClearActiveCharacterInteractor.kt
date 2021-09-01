@@ -1,8 +1,8 @@
 package com.pecawolf.domain.interactor
 
-import com.pecawolf.data.CharacterRepository
+import com.pecawolf.domain.repository.ICharacterRepository
 
-class ClearActiveCharacterInteractor(private val repository: CharacterRepository) :
+class ClearActiveCharacterInteractor(private val repository: ICharacterRepository) :
     CompletableInteractor<Nothing?>() {
 
     override fun execute(params: Nothing?) = repository.clearActiveCharacter()

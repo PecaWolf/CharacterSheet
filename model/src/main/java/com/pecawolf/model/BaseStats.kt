@@ -1,29 +1,18 @@
 package com.pecawolf.model
 
-import android.os.Parcelable
-import com.pecawolf.model.Rollable.Stat.Charisma
-import com.pecawolf.model.Rollable.Stat.Dexterity
-import com.pecawolf.model.Rollable.Stat.Intelligence
-import com.pecawolf.model.Rollable.Stat.Strength
-import com.pecawolf.model.Rollable.Stat.Vitality
-import com.pecawolf.model.Rollable.Stat.Wisdom
-import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
-
-@Parcelize
 class BaseStats(
     var name: String,
     val species: Species,
     val world: World,
     var luck: Int,
     var wounds: Int,
-    var str: Strength,
-    var dex: Dexterity,
-    var vit: Vitality,
-    var inl: Intelligence,
-    var wis: Wisdom,
-    var cha: Charisma
-) : Parcelable, Serializable {
+    var str: Rollable.Stat.Strength,
+    var dex: Rollable.Stat.Dexterity,
+    var vit: Rollable.Stat.Vitality,
+    var inl: Rollable.Stat.Intelligence,
+    var wis: Rollable.Stat.Wisdom,
+    var cha: Rollable.Stat.Charisma,
+) {
     val luckAndWounds: Pair<Int, Int>
         get() = luck to wounds
 

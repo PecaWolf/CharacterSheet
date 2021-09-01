@@ -33,8 +33,7 @@ android {
 }
 
 dependencies {
-    api project(path: ':common')
-    implementation project(path: ':data')
+    implementation project(path: ':common')
     implementation project(path: ':model')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

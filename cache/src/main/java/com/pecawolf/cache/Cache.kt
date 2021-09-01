@@ -1,51 +1,66 @@
 package com.pecawolf.cache
 
+import com.pecawolf.cache.mapper.CharacterEntityMapper
+import com.pecawolf.cache.mapper.ItemEntityMapper
 import com.pecawolf.cache.model.CharacterEntity
-import com.pecawolf.cache.model.CharacterSnippetEntity
 import com.pecawolf.cache.model.ItemEntity
+import com.pecawolf.common.exception.CharacterNotFoundException
+import com.pecawolf.data.datasource.ICache
+import com.pecawolf.data.model.CharacterData
+import com.pecawolf.data.model.CharacterSnippetData
+import com.pecawolf.data.model.ItemData
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import timber.log.Timber
 
 class Cache(
     private val applicationPreferences: ApplicationPreferences,
-    private val database: AppDatabase
-) {
+    private val database: AppDatabase,
+    private val characterMapper: CharacterEntityMapper,
+    private val itemMapper: ItemEntityMapper,
+) : ICache {
 
-    fun createCharacter(character: CharacterEntity) = database.characterDao().insert(character)
+    override fun createCharacter(character: CharacterData): Completable = database.characterDao()
+        .insert(characterMapper.toEntity(character))
         .doOnSuccess { applicationPreferences.activeCharacterId = it }
         .ignoreElement()
 
-    fun updateCharacter(character: CharacterEntity): Completable =
-        database.characterDao().update(character)
+    override fun updateCharacter(character: CharacterData): Completable =
+        database.characterDao().update(characterMapper.toEntity(character))
 
-    fun getCharacters(): Single<List<CharacterSnippetEntity>> {
-        return database.characterDao()
-            .getAll()
-            .map { list ->
-                list.map {
-                    CharacterSnippetEntity(
-                        it.characterId,
-                        it.name,
-                        it.species,
-                        it.world
-                    )
-                }
+    override fun getCharacters(): Single<List<CharacterSnippetData>> = database.characterDao()
+        .getAll()
+        .map { list ->
+            list.map {
+                CharacterSnippetData(
+                    it.characterId,
+                    it.name,
+                    it.species,
+                    it.world
+                )
             }
-    }
+        }
 
-    fun setActiveCharacterId(characterId: Long?) {
+    override fun setActiveCharacterId(characterId: Long?) {
+        Timber.v("setActiveCharacterId(): $characterId")
         applicationPreferences.activeCharacterId = characterId
     }
 
-    fun getCharacter(characterId: Long? = applicationPreferences.activeCharacterId) =
-        database.characterDao().getAllByIds(listOfNotNull(characterId).toTypedArray())
-            .map { it.first { it.characterId == characterId } }
+    override fun getCharacter(characterId: Long?): Observable<CharacterData> =
+        (characterId ?: applicationPreferences.activeCharacterId)?.let {
+            observeCharacter(it)
+        } ?: Observable.error(IllegalStateException("Character Id cannot be null"))
 
-    fun getItemsForOwner(ownerId: Long? = applicationPreferences.activeCharacterId) =
-        database.itemDao().getAllByOwnerId(ownerId ?: -1)
+    override fun getItemsForOwner(ownerId: Long?): Observable<List<ItemData>> =
+        database.itemDao()
+            .getAllByOwnerId(
+                ownerId ?: applicationPreferences.activeCharacterId ?: -1
+            )
+            .map { list -> list.map { item -> itemMapper.fromEntity(item) } }
 
-    fun createItemForCharacter(
+    override fun createItemForCharacter(
         name: String,
         description: String,
         type: String,
@@ -55,11 +70,13 @@ class Cache(
         magazineSize: Int,
         rateOfFire: Int,
         damageTypes: List<String>,
-        ownerId: Long? = applicationPreferences.activeCharacterId,
+        ownerId: Long?,
     ): Single<Long> = database.itemDao().insert(
         ItemEntity(
             0,
-            ownerId ?: throw IllegalArgumentException("User id $ownerId not found!"),
+            ownerId
+                ?: applicationPreferences.activeCharacterId
+                ?: throw IllegalArgumentException("User id $ownerId not found!"),
             type,
             name,
             description,
@@ -74,13 +91,22 @@ class Cache(
         )
     )
 
-    fun getItemById(itemId: Long): Maybe<ItemEntity> = database.itemDao()
+    override fun getItemById(itemId: Long): Maybe<ItemData> = database.itemDao()
         .getById(itemId)
+        .map { itemMapper.fromEntity(it) }
         .toMaybe()
-//        .flatMapMaybe { items -> items.firstOrNull()?.let { Maybe.just(it) } ?: Maybe.empty() }
 
-    fun updateItem(item: ItemEntity) = database.itemDao().update(item)
+    override fun updateItem(item: ItemData) = database.itemDao().update(itemMapper.toEntity(item))
 
-    fun deleteItem(itemId: Long) = database.itemDao().getById(itemId)
+    override fun deleteItem(itemId: Long) = database.itemDao().getById(itemId)
         .flatMapCompletable { database.itemDao().delete(it) }
+
+    private fun observeCharacter(characterId: Long) = database.characterDao()
+        .getAllByIds(listOf(characterId).toTypedArray())
+        .map { findCharacter(it, characterId) }
+        .map { characterMapper.fromEntity(it) }
+
+    private fun findCharacter(characters: List<CharacterEntity>, characterId: Long) =
+        characters.firstOrNull { it.characterId == characterId }
+            ?: throw CharacterNotFoundException(characterId)
 }

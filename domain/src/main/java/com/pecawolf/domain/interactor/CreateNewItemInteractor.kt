@@ -1,10 +1,10 @@
 package com.pecawolf.domain.interactor
 
-import com.pecawolf.data.CharacterRepository
+import com.pecawolf.domain.repository.ICharacterRepository
 import com.pecawolf.model.Item
 import io.reactivex.rxjava3.core.Single
 
-class CreateNewItemInteractor(private val repository: CharacterRepository) :
+class CreateNewItemInteractor(private val repository: ICharacterRepository) :
     SingleInteractor<CreateNewItemInteractor.Params, Long>() {
 
     override fun execute(params: Params): Single<Long> = params.run {

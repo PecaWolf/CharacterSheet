@@ -2,7 +2,6 @@ package com.pecawolf.charactersheet
 
 import android.content.Context
 import com.pecawolf.charactersheet.ui.DialogHelper
-import com.pecawolf.presentation.PresentationModule
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -12,7 +11,6 @@ object UiModule {
     }
 
     fun start() {
-        PresentationModule.start()
         loadKoinModules(instance)
     }
 }
