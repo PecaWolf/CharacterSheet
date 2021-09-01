@@ -34,10 +34,9 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':common')
     implementation project(path: ':data')
     def room_version = "2.3.0"
-
-    api project(path: ':common')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -46,7 +45,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
-
     implementation "org.koin:koin-core:2.2.2"
 
     testImplementation 'junit:junit:4.13.2'

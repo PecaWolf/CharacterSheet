@@ -1,5 +1,6 @@
 package com.pecawolf.cache.model
 
+import com.pecawolf.cache.converter.StringIntMapConverter
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
