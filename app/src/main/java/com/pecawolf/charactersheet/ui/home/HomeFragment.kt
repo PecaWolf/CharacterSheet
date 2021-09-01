@@ -12,6 +12,7 @@ import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
+import com.pecawolf.common.extensions.let2
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve

@@ -3,7 +3,7 @@ package com.pecawolf.presentation.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.pecawolf.common.extensions.let
+import com.pecawolf.common.extensions.let2
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.domain.interactor.UpdateCharacterInteractor
 import com.pecawolf.model.BaseStats
@@ -134,7 +134,7 @@ class HomeViewModel(
     private fun onRollSuccess(result: Pair<Int, RollResult>) {
         Timber.v("onRollSuccess(): $result")
         _navigateTo.postValue(
-            result.let { roll, rollResult -> Destination.RollResultDialog(roll, rollResult) }
+            result.let2 { roll, rollResult -> Destination.RollResultDialog(roll, rollResult) }
         )
     }
 

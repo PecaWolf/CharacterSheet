@@ -2,8 +2,8 @@ package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.pecawolf.charactersheet.common.extensions.isOneOf
-import com.pecawolf.charactersheet.common.extensions.let
+import com.pecawolf.common.extensions.isOneOf
+import com.pecawolf.common.extensions.let2
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
@@ -113,7 +113,7 @@ class LoadoutViewModel(
     private fun onRollSuccess(result: Pair<Int, RollResult>) {
         Timber.v("onRollSuccess(): $result")
         _navigateTo.postValue(
-            result.let { roll, rollResult -> Destination.RollResultDialog(roll, rollResult) }
+            result.let2 { roll, rollResult -> Destination.RollResultDialog(roll, rollResult) }
         )
     }
 

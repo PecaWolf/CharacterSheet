@@ -15,6 +15,6 @@ fun <T> MutableCollection<T>.setAll(items: Collection<T>) {
     addAll(items)
 }
 
-fun <T, U, V> Pair<T, U>.let(lambda: (T, U) -> V): V = lambda.invoke(first, second)
+fun <T, U, V> Pair<T, U>.let2(lambda: (T, U) -> V): V = lambda.invoke(first, second)
 
 fun Handler.postDelayed(delayMillis: Long, runnable: () -> Unit) = postDelayed(runnable, delayMillis)
