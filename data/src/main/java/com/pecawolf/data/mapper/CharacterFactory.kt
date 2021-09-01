@@ -50,15 +50,15 @@ class CharacterFactory(
             baseStats,
             Inventory(
                 character.money,
-                items.first { it.itemId == character.primary } as? Item.Weapon
+                items.firstOrNull { it.itemId == character.primary } as? Item.Weapon
                     ?: Item.Weapon.Melee.BareHands,
-                items.first { it.itemId == character.secondary } as? Item.Weapon
+                items.firstOrNull { it.itemId == character.secondary } as? Item.Weapon
                     ?: Item.Weapon.Melee.BareHands,
-                items.first { it.itemId == character.tertiary } as? Item.Weapon
+                items.firstOrNull { it.itemId == character.tertiary } as? Item.Weapon
                     ?: Item.Weapon.Melee.BareHands,
-                items.first { it.itemId == character.clothes } as? Item.Armor
+                items.firstOrNull { it.itemId == character.clothes } as? Item.Armor
                     ?: Item.Armor.None,
-                items.first { it.itemId == character.armor } as? Item.Armor
+                items.firstOrNull { it.itemId == character.armor } as? Item.Armor
                     ?: Item.Armor.None,
             ),
             Skills(

@@ -2,6 +2,7 @@ package com.pecawolf.cache
 
 import com.pecawolf.cache.mapper.CharacterEntityMapper
 import com.pecawolf.cache.mapper.ItemEntityMapper
+import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.ItemEntity
 import com.pecawolf.common.exception.CharacterNotFoundException
 import com.pecawolf.data.datasource.ICache
@@ -48,16 +49,9 @@ class Cache(
     }
 
     override fun getCharacter(characterId: Long?): Observable<CharacterData> =
-        database.characterDao().getAllByIds(
-            listOfNotNull(
-                characterId ?: applicationPreferences.activeCharacterId
-            ).toTypedArray()
-        )
-            .map {
-                it.firstOrNull { it.characterId == characterId }
-                    ?: throw CharacterNotFoundException(characterId)
-            }
-            .map { characterMapper.fromEntity(it) }
+        (characterId ?: applicationPreferences.activeCharacterId)?.let {
+            observeCharacter(it)
+        } ?: Observable.error(IllegalStateException("Character Id cannot be null"))
 
     override fun getItemsForOwner(ownerId: Long?): Observable<List<ItemData>> =
         database.itemDao()
@@ -106,4 +100,13 @@ class Cache(
 
     override fun deleteItem(itemId: Long) = database.itemDao().getById(itemId)
         .flatMapCompletable { database.itemDao().delete(it) }
+
+    private fun observeCharacter(characterId: Long) = database.characterDao()
+        .getAllByIds(listOf(characterId).toTypedArray())
+        .map { findCharacter(it, characterId) }
+        .map { characterMapper.fromEntity(it) }
+
+    private fun findCharacter(characters: List<CharacterEntity>, characterId: Long) =
+        characters.firstOrNull { it.characterId == characterId }
+            ?: throw CharacterNotFoundException(characterId)
 }
