@@ -60,6 +60,7 @@ class CharacterFactory(
                     ?: Item.Armor.None,
                 items.firstOrNull { it.itemId == character.armor } as? Item.Armor
                     ?: Item.Armor.None,
+                items
             ),
             Skills(
                 skills[Stat.Enum.STR]?.map {
