@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.core.Observable
 
 class SkillsRemote(
     private val database: FirebaseDatabase,
-    private val skillsMapper: SkillsResponseMapper,
+    private val skillsMapper: SkillsResponseMapper
 ) : ISkillsRemote {
 
     override fun observeSkills(): Observable<List<SkillsData>> = getSkills()

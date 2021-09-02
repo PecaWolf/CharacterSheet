@@ -18,29 +18,32 @@ class BaseStats(
 
     enum class Species {
         HUMAN,
-
-        // last realm
         DWARF,
         ELF,
         HAVLIN,
-
-        // dark way
+        GNOME,
         KARANTI,
         NATHOREAN,
         SEARIAN,
         GUSMERIAN,
-
-        // cold frontier
         KRUNG;
     }
 
     enum class World(val species: List<Species>) {
-        LAST_REALM(
+        BRAVE_NEW_WORLD(
             listOf(
                 Species.HUMAN,
                 Species.DWARF,
                 Species.ELF,
                 Species.HAVLIN,
+            )
+        ),
+        BLACKWOOD_VALE(
+            listOf(
+                Species.HUMAN,
+                Species.DWARF,
+                Species.ELF,
+                Species.GNOME,
             )
         ),
         BLUE_WAY(
@@ -66,6 +69,6 @@ class BaseStats(
                 Species.HUMAN,
                 Species.KRUNG
             )
-        )
+        );
     }
 }

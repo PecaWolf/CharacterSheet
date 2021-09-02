@@ -10,8 +10,7 @@ class SkillsResponseMapper {
             skills.map { skill ->
                 SkillsData.SkillData(
                     skill.code,
-                    skill.name,
-                    skill.worlds
+                    skill.name
                 )
             }
         )

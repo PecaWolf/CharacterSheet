@@ -15,7 +15,8 @@
     <string name="title_other">Menu</string>
     <string name="title_refresh">Refresh</string>
 
-    <string name="world_last_realm">Last Realm</string>
+    <string name="world_brave_new_world">Brave New World</string>
+    <string name="world_blackwood_vale">Blackwood Vale</string>
     <string name="world_blue_way">Blue Way</string>
     <string name="world_dark_way">Dark Way</string>
     <string name="world_cold_frontier">Cold Frontier</string>
@@ -24,6 +25,7 @@
     <string name="species_dwarf">Dwarf</string>
     <string name="species_elf">Elf</string>
     <string name="species_havlin">Havlin</string>
+    <string name="species_gnome">Gnome</string>
     <string name="species_karanti">Karanti</string>
     <string name="species_nathorean">Nathorean</string>
     <string name="species_searian">Searian</string>
