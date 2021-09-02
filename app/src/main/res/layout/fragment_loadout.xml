@@ -59,13 +59,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_2"
-                app:checkedSrc="@drawable/ic_loadout_combat_active"
+                app:iconSrc="@drawable/ic_loadout_combat"
                 app:isChecked="false"
                 app:layout_constraintBottom_toTopOf="@id/loadout_weapon_primary_label"
                 app:layout_constraintEnd_toStartOf="@id/loadout_social_checkbox"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loadout_current_value"
-                app:uncheckedSrc="@drawable/ic_loadout_combat_inactive" />
+                app:layout_constraintTop_toBottomOf="@+id/loadout_current_value" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                 android:id="@+id/loadout_social_checkbox"
@@ -73,13 +72,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_2"
-                app:checkedSrc="@drawable/ic_loadout_social_active"
+                app:iconSrc="@drawable/ic_loadout_social"
                 app:isChecked="false"
                 app:layout_constraintBottom_toBottomOf="@id/loadout_combat_checkbox"
                 app:layout_constraintEnd_toStartOf="@id/loadout_travel_checkbox"
                 app:layout_constraintStart_toEndOf="@id/loadout_combat_checkbox"
-                app:layout_constraintTop_toTopOf="@id/loadout_combat_checkbox"
-                app:uncheckedSrc="@drawable/ic_loadout_social_inactive" />
+                app:layout_constraintTop_toTopOf="@id/loadout_combat_checkbox" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                 android:id="@+id/loadout_travel_checkbox"
@@ -87,13 +85,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_2"
-                app:checkedSrc="@drawable/ic_loadout_travel_active"
+                app:iconSrc="@drawable/ic_loadout_travel"
                 app:isChecked="false"
                 app:layout_constraintBottom_toBottomOf="@id/loadout_combat_checkbox"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/loadout_social_checkbox"
-                app:layout_constraintTop_toTopOf="@id/loadout_combat_checkbox"
-                app:uncheckedSrc="@drawable/ic_loadout_travel_inactive" />
+                app:layout_constraintTop_toTopOf="@id/loadout_combat_checkbox" />
 
             <TextView
                 android:id="@+id/loadout_weapon_primary_label"

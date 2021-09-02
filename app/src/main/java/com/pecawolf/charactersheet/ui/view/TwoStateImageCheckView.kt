@@ -1,6 +1,7 @@
 package com.pecawolf.charactersheet.ui.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -22,8 +23,12 @@ class TwoStateImageCheckView : ConstraintLayout {
             refresh(value)
         }
 
-    var checkedSrc: Drawable? = null
-    var uncheckedSrc: Drawable? = null
+    var iconSrc: Drawable? = null
+        set(value) {
+            field = value ?: ResourcesCompat.getDrawable(resources, R.drawable.ic_checkmark, null)
+            binding.icon.setImageDrawable(field)
+        }
+
     var text: String? = null
         set(value) {
             field = value
@@ -67,8 +72,7 @@ class TwoStateImageCheckView : ConstraintLayout {
             0
         ).apply {
             isChecked = getBoolean(R.styleable.TwoStateImageCheckView_isChecked, false)
-            checkedSrc = getDrawable(R.styleable.TwoStateImageCheckView_checkedSrc)
-            uncheckedSrc = getDrawable(R.styleable.TwoStateImageCheckView_uncheckedSrc)
+            iconSrc = getDrawable(R.styleable.TwoStateImageCheckView_iconSrc)
             text = getString(R.styleable.TwoStateImageCheckView_text)
         }
 
@@ -81,14 +85,13 @@ class TwoStateImageCheckView : ConstraintLayout {
     }
 
     private fun refresh(isChecked: Boolean) {
-        binding.icon.setImageDrawable(if (isChecked) checkedSrc else uncheckedSrc)
-        binding.label.setTextColor(
-            ResourcesCompat.getColor(
-                resources,
-                if (isChecked) R.color.activePrimary else R.color.contentSecondary,
-                null
-            )
+        val color = ResourcesCompat.getColor(
+            resources,
+            if (isChecked) R.color.activePrimary else R.color.contentSecondary,
+            null
         )
+        binding.icon.imageTintList = ColorStateList.valueOf(color)
+        binding.label.setTextColor(color)
     }
 
     interface OnCheckedChangeListener {

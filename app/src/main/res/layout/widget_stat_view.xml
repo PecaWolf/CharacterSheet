@@ -115,7 +115,7 @@
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_wrench_inactive" />
+            app:srcCompat="@drawable/ic_wrench" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

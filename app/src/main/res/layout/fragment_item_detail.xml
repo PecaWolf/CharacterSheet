@@ -118,7 +118,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_name"
                         app:layout_constraintDimensionRatio="1:1"
@@ -133,7 +133,7 @@
                         android:layout_marginEnd="@dimen/spacing_1"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_count"
                         app:layout_constraintDimensionRatio="1:1"
@@ -148,7 +148,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_description"
                         app:layout_constraintDimensionRatio="1:1"
@@ -204,39 +204,36 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_loadout_combat_active"
+                        app:iconSrc="@drawable/ic_loadout_combat"
                         app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_social"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_header"
-                        app:text="@string/new_item_loadout_combat"
-                        app:uncheckedSrc="@drawable/ic_loadout_combat_inactive" />
+                        app:text="@string/new_item_loadout_combat" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_loadout_social"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_loadout_social_active"
+                        app:iconSrc="@drawable/ic_loadout_social"
                         app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_travel"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_combat"
-                        app:text="@string/new_item_loadout_social"
-                        app:uncheckedSrc="@drawable/ic_loadout_social_inactive" />
+                        app:text="@string/new_item_loadout_social" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_loadout_travel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_loadout_travel_active"
+                        app:iconSrc="@drawable/ic_loadout_travel"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_social"
-                        app:text="@string/new_item_loadout_travel"
-                        app:uncheckedSrc="@drawable/ic_loadout_travel_inactive" />
+                        app:text="@string/new_item_loadout_travel" />
 
                     <View
                         android:id="@+id/item_detail_loadouts_clicker"
@@ -257,7 +254,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_loadout_header"
                         app:layout_constraintDimensionRatio="1:1"
@@ -302,41 +299,35 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toTopOf="@id/item_detail_damage_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_damage_header"
-                        app:text="@string/new_item_damage_light"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/new_item_damage_light" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_damage_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toTopOf="@id/item_detail_damage_heavy"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_damage_light"
-                        app:text="@string/new_item_damage_medium"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/new_item_damage_medium" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_damage_heavy"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_damage_medium"
-                        app:text="@string/new_item_damage_heavy"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/new_item_damage_heavy" />
 
                     <View
                         android:id="@+id/item_detail_damage_clicker"
@@ -357,7 +348,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_damage_header"
                         app:layout_constraintDimensionRatio="1:1"
@@ -435,7 +426,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_magazine_size_value"
                         app:layout_constraintDimensionRatio="1:1"
@@ -474,7 +465,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_rate_of_fire_value"
                         app:layout_constraintDimensionRatio="1:1"
@@ -519,40 +510,34 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintEnd_toStartOf="@id/item_detail_wield_two_handed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_wield_header"
-                        app:text="@string/wield_one_handed"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_one_handed" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_wield_two_handed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/item_detail_wield_one_handed"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_wield_header"
-                        app:text="@string/wield_two_handed"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_two_handed" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_wield_mounted"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/item_detail_wield_drone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_wield_one_handed"
-                        app:text="@string/wield_mounted"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_mounted" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/item_detail_wield_drone"
@@ -560,14 +545,12 @@
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:visibility="invisible"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/item_detail_wield_mounted"
                         app:layout_constraintTop_toBottomOf="@id/item_detail_wield_two_handed"
-                        app:text="@string/wield_drone"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_drone" />
 
                     <View
                         android:id="@+id/item_detail_wield_clicker"
@@ -588,7 +571,7 @@
                         android:layout_height="@dimen/icon_small"
                         android:background="@drawable/bg_circle_card"
                         android:padding="@dimen/spacing_1"
-                        android:src="@drawable/ic_wrench_inactive"
+                        android:src="@drawable/ic_wrench"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_wield_header"
                         app:layout_constraintDimensionRatio="1:1"
@@ -633,7 +616,7 @@
                         app:layout_constraintBottom_toBottomOf="@id/item_detail_damage_types_header"
                         app:layout_constraintEnd_toEndOf="@id/item_detail_damage_types_header"
                         app:layout_constraintTop_toTopOf="@id/item_detail_damage_types_header"
-                        app:srcCompat="@drawable/ic_wrench_inactive" />
+                        app:srcCompat="@drawable/ic_wrench" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/item_detail_damage_types_recycler"
@@ -687,7 +670,7 @@
         android:layout_height="wrap_content"
         android:alpha="0"
         android:text="@string/item_detail_fab_label_edit"
-        app:icon="@drawable/ic_wrench_24"
+        app:icon="@drawable/ic_wrench"
         app:iconTint="@color/contentPrimary"
         app:layout_constraintBottom_toBottomOf="@id/item_detail_fab_menu"
         app:layout_constraintEnd_toEndOf="@id/item_detail_fab_menu"

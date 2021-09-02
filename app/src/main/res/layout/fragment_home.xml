@@ -75,7 +75,7 @@
                 android:layout_height="@dimen/icon_small"
                 android:background="@drawable/bg_circle_card"
                 android:padding="@dimen/spacing_1"
-                android:src="@drawable/ic_wrench_inactive"
+                android:src="@drawable/ic_wrench"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/home_name_value"
                 app:layout_constraintDimensionRatio="1:1"
@@ -275,7 +275,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_2"
-        android:src="@drawable/ic_wrench_24"
+        android:src="@drawable/ic_wrench"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
