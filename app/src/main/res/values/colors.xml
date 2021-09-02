@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/raw_blue_light</color>
-    <color name="colorPrimaryVariant">@color/raw_blue_medium</color>
+    <color name="colorPrimary">@color/raw_blue_medium</color>
+    <color name="colorPrimaryVariant">@color/raw_blue_dark</color>
     <color name="colorSecondary">@color/raw_orange_light</color>
     <color name="colorSecondaryVariant">@color/raw_orange_medium</color>
 
@@ -13,7 +13,7 @@
     <color name="contentDisabled">@color/raw_greyish</color>
     <color name="contentInverse">#FFF</color>
 
-    <color name="activePrimary">@color/raw_orange_medium</color>
+    <color name="activePrimary">@color/raw_orange_dark</color>
     <color name="activeSecondary">@color/raw_orange_medium</color>
     <color name="buttonBackgroundEnabled">@color/raw_orange_medium</color>
     <color name="buttonBackgroundDisabled">@color/raw_orange_light</color>
