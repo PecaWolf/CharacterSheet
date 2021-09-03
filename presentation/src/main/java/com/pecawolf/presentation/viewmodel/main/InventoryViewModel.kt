@@ -30,7 +30,7 @@ class InventoryViewModel(
                             inventory.tertiary.itemId -> Item.Slot.TERTIARY
                             //                    inventory.grenade.itemId -> Item.Slot.GRENADE
                             inventory.armor.itemId -> Item.Slot.ARMOR
-                            inventory.clothes.itemId -> Item.Slot.CLOTHING
+                            inventory.clothes.itemId -> Item.Slot.CLOTHES
                             else -> null
                         }
                     )

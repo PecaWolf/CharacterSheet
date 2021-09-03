@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bar_height"
                 android:background="@drawable/bg_card"
-                app:iconSrc="@drawable/ic_rifle"
+                app:iconSrc="@drawable/ic_satellite"
                 app:text="@string/skills_scifi" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView

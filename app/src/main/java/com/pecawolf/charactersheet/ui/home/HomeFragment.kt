@@ -12,7 +12,6 @@ import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
-import com.pecawolf.common.extensions.let2
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
@@ -128,7 +127,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 is Destination.EditNameDialog -> showNameDialog(destination.name)
                 is Destination.RollModifierDialog -> showRollModifierDialog(destination.stat)
                 is Destination.RollResultDialog -> showRollResultDialog(
-                    destination.roll,
                     destination.rollResult
                 )
                 is Destination.StatEditDialog -> showStatEditDialog(destination.stat)
@@ -178,8 +176,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
-        dialogHelper.showRollResultDialog(roll, rollResult)
+    private fun showRollResultDialog(rollResult: RollResult) {
+        dialogHelper.showRollResultDialog(rollResult)
     }
 
     private fun showStatEditDialog(stat: Rollable.Stat) {

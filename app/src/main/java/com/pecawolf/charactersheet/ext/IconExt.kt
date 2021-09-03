@@ -27,7 +27,7 @@ fun Item.getIcon() = when (this) {
     is Item.Weapon.Grenade -> R.drawable.ic_grenade
 
     Item.Armor.None -> R.drawable.ic_no_armor
-    is Item.Armor.Clothing -> R.drawable.ic_clothing
+    is Item.Armor.Clothes -> R.drawable.ic_clothes
     is Item.Armor.Kevlar -> R.drawable.ic_kevlar
     is Item.Armor.VacSuit -> R.drawable.ic_vac_suit
     is Item.Armor.VacArmor -> R.drawable.ic_vac_armor

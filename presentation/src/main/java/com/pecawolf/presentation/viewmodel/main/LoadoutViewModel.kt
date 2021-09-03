@@ -3,15 +3,15 @@ package com.pecawolf.presentation.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pecawolf.common.extensions.isOneOf
-import com.pecawolf.common.extensions.let2
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
 import com.pecawolf.model.Item.Armor
 import com.pecawolf.model.Item.Weapon
 import com.pecawolf.model.RollResult
-import com.pecawolf.model.Rollable
+import com.pecawolf.model.Rollable.Skill
 import com.pecawolf.presentation.extensions.MergedLiveData2
+import com.pecawolf.presentation.extensions.MergedLiveData6
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
@@ -46,12 +46,12 @@ class LoadoutViewModel(
     ) { inventory, type ->
         inventory.tertiary.allowedLoadouts.contains(type)
     }
-    val isClothingAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
+    val isClothesAllowed = MergedLiveData2<Inventory, Item.LoadoutType, Boolean>(
         mainViewModel.inventory,
         _loadoutType
     ) { inventory, type ->
         when (type) {
-            Item.LoadoutType.COMBAT -> inventory.armor is Item.Armor.None
+            Item.LoadoutType.COMBAT -> inventory.armor is Armor.None
             Item.LoadoutType.SOCIAL -> true
             Item.LoadoutType.TRAVEL -> true
         }
@@ -63,57 +63,95 @@ class LoadoutViewModel(
         inventory.armor.allowedLoadouts.contains(type)
     }
     val inventory: LiveData<Inventory> = mainViewModel.inventory
-    val skills: LiveData<List<Rollable.Skill>> = MergedLiveData2(
+    val skills: LiveData<List<Skill>> = MergedLiveData6(
         mainViewModel.skills,
-        mainViewModel.inventory
-    ) { skills, inventory ->
-        listOf(
-            inventory.primary,
-            inventory.secondary,
-            inventory.tertiary,
-            inventory.armor,
+        mainViewModel.inventory,
+        isPrimaryAllowed,
+        isSecondaryAllowed,
+        isTertiaryAllowed,
+        isArmorAllowed,
+    ) { skills, inventory, isPrimaryAllowed, isSecondaryAllowed, isTertiaryAllowed, isArmorAllowed ->
+        listOfNotNull(
+            inventory.primary.takeIf { isPrimaryAllowed },
+            inventory.secondary.takeIf { isSecondaryAllowed },
+            inventory.tertiary.takeIf { isTertiaryAllowed },
+            inventory.armor.takeIf { isArmorAllowed },
         )
             .flatMap { item ->
                 when (item) {
-                    is Weapon.Ranged.Bow -> skills.dexterity.filter { it.code == "ARCH" }
-                    is Weapon.Ranged.Crossbow -> skills.dexterity.filter { it.code == "ARCH" }
-                    is Weapon.Ranged -> skills.dexterity.filter { it.code == "FRAM" }
-                    is Weapon.Melee.BareHands -> skills.dexterity.filter { it.code == "UCMB" }
-                    is Weapon.Melee.Knife -> skills.dexterity.filter { it.code.isOneOf("SWDF", "THRW") }
-                    is Weapon.Melee -> skills.dexterity.filter { it.code == "SWDF" }
-                    is Armor -> if (item.damage == Item.Damage.HEAVY) skills.dexterity.filter { it.code == "HVAC" } else listOf()
+                    is Weapon.Ranged.Bow -> skills.dexterity.filter { it.code == Skill.Constants.ARCHERY }
+                    is Weapon.Ranged.Crossbow -> skills.dexterity.filter { it.code == Skill.Constants.ARCHERY }
+                    is Weapon.Ranged -> skills.dexterity.filter { it.code == Skill.Constants.FIREARMS }
+                    is Weapon.Melee.Knife -> skills.dexterity.filter { it.code.isOneOf(Skill.Constants.SWORDFIGHTING, Skill.Constants.THROWING) }
+                    is Weapon.Melee -> skills.dexterity.filter { it.code == Skill.Constants.SWORDFIGHTING }
+                    is Armor -> if (item.damage == Item.Damage.HEAVY) skills.dexterity.filter { it.code == Skill.Constants.HEAVY_ARMOR } else listOf()
                     else -> listOf()
                 }
             }
             .groupBy { it.code }
             .map { it.value.first() }
+            .toMutableList()
+            .apply {
+                skills.dexterity.firstOrNull { it.code == Skill.Constants.UNARMED }
+                    ?.let { add(it) }
+            }
     }
 
     fun onLoadoutCombatClicked() {
-        _loadoutType.value = com.pecawolf.model.Item.LoadoutType.COMBAT
+        _loadoutType.value = Item.LoadoutType.COMBAT
     }
 
     fun onLoadoutSocialClicked() {
-        _loadoutType.value = com.pecawolf.model.Item.LoadoutType.SOCIAL
+        _loadoutType.value = Item.LoadoutType.SOCIAL
     }
 
     fun onLoadoutTravelClicked() {
-        _loadoutType.value = com.pecawolf.model.Item.LoadoutType.TRAVEL
+        _loadoutType.value = Item.LoadoutType.TRAVEL
     }
 
-    fun onRollClicked(skill: Rollable.Skill) {
+    fun onPrimaryClicked() {
+        inventory.value?.primary?.itemId?.let {
+            _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onSecondaryClicked() {
+        inventory.value?.secondary?.itemId?.let {
+            _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onTertiaryClicked() {
+        inventory.value?.tertiary?.itemId?.let {
+            _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onClothesClicked() {
+        inventory.value?.clothes?.itemId?.let {
+            _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onArmorClicked() {
+        inventory.value?.armor?.itemId?.let {
+            _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onRollClicked(skill: Skill) {
         _navigateTo.postValue(Destination.RollModifierDialog(skill))
     }
 
-    fun onRollConfirmed(skill: Rollable.Skill, modifier: String) {
+    fun onRollConfirmed(skill: Skill, modifier: String) {
         roll.execute(skill to modifier.toInt())
             .observe(ROLL + skill.code, ::onRollError, ::onRollSuccess)
     }
 
-    private fun onRollSuccess(result: Pair<Int, RollResult>) {
+    private fun onRollSuccess(result: RollResult) {
         Timber.v("onRollSuccess(): $result")
         _navigateTo.postValue(
-            result.let2 { roll, rollResult -> Destination.RollResultDialog(roll, rollResult) }
+            Destination.RollResultDialog(result)
         )
     }
 
@@ -122,8 +160,9 @@ class LoadoutViewModel(
     }
 
     sealed class Destination {
-        data class RollModifierDialog(val skill: Rollable.Skill) : Destination()
-        data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
+        data class RollModifierDialog(val skill: Skill) : Destination()
+        data class RollResultDialog(val rollResult: RollResult) : Destination()
+        data class ItemDetail(val itemId: Long) : Destination()
     }
 
     companion object {

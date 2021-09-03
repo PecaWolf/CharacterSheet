@@ -2,11 +2,8 @@ package com.pecawolf.charactersheet.ui.loadout
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pecawolf.charactersheet.BuildConfig
-import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentLoadoutBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
@@ -42,6 +39,12 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
             adapter = skillsAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+        binding.loadoutOverviewPrimary.setOnClickListener { viewModel.onPrimaryClicked() }
+        binding.loadoutOverviewSecondary.setOnClickListener { viewModel.onSecondaryClicked() }
+        binding.loadoutOverviewTertiary.setOnClickListener { viewModel.onTertiaryClicked() }
+        binding.loadoutOverviewClothes.setOnClickListener { viewModel.onClothesClicked() }
+        binding.loadoutOverviewArmor.setOnClickListener { viewModel.onArmorClicked() }
     }
 
     override fun observeViewModel(
@@ -56,71 +59,26 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         }
 
         viewModel.isPrimaryAllowed.reObserve(this) { isAllowed ->
-            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
-                resources,
-                R.dimen.inactive_item_alpha
-            )
-            binding.loadoutWeaponPrimaryLabel.alpha = alpha
-            binding.loadoutWeaponPrimaryValue.alpha = alpha
+            binding.loadoutOverviewPrimary.isActive = isAllowed
         }
         viewModel.isSecondaryAllowed.reObserve(this) { isAllowed ->
-            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
-                resources,
-                R.dimen.inactive_item_alpha
-            )
-            binding.loadoutWeaponSecondaryLabel.alpha = alpha
-            binding.loadoutWeaponSecondaryValue.alpha = alpha
+            binding.loadoutOverviewSecondary.isActive = isAllowed
         }
         viewModel.isTertiaryAllowed.reObserve(this) { isAllowed ->
-            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
-                resources,
-                R.dimen.inactive_item_alpha
-            )
-            binding.loadoutWeaponTertiaryLabel.alpha = alpha
-            binding.loadoutWeaponTertiaryValue.alpha = alpha
+            binding.loadoutOverviewTertiary.isActive = isAllowed
         }
-        viewModel.isClothingAllowed.reObserve(this) { isAllowed ->
-            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
-                resources,
-                R.dimen.inactive_item_alpha
-            )
-            binding.loadoutClothesLabel.alpha = alpha
-            binding.loadoutClothesValue.alpha = alpha
+        viewModel.isClothesAllowed.reObserve(this) { isAllowed ->
+            binding.loadoutOverviewClothes.isActive = isAllowed
         }
         viewModel.isArmorAllowed.reObserve(this) { isAllowed ->
-            val alpha = if (isAllowed) 1f else ResourcesCompat.getFloat(
-                resources,
-                R.dimen.inactive_item_alpha
-            )
-            binding.loadoutArmorLabel.alpha = alpha
-            binding.loadoutArmorValue.alpha = alpha
+            binding.loadoutOverviewArmor.isActive = isAllowed
         }
         viewModel.inventory.reObserve(this) { inventory ->
-            binding.loadoutWeaponPrimaryValue.text = inventory.primary.name
-            binding.loadoutWeaponPrimaryId.apply {
-                text = String.format("#%06d", inventory.primary.itemId)
-                isVisible = BuildConfig.DEBUG && inventory.primary.itemId > 0
-            }
-            binding.loadoutWeaponSecondaryValue.text = inventory.secondary.name
-            binding.loadoutWeaponSecondaryId.apply {
-                text = String.format("#%06d", inventory.secondary.itemId)
-                isVisible = BuildConfig.DEBUG && inventory.secondary.itemId > 0
-            }
-            binding.loadoutWeaponTertiaryValue.text = inventory.tertiary.name
-            binding.loadoutWeaponTertiaryId.apply {
-                text = String.format("#%06d", inventory.tertiary.itemId)
-                isVisible = BuildConfig.DEBUG && inventory.tertiary.itemId > 0
-            }
-            binding.loadoutClothesValue.text = inventory.clothes.name
-            binding.loadoutClothesId.apply {
-                text = String.format("#%06d", inventory.clothes.itemId)
-                isVisible = BuildConfig.DEBUG && inventory.clothes.itemId > 0
-            }
-            binding.loadoutArmorValue.text = inventory.armor.name
-            binding.loadoutArmorId.apply {
-                text = String.format("#%06d", inventory.armor.itemId)
-                isVisible = BuildConfig.DEBUG && inventory.armor.itemId > 0
-            }
+            binding.loadoutOverviewPrimary.setItem(inventory.primary)
+            binding.loadoutOverviewSecondary.setItem(inventory.secondary)
+            binding.loadoutOverviewTertiary.setItem(inventory.tertiary)
+            binding.loadoutOverviewClothes.setItem(inventory.clothes)
+            binding.loadoutOverviewArmor.setItem(inventory.armor)
         }
         viewModel.skills.reObserve(this) {
             skillsAdapter.items = listOf(it)
@@ -128,7 +86,10 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         viewModel.navigateTo.reObserve(this) {
             when (it) {
                 is Destination.RollModifierDialog -> showRollModifierDialog(it.skill)
-                is Destination.RollResultDialog -> showRollResultDialog(it.roll, it.rollResult)
+                is Destination.RollResultDialog -> showRollResultDialog(it.rollResult)
+                is Destination.ItemDetail -> findNavController().navigate(
+                    LoadoutFragmentDirections.actionLoadoutToItemDetail(it.itemId)
+                )
             }
         }
     }
@@ -142,7 +103,7 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         }
     }
 
-    private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
-        dialogHelper.showRollResultDialog(roll, rollResult)
+    private fun showRollResultDialog(rollResult: RollResult) {
+        dialogHelper.showRollResultDialog(rollResult)
     }
 }

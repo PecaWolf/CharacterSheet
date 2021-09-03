@@ -3,7 +3,6 @@ package com.pecawolf.presentation.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
-import com.pecawolf.common.extensions.let2
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable.Skill
@@ -101,10 +100,10 @@ class SkillsViewModel(
             .observe(UPDATE, ::onUpdateSkillsError, ::onUpdateSkillsSuccess)
     }
 
-    private fun onRollSuccess(result: Pair<Int, RollResult>) {
+    private fun onRollSuccess(result: RollResult) {
         Timber.v("onRollSuccess(): $result")
         _navigateTo.postValue(
-            result.let2 { roll, rollResult -> Destination.RollResultDialog(roll, rollResult) }
+            Destination.RollResultDialog(result)
         )
     }
 
@@ -122,7 +121,7 @@ class SkillsViewModel(
 
     sealed class Destination {
         data class RollModifierDialog(val skill: Skill) : Destination()
-        data class RollResultDialog(val roll: Int, val rollResult: RollResult) : Destination()
+        data class RollResultDialog(val rollResult: RollResult) : Destination()
         data class SkillEditDialog(val skill: Skill) : Destination()
     }
 

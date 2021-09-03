@@ -15,7 +15,13 @@
         android:id="@+id/navigation_loadout"
         android:name="com.pecawolf.charactersheet.ui.loadout.LoadoutFragment"
         android:label="@string/title_loadout"
-        tools:layout="@layout/fragment_loadout" />
+        tools:layout="@layout/fragment_loadout">
+
+        <action
+            android:id="@+id/action_loadout_to_item_detail"
+            app:destination="@id/navigation_item_detail" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_inventory"

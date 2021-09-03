@@ -30,5 +30,14 @@ sealed class Rollable(open var value: Int) {
 
         override val trap: Int
             get() = stat.value + value * 3
+
+        object Constants {
+            const val ARCHERY = "ARCH"
+            const val FIREARMS = "FRAM"
+            const val UNARMED = "UCMB"
+            const val SWORDFIGHTING = "SWDF"
+            const val THROWING = "THRW"
+            const val HEAVY_ARMOR = "HVAC"
+        }
     }
 }

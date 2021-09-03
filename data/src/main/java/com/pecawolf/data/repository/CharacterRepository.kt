@@ -91,7 +91,7 @@ class CharacterRepository(
                     Item.Slot.TERTIARY -> character.tertiary = itemId
 //                Item.Slot.GRENADE -> character.grenade = itemId
                     Item.Slot.ARMOR -> character.armor = itemId
-                    Item.Slot.CLOTHING -> character.clothes = itemId
+                    Item.Slot.CLOTHES -> character.clothes = itemId
                 }
                 cache.updateCharacter(character)
             }
@@ -105,7 +105,7 @@ class CharacterRepository(
                 Item.Slot.SECONDARY -> character.secondary = -1
                 Item.Slot.TERTIARY -> character.tertiary = -1
                 Item.Slot.ARMOR -> character.armor = -1
-                Item.Slot.CLOTHING -> character.clothes = -1
+                Item.Slot.CLOTHES -> character.clothes = -1
             }
             cache.updateCharacter(character)
         }

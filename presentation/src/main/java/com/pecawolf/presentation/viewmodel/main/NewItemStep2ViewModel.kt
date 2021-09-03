@@ -29,14 +29,14 @@ class NewItemStep2ViewModel(
         type.isOneOf(
             Item.ItemType.PISTOL,
             Item.ItemType.KNIFE,
-            Item.ItemType.CLOTHING
+            Item.ItemType.CLOTHES
         )
     )
     private val _loadoutTravelChecked = MutableLiveData(
         type.isOneOf(
             Item.ItemType.PISTOL,
             Item.ItemType.KNIFE,
-            Item.ItemType.CLOTHING
+            Item.ItemType.CLOTHES
         )
     )
     private val _selectedLoadouts = MergedLiveData3(
