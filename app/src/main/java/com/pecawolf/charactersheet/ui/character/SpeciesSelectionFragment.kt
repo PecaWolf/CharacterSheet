@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.databinding.FragmentSpeciesSelectionBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
+import com.pecawolf.charactersheet.ui.view.initialize
 import com.pecawolf.model.BaseStats
 import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
@@ -37,14 +37,8 @@ class SpeciesSelectionFragment :
         binding: FragmentSpeciesSelectionBinding,
         viewModel: SpeciesSelectionViewModel
     ) {
-        binding.worldsRecycler.apply {
-            adapter = worldsAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-        binding.speciesRecycler.apply {
-            adapter = speciesAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+        binding.worldsRecycler.initialize(worldsAdapter)
+        binding.speciesRecycler.initialize(speciesAdapter)
         binding.continueButton.setOnClickListener { viewModel.onContinueClicked() }
     }
 

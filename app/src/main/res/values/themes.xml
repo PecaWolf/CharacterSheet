@@ -19,8 +19,8 @@
 
     <style name="Card">
         <item name="cardCornerRadius">@dimen/corner_radius</item>
-        <item name="cardElevation">1dp</item>
-        <item name="cardMaxElevation">1dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardMaxElevation">0dp</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardBackgroundColor">@color/backgroundCard</item>

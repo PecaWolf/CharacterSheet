@@ -9,7 +9,6 @@ import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable.Skill
 import com.pecawolf.presentation.extensions.MergedLiveData3
 import com.pecawolf.presentation.extensions.SingleLiveEvent
-import com.pecawolf.presentation.extensions.toggle
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -21,6 +20,7 @@ class SkillsViewModel(
 
     private val _navigateTo = SingleLiveEvent<Destination>()
     private val _isEditing = MutableLiveData<Boolean>(false)
+    private val _isShowingFilters = MutableLiveData<Boolean>(false)
     private val _isShowingUnknown = MutableLiveData<Boolean>(true)
     private val _search = MutableLiveData<String>("")
     val items: LiveData<List<List<Skill>>> = MergedLiveData3(
@@ -58,16 +58,21 @@ class SkillsViewModel(
     }
 
     val navigateTo: LiveData<Destination> = _navigateTo
+    val isShowingFilters: LiveData<Boolean> = _isShowingFilters
     val isEditing: LiveData<Boolean> = _isEditing
     val isShowingUnknown: LiveData<Boolean> = _isShowingUnknown
     val search: LiveData<String> = _search.distinctUntilChanged()
 
-    fun onSkillsEditClicked() {
-        _isEditing.toggle()
+    fun onSkillsFiltersClicked(isChecked: Boolean) {
+        _isShowingFilters.value = isChecked
     }
 
-    fun onSkillsShowUnknownClicked() {
-        _isShowingUnknown.toggle()
+    fun onSkillsEditClicked(isChecked: Boolean) {
+        _isEditing.value = isChecked
+    }
+
+    fun onSkillsShowUnknownClicked(isChecked: Boolean) {
+        _isShowingUnknown.value = isChecked
     }
 
     fun onSearchChanged(search: String) {

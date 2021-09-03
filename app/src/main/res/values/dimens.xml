@@ -7,6 +7,7 @@
 
     <dimen name="spacing_0_5">2dp</dimen>
     <dimen name="spacing_1">4dp</dimen>
+    <dimen name="spacing_1_5">6dp</dimen>
     <dimen name="spacing_2">8dp</dimen>
     <dimen name="spacing_3">12dp</dimen>
     <dimen name="spacing_4">16dp</dimen>
@@ -27,4 +28,5 @@
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="bar_height">68dp</dimen>
     <dimen name="bar_height_double">136dp</dimen>
+    <dimen name="border_thickness">3dp</dimen>
 </resources>

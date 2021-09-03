@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toStartOf="@id/label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_wrench" />
+        tools:srcCompat="@drawable/ic_checkmark" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/label"

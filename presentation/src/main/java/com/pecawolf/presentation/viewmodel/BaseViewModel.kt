@@ -1,8 +1,10 @@
 package com.pecawolf.presentation.viewmodel
 
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.pecawolf.common.extensions.postDelayed
 import com.pecawolf.presentation.extensions.add
 import com.pecawolf.presentation.extensions.remove
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -42,8 +44,8 @@ open class BaseViewModel : ViewModel() {
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { _loading.add(loading) }
         .doOnSubscribe { disposable.add(it) }
-        .doOnNext { _loading.remove(loading) }
-        .doOnError { _loading.remove(loading) }
+        .doOnNext { stopLoadingFor(loading) }
+        .doOnError { stopLoadingFor(loading) }
         .subscribe(onNext, onError, onComplete)
 
     fun <T> Single<T>.observe(
@@ -54,8 +56,8 @@ open class BaseViewModel : ViewModel() {
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { _loading.add(loading) }
         .doOnSubscribe { disposable.add(it) }
-        .doOnSuccess { _loading.remove(loading) }
-        .doOnError { _loading.remove(loading) }
+        .doOnSuccess { stopLoadingFor(loading) }
+        .doOnError { stopLoadingFor(loading) }
         .subscribe(onSuccess, onError)
 
     fun <T> Maybe<T>.observe(
@@ -67,9 +69,9 @@ open class BaseViewModel : ViewModel() {
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { _loading.add(loading) }
         .doOnSubscribe { disposable.add(it) }
-        .doOnSuccess { _loading.remove(loading) }
-        .doOnError { _loading.remove(loading) }
-        .doOnComplete { _loading.remove(loading) }
+        .doOnSuccess { stopLoadingFor(loading) }
+        .doOnError { stopLoadingFor(loading) }
+        .doOnComplete { stopLoadingFor(loading) }
         .subscribe(onSuccess, onError, onComplete)
 
     fun Completable.observe(
@@ -80,7 +82,11 @@ open class BaseViewModel : ViewModel() {
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { _loading.add(loading) }
         .doOnSubscribe { disposable.add(it) }
-        .doOnComplete { _loading.remove(loading) }
-        .doOnError { _loading.remove(loading) }
+        .doOnComplete { stopLoadingFor(loading) }
+        .doOnError { stopLoadingFor(loading) }
         .subscribe(onSuccess, onError)
+
+    private fun stopLoadingFor(loading: String) {
+        Handler().postDelayed(500) { _loading.remove(loading) }
+    }
 }

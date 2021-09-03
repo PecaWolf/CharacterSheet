@@ -8,16 +8,107 @@
     tools:background="@color/background"
     tools:context=".ui.skills.SkillsFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/skills_guide_75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/skills_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/spacing_2"
         android:layout_marginBottom="@dimen/spacing_2"
         app:layout_constraintBottom_toTopOf="@id/skills_filter_card"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/skills_guide_75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_skill_skill" />
+
+    <com.pecawolf.charactersheet.ui.view.SearchView
+        android:id="@+id/skills_search"
+        style="@style/Card"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bar_height"
+        android:layout_marginEnd="@dimen/spacing_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/skills_guide_75"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/skills_recycler_filters"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/spacing_2"
+        app:layout_constraintBottom_toTopOf="@id/skills_edit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/skills_guide_75"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+        android:id="@+id/skills_edit_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bar_height"
+        android:layout_marginBottom="@dimen/spacing_2"
+        android:background="@drawable/bg_card"
+        app:iconSrc="@drawable/ic_wrench"
+        app:layout_constraintBottom_toTopOf="@id/skills_filters_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/skills_guide_75" />
+
+    <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+        android:id="@+id/skills_filters_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bar_height"
+        android:background="@drawable/bg_card"
+        app:iconSrc="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/skills_guide_75" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/skills_filter_card"
+        style="@style/Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_2"
+        app:layout_constraintBottom_toTopOf="@id/skills_filters_button"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_2">
+
+            <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+                android:id="@+id/skills_unknown_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:background="@drawable/bg_card"
+                app:text="@string/skills_unknown_show" />
+
+            <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+                android:id="@+id/skills_scifi_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:background="@drawable/bg_card"
+                app:iconSrc="@drawable/ic_rifle"
+                app:text="@string/skills_scifi" />
+
+            <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+                android:id="@+id/skills_fantasy_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:background="@drawable/bg_card"
+                app:iconSrc="@drawable/ic_sword"
+                app:text="@string/skills_fantasy" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
 
     <ProgressBar
         android:id="@+id/skills_progress"
@@ -27,117 +118,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/skills_filter_card"
-        style="@style/Card"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/bar_height"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/skills_fab"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/spacing_2">
-
-            <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
-                android:id="@+id/skill_search_icon"
-                android:layout_width="@dimen/icon_medium"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/skill_search_layout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:clickable="true"
-                app:layout_constraintBottom_toBottomOf="@id/skill_search_icon"
-                app:layout_constraintEnd_toEndOf="@id/skill_search_icon"
-                app:layout_constraintStart_toStartOf="@id/skill_search_icon"
-                app:layout_constraintTop_toTopOf="@id/skill_search_icon" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/skill_search_layout"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/spacing_2"
-                android:hint="@string/skills_search"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/skill_search_icon"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/skill_search_input"
-                    style="@style/Input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/backgroundCard"
-                    android:imeOptions="actionSearch"
-                    android:lines="1"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/skill_search_cancel"
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:layout_marginEnd="@dimen/spacing_2"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_cancel"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/skills_edit_fab"
-        style="@style/Button.Fab.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:text="@string/skills_edit"
-        app:icon="@drawable/ic_wrench"
-        app:iconTint="@color/contentPrimary"
-        app:layout_constraintBottom_toBottomOf="@id/skills_fab"
-        app:layout_constraintEnd_toEndOf="@id/skills_fab"
-        app:layout_constraintTop_toTopOf="@id/skills_fab"
-        tools:alpha="1"
-        tools:translationY="-136dp" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/skills_show_unknown_fab"
-        style="@style/Button.Fab.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:text="@string/skills_unknown_show"
-        app:icon="@drawable/ic_search"
-        app:iconTint="@color/contentPrimary"
-        app:layout_constraintBottom_toBottomOf="@id/skills_fab"
-        app:layout_constraintEnd_toEndOf="@id/skills_fab"
-        app:layout_constraintTop_toTopOf="@id/skills_fab"
-        tools:alpha="1"
-        tools:translationY="-68dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/skills_fab"
-        style="@style/Button.Fab.Menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
-        app:iconTint="@color/contentPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

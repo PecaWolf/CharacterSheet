@@ -223,6 +223,8 @@
     <string name="skills_unknown_show">Show unknown</string>
     <string name="skills_unknown_hide">Hide unknown</string>
     <string name="skills_edit">Edit skills</string>
+    <string name="skills_scifi">Show sci-fi skills</string>
+    <string name="skills_fantasy">Show fantasy skills</string>
     <string name="skills_search">Search</string>
     <string name="generic_selection_empty">Nothing to show</string>
 

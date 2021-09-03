@@ -6,9 +6,17 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.pecawolf.common.extensions.postDelayed
 
 fun View.showKeyboard() =
     (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+
+fun RecyclerView.initialize(adapter: RecyclerView.Adapter<*>, manager: RecyclerView.LayoutManager? = null) {
+    this.adapter = adapter
+    layoutManager = manager ?: LinearLayoutManager(context)
+}
 
 class DebouncedOnClickListener(private val onClick: (Int) -> Unit) : View.OnClickListener {
 
@@ -28,10 +36,6 @@ class DebouncedOnClickListener(private val onClick: (Int) -> Unit) : View.OnClic
         } else {
             bounces++
         }
-    }
-
-    fun Handler.postDelayed(delayMillis: Long, runnable: Runnable) {
-        postDelayed(runnable, delayMillis)
     }
 }
 

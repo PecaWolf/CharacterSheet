@@ -3,7 +3,6 @@ package com.pecawolf.charactersheet.ui
 import android.os.Bundle
 import android.view.View
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.pecawolf.charactersheet.R
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
@@ -13,7 +12,7 @@ abstract class FabMenuFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding>
 
     private var isFabMenuExtended: Boolean = false
 
-    abstract fun getMenuFab(): FloatingActionButton
+    abstract fun getMenuFab(): View
     abstract fun getMenuFabItems(): List<View>
 
     override fun onViewCreated(fab: View, savedInstanceState: Bundle?) {
@@ -32,6 +31,7 @@ abstract class FabMenuFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding>
                             .setDuration(MENU_ANIMATION_DURATION)
                             .alpha(1f)
                             .translationY(-1 * (index + 1) * translationUnit)
+                            .withStartAction { fab.isEnabled = true }
                             .start()
                     }
                 getMenuFab().animate()
@@ -44,6 +44,7 @@ abstract class FabMenuFragment<VIEWMODEL : BaseViewModel, BINDING : ViewBinding>
                         .setDuration(MENU_ANIMATION_DURATION)
                         .alpha(0f)
                         .translationY(0f)
+                        .withEndAction { fab.isEnabled = false }
                         .start()
                 }
                 getMenuFab().animate()

@@ -3,12 +3,9 @@ package com.pecawolf.charactersheet.ui.skills
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentSkillsBinding
-import com.pecawolf.charactersheet.ui.FabMenuFragment
-import com.pecawolf.charactersheet.ui.view.DebouncedTextChangeListener
+import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.charactersheet.ui.view.initialize
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
@@ -18,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class SkillsFragment : FabMenuFragment<SkillsViewModel, FragmentSkillsBinding>() {
+class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
 
     private val skillsAdapter: SkillsAdapter by lazy {
         SkillsAdapter(
@@ -34,23 +31,12 @@ class SkillsFragment : FabMenuFragment<SkillsViewModel, FragmentSkillsBinding>()
 
     override fun createViewModel() = viewModel<SkillsViewModel> { parametersOf() }.value
 
-    override fun getMenuFab() = binding.skillsFab
-
-    override fun getMenuFabItems() = binding.run { listOf(skillsEditFab, skillsShowUnknownFab) }
-
     override fun bindView(binding: FragmentSkillsBinding, viewModel: SkillsViewModel) {
-        binding.skillsRecycler.apply {
-            adapter = skillsAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-        binding.skillsEditFab.setOnClickListener { viewModel.onSkillsEditClicked() }
-        binding.skillsShowUnknownFab.setOnClickListener { viewModel.onSkillsShowUnknownClicked() }
-        binding.skillSearchInput.apply {
-            addTextChangedListener(DebouncedTextChangeListener { viewModel.onSearchChanged(it) })
-            addTextChangedListener { binding.skillSearchCancel.isVisible = !it.isNullOrBlank() }
-            setOnFocusChangeListener { _, hasFocus -> binding.skillSearchIcon.isChecked = hasFocus }
-        }
-        binding.skillSearchCancel.setOnClickListener { viewModel.onSearchCancelClicked() }
+        binding.skillsRecycler.initialize(skillsAdapter)
+        binding.skillsFiltersButton.setOnCheckedChangedListener { _, isChecked -> viewModel.onSkillsFiltersClicked(isChecked) }
+        binding.skillsEditButton.setOnCheckedChangedListener { _, isChecked -> viewModel.onSkillsEditClicked(isChecked) }
+        binding.skillsUnknownButton.setOnCheckedChangedListener { _, isChecked -> viewModel.onSkillsShowUnknownClicked(isChecked) }
+        binding.skillsSearch.setOnSearchChangedListener { viewModel.onSearchChanged(it) }
     }
 
     override fun observeViewModel(binding: FragmentSkillsBinding, viewModel: SkillsViewModel) {
@@ -61,17 +47,18 @@ class SkillsFragment : FabMenuFragment<SkillsViewModel, FragmentSkillsBinding>()
             Timber.v("onItems(): ${it.map { it.size }}")
             skillsAdapter.items = it
         }
+        viewModel.isShowingFilters.reObserve(this) { isShowing ->
+            binding.skillsFiltersButton.isChecked = isShowing
+            binding.skillsFilterCard.isVisible = isShowing
+        }
         viewModel.isEditing.reObserve(this) { isEditing ->
             skillsAdapter.isEditing = isEditing
         }
         viewModel.isShowingUnknown.reObserve(this) { isShowingUnknown ->
-            binding.skillsShowUnknownFab.text =
-                getString(if (isShowingUnknown) R.string.skills_unknown_hide else R.string.skills_unknown_show)
+            binding.skillsUnknownButton.isChecked = isShowingUnknown
         }
         viewModel.search.reObserve(this) { search ->
-            binding.skillSearchInput.apply {
-                if (text.toString() != search) setText(search)
-            }
+            binding.skillsSearch.text = search
         }
         viewModel.navigateTo.reObserve(this) {
             when (it) {
