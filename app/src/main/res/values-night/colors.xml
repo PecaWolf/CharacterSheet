@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#333</color>
-    <color name="backgroundCard">#666</color>
-    <color name="backgroundInput">#EBEBEB</color>
-    <color name="primary">#FFF</color>
-    <color name="secondary">#AAA</color>
-    <color name="inverse">#000</color>
-    <color name="activePrimary">@color/raw_teal_200</color>
-    <color name="activeSecondary">@color/raw_teal_700</color>
-    <color name="buttonBackgroundEnabled">@color/raw_teal_700</color>
-    <color name="buttonBackgroundDisabled">@color/background</color>
+    <color name="colorPrimary">@color/raw_blue_light</color>
+    <color name="colorPrimaryVariant">@color/raw_blue_dark</color>
+    <color name="colorSecondary">@color/raw_orange_medium</color>
+    <color name="colorSecondaryVariant">@color/raw_orange_dark</color>
+
+    <color name="background">#222</color>
+    <color name="backgroundCard">#444</color>
+    <color name="backgroundInput">#555</color>
+    <color name="contentPrimary">#FFF</color>
+    <color name="contentSecondary">#BBB</color>
+    <color name="contentInverse">#000</color>
+
+    <color name="activePrimary">@color/raw_orange_medium</color>
+    <color name="activeSecondary">@color/raw_orange_light</color>
+    <color name="buttonBackgroundEnabled">@color/raw_orange_dark</color>
+    <color name="buttonBackgroundDisabled">@color/raw_orange_medium</color>
     <color name="buttonBackgroundPositiveEnabled">@color/raw_green_dark</color>
     <color name="buttonBackgroundPositiveDisabled">@color/raw_green_medium</color>
     <color name="buttonBackgroundNegativeEnabled">@color/raw_red_dark</color>
     <color name="buttonBackgroundNegativeDisabled">@color/raw_red_medium</color>
-
-    <color name="wound">@color/raw_red_light</color>
-    <color name="luck">@color/raw_green_light</color>
 </resources>

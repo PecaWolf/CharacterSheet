@@ -31,7 +31,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
             layoutManager = LinearLayoutManager(requireContext())
         }
         binding.inventoryMoneyClicker.setOnClickListener { viewModel.onMoneyClicked() }
-        binding.inventoryAddItemButton.setOnClickListener { viewModel.onAddItemClicked() }
+        binding.inventoryAddItemFab.setOnClickListener { viewModel.onAddItemClicked() }
     }
 
     override fun observeViewModel(

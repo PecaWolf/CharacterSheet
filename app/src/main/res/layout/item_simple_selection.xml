@@ -11,13 +11,11 @@
         android:id="@+id/selection_checkbox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:checkedSrc="@drawable/ic_checkmark_active"
         app:isChecked="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:text="Togruta"
-        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+        app:text="Togruta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

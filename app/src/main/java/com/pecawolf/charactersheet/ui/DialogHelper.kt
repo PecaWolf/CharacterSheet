@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.DialogMultiChoiceBinding
 import com.pecawolf.charactersheet.databinding.DialogSingleChoiceBinding
@@ -21,6 +20,7 @@ import com.pecawolf.charactersheet.databinding.DialogThreeChoiceBinding
 import com.pecawolf.charactersheet.databinding.DialogTwoChoiceBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ext.getName
+import com.pecawolf.charactersheet.ui.view.initialize
 import com.pecawolf.charactersheet.ui.view.showKeyboard
 import com.pecawolf.model.Item
 import com.pecawolf.model.RollResult
@@ -147,7 +147,7 @@ class DialogHelper(private val context: Context) {
                 binding.multiChoiceButtonPositive.isEnabled =
                     items.any { it.isChecked }
 
-                adapter = SimpleSelectionAdapter { clicked ->
+                val simpleSelectionAdapter = SimpleSelectionAdapter { clicked ->
                     val adapter = (adapter as SimpleSelectionAdapter)
 
                     if (isSingleChoice) {
@@ -163,8 +163,8 @@ class DialogHelper(private val context: Context) {
                     binding.multiChoiceButtonPositive.isEnabled =
                         adapter.items.any { it.isChecked }
                 }
-                layoutManager = LinearLayoutManager(context)
-                (adapter as SimpleSelectionAdapter).items = items
+                initialize(simpleSelectionAdapter)
+                simpleSelectionAdapter.items = items
             }
         }
 

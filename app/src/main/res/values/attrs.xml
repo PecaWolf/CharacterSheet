@@ -2,8 +2,12 @@
 <resources>
     <declare-styleable name="TwoStateImageCheckView">
         <attr name="isChecked" format="boolean" />
-        <attr name="checkedSrc" format="integer" />
-        <attr name="uncheckedSrc" format="integer" />
+        <attr name="iconSrc" format="integer" />
+        <attr name="activeColor" format="color" />
         <attr name="text" format="string" />
     </declare-styleable>
+    <declare-styleable name="RectangleFab">
+        <attr name="fabIcon" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="SearchView"></declare-styleable>
 </resources>

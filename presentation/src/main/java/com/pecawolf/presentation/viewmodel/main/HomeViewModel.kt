@@ -3,7 +3,6 @@ package com.pecawolf.presentation.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.distinctUntilChanged
 import com.pecawolf.common.extensions.let
 import com.pecawolf.domain.interactor.RollDiceInteractor
 import com.pecawolf.domain.interactor.UpdateCharacterInteractor
@@ -11,10 +10,8 @@ import com.pecawolf.model.BaseStats
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.SingleLiveEvent
-import com.pecawolf.presentation.extensions.toggle
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
-import kotlin.math.max
 
 class HomeViewModel(
     private val mainViewModel: MainViewModel,
@@ -24,8 +21,8 @@ class HomeViewModel(
 
     private val _isEditing = MutableLiveData<Boolean>(false)
     private val _navigateTo = SingleLiveEvent<Destination>()
-    val baseStats: LiveData<BaseStats> = mainViewModel.character.distinctUntilChanged()
-    val luckAndHp: LiveData<Pair<Int, Int>> = Transformations.map(baseStats) { it.luckAndWounds }
+    val baseStats: LiveData<BaseStats> = mainViewModel.character
+    val luckAndHp: LiveData<BaseStats.LuckAndWounds> = Transformations.map(baseStats) { it.luckAndWounds }
     val isEditing: LiveData<Boolean> = _isEditing
     val navigateTo: LiveData<Destination> = _navigateTo
 
@@ -58,12 +55,14 @@ class HomeViewModel(
 
     fun onHealClicked(heal: Int) {
         baseStats.value?.also { baseStats ->
-            if (baseStats.wounds < baseStats.vit.value) {
-                baseStats.wounds += heal
-                val over = baseStats.wounds - baseStats.vit.value
-                baseStats.luck += over
-                baseStats.wounds -= max(over, 0)
-            } else baseStats.luck += heal
+            var luck = baseStats.luck
+            var wounds = baseStats.wounds
+
+            wounds += heal
+            luck += maxOf(wounds - baseStats.vit.value, 0)
+
+            baseStats.luck = minOf(luck, baseStats.vit.value * 2)
+            baseStats.wounds = minOf(wounds, baseStats.vit.value)
 
             updateCharacter.execute(baseStats)
                 .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
@@ -72,9 +71,14 @@ class HomeViewModel(
 
     fun onDamageClicked(damage: Int) {
         baseStats.value?.also { baseStats ->
-            if (baseStats.luck > 0) {
-                baseStats.luck -= damage
-            } else baseStats.wounds = maxOf(baseStats.wounds - damage, 0)
+            var luck = baseStats.luck
+            var wounds = baseStats.wounds
+
+            luck -= damage
+            if (luck < 0) wounds += luck
+
+            baseStats.luck = maxOf(luck, 0)
+            baseStats.wounds = wounds
 
             updateCharacter.execute(baseStats)
                 .observe(UPDATE, ::onUpdateCharacterError, ::onUpdateCharacterSuccess)
@@ -90,8 +94,8 @@ class HomeViewModel(
         }
     }
 
-    fun onEditClicked() {
-        _isEditing.toggle()
+    fun onEditClicked(isChecked: Boolean) {
+        _isEditing.value = isChecked
     }
 
     private fun onUpdateCharacterSuccess() {

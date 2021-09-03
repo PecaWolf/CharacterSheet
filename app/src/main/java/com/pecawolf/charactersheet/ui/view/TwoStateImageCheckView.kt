@@ -1,6 +1,7 @@
 package com.pecawolf.charactersheet.ui.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -22,8 +23,23 @@ class TwoStateImageCheckView : ConstraintLayout {
             refresh(value)
         }
 
-    var checkedSrc: Drawable? = null
-    var uncheckedSrc: Drawable? = null
+    var icon: Drawable? = null
+        set(value) {
+            field = value ?: ResourcesCompat.getDrawable(resources, R.drawable.ic_checkmark, null)
+            binding.icon.setImageDrawable(field)
+        }
+
+    var activeColor: Int? = null
+        get() = field ?: ResourcesCompat.getColor(resources, R.color.activePrimary, null)
+        set(value) {
+            field = value ?: ResourcesCompat.getColor(resources, R.color.activePrimary, null)
+            refresh(isChecked)
+        }
+
+    private val inactiveColor: Int by lazy {
+        ResourcesCompat.getColor(resources, R.color.contentSecondary, null)
+    }
+
     var text: String? = null
         set(value) {
             field = value
@@ -47,11 +63,11 @@ class TwoStateImageCheckView : ConstraintLayout {
         initStyleable(context, attrs)
     }
 
-    fun setCheckedChangedListener(listener: OnCheckedChangeListener?) {
+    fun setOnCheckedChangedListener(listener: OnCheckedChangeListener?) {
         checkedChangedListener = listener
     }
 
-    fun setCheckedChangedListener(listener: (view: TwoStateImageCheckView, isChecked: Boolean) -> Unit) {
+    fun setOnCheckedChangedListener(listener: (view: TwoStateImageCheckView, isChecked: Boolean) -> Unit) {
         checkedChangedListener = object : OnCheckedChangeListener {
             override fun onCheckedChanged(view: TwoStateImageCheckView, isChecked: Boolean) {
                 listener.invoke(view, isChecked)
@@ -67,8 +83,8 @@ class TwoStateImageCheckView : ConstraintLayout {
             0
         ).apply {
             isChecked = getBoolean(R.styleable.TwoStateImageCheckView_isChecked, false)
-            checkedSrc = getDrawable(R.styleable.TwoStateImageCheckView_checkedSrc)
-            uncheckedSrc = getDrawable(R.styleable.TwoStateImageCheckView_uncheckedSrc)
+            icon = getDrawable(R.styleable.TwoStateImageCheckView_iconSrc)
+            activeColor = getColor(R.styleable.TwoStateImageCheckView_activeColor, ResourcesCompat.getColor(resources, R.color.activePrimary, null))
             text = getString(R.styleable.TwoStateImageCheckView_text)
         }
 
@@ -81,14 +97,9 @@ class TwoStateImageCheckView : ConstraintLayout {
     }
 
     private fun refresh(isChecked: Boolean) {
-        binding.icon.setImageDrawable(if (isChecked) checkedSrc else uncheckedSrc)
-        binding.label.setTextColor(
-            ResourcesCompat.getColor(
-                resources,
-                if (isChecked) R.color.activePrimary else R.color.secondary,
-                null
-            )
-        )
+        val color = if (isChecked) activeColor!! else inactiveColor
+        binding.icon.imageTintList = ColorStateList.valueOf(color)
+        binding.label.setTextColor(color)
     }
 
     interface OnCheckedChangeListener {

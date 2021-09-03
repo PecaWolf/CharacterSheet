@@ -7,7 +7,6 @@ data class SkillsData(
     data class SkillData(
         val code: String = "",
         val name: Map<String, String> = mapOf(),
-        val worlds: List<String> = listOf(),
         val value: Int = 0,
     )
 }

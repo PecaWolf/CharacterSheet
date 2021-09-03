@@ -12,10 +12,11 @@
     <string name="title_multi_choice">Multi choice</string>
     <string name="title_new_item">New Item</string>
     <string name="title_skills">Skills</string>
-    <string name="title_other">Other</string>
+    <string name="title_other">Menu</string>
     <string name="title_refresh">Refresh</string>
 
-    <string name="world_last_realm">Last Realm</string>
+    <string name="world_brave_new_world">Brave New World</string>
+    <string name="world_blackwood_vale">Blackwood Vale</string>
     <string name="world_blue_way">Blue Way</string>
     <string name="world_dark_way">Dark Way</string>
     <string name="world_cold_frontier">Cold Frontier</string>
@@ -24,6 +25,7 @@
     <string name="species_dwarf">Dwarf</string>
     <string name="species_elf">Elf</string>
     <string name="species_havlin">Havlin</string>
+    <string name="species_gnome">Gnome</string>
     <string name="species_karanti">Karanti</string>
     <string name="species_nathorean">Nathorean</string>
     <string name="species_searian">Searian</string>
@@ -52,6 +54,9 @@
     <string name="item_type_vac_suit">Vac-suit</string>
     <string name="item_type_vac_armor">Vac-armor</string>
     <string name="item_type_powered_armor">Powered armor</string>
+    <string name="item_type_electronics">Electronics</string>
+    <string name="item_type_food">Food</string>
+    <string name="item_type_potion">Potion</string>
     <string name="item_type_other">Other</string>
 
     <string name="character_name">Name:</string>
@@ -218,6 +223,9 @@
     <string name="skills_unknown_show">Show unknown</string>
     <string name="skills_unknown_hide">Hide unknown</string>
     <string name="skills_edit">Edit skills</string>
+    <string name="skills_scifi">Show sci-fi skills</string>
+    <string name="skills_fantasy">Show fantasy skills</string>
     <string name="skills_search">Search</string>
+    <string name="generic_selection_empty">Nothing to show</string>
 
 </resources>

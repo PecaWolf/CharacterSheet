@@ -12,7 +12,6 @@ import com.pecawolf.charactersheet.databinding.ItemHitPointBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.view.DebouncedOnClickListener
-import com.pecawolf.common.extensions.let
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
 import com.pecawolf.presentation.extensions.reObserve
@@ -63,14 +62,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             viewModel.onDamageClicked(clicks)
         })
         binding.homeDamage.setOnLongClickListener { true.also { viewModel.onDamageLongClicked() } }
-        binding.homeCharacterEditFab.setOnClickListener { viewModel.onEditClicked() }
+        binding.homeCharacterEditButton.setOnCheckedChangedListener { _, isChecked -> viewModel.onEditClicked(isChecked) }
     }
 
     override fun observeViewModel(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         viewModel.isLoading.reObserve(this) { isLoading ->
             binding.homeProgress.isVisible = isLoading
-            binding.homeClicker.isVisible = isLoading
-            binding.homeClicker.isEnabled = isLoading
         }
 
         viewModel.baseStats.reObserve(this, { stats ->
@@ -85,18 +82,27 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         })
 
         viewModel.luckAndHp.reObserve(this) { luckAndHp ->
-            luckAndHp.let { luck, wounds ->
-                binding.homeLuckAndHpValue.text =
-                    resources.getString(R.string.home_luck_and_wounds, luck, wounds)
+            Timber.d("luckAndHp(): $luckAndHp")
+            luckAndHp.run {
+                binding.homeLuckAndHpValue.text = resources.getString(R.string.home_luck_and_wounds, luckFull, woundsFull)
                 binding.homeLuckAndHpRecycler.apply {
                     removeAllViews()
-                    for (i in 1..luck) {
-                        Timber.d("luck")
-                        inflateHitPoint(R.color.luck)
+                    for (i in 1..luckEmpty) {
+                        Timber.i("luck Empty")
+                        inflateHitPoint(R.drawable.bg_hitpoint_luck_empty)
                     }
-                    for (i in 1..wounds) {
-                        Timber.e("wound")
-                        inflateHitPoint(R.color.wound)
+                    for (i in 1..luckFull) {
+                        Timber.d("luck Full")
+                        inflateHitPoint(R.drawable.bg_hitpoint_luck_full)
+                    }
+
+                    for (i in 1..woundsEmpty) {
+                        Timber.e("wound Empty")
+                        inflateHitPoint(R.drawable.bg_hitpoint_wound_empty)
+                    }
+                    for (i in 1..woundsFull) {
+                        Timber.w("wound Full")
+                        inflateHitPoint(R.drawable.bg_hitpoint_wound_full)
                     }
                 }
             }
@@ -111,6 +117,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             binding.homeInlStat.isEditing = isEditing
             binding.homeWisStat.isEditing = isEditing
             binding.homeChaStat.isEditing = isEditing
+
+            binding.homeCharacterEditButton.isChecked = isEditing
         }
 
         viewModel.navigateTo.reObserve(this) { destination ->
@@ -126,19 +134,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    private fun LinearLayoutCompat.inflateHitPoint(color: Int) =
+    private fun LinearLayoutCompat.inflateHitPoint(background: Int) =
         addView(
             ItemHitPointBinding.inflate(
                 layoutInflater,
                 this,
                 false
             ).apply {
-                this.item.setCardBackgroundColor(ResourcesCompat.getColor(resources, color, null))
+                this.item.background = ResourcesCompat.getDrawable(resources, background, null)
                 this.item.layoutParams = LinearLayoutParams(
                     LinearLayoutParams.MATCH_PARENT,
                     0,
                     1f
-                )
+                ).apply {
+                    bottomMargin = resources.getDimensionPixelSize(R.dimen.spacing_1)
+                }
             }.root
         )
 

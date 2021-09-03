@@ -5,13 +5,13 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
-import com.pecawolf.charactersheet.databinding.WidgetStatViewBinding
+import com.pecawolf.charactersheet.databinding.WidgetRollViewBinding
 import com.pecawolf.charactersheet.ext.getName
 import com.pecawolf.model.Rollable
 
 class RollView : FrameLayout {
 
-    private val binding: WidgetStatViewBinding = WidgetStatViewBinding.inflate(
+    private val binding: WidgetRollViewBinding = WidgetRollViewBinding.inflate(
         LayoutInflater.from(context), this, true
     )
 

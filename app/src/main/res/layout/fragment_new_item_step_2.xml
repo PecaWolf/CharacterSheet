@@ -47,25 +47,22 @@
                         android:id="@+id/new_item_step_2_loadout_combat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_loadout_combat_active"
-                        app:text="@string/new_item_loadout_combat"
-                        app:uncheckedSrc="@drawable/ic_loadout_combat_inactive" />
+                        app:iconSrc="@drawable/ic_loadout_combat"
+                        app:text="@string/new_item_loadout_combat" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_loadout_social"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_loadout_social_active"
-                        app:text="@string/new_item_loadout_social"
-                        app:uncheckedSrc="@drawable/ic_loadout_social_inactive" />
+                        app:iconSrc="@drawable/ic_loadout_social"
+                        app:text="@string/new_item_loadout_social" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_loadout_travel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_loadout_travel_active"
-                        app:text="@string/new_item_loadout_travel"
-                        app:uncheckedSrc="@drawable/ic_loadout_travel_inactive" />
+                        app:iconSrc="@drawable/ic_loadout_travel"
+                        app:text="@string/new_item_loadout_travel" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -99,28 +96,22 @@
                         android:id="@+id/new_item_step_2_damage_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
-                        app:text="@string/new_item_damage_light"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/new_item_damage_light" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_damage_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
-                        app:text="@string/new_item_damage_medium"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/new_item_damage_medium" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_damage_heavy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
-                        app:text="@string/new_item_damage_heavy"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/new_item_damage_heavy" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -226,38 +217,32 @@
                         android:id="@+id/new_item_step_2_wield_one_handed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintEnd_toStartOf="@id/new_item_step_2_wield_two_handed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_header"
-                        app:text="@string/wield_one_handed"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_one_handed" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_wield_two_handed"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/new_item_step_2_wield_one_handed"
                         app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_header"
-                        app:text="@string/wield_two_handed"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_two_handed" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_wield_mounted"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/new_item_step_2_wield_drone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_one_handed"
-                        app:text="@string/wield_mounted"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_mounted" />
 
                     <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
                         android:id="@+id/new_item_step_2_wield_drone"
@@ -265,14 +250,12 @@
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:visibility="invisible"
-                        app:checkedSrc="@drawable/ic_checkmark_active"
                         app:isChecked="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/new_item_step_2_wield_mounted"
                         app:layout_constraintTop_toBottomOf="@id/new_item_step_2_wield_two_handed"
-                        app:text="@string/wield_drone"
-                        app:uncheckedSrc="@drawable/ic_checkmark_inactive" />
+                        app:text="@string/wield_drone" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

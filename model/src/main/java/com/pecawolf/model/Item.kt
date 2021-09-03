@@ -607,6 +607,57 @@ sealed class Item(
         HEAVY(3);
     }
 
+    data class Electronics(
+        override var itemId: Long,
+        override var name: String,
+        override var description: String,
+        override var count: Int,
+        override var enhancements: List<Enhancement> = listOf()
+    ) : Item(
+        itemId,
+        name,
+        description,
+        count,
+        enhancements,
+        LoadoutType.ALL,
+        Damage.NONE,
+        mutableSetOf()
+    )
+
+    data class Food(
+        override var itemId: Long,
+        override var name: String,
+        override var description: String,
+        override var count: Int,
+        override var enhancements: List<Enhancement> = listOf()
+    ) : Item(
+        itemId,
+        name,
+        description,
+        count,
+        enhancements,
+        LoadoutType.ALL,
+        Damage.NONE,
+        mutableSetOf()
+    )
+
+    data class Potion(
+        override var itemId: Long,
+        override var name: String,
+        override var description: String,
+        override var count: Int,
+        override var enhancements: List<Enhancement> = listOf()
+    ) : Item(
+        itemId,
+        name,
+        description,
+        count,
+        enhancements,
+        LoadoutType.ALL,
+        Damage.NONE,
+        mutableSetOf()
+    )
+
     data class Other(
         override var itemId: Long,
         override var name: String,
@@ -820,6 +871,9 @@ sealed class Item(
             )
         ),
 
+        ELECTRONICS(false, false, false, null, Damage.NONE, mutableSetOf()),
+        FOOD(false, false, false, null, Damage.NONE, mutableSetOf()),
+        POTION(false, false, false, null, Damage.NONE, mutableSetOf()),
         OTHER(false, false, false, null, Damage.NONE, mutableSetOf());
 
         companion object {

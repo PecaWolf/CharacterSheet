@@ -65,7 +65,7 @@ class InventoryAdapter(
                 setTextColor(
                     ResourcesCompat.getColor(
                         resources,
-                        if (slot == null) R.color.disabled else R.color.activePrimary,
+                        if (slot == null) R.color.contentDisabled else R.color.activePrimary,
                         null
                     )
                 )

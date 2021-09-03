@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.MainActivity
 import com.pecawolf.charactersheet.databinding.FragmentCharacterSelectionBinding
 import com.pecawolf.charactersheet.ui.BaseFragment
+import com.pecawolf.charactersheet.ui.view.initialize
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel
 import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel.Destination
@@ -33,10 +33,7 @@ class CharacterSelectionFragment :
         binding: FragmentCharacterSelectionBinding,
         viewModel: CharacterSelectionViewModel
     ) {
-        binding.selectionRecycler.apply {
-            adapter = characterAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+        binding.selectionRecycler.initialize(characterAdapter)
     }
 
     override fun observeViewModel(

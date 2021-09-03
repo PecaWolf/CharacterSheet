@@ -36,7 +36,9 @@ class CharacterRepository(
         cache.getItemsForOwner(null),
         remote.observeSkills().distinctUntilChanged(),
         { character: CharacterData, items: List<ItemData>, skills: List<SkillsData> ->
-            characterFactory.createCharacter(character, items, skills)
+            characterFactory.createCharacter(character, items, skills).also {
+                Timber.d("${it.baseStats.luckAndWounds}")
+            }
         }
     )
         .doOnNext { Timber.v("activeCharacter(): $it") }

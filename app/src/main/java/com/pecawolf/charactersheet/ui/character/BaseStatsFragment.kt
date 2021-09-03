@@ -95,7 +95,7 @@ class BaseStatsFragment : BaseFragment<BaseStatsViewModel, FragmentBaseStatsBind
                         when {
                             it < 0 -> R.color.buttonBackgroundNegativeEnabled
                             it == 0 -> R.color.buttonBackgroundPositiveEnabled
-                            else -> R.color.primary
+                            else -> R.color.contentPrimary
                         },
                         null
                     )

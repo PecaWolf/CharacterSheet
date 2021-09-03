@@ -1,6 +1,9 @@
 package com.pecawolf.model
 
-class BaseStats(
+import kotlin.math.max
+import kotlin.math.min
+
+data class BaseStats(
     var name: String,
     val species: Species,
     val world: World,
@@ -13,34 +16,49 @@ class BaseStats(
     var wis: Rollable.Stat.Wisdom,
     var cha: Rollable.Stat.Charisma,
 ) {
-    val luckAndWounds: Pair<Int, Int>
-        get() = luck to wounds
+    val luckAndWounds: LuckAndWounds
+        get() = LuckAndWounds(
+            max(0, luck),
+            min(max(0, (vit.value * 2) - luck), (vit.value * 2)),
+            max(0, wounds),
+            min(max(0, vit.value - wounds), vit.value),
+        )
+
+    data class LuckAndWounds(
+        val luckFull: Int,
+        val luckEmpty: Int,
+        val woundsFull: Int,
+        val woundsEmpty: Int,
+    )
 
     enum class Species {
         HUMAN,
-
-        // last realm
         DWARF,
         ELF,
         HAVLIN,
-
-        // dark way
+        GNOME,
         KARANTI,
         NATHOREAN,
         SEARIAN,
         GUSMERIAN,
-
-        // cold frontier
         KRUNG;
     }
 
     enum class World(val species: List<Species>) {
-        LAST_REALM(
+        BRAVE_NEW_WORLD(
             listOf(
                 Species.HUMAN,
                 Species.DWARF,
                 Species.ELF,
                 Species.HAVLIN,
+            )
+        ),
+        BLACKWOOD_VALE(
+            listOf(
+                Species.HUMAN,
+                Species.DWARF,
+                Species.ELF,
+                Species.GNOME,
             )
         ),
         BLUE_WAY(
@@ -66,6 +84,6 @@ class BaseStats(
                 Species.HUMAN,
                 Species.KRUNG
             )
-        )
+        );
     }
 }
