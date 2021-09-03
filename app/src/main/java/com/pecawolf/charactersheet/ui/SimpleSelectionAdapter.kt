@@ -2,6 +2,7 @@ package com.pecawolf.charactersheet.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pecawolf.charactersheet.databinding.EmptySimpleSelectionBinding
@@ -51,6 +52,7 @@ class SimpleSelectionAdapter(
                 text = item.text
                 setOnClickListener { listener.invoke(item.data) }
                 isChecked = item.isChecked
+                item.icon?.let { icon = ResourcesCompat.getDrawable(resources, it, null) }
             }
         }
     }

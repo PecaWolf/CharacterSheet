@@ -6,6 +6,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.databinding.FragmentNewItemStep1Binding
+import com.pecawolf.charactersheet.ext.getIcon
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
@@ -22,7 +23,12 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         SimpleSelectionAdapter { viewModel.onItemTypeSelected(it as Item.ItemType) }
             .apply {
                 items = Item.ItemType.items().map {
-                    SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it)
+                    SimpleSelectionItem(
+                        it.getLocalizedName(requireContext()),
+                        false,
+                        it,
+                        it.getIcon(),
+                    )
                 }
             }
     }
@@ -69,7 +75,8 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
                 SimpleSelectionItem(
                     it.first.getLocalizedName(requireContext()),
                     it.second,
-                    it.first
+                    it.first,
+                    it.first.getIcon()
                 )
             }
             binding.newItemStep1TypeRecycler.post {
