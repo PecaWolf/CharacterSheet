@@ -15,7 +15,7 @@ sealed class Item(
 
     val allowedSlots: List<Slot>
         get() = when (this) {
-            is Armor.Clothing -> listOf(Slot.CLOTHING, Slot.ARMOR)
+            is Armor.Clothes -> listOf(Slot.CLOTHES, Slot.ARMOR)
             is Armor -> listOf(Slot.ARMOR)
 //            is Weapon.Grenade -> listOf(Slot.GRENADE)
             is Weapon -> listOf(Slot.PRIMARY, Slot.SECONDARY, Slot.TERTIARY)
@@ -461,7 +461,7 @@ sealed class Item(
 
         object None : Armor(-1, "", "", 0, listOf(), LoadoutType.ALL, Damage.NONE, mutableSetOf())
 
-        data class Clothing(
+        data class Clothes(
             override var itemId: Long,
             override var name: String,
             override var description: String,
@@ -827,7 +827,7 @@ sealed class Item(
         ),
 
         NONE(false, false, true, null, Damage.NONE, mutableSetOf()),
-        CLOTHING(false, false, true, null, Damage.NONE, mutableSetOf()),
+        CLOTHES(false, false, true, null, Damage.NONE, mutableSetOf()),
         KEVLAR(false, false, true, null, Damage.LIGHT, mutableSetOf(DamageType.BALLISTIC)),
         EXO_SKELETON(
             false,
@@ -888,6 +888,6 @@ sealed class Item(
 
         //        GRENADE,
         ARMOR,
-        CLOTHING;
+        CLOTHES;
     }
 }

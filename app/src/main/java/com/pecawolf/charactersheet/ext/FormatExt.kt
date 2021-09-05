@@ -55,7 +55,7 @@ fun Item.ItemType.getLocalizedName() = when (this) {
     Item.ItemType.GRENADE -> R.string.item_type_grenade
 
     Item.ItemType.NONE -> R.string.item_type_none
-    Item.ItemType.CLOTHING -> R.string.item_type_clothing
+    Item.ItemType.CLOTHES -> R.string.item_type_clothes
     Item.ItemType.KEVLAR -> R.string.item_type_kevlar
     Item.ItemType.EXO_SKELETON -> R.string.item_type_exo_skeleton
     Item.ItemType.VAC_SUIT -> R.string.item_type_vac_suit
@@ -118,7 +118,7 @@ fun Item.Slot.getLocalizedName() = when (this) {
     Item.Slot.TERTIARY -> R.string.equip_slot_tertiary
 //    Item.Slot.GRENADE -> R.string.equip_slot_grenade
     Item.Slot.ARMOR -> R.string.equip_slot_armor
-    Item.Slot.CLOTHING -> R.string.equip_slot_clothing
+    Item.Slot.CLOTHES -> R.string.equip_slot_clothes
 }
 
 fun Rollable.getName(context: Context) = when (this) {

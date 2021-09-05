@@ -6,6 +6,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.databinding.FragmentNewItemStep1Binding
+import com.pecawolf.charactersheet.ext.getIcon
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
@@ -13,7 +14,8 @@ import com.pecawolf.model.Item
 import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.NewItemStep1ViewModel
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItemStep1Binding>() {
 
@@ -21,7 +23,12 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         SimpleSelectionAdapter { viewModel.onItemTypeSelected(it as Item.ItemType) }
             .apply {
                 items = Item.ItemType.items().map {
-                    SimpleSelectionItem(it.getLocalizedName(requireContext()), false, it)
+                    SimpleSelectionItem(
+                        it.getLocalizedName(requireContext()),
+                        false,
+                        it,
+                        it.getIcon(),
+                    )
                 }
             }
     }
@@ -31,7 +38,7 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
         container: ViewGroup?
     ) = FragmentNewItemStep1Binding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<NewItemStep1ViewModel>().value
+    override fun createViewModel() = viewModel<NewItemStep1ViewModel> { parametersOf() }.value
 
     override fun bindView(binding: FragmentNewItemStep1Binding, viewModel: NewItemStep1ViewModel) {
         binding.newItemStep1NameInput.doAfterTextChanged {
@@ -68,7 +75,8 @@ class NewItemStep1Fragment : BaseFragment<NewItemStep1ViewModel, FragmentNewItem
                 SimpleSelectionItem(
                     it.first.getLocalizedName(requireContext()),
                     it.second,
-                    it.first
+                    it.first,
+                    it.first.getIcon()
                 )
             }
             binding.newItemStep1TypeRecycler.post {

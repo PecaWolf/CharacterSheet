@@ -322,13 +322,13 @@ class DialogHelper(private val context: Context) {
         )
     }
 
-    fun showRollResultDialog(roll: Int, rollResult: RollResult) {
+    fun showRollResultDialog(rollResult: RollResult) {
         showSingleChoiceDialog(
             getString(R.string.roll_result_title),
             Html.fromHtml(
                 getString(
                     R.string.roll_result_message,
-                    roll,
+                    rollResult.roll,
                     rollResult.getLocalizedName(context)
                 )
             )

@@ -12,7 +12,8 @@ import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel
 import com.pecawolf.presentation.viewmodel.main.InventoryViewModel.Destination
-import org.koin.android.viewmodel.ext.android.viewModel as injectVM
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBinding>() {
 
@@ -23,7 +24,7 @@ class InventoryFragment : BaseFragment<InventoryViewModel, FragmentInventoryBind
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentInventoryBinding.inflate(inflater, container, false)
 
-    override fun createViewModel() = injectVM<InventoryViewModel>().value
+    override fun createViewModel() = viewModel<InventoryViewModel> { parametersOf() }.value
 
     override fun bindView(binding: FragmentInventoryBinding, viewModel: InventoryViewModel) {
         binding.inventoryRecycler.apply {

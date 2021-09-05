@@ -63,7 +63,7 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
         viewModel.navigateTo.reObserve(this) {
             when (it) {
                 is Destination.RollModifierDialog -> showRollModifierDialog(it.skill)
-                is Destination.RollResultDialog -> showRollResultDialog(it.roll, it.rollResult)
+                is Destination.RollResultDialog -> showRollResultDialog(it.rollResult)
                 is Destination.SkillEditDialog -> showSkillEditDialog(it.skill)
             }
         }
@@ -78,8 +78,8 @@ class SkillsFragment : BaseFragment<SkillsViewModel, FragmentSkillsBinding>() {
         }
     }
 
-    private fun showRollResultDialog(roll: Int, rollResult: RollResult) {
-        dialogHelper.showRollResultDialog(roll, rollResult)
+    private fun showRollResultDialog(rollResult: RollResult) {
+        dialogHelper.showRollResultDialog(rollResult)
     }
 
     private fun showSkillEditDialog(skill: Rollable.Skill) {

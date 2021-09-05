@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/spacing_1"
     tools:context=".ui.skills.SkillsFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/select_character"
         style="@style/Card"
-        android:layout_margin="@dimen/spacing_1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/menu_item_height">
+        android:layout_height="@dimen/menu_item_height"
+        android:layout_margin="@dimen/spacing_1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,9 +44,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/create_character"
         style="@style/Card"
-        android:layout_margin="@dimen/spacing_1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/menu_item_height">
+        android:layout_height="@dimen/menu_item_height"
+        android:layout_margin="@dimen/spacing_1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

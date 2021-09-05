@@ -13,6 +13,7 @@ import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel
 import com.pecawolf.presentation.viewmodel.character.CharacterSelectionViewModel.Destination
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class CharacterSelectionFragment :
@@ -27,7 +28,7 @@ class CharacterSelectionFragment :
         container: ViewGroup?
     ) = FragmentCharacterSelectionBinding.inflate(inflater, container, false)
 
-    override fun createViewModel() = viewModel<CharacterSelectionViewModel>().value
+    override fun createViewModel() = viewModel<CharacterSelectionViewModel> { parametersOf() }.value
 
     override fun bindView(
         binding: FragmentCharacterSelectionBinding,

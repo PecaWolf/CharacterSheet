@@ -168,7 +168,7 @@ class ItemDataMapper {
                 parseDamageTypes(),
             )
             Item.ItemType.NONE -> Item.Armor.None
-            Item.ItemType.CLOTHING -> Item.Armor.Clothing(
+            Item.ItemType.CLOTHES -> Item.Armor.Clothes(
                 itemId,
                 name,
                 description,
@@ -259,7 +259,7 @@ class ItemDataMapper {
 
     fun toData(item: Item, ownerId: Long): ItemData {
         val type = when (item) {
-            is Item.Armor.Clothing -> Item.ItemType.CLOTHING
+            is Item.Armor.Clothes -> Item.ItemType.CLOTHES
             is Item.Armor.ExoSkeleton -> Item.ItemType.EXO_SKELETON
             is Item.Armor.Kevlar -> Item.ItemType.KEVLAR
             Item.Armor.None -> Item.ItemType.NONE

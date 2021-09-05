@@ -14,6 +14,7 @@ import com.pecawolf.presentation.SimpleSelectionItem
 import com.pecawolf.presentation.extensions.reObserve
 import com.pecawolf.presentation.viewmodel.character.SpeciesSelectionViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SpeciesSelectionFragment :
     BaseFragment<SpeciesSelectionViewModel, FragmentSpeciesSelectionBinding>() {
@@ -31,7 +32,7 @@ class SpeciesSelectionFragment :
         container: ViewGroup?
     ) = FragmentSpeciesSelectionBinding.inflate(inflater, container, false)
 
-    override fun createViewModel() = viewModel<SpeciesSelectionViewModel>().value
+    override fun createViewModel() = viewModel<SpeciesSelectionViewModel> { parametersOf() }.value
 
     override fun bindView(
         binding: FragmentSpeciesSelectionBinding,

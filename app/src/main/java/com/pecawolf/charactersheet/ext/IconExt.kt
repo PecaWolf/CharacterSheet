@@ -27,7 +27,7 @@ fun Item.getIcon() = when (this) {
     is Item.Weapon.Grenade -> R.drawable.ic_grenade
 
     Item.Armor.None -> R.drawable.ic_no_armor
-    is Item.Armor.Clothing -> R.drawable.ic_clothing
+    is Item.Armor.Clothes -> R.drawable.ic_clothes
     is Item.Armor.Kevlar -> R.drawable.ic_kevlar
     is Item.Armor.VacSuit -> R.drawable.ic_vac_suit
     is Item.Armor.VacArmor -> R.drawable.ic_vac_armor
@@ -38,4 +38,37 @@ fun Item.getIcon() = when (this) {
     is Item.Food -> R.drawable.ic_hamburger
     is Item.Potion -> R.drawable.ic_potion
     is Item.Other -> R.drawable.ic_bag
+}
+
+fun Item.ItemType.getIcon() = when (this) {
+    Item.ItemType.BARE_HANDS -> R.drawable.ic_backpack
+    Item.ItemType.AXE -> R.drawable.ic_axe
+    Item.ItemType.HAMMER -> R.drawable.ic_hammer
+    Item.ItemType.KNIFE -> R.drawable.ic_knife
+    Item.ItemType.SWORD -> R.drawable.ic_sword
+
+    Item.ItemType.BOW -> R.drawable.ic_bow
+    Item.ItemType.CROSSBOW -> R.drawable.ic_crossbow
+    Item.ItemType.PISTOL -> R.drawable.ic_pistol
+    Item.ItemType.REVOLVER -> R.drawable.ic_revolver
+    Item.ItemType.SUBMACHINE_GUN -> R.drawable.ic_smg
+    Item.ItemType.RIFLE -> R.drawable.ic_rifle
+    Item.ItemType.SHOTGUN -> R.drawable.ic_shotgun
+    Item.ItemType.MACHINE_GUN -> R.drawable.ic_machine_gun
+    Item.ItemType.ANTIMATERIAL_GUN -> R.drawable.ic_anti_material
+
+    Item.ItemType.GRENADE -> R.drawable.ic_grenade
+
+    Item.ItemType.NONE -> R.drawable.ic_no_armor
+    Item.ItemType.CLOTHES -> R.drawable.ic_clothes
+    Item.ItemType.KEVLAR -> R.drawable.ic_kevlar
+    Item.ItemType.VAC_SUIT -> R.drawable.ic_vac_suit
+    Item.ItemType.VAC_ARMOR -> R.drawable.ic_vac_armor
+    Item.ItemType.EXO_SKELETON -> R.drawable.ic_exo_skeleton
+    Item.ItemType.POWERED_ARMOR -> R.drawable.ic_power_armor
+
+    Item.ItemType.ELECTRONICS -> R.drawable.ic_electronics
+    Item.ItemType.FOOD -> R.drawable.ic_hamburger
+    Item.ItemType.POTION -> R.drawable.ic_potion
+    Item.ItemType.OTHER -> R.drawable.ic_bag
 }

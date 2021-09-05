@@ -9,39 +9,34 @@
     tools:context=".ui.loadout.LoadoutFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/loadout_card"
+        android:id="@+id/loadout_overview_card"
         style="@style/Card"
-        android:layout_margin="@dimen/spacing_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_1"
+        android:padding="@dimen/spacing_1"
+        app:layout_constraintBottom_toTopOf="@id/loadout_scroll_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/spacing_2">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/loadout_guide_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.40" />
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/loadout_current_label"
                 style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_2"
                 android:text="@string/current_loadout"
-                app:layout_constraintEnd_toEndOf="@id/loadout_guide_vertical"
+                app:layout_constraintEnd_toStartOf="@id/loadout_current_value"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/loadout_current_value"
                 style="@style/Text.Value.Primary"
                 android:layout_width="0dp"
@@ -50,7 +45,7 @@
                 android:layout_marginTop="@dimen/spacing_2"
                 app:layout_constraintBaseline_toBaselineOf="@id/loadout_current_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/loadout_guide_vertical"
+                app:layout_constraintStart_toEndOf="@id/loadout_current_label"
                 tools:text="Combat" />
 
             <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
@@ -61,7 +56,7 @@
                 android:layout_marginVertical="@dimen/spacing_2"
                 app:iconSrc="@drawable/ic_loadout_combat"
                 app:isChecked="false"
-                app:layout_constraintBottom_toTopOf="@id/loadout_weapon_primary_label"
+                app:layout_constraintBottom_toTopOf="@id/loadout_overview_primary"
                 app:layout_constraintEnd_toStartOf="@id/loadout_social_checkbox"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loadout_current_value" />
@@ -92,180 +87,107 @@
                 app:layout_constraintStart_toEndOf="@id/loadout_social_checkbox"
                 app:layout_constraintTop_toTopOf="@id/loadout_combat_checkbox" />
 
-            <TextView
-                android:id="@+id/loadout_weapon_primary_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_2"
-                android:text="@string/primary_weapon"
-                app:layout_constraintBottom_toTopOf="@id/loadout_weapon_secondary_label"
-                app:layout_constraintEnd_toEndOf="@id/loadout_guide_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loadout_combat_checkbox" />
-
-            <TextView
-                android:id="@+id/loadout_weapon_primary_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                app:layout_constraintBaseline_toBaselineOf="@+id/loadout_weapon_primary_label"
-                app:layout_constraintEnd_toStartOf="@id/loadout_weapon_primary_id"
-                app:layout_constraintStart_toStartOf="@id/loadout_guide_vertical"
-                tools:text="AR-15" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/loadout_weapon_primary_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/loadout_weapon_primary_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loadout_weapon_primary_value"
-                tools:text="#000001" />
-
-            <TextView
-                android:id="@+id/loadout_weapon_secondary_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_2"
-                android:text="@string/secondary_weapon"
-                app:layout_constraintBottom_toTopOf="@id/loadout_weapon_tertiary_label"
-                app:layout_constraintEnd_toEndOf="@id/loadout_guide_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loadout_weapon_primary_label" />
-
-            <TextView
-                android:id="@+id/loadout_weapon_secondary_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                app:layout_constraintBaseline_toBaselineOf="@+id/loadout_weapon_secondary_label"
-                app:layout_constraintEnd_toStartOf="@id/loadout_weapon_secondary_id"
-                app:layout_constraintStart_toStartOf="@id/loadout_guide_vertical"
-                tools:text="Glock" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/loadout_weapon_secondary_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/loadout_weapon_secondary_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loadout_weapon_secondary_value"
-                tools:text="#000001" />
-
-            <TextView
-                android:id="@+id/loadout_weapon_tertiary_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_2"
-                android:text="@string/tertiary_weapon"
-                app:layout_constraintBottom_toTopOf="@id/loadout_clothes_label"
-                app:layout_constraintEnd_toEndOf="@id/loadout_guide_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loadout_weapon_secondary_label" />
-
-            <TextView
-                android:id="@+id/loadout_weapon_tertiary_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                app:layout_constraintBaseline_toBaselineOf="@+id/loadout_weapon_tertiary_label"
-                app:layout_constraintEnd_toStartOf="@id/loadout_weapon_tertiary_id"
-                app:layout_constraintStart_toStartOf="@id/loadout_guide_vertical"
-                tools:text="Falcata" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/loadout_weapon_tertiary_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/loadout_weapon_tertiary_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loadout_weapon_tertiary_value"
-                tools:text="#000001" />
-
-            <TextView
-                android:id="@+id/loadout_clothes_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_4"
-                android:text="@string/civilian_clothes"
-                app:layout_constraintEnd_toEndOf="@id/loadout_guide_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loadout_weapon_tertiary_label" />
-
-            <TextView
-                android:id="@+id/loadout_clothes_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                app:layout_constraintBaseline_toBaselineOf="@+id/loadout_clothes_label"
-                app:layout_constraintEnd_toStartOf="@id/loadout_clothes_id"
-                app:layout_constraintStart_toStartOf="@id/loadout_guide_vertical"
-                tools:text="Kevlar-reinforced suit" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/loadout_clothes_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/loadout_clothes_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loadout_clothes_value"
-                tools:text="#000001" />
-
-            <TextView
-                android:id="@+id/loadout_armor_label"
-                style="@style/Text.Label.Secondary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:layout_marginTop="@dimen/spacing_4"
-                android:text="@string/combat_gear"
-                app:layout_constraintEnd_toEndOf="@id/loadout_guide_vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/loadout_clothes_label" />
-
-            <TextView
-                android:id="@+id/loadout_armor_value"
-                style="@style/Text.Value.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_1"
-                android:ellipsize="end"
-                android:maxLines="1"
-                app:layout_constraintBaseline_toBaselineOf="@+id/loadout_armor_label"
-                app:layout_constraintEnd_toStartOf="@id/loadout_armor_id"
-                app:layout_constraintStart_toStartOf="@id/loadout_guide_vertical"
-                tools:text="Goliath exo-skeleton" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/loadout_armor_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@id/loadout_armor_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loadout_armor_value"
-                tools:text="#000001" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/loadout_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loadout_overview_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.pecawolf.charactersheet.ui.view.LoadoutItem
+                android:id="@+id/loadout_overview_primary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
+                android:background="@drawable/bg_card"
+                app:label="@string/primary_weapon"
+                app:layout_constraintBottom_toTopOf="@id/loadout_overview_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemIcon="@drawable/ic_rifle" />
+
+            <com.pecawolf.charactersheet.ui.view.LoadoutItem
+                android:id="@+id/loadout_overview_secondary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
+                android:background="@drawable/bg_card"
+                app:label="@string/secondary_weapon"
+                app:layout_constraintBottom_toTopOf="@id/loadout_overview_tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadout_overview_primary"
+                tools:itemIcon="@drawable/ic_pistol" />
+
+            <com.pecawolf.charactersheet.ui.view.LoadoutItem
+                android:id="@+id/loadout_overview_tertiary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
+                android:background="@drawable/bg_card"
+                app:label="@string/tertiary_weapon"
+                app:layout_constraintBottom_toTopOf="@id/loadout_overview_clothes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadout_overview_secondary"
+                tools:itemIcon="@drawable/ic_knife" />
+
+            <com.pecawolf.charactersheet.ui.view.LoadoutItem
+                android:id="@+id/loadout_overview_clothes"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
+                android:background="@drawable/bg_card"
+                app:label="@string/civilian_clothes"
+                app:layout_constraintBottom_toTopOf="@id/loadout_overview_armor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadout_overview_tertiary"
+                tools:itemIcon="@drawable/ic_clothes" />
+
+            <com.pecawolf.charactersheet.ui.view.LoadoutItem
+                android:id="@+id/loadout_overview_armor"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bar_height"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:layout_marginVertical="@dimen/spacing_1"
+                android:background="@drawable/bg_card"
+                app:label="@string/combat_gear"
+                app:layout_constraintBottom_toTopOf="@id/loadout_skills_recycler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadout_overview_clothes"
+                tools:itemIcon="@drawable/ic_no_armor" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/loadout_skills_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_1"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadout_overview_armor"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_skill_skill" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

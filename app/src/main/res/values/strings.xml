@@ -48,7 +48,7 @@
     <string name="item_type_antimaterial_gun">Antimaterial gun</string>
     <string name="item_type_grenade">Grenade</string>
     <string name="item_type_none">None</string>
-    <string name="item_type_clothing">Clothing</string>
+    <string name="item_type_clothes">Clothes</string>
     <string name="item_type_kevlar">Kevlar</string>
     <string name="item_type_exo_skeleton">Exo-skeleton</string>
     <string name="item_type_vac_suit">Vac-suit</string>
@@ -70,8 +70,8 @@
     <string name="roll">Roll</string>
     <string name="damage">-</string>
     <string name="heal">+</string>
-    <string name="primary_weapon">Main Weapon:</string>
-    <string name="secondary_weapon">Side weapon:</string>
+    <string name="primary_weapon">Primary Weapon:</string>
+    <string name="secondary_weapon">Secondary weapon:</string>
     <string name="tertiary_weapon">Tertiary weapon:</string>
     <string name="civilian_clothes">Civilian clothes:</string>
     <string name="combat_gear">Armor:</string>
@@ -151,7 +151,7 @@
     <string name="item_unequip_slot_description">Do you want to unequip %1$s from %2$s slot?</string>
 
     <string name="equip_slot_armor">Armor</string>
-    <string name="equip_slot_clothing">Clothing</string>
+    <string name="equip_slot_clothes">Clothes</string>
     <string name="equip_slot_grenade">Grenade</string>
     <string name="equip_slot_primary">Primary</string>
     <string name="equip_slot_secondary">Secondary</string>

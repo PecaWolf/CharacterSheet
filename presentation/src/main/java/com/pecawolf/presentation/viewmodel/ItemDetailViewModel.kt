@@ -49,7 +49,7 @@ class ItemDetailViewModel(
             inventory.tertiary.itemId -> listOf(Item.Slot.TERTIARY)
             //                    inventory.grenade.itemId -> listOf(Item.Slot.GRENADE)
             inventory.armor.itemId -> listOf(Item.Slot.ARMOR)
-            inventory.clothes.itemId -> listOf(Item.Slot.CLOTHING)
+            inventory.clothes.itemId -> listOf(Item.Slot.CLOTHES)
             else -> listOf()
         }.also { Timber.v("onChanged(): $it") }
     }
