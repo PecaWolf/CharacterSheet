@@ -3,6 +3,7 @@ package com.pecawolf.data.datasource
 import com.pecawolf.data.model.CharacterData
 import com.pecawolf.data.model.CharacterSnippetData
 import com.pecawolf.data.model.ItemData
+import com.pecawolf.data.model.SkillsData
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
@@ -40,4 +41,6 @@ interface ICache {
     fun updateItem(item: ItemData): Completable
 
     fun deleteItem(itemId: Long): Completable
+
+    fun getSkills(): Single<List<SkillsData>>
 }

@@ -35,10 +35,10 @@ android {
 dependencies {
     implementation project(path: ':common')
     implementation project(path: ':model')
+    implementation project(path: ':domain')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
     implementation "org.koin:koin-core:2.2.2"
-    implementation project(path: ':domain')
 }

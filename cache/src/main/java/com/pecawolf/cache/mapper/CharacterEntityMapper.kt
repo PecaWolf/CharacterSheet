@@ -54,13 +54,4 @@ class CharacterEntityMapper {
             skills,
         )
     }
-
-    companion object {
-        private const val STRENGTH = "STR"
-        private const val DEXTERITY = "DEX"
-        private const val VITALITY = "VIT"
-        private const val INTELLIGENCE = "INL"
-        private const val WISDOM = "WIS"
-        private const val CHARISMA = "CHA"
-    }
 }

@@ -64,22 +64,22 @@ class CharacterFactory(
             ),
             Skills(
                 skills[Stat.Enum.STR]?.map {
-                    skillsMapper.fromData(it, baseStats.str, locale)
+                    skillsMapper.fromData(it, baseStats.str, locale, character.skills[it.code] ?: 0)
                 } ?: listOf(),
                 skills[Stat.Enum.DEX]?.map {
-                    skillsMapper.fromData(it, baseStats.dex, locale)
+                    skillsMapper.fromData(it, baseStats.dex, locale, character.skills[it.code] ?: 0)
                 } ?: listOf(),
                 skills[Stat.Enum.VIT]?.map {
-                    skillsMapper.fromData(it, baseStats.vit, locale)
+                    skillsMapper.fromData(it, baseStats.vit, locale, character.skills[it.code] ?: 0)
                 } ?: listOf(),
                 skills[Stat.Enum.INL]?.map {
-                    skillsMapper.fromData(it, baseStats.inl, locale)
+                    skillsMapper.fromData(it, baseStats.inl, locale, character.skills[it.code] ?: 0)
                 } ?: listOf(),
                 skills[Stat.Enum.WIS]?.map {
-                    skillsMapper.fromData(it, baseStats.wis, locale)
+                    skillsMapper.fromData(it, baseStats.wis, locale, character.skills[it.code] ?: 0)
                 } ?: listOf(),
                 skills[Stat.Enum.CHA]?.map {
-                    skillsMapper.fromData(it, baseStats.cha, locale)
+                    skillsMapper.fromData(it, baseStats.cha, locale, character.skills[it.code] ?: 0)
                 } ?: listOf(),
             )
         )

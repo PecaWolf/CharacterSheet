@@ -14,7 +14,7 @@ import com.pecawolf.cache.model.ItemEntity
 @Database(
     entities = arrayOf(
         CharacterEntity::class,
-        ItemEntity::class
+        ItemEntity::class,
     ), version = 1
 )
 @TypeConverters(
