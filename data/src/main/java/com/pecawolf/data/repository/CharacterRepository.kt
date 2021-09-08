@@ -1,7 +1,6 @@
 package com.pecawolf.data.repository
 
 import com.pecawolf.data.datasource.ICache
-import com.pecawolf.data.datasource.ISkillsRemote
 import com.pecawolf.data.mapper.CharacterFactory
 import com.pecawolf.data.mapper.CharacterSnippetDataMapper
 import com.pecawolf.data.mapper.ItemDataMapper
@@ -21,7 +20,6 @@ import io.reactivex.rxjava3.core.Single
 import timber.log.Timber
 
 class CharacterRepository(
-    private val remote: ISkillsRemote,
     private val cache: ICache,
     private val characterFactory: CharacterFactory,
     private val characterSnippetMapper: CharacterSnippetDataMapper,
@@ -34,7 +32,7 @@ class CharacterRepository(
     override fun observeActiveCharacter(): Observable<Character> = Observable.combineLatest(
         cache.getCharacter(null),
         cache.getItemsForOwner(null),
-        remote.observeSkills().distinctUntilChanged(),
+        cache.getSkills().toObservable(),
         { character: CharacterData, items: List<ItemData>, skills: List<SkillsData> ->
             characterFactory.createCharacter(character, items, skills).also {
                 Timber.d("${it.baseStats.luckAndWounds}")

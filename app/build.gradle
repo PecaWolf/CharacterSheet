@@ -41,6 +41,7 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':model')
     implementation project(path: ':presentation')
+    implementation project(path: ':injection')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -62,7 +63,6 @@ dependencies {
 
     implementation "org.koin:koin-core:2.2.2"
     implementation "org.koin:koin-android-viewmodel:2.2.2"
-    implementation project(path: ':injection')
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -5,10 +5,10 @@ import com.pecawolf.model.Rollable
 import com.pecawolf.model.Rollable.Skill
 
 class SkillDataMapper {
-    fun fromData(data: SkillsData.SkillData, usedStat: Rollable.Stat, locale: String) = Skill(
+    fun fromData(data: SkillsData.SkillData, usedStat: Rollable.Stat, locale: String, value: Int) = Skill(
         data.code,
         data.name[locale] ?: "code:${data.code}",
         usedStat,
-        data.value
+        value
     )
 }

@@ -3,11 +3,8 @@ package com.pecawolf.remote
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.pecawolf.data.datasource.IDiceRemote
-import com.pecawolf.data.datasource.ISkillsRemote
 import com.pecawolf.remote.dice.DiceApi
 import com.pecawolf.remote.dice.DiceRemote
-import com.pecawolf.remote.mapper.SkillsResponseMapper
-import com.pecawolf.remote.skills.SkillsRemote
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import org.koin.core.context.loadKoinModules
@@ -20,7 +17,6 @@ object RemoteModule {
     val instance = module {
         single { Connectivity(get()) }
         single { DiceRemote(get(), get()) as IDiceRemote }
-        single { SkillsRemote(get(), get()) as ISkillsRemote }
 
         single {
             Moshi.Builder()
@@ -51,8 +47,6 @@ object RemoteModule {
                 .create(DiceApi::class.java)
         }
         single { Firebase.database }
-
-        single { SkillsResponseMapper() }
     }
 
     fun start() {

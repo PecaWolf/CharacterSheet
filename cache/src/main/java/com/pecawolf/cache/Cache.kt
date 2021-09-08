@@ -1,25 +1,35 @@
 package com.pecawolf.cache
 
+import android.content.Context
 import com.pecawolf.cache.mapper.CharacterEntityMapper
 import com.pecawolf.cache.mapper.ItemEntityMapper
+import com.pecawolf.cache.mapper.SkillEntityMapper
 import com.pecawolf.cache.model.CharacterEntity
 import com.pecawolf.cache.model.ItemEntity
+import com.pecawolf.cache.model.SkillsEntity
 import com.pecawolf.common.exception.CharacterNotFoundException
 import com.pecawolf.data.datasource.ICache
 import com.pecawolf.data.model.CharacterData
 import com.pecawolf.data.model.CharacterSnippetData
 import com.pecawolf.data.model.ItemData
+import com.pecawolf.data.model.SkillsData
+import com.squareup.moshi.Moshi
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import java.io.IOException
+import java.nio.charset.Charset
 import timber.log.Timber
 
 class Cache(
+    private val context: Context,
+    private val moshi: Moshi,
     private val applicationPreferences: ApplicationPreferences,
     private val database: AppDatabase,
     private val characterMapper: CharacterEntityMapper,
     private val itemMapper: ItemEntityMapper,
+    private val skillMapper: SkillEntityMapper,
 ) : ICache {
 
     override fun createCharacter(character: CharacterData): Completable = database.characterDao()
@@ -101,6 +111,10 @@ class Cache(
     override fun deleteItem(itemId: Long) = database.itemDao().getById(itemId)
         .flatMapCompletable { database.itemDao().delete(it) }
 
+    override fun getSkills(): Single<List<SkillsData>> = Single.just(loadJSONFromAsset())
+        .map { moshi.adapter(SkillsEntity::class.java).fromJson(it)?.availableSkills ?: listOf() }
+        .map { list -> list.map { skillMapper.fromEntity(it) } }
+
     private fun observeCharacter(characterId: Long) = database.characterDao()
         .getAllByIds(listOf(characterId).toTypedArray())
         .map { findCharacter(it, characterId) }
@@ -109,4 +123,17 @@ class Cache(
     private fun findCharacter(characters: List<CharacterEntity>, characterId: Long) =
         characters.firstOrNull { it.characterId == characterId }
             ?: throw CharacterNotFoundException(characterId)
+
+    private fun loadJSONFromAsset() = try {
+        context.assets?.open("skills.json")?.let { stream ->
+            val size: Int = stream.available()
+            val buffer = ByteArray(size)
+            stream.read(buffer)
+            stream.close()
+            String(buffer, Charset.forName("UTF-8"))
+        } ?: ""
+    } catch (ex: IOException) {
+        ex.printStackTrace()
+        ""
+    }
 }

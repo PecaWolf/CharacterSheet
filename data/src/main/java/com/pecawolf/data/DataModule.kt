@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 object DataModule {
     val instance = module {
-        single { CharacterRepository(get(), get(), get(), get(), get()) as ICharacterRepository }
+        single { CharacterRepository(get(), get(), get(), get()) as ICharacterRepository }
         single { DiceRepository(get()) as IDiceRepository }
 
         single { CharacterFactory(get(), get()) }

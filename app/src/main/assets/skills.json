@@ -1,0 +1,353 @@
+{
+  "availableSkills": [
+    {
+      "skills": [
+        {
+          "code": "BCKS",
+          "name": {
+            "cs": "Kovářství",
+            "en": "Blacksmithing"
+          }
+        },
+        {
+          "code": "MINE",
+          "name": {
+            "cs": "Hornictví",
+            "en": "Mining"
+          }
+        },
+        {
+          "code": "CLMB",
+          "name": {
+            "cs": "Šplhání",
+            "en": "Climbing"
+          }
+        },
+        {
+          "code": "SWIM",
+          "name": {
+            "cs": "Plavání",
+            "en": "Swimming"
+          }
+        },
+        {
+          "code": "HVWC",
+          "name": {
+            "cs": "Boj s těžkými zbraněmi na blízko",
+            "en": "Heavy weapon melee combat"
+          }
+        }
+      ],
+      "stat": "STR"
+    },
+    {
+      "skills": [
+        {
+          "code": "ACBC",
+          "name": {
+            "cs": "Akrobacie",
+            "en": "Acrobacy"
+          }
+        },
+        {
+          "code": "SWDF",
+          "name": {
+            "cs": "Šerm",
+            "en": "Fencing"
+          }
+        },
+        {
+          "code": "FRAM",
+          "name": {
+            "cs": "Palné zbraně",
+            "en": "Firearms"
+          }
+        },
+        {
+          "code": "HVAC",
+          "name": {
+            "cs": "Boj v těžké zbroji",
+            "en": "Heavy-armored combat"
+          }
+        },
+        {
+          "code": "STTH",
+          "name": {
+            "cs": "Plížení",
+            "en": "Sneaking"
+          }
+        },
+        {
+          "code": "ARCH",
+          "name": {
+            "cs": "Lukostřelba",
+            "en": "Archery"
+          }
+        },
+        {
+          "code": "THRW",
+          "name": {
+            "cs": "Vrh",
+            "en": "Throwing"
+          }
+        },
+        {
+          "code": "UCMB",
+          "name": {
+            "cs": "Boj beze zbraně",
+            "en": "Unarmed combat"
+          }
+        }
+      ],
+      "stat": "DEX"
+    },
+    {
+      "skills": [
+        {
+          "code": "AKTM",
+          "name": {
+            "cs": "Asketismus",
+            "en": "Asketism"
+          }
+        },
+        {
+          "code": "HLVR",
+          "name": {
+            "cs": "Tvrdá játra",
+            "en": "Hard Liver"
+          }
+        },
+        {
+          "code": "HLDB",
+          "name": {
+            "cs": "Zadržení dechu",
+            "en": "Holding breath"
+          }
+        },
+        {
+          "code": "HIKE",
+          "name": {
+            "cs": "Pochod",
+            "en": "Hiking"
+          }
+        },
+        {
+          "code": "HGEN",
+          "name": {
+            "cs": "Výdrž při přetížení",
+            "en": "High-g endurance"
+          }
+        },
+        {
+          "code": "HDLB",
+          "name": {
+            "cs": "Těžká práce",
+            "en": "Hard labor"
+          }
+        }
+      ],
+      "stat": "VIT"
+    },
+    {
+      "skills": [
+        {
+          "code": "ANTH",
+          "name": {
+            "cs": "Antropologie",
+            "en": "Anthropology"
+          }
+        },
+        {
+          "code": "ARLG",
+          "name": {
+            "cs": "Archeologie",
+            "en": "Archeology"
+          }
+        },
+        {
+          "code": "BTNC",
+          "name": {
+            "cs": "Botanika",
+            "en": "Botanics"
+          }
+        },
+        {
+          "code": "PILT",
+          "name": {
+            "cs": "Pilotování",
+            "en": "Piloting"
+          }
+        },
+        {
+          "code": "HELM",
+          "name": {
+            "cs": "Kormidelnictví",
+            "en": "Helmsmanship"
+          }
+        },
+        {
+          "code": "ENGN",
+          "name": {
+            "cs": "Inženýrství",
+            "en": "Engineering"
+          }
+        },
+        {
+          "code": "MDCN",
+          "name": {
+            "cs": "Medicína",
+            "en": "Medicine"
+          }
+        },
+        {
+          "code": "CHEM",
+          "name": {
+            "cs": "Chemie",
+            "en": "Chemistry"
+          }
+        },
+        {
+          "code": "PHYS",
+          "name": {
+            "cs": "Fyzika",
+            "en": "Physics"
+          }
+        },
+        {
+          "code": "ZOOG",
+          "name": {
+            "cs": "Zoologie",
+            "en": "Zoology"
+          }
+        },
+        {
+          "code": "ALCH",
+          "name": {
+            "cs": "Alchymie",
+            "en": "Alchemy"
+          }
+        },
+        {
+          "code": "RUNE",
+          "name": {
+            "cs": "Runotepectvi",
+            "en": "Runesmithing"
+          }
+        },
+        {
+          "code": "NAVI",
+          "name": {
+            "cs": "Navigace",
+            "en": "Navigation"
+          }
+        }
+      ],
+      "stat": "INL"
+    },
+    {
+      "skills": [
+        {
+          "code": "ANMT",
+          "name": {
+            "cs": "Trénink zvířat",
+            "en": "Animal training"
+          }
+        },
+        {
+          "code": "COOK",
+          "name": {
+            "cs": "Vaření",
+            "en": "Cooking"
+          }
+        },
+        {
+          "code": "GUNR",
+          "name": {
+            "cs": "Dělostřelba",
+            "en": "Gunnery"
+          }
+        },
+        {
+          "code": "INVS",
+          "name": {
+            "cs": "Vyšetřování",
+            "en": "Investigation"
+          }
+        },
+        {
+          "code": "PYRO",
+          "name": {
+            "cs": "Pyromancie",
+            "en": "Pyromancy"
+          },
+          "worlds": "LAST_REALM"
+        },
+        {
+          "code": "GEOM",
+          "name": {
+            "cs": "Geomancie",
+            "en": "Geommancy"
+          },
+          "worlds": "LAST_REALM"
+        },
+        {
+          "code": "AQUA",
+          "name": {
+            "cs": "Aquamancie",
+            "en": "Aquamancy"
+          },
+          "worlds": "LAST_REALM"
+        },
+        {
+          "code": "CAEL",
+          "name": {
+            "cs": "Caelomancie",
+            "en": "Caelomancy"
+          },
+          "worlds": "LAST_REALM"
+        }
+      ],
+      "stat": "WIS"
+    },
+    {
+      "skills": [
+        {
+          "code": "HAGG",
+          "name": {
+            "cs": "Smlouvání",
+            "en": "Haggling"
+          }
+        },
+        {
+          "code": "LYIN",
+          "name": {
+            "cs": "Lhaní",
+            "en": "Lying"
+          }
+        },
+        {
+          "code": "PERS",
+          "name": {
+            "cs": "Přesvědčování",
+            "en": "Persuation"
+          }
+        },
+        {
+          "code": "JUGG",
+          "name": {
+            "cs": "Kejklířství",
+            "en": "Juggling"
+          }
+        },
+        {
+          "code": "INTI",
+          "name": {
+            "cs": "Zastrašování",
+            "en": "Intimidation"
+          }
+        }
+      ],
+      "stat": "CHA"
+    }
+  ]
+}
