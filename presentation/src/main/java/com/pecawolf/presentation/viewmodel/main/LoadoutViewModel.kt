@@ -2,23 +2,23 @@ package com.pecawolf.presentation.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.pecawolf.common.extensions.isOneOf
 import com.pecawolf.domain.interactor.RollDiceInteractor
+import com.pecawolf.domain.interactor.SaveItemChangesInteractor
 import com.pecawolf.model.Inventory
 import com.pecawolf.model.Item
 import com.pecawolf.model.Item.Armor
-import com.pecawolf.model.Item.Weapon
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable.Skill
+import com.pecawolf.model.Skills
 import com.pecawolf.presentation.extensions.MergedLiveData2
-import com.pecawolf.presentation.extensions.MergedLiveData6
 import com.pecawolf.presentation.extensions.SingleLiveEvent
 import com.pecawolf.presentation.viewmodel.BaseViewModel
 import timber.log.Timber
 
 class LoadoutViewModel(
     private val mainViewModel: MainViewModel,
-    private val roll: RollDiceInteractor
+    private val roll: RollDiceInteractor,
+    private val saveItemChanges: SaveItemChangesInteractor,
 ) : BaseViewModel() {
 
     private val _navigateTo = SingleLiveEvent<Destination>()
@@ -62,39 +62,40 @@ class LoadoutViewModel(
     ) { inventory, type ->
         inventory.armor.allowedLoadouts.contains(type)
     }
-    val inventory: LiveData<Inventory> = mainViewModel.inventory
-    val skills: LiveData<List<Skill>> = MergedLiveData6(
-        mainViewModel.skills,
-        mainViewModel.inventory,
-        isPrimaryAllowed,
-        isSecondaryAllowed,
-        isTertiaryAllowed,
-        isArmorAllowed,
-    ) { skills, inventory, isPrimaryAllowed, isSecondaryAllowed, isTertiaryAllowed, isArmorAllowed ->
-        listOfNotNull(
-            inventory.primary.takeIf { isPrimaryAllowed },
-            inventory.secondary.takeIf { isSecondaryAllowed },
-            inventory.tertiary.takeIf { isTertiaryAllowed },
-            inventory.armor.takeIf { isArmorAllowed },
-        )
-            .flatMap { item ->
-                when (item) {
-                    is Weapon.Ranged.Bow -> skills.dexterity.filter { it.code == Skill.Constants.ARCHERY }
-                    is Weapon.Ranged.Crossbow -> skills.dexterity.filter { it.code == Skill.Constants.ARCHERY }
-                    is Weapon.Ranged -> skills.dexterity.filter { it.code == Skill.Constants.FIREARMS }
-                    is Weapon.Melee.Knife -> skills.dexterity.filter { it.code.isOneOf(Skill.Constants.SWORDFIGHTING, Skill.Constants.THROWING) }
-                    is Weapon.Melee -> skills.dexterity.filter { it.code == Skill.Constants.SWORDFIGHTING }
-                    is Armor -> if (item.damage == Item.Damage.HEAVY) skills.dexterity.filter { it.code == Skill.Constants.HEAVY_ARMOR } else listOf()
-                    else -> listOf()
-                }
-            }
-            .groupBy { it.code }
-            .map { it.value.first() }
-            .toMutableList()
-            .apply {
-                skills.dexterity.firstOrNull { it.code == Skill.Constants.UNARMED }
-                    ?.let { add(it) }
-            }
+    val primary = MergedLiveData2<Inventory, Skills, Pair<Item, Skill?>>(
+        mainViewModel.inventory, mainViewModel.skills,
+    ) { inventory, skills ->
+        inventory.primary.let {
+            it to getAppropriateSkill(it, skills)
+        }
+    }
+    val secondary = MergedLiveData2<Inventory, Skills, Pair<Item, Skill?>>(
+        mainViewModel.inventory, mainViewModel.skills,
+    ) { inventory, skills ->
+        inventory.secondary.let {
+            it to getAppropriateSkill(it, skills)
+        }
+    }
+    val tertiary = MergedLiveData2<Inventory, Skills, Pair<Item, Skill?>>(
+        mainViewModel.inventory, mainViewModel.skills,
+    ) { inventory, skills ->
+        inventory.tertiary.let {
+            it to getAppropriateSkill(it, skills)
+        }
+    }
+    val armor = MergedLiveData2<Inventory, Skills, Pair<Item, Skill?>>(
+        mainViewModel.inventory, mainViewModel.skills,
+    ) { inventory, skills ->
+        inventory.armor.let {
+            it to getAppropriateSkill(it, skills)
+        }
+    }
+    val clothes = MergedLiveData2<Inventory, Skills, Pair<Item, Skill?>>(
+        mainViewModel.inventory, mainViewModel.skills,
+    ) { inventory, skills ->
+        inventory.clothes.let {
+            it to getAppropriateSkill(it, skills)
+        }
     }
 
     fun onLoadoutCombatClicked() {
@@ -110,62 +111,114 @@ class LoadoutViewModel(
     }
 
     fun onPrimaryClicked() {
-        inventory.value?.primary?.itemId?.let {
+        primary.value?.first?.itemId?.let {
             _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onPrimaryReloadClicked() {
+        (primary.value?.first as? Item.Weapon.Ranged)?.apply {
+            magazineState = magazineSize
+            magazineCount = maxOf(magazineCount - 1, 0)
+            updateItem(this)
         }
     }
 
     fun onSecondaryClicked() {
-        inventory.value?.secondary?.itemId?.let {
+        secondary.value?.first?.itemId?.let {
             _navigateTo.postValue(Destination.ItemDetail(it))
+        }
+    }
+
+    fun onSecondaryReloadClicked() {
+        (secondary.value?.first as? Item.Weapon.Ranged)?.apply {
+            magazineState = magazineSize
+            magazineCount = maxOf(magazineCount - 1, 0)
+            updateItem(this)
         }
     }
 
     fun onTertiaryClicked() {
-        inventory.value?.tertiary?.itemId?.let {
+        tertiary.value?.first?.itemId?.let {
             _navigateTo.postValue(Destination.ItemDetail(it))
         }
     }
 
+    fun onTertiaryReloadClicked() {
+        (tertiary.value?.first as? Item.Weapon.Ranged)?.apply {
+            magazineState = magazineSize
+            magazineCount = maxOf(magazineCount - 1, 0)
+            updateItem(this)
+        }
+    }
+
     fun onClothesClicked() {
-        inventory.value?.clothes?.itemId?.let {
+        clothes.value?.first?.itemId?.let {
             _navigateTo.postValue(Destination.ItemDetail(it))
         }
     }
 
     fun onArmorClicked() {
-        inventory.value?.armor?.itemId?.let {
+        armor.value?.first?.itemId?.let {
             _navigateTo.postValue(Destination.ItemDetail(it))
         }
     }
 
-    fun onRollClicked(skill: Skill) {
-        _navigateTo.postValue(Destination.RollModifierDialog(skill))
+    fun onRollClicked(skill: Skill, item: Item?) {
+        _navigateTo.postValue(Destination.RollModifierDialog(skill, item))
     }
 
-    fun onRollConfirmed(skill: Skill, modifier: String) {
+    fun onRollConfirmed(skill: Skill, modifier: String, item: Item?) {
         roll.execute(skill to modifier.toInt())
-            .observe(ROLL + skill.code, ::onRollError, ::onRollSuccess)
+            .observe(ROLL + skill.code, ::onRollError, { onRollSuccess(it, item) })
     }
 
-    private fun onRollSuccess(result: RollResult) {
+    private fun onRollSuccess(result: RollResult, item: Item?) {
         Timber.v("onRollSuccess(): $result")
-        _navigateTo.postValue(
-            Destination.RollResultDialog(result)
-        )
+        Timber.i("onRollSuccess(): $item")
+        _navigateTo.postValue(Destination.RollResultDialog(result))
+        (item as? Item.Weapon.Ranged)?.let { ranged ->
+            ranged.magazineState = maxOf(ranged.magazineState - ranged.rateOfFire, 0)
+            updateItem(ranged)
+        }
     }
 
     private fun onRollError(error: Throwable) {
         Timber.e(error, "onRollError(): ")
     }
 
+    private fun updateItem(item: Item) = saveItemChanges.execute(item)
+        .observe(UPDATE + item.name.uppercase(), ::onUpdateItemError, ::onUpdateItemSuccess)
+
+    private fun onUpdateItemSuccess() {
+        Timber.v("onUpdateItemSuccess()")
+    }
+
+    private fun onUpdateItemError(error: Throwable) {
+        Timber.e(error, "onUpdateItemError(): ")
+    }
+
+    private fun getAppropriateSkill(item: Item, skills: Skills): Skill? {
+        return when (item) {
+            is Item.Weapon.Ranged.Bow -> skills.dexterity.firstOrNull { it.code == Skill.Constants.ARCHERY }
+            is Item.Weapon.Ranged.Crossbow -> skills.dexterity.firstOrNull { it.code == Skill.Constants.ARCHERY }
+            is Item.Weapon.Ranged -> skills.dexterity.firstOrNull { it.code == Skill.Constants.FIREARMS }
+            is Item.Weapon.Melee.Knife -> skills.dexterity.firstOrNull { it.code == Skill.Constants.SWORDFIGHTING }
+            is Item.Weapon.Melee.BareHands -> skills.dexterity.firstOrNull { it.code == Skill.Constants.UNARMED }
+            is Item.Weapon.Melee -> skills.dexterity.firstOrNull { it.code == Skill.Constants.SWORDFIGHTING }
+            is Armor -> if (item.damage == Item.Damage.HEAVY) skills.dexterity.firstOrNull { it.code == Skill.Constants.HEAVY_ARMOR } else null
+            else -> null
+        }
+    }
+
     sealed class Destination {
-        data class RollModifierDialog(val skill: Skill) : Destination()
+        data class RollModifierDialog(val skill: Skill, val item: Item?) : Destination()
         data class RollResultDialog(val rollResult: RollResult) : Destination()
         data class ItemDetail(val itemId: Long) : Destination()
     }
 
     companion object {
         private const val ROLL = "ROLL_"
+        private const val UPDATE = "UPDATE_"
     }
 }

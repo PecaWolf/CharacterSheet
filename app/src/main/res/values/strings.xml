@@ -115,8 +115,11 @@
     <string name="new_item_damage_medium">Medium</string>
     <string name="new_item_damage_heavy">Heavy</string>
     <string name="new_item_damage_types_header">Damage types</string>
-    <string name="new_item_protection_types_header">Protection against damage types</string>
+    <string name="new_item_protection_types_header">Protection types</string>
     <string name="new_item_ammunition_header">Ammunition</string>
+    <string name="new_item_ammunition_state_header">Ammunition state</string>
+    <string name="new_item_magazine_state_hint">Magazine state</string>
+    <string name="new_item_magazine_count_hint">Magazine count</string>
     <string name="new_item_wield_header">Wielded</string>
 
     <string name="wield_one_handed">One-handed</string>
@@ -145,6 +148,8 @@
     <string name="item_detail_error_message">The item was not found, possibly there was some error</string>
 
     <string name="item_count">%1$dx</string>
+    <string name="item_equipment_nothing">Nothing</string>
+    <string name="item_equipment_magazines">Magazines: %1$d</string>
     <string name="item_equip_slot_selection_title">Slot selection</string>
     <string name="item_equip_slot_selection_description">Select a slot to equip %1$s.</string>
     <string name="item_unequip_slot_title">Unequip item</string>
@@ -177,6 +182,9 @@
     <string name="item_edit_rate_of_fire_title">Rate of fire</string>
     <string name="item_edit_rate_of_fire_message">Fill in the new rate of fire</string>
     <string name="item_edit_rate_of_fire_hint">Rate of fire</string>
+    <string name="item_edit_magazine_count_title">Magazine count</string>
+    <string name="item_edit_magazine_count_message">Fill in the new magazine count</string>
+    <string name="item_edit_magazine_count_hint">Magazine count</string>
 
     <string name="item_detail_fab_label_edit">Edit item</string>
     <string name="item_detail_fab_label_equip">Equip item</string>

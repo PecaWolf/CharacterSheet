@@ -2,6 +2,7 @@ package com.pecawolf.charactersheet
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = ResourcesCompat.getColor(resources, R.color.background, null)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)

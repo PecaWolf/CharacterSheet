@@ -1,71 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/bar_height"
-    android:paddingHorizontal="@dimen/spacing_2">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/spacing_2"
+    tools:background="@drawable/bg_card">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/loadout_item_icon_start"
-        android:layout_width="@dimen/icon_medium"
-        android:layout_height="@dimen/icon_medium"
-        android:padding="@dimen/spacing_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_sword" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_height">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/loadout_item_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_2"
-        android:gravity="start"
-        android:maxLines="1"
-        android:text="@string/primary_weapon"
-        android:textAppearance="@style/Text.Label.Primary"
-        app:layout_constraintBottom_toTopOf="@id/loadout_item_value"
-        app:layout_constraintStart_toEndOf="@id/loadout_item_icon_start"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/loadout_item_icon_start"
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
+            android:padding="@dimen/spacing_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_sword" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/loadout_item_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_2"
-        android:ellipsize="end"
-        android:gravity="start"
-        android:maxLines="1"
-        android:textAppearance="@style/Text.Value.Primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/loadout_item_icon_end"
-        app:layout_constraintStart_toEndOf="@id/loadout_item_icon_start"
-        app:layout_constraintTop_toBottomOf="@id/loadout_item_label"
-        tools:text="AR-15" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loadout_item_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_2"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="@string/primary_weapon"
+            android:textAppearance="@style/Text.Label.Primary"
+            app:layout_constraintBottom_toTopOf="@id/loadout_item_value"
+            app:layout_constraintEnd_toStartOf="@id/loadout_item_id"
+            app:layout_constraintStart_toEndOf="@id/loadout_item_icon_start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/loadout_item_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_1"
-        android:layout_marginStart="@dimen/spacing_1"
-        app:layout_constraintBottom_toBottomOf="@id/loadout_item_label"
-        app:layout_constraintEnd_toStartOf="@id/loadout_item_icon_end"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/loadout_item_label"
-        app:layout_constraintTop_toTopOf="@id/loadout_item_label"
-        tools:text="#000001" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loadout_item_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_2"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textAppearance="@style/Text.Value.Primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/loadout_item_icon_end"
+            app:layout_constraintStart_toEndOf="@id/loadout_item_icon_start"
+            app:layout_constraintTop_toBottomOf="@id/loadout_item_label"
+            tools:text="AR-15" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/loadout_item_icon_end"
-        android:layout_width="@dimen/icon_small"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loadout_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/loadout_item_label"
+            app:layout_constraintEnd_toStartOf="@id/loadout_item_icon_end"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/loadout_item_label"
+            app:layout_constraintTop_toTopOf="@id/loadout_item_label"
+            tools:text="#000001" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/loadout_item_icon_end"
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/loadout_item_clicker"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/loadout_item_ammo_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/contentPrimary"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/loadout_item_ammo"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/icon_small"
-        android:src="@drawable/ic_right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginVertical="@dimen/spacing_2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/loadout_item_rounds"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_2"
+            android:layout_weight="1"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_magazine_round"
+            tools:orientation="horizontal" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/loadout_item_reload"
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:padding="@dimen/spacing_1"
+            app:srcCompat="@drawable/ic_refresh"
+            tools:text="Magazines: 5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/loadout_item_magazines"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/icon_small"
+            android:gravity="center"
+            tools:text="Magazines: 5" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/loadout_item_roll_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/contentPrimary"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <com.pecawolf.charactersheet.ui.view.RollView
+        android:id="@+id/loadout_item_roll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/spacing_1"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

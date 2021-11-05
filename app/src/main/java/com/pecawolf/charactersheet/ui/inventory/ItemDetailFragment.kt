@@ -3,17 +3,18 @@ package com.pecawolf.charactersheet.ui.inventory
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.BuildConfig
 import com.pecawolf.charactersheet.R
 import com.pecawolf.charactersheet.databinding.FragmentItemDetailBinding
 import com.pecawolf.charactersheet.ext.formatAmount
 import com.pecawolf.charactersheet.ext.getIcon
 import com.pecawolf.charactersheet.ext.getLocalizedName
-import com.pecawolf.charactersheet.ui.FabMenuFragment
+import com.pecawolf.charactersheet.ui.BaseFragment
 import com.pecawolf.charactersheet.ui.SimpleSelectionAdapter
+import com.pecawolf.charactersheet.ui.view.initialize
 import com.pecawolf.model.Item
 import com.pecawolf.model.Item.Damage
 import com.pecawolf.model.Item.DamageType
@@ -26,9 +27,13 @@ import com.pecawolf.presentation.viewmodel.ItemDetailViewModel.Destination
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDetailBinding>() {
+class ItemDetailFragment : BaseFragment<ItemDetailViewModel, FragmentItemDetailBinding>() {
 
     private val damageTypeAdapter: SimpleSelectionAdapter by lazy {
+        SimpleSelectionAdapter {}
+    }
+
+    private val wieldAdapter: SimpleSelectionAdapter by lazy {
         SimpleSelectionAdapter {}
     }
 
@@ -42,12 +47,6 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
         }
     }.value
 
-    override fun getMenuFab() = binding.itemDetailFabMenu
-
-    override fun getMenuFabItems() = binding.run {
-        listOf(itemDetailItemEditFab, itemDetailItemEquipFab, itemDetailItemDeleteFab)
-    }
-
     override fun bindView(
         binding: FragmentItemDetailBinding,
         viewModel: ItemDetailViewModel,
@@ -55,15 +54,19 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
         binding.itemDetailItemEditFab.setOnClickListener { viewModel.onItemEditClicked() }
         binding.itemDetailItemEquipFab.setOnClickListener { viewModel.onItemEquipClicked() }
         binding.itemDetailItemDeleteFab.setOnClickListener { viewModel.onItemDeleteClicked() }
-        binding.itemDetailNameEditIcon.setOnClickListener { viewModel.onNameEditClicked() }
-        binding.itemDetailDescriptionEditIcon.setOnClickListener { viewModel.onDescriptionEditClicked() }
-        binding.itemDetailCountEditIcon.setOnClickListener { viewModel.onCountEditClicked() }
-        binding.itemDetailLoadoutEditIcon.setOnClickListener { viewModel.onLoadoutEditClicked() }
-        binding.itemDetailDamageEditIcon.setOnClickListener { viewModel.onDamageEditClicked() }
-        binding.itemDetailMagazineSizeEditIcon.setOnClickListener { viewModel.onMagazineSizeEditClicked() }
-        binding.itemDetailRateOfFireEditIcon.setOnClickListener { viewModel.onRateOfFireEditClicked() }
-        binding.itemDetailWieldEditIcon.setOnClickListener { viewModel.onWieldEditClicked() }
-        binding.itemDetailDamageTypesEditIcon.setOnClickListener { viewModel.onDamageTypesEditClicked() }
+
+        binding.itemDetailBaseDataCard.itemDetailNameEditIcon.setOnClickListener { viewModel.onNameEditClicked() }
+        binding.itemDetailBaseDataCard.itemDetailDescriptionEditIcon.setOnClickListener { viewModel.onDescriptionEditClicked() }
+        binding.itemDetailBaseDataCard.itemDetailCountEditIcon.setOnClickListener { viewModel.onCountEditClicked() }
+
+        binding.itemDetailLoadoutsCard.itemDetailLoadoutEditIcon.setOnClickListener { viewModel.onLoadoutEditClicked() }
+        binding.itemDetailDamageCard.itemDetailDamageEditIcon.setOnClickListener { viewModel.onDamageEditClicked() }
+        binding.itemDetailAmmoCard.itemDetailMagazineSizeEditIcon.setOnClickListener { viewModel.onMagazineSizeEditClicked() }
+        binding.itemDetailAmmoCard.itemDetailRateOfFireEditIcon.setOnClickListener { viewModel.onRateOfFireEditClicked() }
+        binding.itemDetailAmmoStateCard.itemDetailMagazineStateRefreshIcon.setOnClickListener { viewModel.onMagazineStateRefreshClicked() }
+        binding.itemDetailAmmoStateCard.itemDetailMagazineCountEditIcon.setOnClickListener { viewModel.onMagazineCountEditClicked() }
+        binding.itemDetailWieldCard.itemDetailWieldEditIcon.setOnClickListener { viewModel.onWieldEditClicked() }
+        binding.itemDetailDamageTypesCard.itemDetailDamageTypesEditIcon.setOnClickListener { viewModel.onDamageTypesEditClicked() }
     }
 
     override fun observeViewModel(
@@ -81,23 +84,27 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
             binding.itemDetailItemEquipFab.isEnabled = isEquippable
         }
         viewModel.isEditingBaseData.reObserve(this) { isEditing ->
-            binding.itemDetailNameEditIcon.isVisible = isEditing
-            binding.itemDetailDescriptionEditIcon.isVisible = isEditing
+            binding.itemDetailItemEditFab.isChecked = isEditing
+
+            binding.itemDetailBaseDataCard.itemDetailNameEditIcon.isVisible = isEditing
+            binding.itemDetailBaseDataCard.itemDetailDescriptionEditIcon.isVisible = isEditing
         }
         viewModel.isEditingCount.reObserve(this) { isEditing ->
-            binding.itemDetailCountEditIcon.isVisible = isEditing
+            binding.itemDetailBaseDataCard.itemDetailCountEditIcon.isVisible = isEditing
         }
         viewModel.isEditingLoadoutAndDamage.reObserve(this) { isEditing ->
-            binding.itemDetailLoadoutEditIcon.isVisible = isEditing
-            binding.itemDetailDamageEditIcon.isVisible = isEditing
-            binding.itemDetailDamageTypesEditIcon.isVisible = isEditing
+            binding.itemDetailLoadoutsCard.itemDetailLoadoutEditIcon.isVisible = isEditing
+            binding.itemDetailDamageCard.itemDetailDamageEditIcon.isVisible = isEditing
+            binding.itemDetailDamageTypesCard.itemDetailDamageTypesEditIcon.isVisible = isEditing
         }
         viewModel.isEditingAmmunition.reObserve(this) { isEditing ->
-            binding.itemDetailMagazineSizeEditIcon.isVisible = isEditing
-            binding.itemDetailRateOfFireEditIcon.isVisible = isEditing
+            binding.itemDetailAmmoCard.itemDetailMagazineSizeEditIcon.isVisible = isEditing
+            binding.itemDetailAmmoCard.itemDetailRateOfFireEditIcon.isVisible = isEditing
+            binding.itemDetailAmmoStateCard.itemDetailMagazineStateRefreshIcon.isVisible = isEditing
+            binding.itemDetailAmmoStateCard.itemDetailMagazineCountEditIcon.isVisible = isEditing
         }
         viewModel.isEditingWield.reObserve(this) { isEditing ->
-            binding.itemDetailWieldEditIcon.isVisible = isEditing
+            binding.itemDetailWieldCard.itemDetailWieldEditIcon.isVisible = isEditing
         }
 
         viewModel.damageTypes.reObserve(this) { items ->
@@ -117,14 +124,11 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
         viewModel.slot.reObserve(this) {
             val isEquipped = it.isNotEmpty()
 
-            binding.itemDetailSlot.apply {
-                isVisible = isEquipped
+            binding.itemDetailBaseDataCard.itemDetailSlot.apply {
+                isInvisible = !isEquipped
                 text = it.firstOrNull()?.getLocalizedName(requireContext())
             }
-            binding.itemDetailItemEquipFab.text = getString(
-                if (isEquipped) R.string.item_detail_fab_label_unequip
-                else R.string.item_detail_fab_label_equip
-            )
+            binding.itemDetailItemEquipFab.isChecked = isEquipped
         }
 
         viewModel.navigateTo.reObserve(this) {
@@ -141,13 +145,31 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
                 is Destination.MagazineSizeDialog -> showMagazineSizeDialog(it.magazine)
                 is Destination.NameDialog -> showNameDialog(it.name)
                 is Destination.RateOfFireDialog -> showRateOfFireDialog(it.rateOfFire)
+                is Destination.MagazineCountDialog -> showMagazineCountDialog(it.magazineCount)
                 is Destination.WieldDialog -> showWieldDialog(it.items)
             }
         }
     }
 
     private fun setupItemDetails(item: Item) {
-        binding.run {
+        setupVisibilities(item)
+        setupBaseData(item)
+        setupDamage(item)
+        setupLoadout(item)
+        setupCombatGear(item)
+    }
+
+    private fun setupVisibilities(item: Item) {
+        binding.itemDetailDamageCard.root.isVisible = item is Item.Weapon || item is Item.Armor
+        binding.itemDetailLoadoutsCard.root.isVisible = item is Item.Weapon || item is Item.Armor
+        binding.itemDetailWieldCard.root.isVisible = item is Item.Weapon
+        binding.itemDetailDamageTypesCard.root.isVisible = item is Item.Weapon || item is Item.Armor
+        binding.itemDetailAmmoCard.root.isVisible = item is Item.Weapon.Ranged
+        binding.itemDetailAmmoStateCard.root.isVisible = item is Item.Weapon.Ranged
+    }
+
+    private fun setupBaseData(item: Item) {
+        binding.itemDetailBaseDataCard.run {
             itemDetailIcon.setImageDrawable(item.getIcon(resources))
             itemDetailName.text = item.name
             itemDetailId.apply {
@@ -158,41 +180,45 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
             itemDetailCount.apply {
                 text = resources.getString(R.string.item_count, item.count)
             }
+        }
+    }
 
-            itemDetailDamageCard.isVisible = item is Item.Weapon || item is Item.Armor
-            itemDetailLoadoutsCard.isVisible = item is Item.Weapon || item is Item.Armor
-            itemDetailWieldCard.isVisible = item is Item.Weapon
-            itemDetailDamageTypesCard.isVisible = item is Item.Weapon || item is Item.Armor
-            itemDetailAmmoCard.isVisible = item is Item.Weapon.Ranged
-
+    private fun setupDamage(item: Item) {
+        binding.itemDetailDamageCard.run {
             itemDetailDamageHeavy.isChecked = item.damage == Damage.HEAVY
             itemDetailDamageMedium.isChecked = item.damage == Damage.MEDIUM
             itemDetailDamageLight.isChecked = item.damage == Damage.LIGHT
+        }
+    }
 
+    private fun setupLoadout(item: Item) {
+        binding.itemDetailLoadoutsCard.run {
             itemDetailLoadoutCombat.isChecked = item.allowedLoadouts.contains(LoadoutType.COMBAT)
             itemDetailLoadoutSocial.isChecked = item.allowedLoadouts.contains(LoadoutType.SOCIAL)
             itemDetailLoadoutTravel.isChecked = item.allowedLoadouts.contains(LoadoutType.TRAVEL)
+        }
+    }
 
-            itemDetailDamageTypesRecycler.apply {
-                adapter = damageTypeAdapter
-                layoutManager = LinearLayoutManager(requireContext())
-            }
+    private fun setupCombatGear(item: Item) {
+        binding.run {
+            itemDetailDamageTypesCard.itemDetailDamageTypesRecycler.initialize(damageTypeAdapter)
 
             if (item is Item.Weapon) {
-                itemDetailDamageHeader.setText(R.string.new_item_header_damage)
-                itemDetailDamageTypesHeader.setText(R.string.new_item_damage_types_header)
+                itemDetailDamageCard.itemDetailDamageHeader.setText(R.string.new_item_header_damage)
+                itemDetailDamageTypesCard.itemDetailDamageTypesHeader.setText(R.string.new_item_damage_types_header)
 
-                itemDetailWieldOneHanded.isChecked = item.wield == Wield.ONE_HANDED
-                itemDetailWieldTwoHanded.isChecked = item.wield == Wield.TWO_HANDED
-                itemDetailWieldMounted.isChecked = item.wield == Wield.MOUNTED
+                itemDetailWieldCard.itemDetailWield.text = item.wield.getLocalizedName(requireContext())
 
                 if (item is Item.Weapon.Ranged) {
-                    itemDetailMagazineSizeValue.text = item.magazine.formatAmount()
-                    itemDetailRateOfFireValue.text = item.rateOfFire.formatAmount()
+                    itemDetailAmmoCard.itemDetailMagazineSizeValue.text = item.magazineSize.formatAmount()
+                    itemDetailAmmoCard.itemDetailRateOfFireValue.text = item.rateOfFire.formatAmount()
+
+                    itemDetailAmmoStateCard.itemDetailMagazineStateValue.text = item.magazineState.formatAmount()
+                    itemDetailAmmoStateCard.itemDetailMagazineCountValue.text = item.magazineCount.formatAmount()
                 }
             } else if (item is Item.Armor) {
-                itemDetailDamageHeader.setText(R.string.new_item_header_protection)
-                itemDetailDamageTypesHeader.setText(R.string.new_item_protection_types_header)
+                itemDetailDamageCard.itemDetailDamageHeader.setText(R.string.new_item_header_protection)
+                itemDetailDamageTypesCard.itemDetailDamageTypesHeader.setText(R.string.new_item_protection_types_header)
             }
         }
     }
@@ -342,6 +368,21 @@ class ItemDetailFragment : FabMenuFragment<ItemDetailViewModel, FragmentItemDeta
             positiveButton = getString(R.string.generic_ok)
         ) { dialog, rateOfFire ->
             viewModel.onRateOfFireChanged(rateOfFire.toInt())
+            dialog.cancel()
+        }
+    }
+
+    private fun showMagazineCountDialog(currentMagazineCount: Int) {
+        dialogHelper.showTextInputDialog(
+            title = getString(R.string.item_edit_magazine_count_title),
+            message = getString(R.string.item_edit_magazine_count_message),
+            inputType = InputType.TYPE_CLASS_NUMBER,
+            lineCount = 1,
+            defaultInput = currentMagazineCount.toString(),
+            hint = getString(R.string.item_edit_magazine_count_hint),
+            positiveButton = getString(R.string.generic_ok)
+        ) { dialog, magazineCount ->
+            viewModel.onMagazineCountChanged(magazineCount.toInt())
             dialog.cancel()
         }
     }

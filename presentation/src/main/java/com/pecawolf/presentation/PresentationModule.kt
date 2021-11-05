@@ -25,7 +25,7 @@ object PresentationModule {
 
         viewModel { HomeViewModel(get(), get(), get()) }
 
-        viewModel { LoadoutViewModel(get(), get()) }
+        viewModel { LoadoutViewModel(get(), get(), get()) }
 
         viewModel { InventoryViewModel(get(), get()) }
         viewModel { (itemId: Long) ->

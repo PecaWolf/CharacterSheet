@@ -22,4 +22,6 @@ data class ItemEntity(
     val damageTypes: List<String>,
     val magazine: Int,
     val rateOfFire: Int,
+    val magazineCount: Int,
+    val magazineState: Int,
 )

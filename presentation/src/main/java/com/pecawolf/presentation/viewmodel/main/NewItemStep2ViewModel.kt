@@ -67,6 +67,8 @@ class NewItemStep2ViewModel(
     }
     private val _magazineSize = MutableLiveData<Int>(-1)
     private val _rateOfFire = MutableLiveData<Int>(-1)
+    private val _magazineCount = MutableLiveData<Int>(-1)
+    private val _magazineState = MutableLiveData<Int>(-1)
     private val _selectedDamageTypes = MutableLiveData(type.defaultDamageTypes.toMutableSet())
     private val _selectedWield =
         MutableLiveData<Item.Weapon.Wield>(type.defaultWield)
@@ -205,6 +207,8 @@ class NewItemStep2ViewModel(
                 wield = _selectedWield.value,
                 magazineSize = _magazineSize.value ?: -1,
                 rateOfFire = _rateOfFire.value ?: -1,
+                _magazineCount.value ?: -1,
+                _magazineState.value ?: -1,
                 damageTypes = _selectedDamageTypes.value!!,
             )
         )

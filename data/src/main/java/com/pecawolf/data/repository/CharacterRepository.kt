@@ -63,6 +63,8 @@ class CharacterRepository(
         wield: Item.Weapon.Wield?,
         magazineSize: Int,
         rateOfFire: Int,
+        magazineCount: Int,
+        magazineState: Int,
         damageTypes: MutableSet<Item.DamageType>,
     ): Single<Long> = cache.createItemForCharacter(
         name,
@@ -73,6 +75,8 @@ class CharacterRepository(
         wield?.name ?: "",
         magazineSize,
         rateOfFire,
+        magazineCount,
+        magazineState,
         damageTypes.map { it.name },
     )
 

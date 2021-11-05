@@ -138,13 +138,25 @@ class ItemDetailViewModel(
 
     fun onMagazineSizeEditClicked() {
         (_item.value as? Weapon.Ranged)?.let { item ->
-            _navigateTo.postValue(Destination.MagazineSizeDialog(item.magazine))
+            _navigateTo.postValue(Destination.MagazineSizeDialog(item.magazineSize))
         }
     }
 
     fun onRateOfFireEditClicked() {
         (_item.value as? Weapon.Ranged)?.let { item ->
             _navigateTo.postValue(Destination.RateOfFireDialog(item.rateOfFire))
+        }
+    }
+
+    fun onMagazineStateRefreshClicked() {
+        (_item.value as? Weapon.Ranged)?.let { item ->
+            item.magazineCount = maxOf(item.magazineCount, 0)
+        }
+    }
+
+    fun onMagazineCountEditClicked() {
+        (_item.value as? Weapon.Ranged)?.let { item ->
+            _navigateTo.postValue(Destination.MagazineCountDialog(item.magazineCount))
         }
     }
 
@@ -193,8 +205,8 @@ class ItemDetailViewModel(
 
     fun onMagazineSizeChanged(magazine: Int) {
         (_item.value as? Weapon.Ranged)?.also { item ->
-            if (item.magazine != magazine) {
-                item.magazine = magazine
+            if (item.magazineSize != magazine) {
+                item.magazineSize = magazine
                 updateItem(item)
             }
         }
@@ -204,6 +216,15 @@ class ItemDetailViewModel(
         (_item.value as? Weapon.Ranged)?.also { item ->
             if (item.rateOfFire != rateOfFire) {
                 item.rateOfFire = rateOfFire
+                updateItem(item)
+            }
+        }
+    }
+
+    fun onMagazineCountChanged(magazineCount: Int) {
+        (_item.value as? Weapon.Ranged)?.also { item ->
+            if (item.magazineCount != magazineCount) {
+                item.magazineCount = magazineCount
                 updateItem(item)
             }
         }
@@ -316,6 +337,7 @@ class ItemDetailViewModel(
         data class MagazineSizeDialog(val magazine: Int) : Destination()
         data class NameDialog(val name: String) : Destination()
         data class RateOfFireDialog(val rateOfFire: Int) : Destination()
+        data class MagazineCountDialog(val magazineCount: Int) : Destination()
         data class WieldDialog(val items: List<Pair<Weapon.Wield, Boolean>>) : Destination()
     }
 

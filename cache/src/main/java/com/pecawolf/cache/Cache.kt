@@ -79,6 +79,8 @@ class Cache(
         wield: String,
         magazineSize: Int,
         rateOfFire: Int,
+        magazineCount: Int,
+        magazineState: Int,
         damageTypes: List<String>,
         ownerId: Long?,
     ): Single<Long> = database.itemDao().insert(
@@ -97,7 +99,9 @@ class Cache(
             wield,
             damageTypes,
             magazineSize,
-            rateOfFire
+            rateOfFire,
+            magazineCount,
+            magazineState,
         )
     )
 

@@ -1,128 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/stat_widget_stats_card"
-    style="@style/Card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:showIn="@layout/fragment_home">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/spacing_1">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/stat_widget_guide_stats_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.333" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/stat_widget_guide_stats_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.333" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/stat_widget_guide_stats_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.666" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/stat_widget_guide_stats_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.666" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stat_widget_label"
+        style="@style/Text.Label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:padding="0dp"
+        android:singleLine="true"
+        android:textColor="@color/contentPrimary"
+        app:layout_constraintBottom_toTopOf="@id/stat_widget_value"
+        app:layout_constraintEnd_toEndOf="@id/stat_widget_guide_stats_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Heavy weapon melee combat" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_widget_label"
-            style="@style/Text.Label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:gravity="center"
-            android:singleLine="true"
-            android:padding="0dp"
-            android:textColor="@color/contentPrimary"
-            app:layout_constraintBottom_toTopOf="@id/stat_widget_value"
-            app:layout_constraintEnd_toEndOf="@id/stat_widget_guide_stats_2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Heavy weapon melee combat" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stat_widget_value"
+        style="@style/Text.Value.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/stat_widget_guide_stats_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stat_widget_label"
+        tools:text="10" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_widget_value"
-            style="@style/Text.Value.Primary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/stat_widget_guide_stats_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stat_widget_label"
-            tools:text="10" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stat_widget_value_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="@string/stat_value"
+        android:textSize="@dimen/text_tiny"
+        app:layout_constraintBottom_toTopOf="@id/stat_widget_value"
+        app:layout_constraintEnd_toEndOf="@id/stat_widget_value"
+        app:layout_constraintStart_toStartOf="@id/stat_widget_value"
+        app:layout_constraintTop_toTopOf="@id/stat_widget_value" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_widget_value_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:lines="1"
-            android:maxLines="1"
-            android:text="@string/stat_value"
-            android:textSize="@dimen/text_tiny"
-            app:layout_constraintBottom_toTopOf="@id/stat_widget_value"
-            app:layout_constraintEnd_toEndOf="@id/stat_widget_value"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_value"
-            app:layout_constraintTop_toTopOf="@id/stat_widget_value" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stat_widget_trap"
+        style="@style/Text.Value.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBaseline_toBaselineOf="@id/stat_widget_value"
+        app:layout_constraintEnd_toEndOf="@id/stat_widget_guide_stats_2"
+        app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_1"
+        tools:text="20" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_widget_trap"
-            style="@style/Text.Value.Secondary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintBaseline_toBaselineOf="@id/stat_widget_value"
-            app:layout_constraintEnd_toEndOf="@id/stat_widget_guide_stats_2"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_1"
-            tools:text="20" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stat_widget_trap_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLines="1"
+        android:text="@string/stat_trap"
+        android:textSize="@dimen/text_tiny"
+        app:layout_constraintBottom_toTopOf="@id/stat_widget_trap"
+        app:layout_constraintEnd_toEndOf="@id/stat_widget_trap"
+        app:layout_constraintStart_toStartOf="@id/stat_widget_trap"
+        app:layout_constraintTop_toTopOf="@id/stat_widget_trap" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_widget_trap_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:lines="1"
-            android:maxLines="1"
-            android:text="@string/stat_trap"
-            android:textSize="@dimen/text_tiny"
-            app:layout_constraintBottom_toTopOf="@id/stat_widget_trap"
-            app:layout_constraintEnd_toEndOf="@id/stat_widget_trap"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_trap"
-            app:layout_constraintTop_toTopOf="@id/stat_widget_trap" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/stat_widget_roll_button"
+        style="@style/Button.Positive"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="@dimen/spacing_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_roll" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/stat_widget_roll_button"
-            style="@style/Button.Positive"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:padding="@dimen/spacing_4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_roll" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/stat_widget_edit_button"
+        style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="@dimen/spacing_4"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_wrench" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/stat_widget_edit_button"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:padding="@dimen/spacing_4"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/stat_widget_guide_stats_2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_wrench" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
-
-    
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card"
+    tools:showIn="@layout/fragment_item_detail">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_wield_header"
+        style="@style/Text.Header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/new_item_wield_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_detail_wield_edit_icon"
+        style="@style/Button.Icon"
+        android:src="@drawable/ic_wrench"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_wield_header"
+        app:layout_constraintEnd_toEndOf="@id/item_detail_wield_header"
+        app:layout_constraintTop_toTopOf="@id/item_detail_wield_header"
+        tools:visibility="visible" />
+
+    <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+        android:id="@+id/item_detail_wield"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        app:isChecked="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_wield_header"
+        tools:text="@string/wield_one_handed" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+            

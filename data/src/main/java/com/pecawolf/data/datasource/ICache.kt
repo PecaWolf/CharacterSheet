@@ -32,6 +32,8 @@ interface ICache {
         wield: String,
         magazineSize: Int,
         rateOfFire: Int,
+        magazineCount: Int,
+        magazineState: Int,
         damageTypes: List<String>,
         ownerId: Long? = null,
     ): Single<Long>
