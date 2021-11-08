@@ -30,6 +30,8 @@ interface ICharacterRepository {
         wield: Item.Weapon.Wield?,
         magazineSize: Int,
         rateOfFire: Int,
+        magazineCount: Int,
+        magazineState: Int,
         damageTypes: MutableSet<Item.DamageType>,
     ): Single<Long>
 

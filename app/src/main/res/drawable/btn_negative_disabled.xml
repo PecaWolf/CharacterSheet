@@ -5,5 +5,5 @@
         android:width="@dimen/spacing_0_5"
         android:color="@color/buttonBackgroundNegativeDisabled" />
     <solid android:color="@color/buttonBackgroundDisabled" />
-    <corners android:radius="8dp" />
+    <corners android:radius="@dimen/corner_radius" />
 </shape>

@@ -59,8 +59,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.CROSSBOW -> Item.Weapon.Ranged.Crossbow(
                 itemId,
@@ -71,8 +73,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.PISTOL -> Item.Weapon.Ranged.Pistol(
                 itemId,
@@ -83,8 +87,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.REVOLVER -> Item.Weapon.Ranged.Revolver(
                 itemId,
@@ -95,8 +101,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.RIFLE -> Item.Weapon.Ranged.Rifle(
                 itemId,
@@ -107,8 +115,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.SUBMACHINE_GUN -> Item.Weapon.Ranged.SubmachineGun(
                 itemId,
@@ -119,8 +129,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.SHOTGUN -> Item.Weapon.Ranged.Shotgun(
                 itemId,
@@ -131,8 +143,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.MACHINE_GUN -> Item.Weapon.Ranged.MachineGun(
                 itemId,
@@ -143,8 +157,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.ANTIMATERIAL_GUN -> Item.Weapon.Ranged.AntimaterialGun(
                 itemId,
@@ -155,8 +171,10 @@ class ItemDataMapper {
                 parseLoadouts(),
                 parseDamage(),
                 parseDamageTypes(),
-                magazine,
+                magazineSize,
                 rateOfFire,
+                maxOf(0, magazineCount),
+                maxOf(0, magazineState),
             )
             Item.ItemType.GRENADE -> Item.Weapon.Grenade(
                 itemId,
@@ -300,8 +318,10 @@ class ItemDataMapper {
                 damage.name,
                 (this as? Item.Weapon)?.run { wield.name } ?: "",
                 damageTypes.map { it.name },
-                (this as? Item.Weapon.Ranged)?.run { magazine } ?: 0,
+                (this as? Item.Weapon.Ranged)?.run { magazineSize } ?: 0,
                 (this as? Item.Weapon.Ranged)?.run { rateOfFire } ?: 0,
+                (this as? Item.Weapon.Ranged)?.run { magazineCount } ?: 0,
+                (this as? Item.Weapon.Ranged)?.run { magazineState } ?: 0,
             )
         }
     }

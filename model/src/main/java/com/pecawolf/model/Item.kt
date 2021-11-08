@@ -175,8 +175,10 @@ sealed class Item(
             damage: Damage,
             wield: Wield,
             damageTypes: MutableSet<DamageType>,
-            open var magazine: Int,
-            open var rateOfFire: Int
+            open var magazineSize: Int,
+            open var rateOfFire: Int,
+            open var magazineCount: Int,
+            open var magazineState: Int
         ) : Weapon(
             itemId,
             name,
@@ -200,8 +202,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
                 override var damage: Damage = Damage.LIGHT,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.PIERCE),
-                override var magazine: Int = 1,
-                override var rateOfFire: Int = 1
+                override var magazineSize: Int = 1,
+                override var rateOfFire: Int = 1,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -212,8 +216,10 @@ sealed class Item(
                 damage,
                 Wield.TWO_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class Crossbow(
@@ -225,8 +231,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
                 override var damage: Damage = Damage.MEDIUM,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.PIERCE),
-                override var magazine: Int = 1,
-                override var rateOfFire: Int = 1
+                override var magazineSize: Int = 1,
+                override var rateOfFire: Int = 1,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -237,8 +245,10 @@ sealed class Item(
                 damage,
                 Wield.TWO_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             // endregion Primitive Weapons
@@ -254,8 +264,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
                 override var damage: Damage = Damage.LIGHT,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 12,
-                override var rateOfFire: Int = 2
+                override var magazineSize: Int = 12,
+                override var rateOfFire: Int = 2,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -266,8 +278,10 @@ sealed class Item(
                 damage,
                 Wield.ONE_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class Revolver(
@@ -279,8 +293,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = LoadoutType.ALL,
                 override var damage: Damage = Damage.LIGHT,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 6,
-                override var rateOfFire: Int = 1
+                override var magazineSize: Int = 6,
+                override var rateOfFire: Int = 1,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -291,8 +307,10 @@ sealed class Item(
                 damage,
                 Wield.ONE_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class Rifle(
@@ -304,8 +322,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = mutableListOf(LoadoutType.COMBAT),
                 override var damage: Damage = Damage.MEDIUM,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 20,
-                override var rateOfFire: Int = 5
+                override var magazineSize: Int = 20,
+                override var rateOfFire: Int = 5,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -316,8 +336,10 @@ sealed class Item(
                 damage,
                 Wield.TWO_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class SubmachineGun(
@@ -329,8 +351,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = mutableListOf(LoadoutType.COMBAT),
                 override var damage: Damage = Damage.MEDIUM,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 32,
-                override var rateOfFire: Int = 8
+                override var magazineSize: Int = 32,
+                override var rateOfFire: Int = 8,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -341,8 +365,10 @@ sealed class Item(
                 damage,
                 Wield.TWO_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class Shotgun(
@@ -354,8 +380,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = mutableListOf(LoadoutType.COMBAT),
                 override var damage: Damage = Damage.MEDIUM,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 8,
-                override var rateOfFire: Int = 1
+                override var magazineSize: Int = 8,
+                override var rateOfFire: Int = 1,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -366,8 +394,10 @@ sealed class Item(
                 damage,
                 Wield.TWO_HANDED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class MachineGun(
@@ -379,8 +409,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = mutableListOf(LoadoutType.COMBAT),
                 override var damage: Damage = Damage.HEAVY,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 150,
-                override var rateOfFire: Int = 15
+                override var magazineSize: Int = 150,
+                override var rateOfFire: Int = 15,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -391,8 +423,10 @@ sealed class Item(
                 damage,
                 Wield.MOUNTED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             data class AntimaterialGun(
@@ -404,8 +438,10 @@ sealed class Item(
                 override var allowedLoadouts: MutableList<LoadoutType> = mutableListOf(LoadoutType.COMBAT),
                 override var damage: Damage = Damage.HEAVY,
                 override var damageTypes: MutableSet<DamageType> = mutableSetOf(DamageType.BALLISTIC),
-                override var magazine: Int = 5,
-                override var rateOfFire: Int = 1
+                override var magazineSize: Int = 5,
+                override var rateOfFire: Int = 1,
+                override var magazineCount: Int,
+                override var magazineState: Int,
             ) : Ranged(
                 itemId,
                 name,
@@ -416,8 +452,10 @@ sealed class Item(
                 damage,
                 Wield.MOUNTED,
                 damageTypes,
-                magazine,
-                rateOfFire
+                magazineSize,
+                rateOfFire,
+                magazineCount,
+                magazineState,
             )
 
             // endregion Firearms

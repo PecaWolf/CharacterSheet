@@ -19,7 +19,9 @@ class ItemEntityMapper {
             wield,
             damageTypes,
             magazine,
-            rateOfFire
+            rateOfFire,
+            magazineCount,
+            magazineState,
         )
     }
 
@@ -36,8 +38,10 @@ class ItemEntityMapper {
             damage,
             wield,
             damageTypes,
-            magazine,
-            rateOfFire
+            magazineSize,
+            rateOfFire,
+            magazineCount,
+            magazineState,
         )
     }
 }

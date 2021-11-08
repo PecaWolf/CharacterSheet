@@ -3,11 +3,9 @@ package com.pecawolf.charactersheet.ui.loadout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pecawolf.charactersheet.databinding.FragmentLoadoutBinding
 import com.pecawolf.charactersheet.ext.getLocalizedName
 import com.pecawolf.charactersheet.ui.BaseFragment
-import com.pecawolf.charactersheet.ui.skills.SkillsAdapter
 import com.pecawolf.model.Item
 import com.pecawolf.model.RollResult
 import com.pecawolf.model.Rollable
@@ -19,12 +17,6 @@ import org.koin.core.parameter.parametersOf
 
 class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>() {
 
-    private val skillsAdapter: SkillsAdapter by lazy {
-        SkillsAdapter({ viewModel.onRollClicked(it as Rollable.Skill) }).apply {
-            showGroups = false
-        }
-    }
-
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentLoadoutBinding.inflate(inflater, container, false)
 
@@ -35,16 +27,29 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         binding.loadoutSocialCheckbox.setOnClickListener { viewModel.onLoadoutSocialClicked() }
         binding.loadoutTravelCheckbox.setOnClickListener { viewModel.onLoadoutTravelClicked() }
 
-        binding.loadoutSkillsRecycler.apply {
-            adapter = skillsAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+        binding.loadoutOverviewPrimary.apply {
+            setOnDetailClickedListener { viewModel.onPrimaryClicked() }
+            setOnReloadClickedListener { viewModel.onPrimaryReloadClicked() }
+            setOnRollClickedListener { viewModel.onRollClicked(it as Rollable.Skill, binding.loadoutOverviewPrimary.data) }
         }
-
-        binding.loadoutOverviewPrimary.setOnClickListener { viewModel.onPrimaryClicked() }
-        binding.loadoutOverviewSecondary.setOnClickListener { viewModel.onSecondaryClicked() }
-        binding.loadoutOverviewTertiary.setOnClickListener { viewModel.onTertiaryClicked() }
-        binding.loadoutOverviewClothes.setOnClickListener { viewModel.onClothesClicked() }
-        binding.loadoutOverviewArmor.setOnClickListener { viewModel.onArmorClicked() }
+        binding.loadoutOverviewSecondary.apply {
+            setOnDetailClickedListener { viewModel.onSecondaryClicked() }
+            setOnReloadClickedListener { viewModel.onSecondaryReloadClicked() }
+            setOnRollClickedListener { viewModel.onRollClicked(it as Rollable.Skill, binding.loadoutOverviewSecondary.data) }
+        }
+        binding.loadoutOverviewTertiary.apply {
+            setOnDetailClickedListener { viewModel.onTertiaryClicked() }
+            setOnReloadClickedListener { viewModel.onTertiaryReloadClicked() }
+            setOnRollClickedListener { viewModel.onRollClicked(it as Rollable.Skill, binding.loadoutOverviewTertiary.data) }
+        }
+        binding.loadoutOverviewClothes.apply {
+            setOnDetailClickedListener { viewModel.onClothesClicked() }
+            setOnRollClickedListener { viewModel.onRollClicked(it as Rollable.Skill, binding.loadoutOverviewClothes.data) }
+        }
+        binding.loadoutOverviewArmor.apply {
+            setOnDetailClickedListener { viewModel.onArmorClicked() }
+            setOnRollClickedListener { viewModel.onRollClicked(it as Rollable.Skill, binding.loadoutOverviewArmor.data) }
+        }
     }
 
     override fun observeViewModel(
@@ -73,19 +78,39 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         viewModel.isArmorAllowed.reObserve(this) { isAllowed ->
             binding.loadoutOverviewArmor.isActive = isAllowed
         }
-        viewModel.inventory.reObserve(this) { inventory ->
-            binding.loadoutOverviewPrimary.setItem(inventory.primary)
-            binding.loadoutOverviewSecondary.setItem(inventory.secondary)
-            binding.loadoutOverviewTertiary.setItem(inventory.tertiary)
-            binding.loadoutOverviewClothes.setItem(inventory.clothes)
-            binding.loadoutOverviewArmor.setItem(inventory.armor)
+        viewModel.primary.reObserve(this) {
+            binding.loadoutOverviewPrimary.apply {
+                data = it.first
+                skill = it.second
+            }
         }
-        viewModel.skills.reObserve(this) {
-            skillsAdapter.items = listOf(it)
+        viewModel.secondary.reObserve(this) {
+            binding.loadoutOverviewSecondary.apply {
+                data = it.first
+                skill = it.second
+            }
+        }
+        viewModel.tertiary.reObserve(this) {
+            binding.loadoutOverviewTertiary.apply {
+                data = it.first
+                skill = it.second
+            }
+        }
+        viewModel.armor.reObserve(this) {
+            binding.loadoutOverviewArmor.apply {
+                data = it.first
+                skill = it.second
+            }
+        }
+        viewModel.clothes.reObserve(this) {
+            binding.loadoutOverviewClothes.apply {
+                data = it.first
+                skill = it.second
+            }
         }
         viewModel.navigateTo.reObserve(this) {
             when (it) {
-                is Destination.RollModifierDialog -> showRollModifierDialog(it.skill)
+                is Destination.RollModifierDialog -> showRollModifierDialog(it.skill, it.item)
                 is Destination.RollResultDialog -> showRollResultDialog(it.rollResult)
                 is Destination.ItemDetail -> findNavController().navigate(
                     LoadoutFragmentDirections.actionLoadoutToItemDetail(it.itemId)
@@ -94,11 +119,11 @@ class LoadoutFragment : BaseFragment<LoadoutViewModel, FragmentLoadoutBinding>()
         }
     }
 
-    private fun showRollModifierDialog(skill: Rollable.Skill) {
+    private fun showRollModifierDialog(skill: Rollable.Skill, item: Item?) {
         dialogHelper.showRollModifierDialog(
             skill
         ) { dialog, modifier ->
-            viewModel.onRollConfirmed(skill, modifier)
+            viewModel.onRollConfirmed(skill, modifier, item)
             dialog.cancel()
         }
     }

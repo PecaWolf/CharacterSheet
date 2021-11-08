@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Box"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_card"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_item_detail">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_loadout_header"
+        style="@style/Text.Header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/new_item_header_loadout"
+        app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_combat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+        android:id="@+id/item_detail_loadout_combat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        app:iconSrc="@drawable/ic_loadout_combat"
+        app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_social"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_header"
+        app:text="@string/new_item_loadout_combat" />
+
+    <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+        android:id="@+id/item_detail_loadout_social"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        app:iconSrc="@drawable/ic_loadout_social"
+        app:layout_constraintBottom_toTopOf="@id/item_detail_loadout_travel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_combat"
+        app:text="@string/new_item_loadout_social" />
+
+    <com.pecawolf.charactersheet.ui.view.TwoStateImageCheckView
+        android:id="@+id/item_detail_loadout_travel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        app:iconSrc="@drawable/ic_loadout_travel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_loadout_social"
+        app:text="@string/new_item_loadout_travel" />
+
+    <View
+        android:id="@+id/item_detail_loadouts_clicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:enabled="true"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_detail_loadout_edit_icon"
+        style="@style/Button.Icon"
+        android:src="@drawable/ic_wrench"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_loadout_header"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/item_detail_loadout_header"
+        app:layout_constraintTop_toTopOf="@id/item_detail_loadout_header"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

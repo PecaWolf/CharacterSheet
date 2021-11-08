@@ -17,6 +17,8 @@ class CreateNewItemInteractor(private val repository: ICharacterRepository) :
             wield,
             magazineSize,
             rateOfFire,
+            magazineCount,
+            magazineState,
             damageTypes
         )
     }
@@ -30,6 +32,8 @@ class CreateNewItemInteractor(private val repository: ICharacterRepository) :
         val wield: Item.Weapon.Wield?,
         val magazineSize: Int,
         val rateOfFire: Int,
+        val magazineCount: Int,
+        val magazineState: Int,
         val damageTypes: MutableSet<Item.DamageType>
     )
 }

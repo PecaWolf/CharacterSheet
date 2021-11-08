@@ -9,7 +9,9 @@ import android.text.Html
 import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.pecawolf.charactersheet.R
@@ -36,7 +38,8 @@ class DialogHelper(private val context: Context) {
         title: String,
         message: String,
         positiveButton: String,
-        positive: (Dialog) -> Unit
+        state: ButtonType = ButtonType.NEUTRAL,
+        positive: (Dialog) -> Unit,
     ) {
         val binding = DialogSingleChoiceBinding.inflate(LayoutInflater.from(context))
         val dialog: AlertDialog = AlertDialog.Builder(context)
@@ -53,6 +56,7 @@ class DialogHelper(private val context: Context) {
             setOnClickListener {
                 positive.invoke(dialog)
             }
+            background = ResourcesCompat.getDrawable(resources, state.background, null)
         }
     }
 
@@ -331,9 +335,9 @@ class DialogHelper(private val context: Context) {
                     rollResult.roll,
                     rollResult.getLocalizedName(context)
                 )
-            )
-                .toString(),
-            getString(R.string.generic_ok)
+            ).toString(),
+            getString(R.string.generic_ok),
+            if (rollResult.isSuccess) ButtonType.POSITIVE else ButtonType.NEGATIVE
         ) { dialog -> dialog.cancel() }
     }
 
@@ -356,4 +360,10 @@ class DialogHelper(private val context: Context) {
         context.resources.getString(resId, *formatArgs)
 
     private fun getString(@StringRes resId: Int) = context.resources.getString(resId)
+
+    enum class ButtonType(@DrawableRes val background: Int) {
+        POSITIVE(R.drawable.btn_positive),
+        NEUTRAL(R.drawable.btn_primary),
+        NEGATIVE(R.drawable.btn_negative);
+    }
 }

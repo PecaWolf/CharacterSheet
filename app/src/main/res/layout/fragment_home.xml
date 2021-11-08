@@ -71,18 +71,13 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/home_name_edit_icon"
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:background="@drawable/bg_circle_card"
-                android:padding="@dimen/spacing_1"
+                style="@style/Button.Icon"
                 android:src="@drawable/ic_wrench"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/home_name_value"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@id/home_name_value"
                 app:layout_constraintTop_toTopOf="@id/home_name_value"
                 tools:visibility="visible" />
-
 
             <TextView
                 android:id="@+id/home_species_label"
@@ -125,42 +120,54 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/spacing_1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/spacing_1" />
 
         <com.pecawolf.charactersheet.ui.view.RollView
             android:id="@+id/home_dex_stat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/spacing_1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/spacing_1" />
 
         <com.pecawolf.charactersheet.ui.view.RollView
             android:id="@+id/home_vit_stat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/spacing_1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/spacing_1" />
 
         <com.pecawolf.charactersheet.ui.view.RollView
             android:id="@+id/home_inl_stat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/spacing_1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/spacing_1" />
 
         <com.pecawolf.charactersheet.ui.view.RollView
             android:id="@+id/home_wis_stat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/spacing_1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/spacing_1" />
 
         <com.pecawolf.charactersheet.ui.view.RollView
             android:id="@+id/home_cha_stat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/spacing_1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:padding="@dimen/spacing_1" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

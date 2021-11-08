@@ -3,7 +3,10 @@
     android:color="@color/raw_greyish">
     <item>
         <shape>
-            <solid android:color="@color/buttonBackgroundPositiveEnabled" />
+            <solid android:color="@color/backgroundCard" />
+            <stroke
+                android:width="@dimen/border_thickness"
+                android:color="@color/buttonBackgroundEnabled" />
             <corners android:radius="@dimen/corner_radius" />
         </shape>
     </item>

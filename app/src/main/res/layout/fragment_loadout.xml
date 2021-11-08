@@ -107,7 +107,8 @@
             <com.pecawolf.charactersheet.ui.view.LoadoutItem
                 android:id="@+id/loadout_overview_primary"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bar_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/bar_height"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_1"
                 android:background="@drawable/bg_card"
@@ -121,7 +122,8 @@
             <com.pecawolf.charactersheet.ui.view.LoadoutItem
                 android:id="@+id/loadout_overview_secondary"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bar_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/bar_height"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_1"
                 android:background="@drawable/bg_card"
@@ -135,7 +137,8 @@
             <com.pecawolf.charactersheet.ui.view.LoadoutItem
                 android:id="@+id/loadout_overview_tertiary"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bar_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/bar_height"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_1"
                 android:background="@drawable/bg_card"
@@ -149,7 +152,8 @@
             <com.pecawolf.charactersheet.ui.view.LoadoutItem
                 android:id="@+id/loadout_overview_clothes"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bar_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/bar_height"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_1"
                 android:background="@drawable/bg_card"
@@ -163,7 +167,8 @@
             <com.pecawolf.charactersheet.ui.view.LoadoutItem
                 android:id="@+id/loadout_overview_armor"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bar_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/bar_height"
                 android:layout_marginHorizontal="@dimen/spacing_1"
                 android:layout_marginVertical="@dimen/spacing_1"
                 android:background="@drawable/bg_card"

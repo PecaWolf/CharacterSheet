@@ -11,6 +11,7 @@
     <dimen name="spacing_2">8dp</dimen>
     <dimen name="spacing_3">12dp</dimen>
     <dimen name="spacing_4">16dp</dimen>
+    <dimen name="spacing_6">24dp</dimen>
     <dimen name="spacing_8">32dp</dimen>
 
     <dimen name="text_size_primary">18sp</dimen>
@@ -24,6 +25,7 @@
     <dimen name="icon_large">64dp</dimen>
     <dimen name="icon_medium">48dp</dimen>
     <dimen name="icon_small">32dp</dimen>
+    <dimen name="icon_dot">8dp</dimen>
 
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="bar_height">68dp</dimen>

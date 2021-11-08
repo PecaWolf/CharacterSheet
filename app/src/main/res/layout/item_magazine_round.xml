@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    tools:background="#E1AD01"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/icon_dot"
+        android:layout_height="@dimen/icon_dot"
+        android:layout_margin="@dimen/spacing_0_5"
+        android:padding="1dp"
+        android:src="@drawable/ic_dot" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/icon_dot"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_0_5"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>

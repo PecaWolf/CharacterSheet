@@ -15,6 +15,8 @@ data class ItemData(
 
     val wield: String,
     val damageTypes: List<String>,
-    val magazine: Int,
+    val magazineSize: Int,
     val rateOfFire: Int,
+    val magazineCount: Int,
+    val magazineState: Int,
 )

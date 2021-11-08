@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card"
+    tools:showIn="@layout/fragment_item_detail">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_ammunition_header"
+        style="@style/Text.Header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/new_item_ammunition_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_magazine_size_label"
+        style="@style/Text.Label.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_2"
+        android:paddingBottom="@dimen/spacing_2"
+        android:text="@string/new_item_magazine_size_hint"
+        app:layout_constraintEnd_toStartOf="@id/item_detail_magazine_size_value"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_ammunition_header" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_magazine_size_value"
+        style="@style/Text.Value.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBaseline_toBaselineOf="@id/item_detail_magazine_size_label"
+        app:layout_constraintEnd_toStartOf="@id/item_detail_magazine_size_edit_icon"
+        app:layout_constraintStart_toEndOf="@id/item_detail_magazine_size_label"
+        tools:text="10" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_detail_magazine_size_edit_icon"
+        style="@style/Button.Icon"
+        android:src="@drawable/ic_wrench"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_magazine_size_value"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_detail_magazine_size_value"
+        app:layout_constraintTop_toTopOf="@id/item_detail_magazine_size_value"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_rate_of_fire_label"
+        style="@style/Text.Label.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_2"
+        android:paddingBottom="@dimen/spacing_2"
+        android:text="@string/new_item_rate_of_fire_hint"
+        app:layout_constraintEnd_toStartOf="@id/item_detail_rate_of_fire_value"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_detail_magazine_size_label" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_detail_rate_of_fire_value"
+        style="@style/Text.Value.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBaseline_toBaselineOf="@id/item_detail_rate_of_fire_label"
+        app:layout_constraintEnd_toStartOf="@id/item_detail_rate_of_fire_edit_icon"
+        app:layout_constraintStart_toEndOf="@id/item_detail_rate_of_fire_label"
+        tools:text="10" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/item_detail_rate_of_fire_edit_icon"
+        style="@style/Button.Icon"
+        android:src="@drawable/ic_wrench"
+        app:layout_constraintBottom_toBottomOf="@id/item_detail_rate_of_fire_value"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_detail_rate_of_fire_value"
+        app:layout_constraintTop_toTopOf="@id/item_detail_rate_of_fire_value"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
